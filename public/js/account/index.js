@@ -10745,8 +10745,16 @@ function () {
     key: "getLastInvoice",
     value: function getLastInvoice() {
       var div = document.querySelector('#listLatestInvoice');
+      KTApp.block(div, {
+        overlayColor: '#000000',
+        type: 'v2',
+        state: 'success',
+        size: 'lg',
+        message: 'Chargement des activitées...'
+      });
       jquery__WEBPACK_IMPORTED_MODULE_0__["get"]('/account/api/latestInvoice').done(function (data) {
-        console.log(data); //div.innerHTML = data.data
+        KTApp.unblock(div);
+        div.innerHTML = data.data;
       });
     }
   }]);

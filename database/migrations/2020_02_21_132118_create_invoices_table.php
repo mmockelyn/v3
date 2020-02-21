@@ -15,7 +15,12 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->bigInteger('user_id')->unsigned();
+            $table->string('numberInvoice')->comment('Numéro de facture Stripe');
+            $table->timestamp('date');
+            $table->string('total');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

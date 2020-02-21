@@ -34,7 +34,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--begin::Layout Skins(used by all pages) -->
 
     <!--end::Layout Skins -->
-    <link rel="shortcut icon" href="/storage/logos/favicon.png" />
+    <link rel="shortcut icon" href="/storage/logos/favicon.ico" />
 </head>
 
 <!-- end::Head -->
@@ -341,6 +341,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <!-- end::Global Config -->
 <script src="https://code.iconify.design/1/1.0.4/iconify.min.js"></script>
+<script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 @if(config('app.env') == 'local')
     <script src="http://localhost:35729/livereload.js"></script>

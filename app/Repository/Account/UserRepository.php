@@ -26,5 +26,26 @@ class UserRepository
             ->find($id);
     }
 
+    public function update($id, $email, $name)
+    {
+        $this->user->newQuery()
+            ->find($id)
+            ->update([
+                "email" => $email,
+                "name" => $name
+            ]);
+
+        return null;
+    }
+
+    public function updatePass($id, $password)
+    {
+        $this->user->newQuery()
+            ->find($id)
+            ->update([
+                "password" => bcrypt($password)
+            ]);
+    }
+
 }
 

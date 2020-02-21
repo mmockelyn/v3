@@ -40,5 +40,18 @@ class UserAccountRepository
             ]);
     }
 
+    public function update($id, $site_web, $trainz_id)
+    {
+        $this->userAccount->newQuery()
+            ->where('user_id', $id)
+            ->first()
+            ->update([
+                "site_web" => $site_web,
+                "trainz_id" => $trainz_id
+            ]);
+
+        return null;
+    }
+
 }
 

@@ -212,7 +212,9 @@
                     <div class="pt-lg-5"></div>
                     <div class="kt-portlet">
                         <div class="kt-portlet__body">
-                            <form action="{{ route('Account.update') }}" class="kt-form" method="POST">
+                            <form id="formEditInfo" action="{{ route('Account.update') }}" class="kt-form" method="POST">
+                                @csrf
+                                @include("layout.includes.alert")
                                 <div class="form-group row">
                                     <div class="col-md-6">
                                         <label for="email">Email <span class="required">*</span></label>
@@ -243,7 +245,9 @@
                     <div class="pt-lg-5"></div>
                     <div class="kt-portlet">
                         <div class="kt-portlet__body">
-                            <form action="{{ route('Account.updatePass') }}" class="kt-form" method="POST">
+                            <form id="formEditPassword" action="{{ route('Account.updatePass') }}" class="kt-form" method="POST">
+                                @csrf
+                                @include("layout.includes.alert")
                                 <div class="form-group row">
                                     <div class="col-md-6">
                                         <input type="password" id="password" name="password" class="form-control" placeholder="Nouveau mot de passe">
@@ -252,6 +256,7 @@
                                         <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirmation du mot de passe">
                                     </div>
                                 </div>
+                                <div id="feedback"></div>
                                 <div class="kt-form__actions kt-form__actions--right">
                                     <button type="submit" class="btn btn-success">Modifier mon mot de passe</button>
                                 </div>
@@ -278,12 +283,12 @@
                                     Votre abonnement expire <strong>{{ auth()->user()->premium->premium_end->diffForHumans() }}</strong>
                                 </p>
 
-                                <button class="btn btn-outline-dark"><i class="la la-calendar"></i> Rallonger mon abonnement</button>
+                                <button id="btnExtendAbo" class="btn btn-outline-dark"><i class="la la-calendar"></i> Rallonger mon abonnement</button>
 
                             @else
                                 <p>Vous n'avez actuellement pas souscrit à <strong>Trainznation</strong></p>
 
-                                <button class="btn btn-outline-success"><i class="la la-certificate"></i> Souscrire</button>
+                                <button id="btnSubscriptionAbo" class="btn btn-outline-success"><i class="la la-certificate"></i> Souscrire</button>
                             @endif
                         </div>
                     </div>
@@ -301,4 +306,5 @@
 
 @section("script")
     <script src="{{ asset('js/account/index.js') }}"></script>
+    <script src="{{ asset('js/account/account.js') }}"></script>
 @endsection

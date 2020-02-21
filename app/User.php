@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Model\Account\Invoice;
 use App\Model\Account\UserAccount;
 use App\Model\Account\UserActivity;
 use App\Model\Account\UserPayment;
@@ -84,5 +85,10 @@ class User extends Authenticatable
     public function tutoriels()
     {
         return $this->hasMany(Tutoriel::class);
+    }
+    
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
     }
 }

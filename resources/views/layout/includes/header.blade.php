@@ -62,7 +62,7 @@
                                                 <!--<i class="flaticon2-bell-alarm-symbol"></i>-->
 											</span>
                                 @if(count(auth()->user()->unreadNotifications) != 0)
-                                <span class="kt-hidden- kt-badge kt-badge--danger">{{ count(auth()->user()->unreadNotifications) }}</span>
+                                <span id="countNotifBar" class="kt-hidden- kt-badge kt-badge--danger">{{ count(auth()->user()->unreadNotifications) }}</span>
                                 @endif
                             </div>
                             <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">

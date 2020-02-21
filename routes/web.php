@@ -64,6 +64,7 @@ Route::group(["middleware" => ["auth", "verified"], "prefix" => "account", "name
     Route::group(["prefix" => "api"], function () {
         Route::get('latestActivity', 'AccountApiController@loadLatestActivity');
         Route::get('latestInvoice', 'AccountApiController@loadLatestInvoice');
+
         Route::post('update', ["as" => "Account.update", "uses" => "AccountApiController@update"]);
         Route::post('updatePass', ["as" => "Account.updatePass", "uses" => "AccountApiController@updatePass"]);
 
