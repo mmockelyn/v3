@@ -19,7 +19,7 @@
 ### Gestion de compte <a id='account'></a>
 
 - [x] Création de l'acceuil
-- [ ] Gestion de compte
+- [x] Gestion de compte
 - [ ] Système de badge (Facultatif)
 - [ ] Gestion des contributions
 - [ ] Gestion des factures et moyen de paiement
