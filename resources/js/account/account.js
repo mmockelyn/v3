@@ -140,6 +140,13 @@ $("#formEditInfo").on('submit', function (e) {
     })
 })
 
+$("#btnExtendAbo").on('click', function () {
+    window.location.href='/account/premium/extends'
+})
+$("#btnSubscriptionAbo").on('click', function () {
+    window.location.href='/account/premium'
+})
+
 checkPassword()
 updatePassword()
 trashAccount()

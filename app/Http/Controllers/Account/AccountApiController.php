@@ -7,17 +7,30 @@ use App\HelpersClass\Account\AccountActivityHelper;
 use App\HelpersClass\Generator;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
+use App\Jobs\Account\NewSubscriptionJob;
 use App\Jobs\Account\UpdateInfoJob;
 use App\Jobs\Account\UpdatePassJob;
+use App\Model\Account\UserAccount;
 use App\Notifications\Account\UpdateInfoNotification;
 use App\Notifications\Account\UpdatePasswordNotification;
+use App\Packages\Stripe\Billing\Invoice;
+use App\Packages\Stripe\Billing\InvoiceItem;
+use App\Packages\Stripe\Billing\Subscription;
+use App\Packages\Stripe\Core\Customer;
+use App\Packages\Stripe\PaymentMethod\PaymentMethod;
+use App\Repository\Account\InvoiceItemRepository;
 use App\Repository\Account\InvoiceRepository;
 use App\Repository\Account\UserAccountRepository;
 use App\Repository\Account\UserActivityRepository;
+use App\Repository\Account\UserPaymentRepository;
+use App\Repository\Account\UserPremiumRepository;
 use App\Repository\Account\UserRepository;
 use Carbon\Carbon;
+use Cartalyst\Stripe\Exception\StripeException;
 use Cartalyst\Stripe\Stripe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Inacho\CreditCard;
 
 class AccountApiController extends BaseController
 {
@@ -37,6 +50,18 @@ class AccountApiController extends BaseController
      * @var UserAccountRepository
      */
     private $accountRepository;
+    /**
+     * @var UserPaymentRepository
+     */
+    private $paymentRepository;
+    /**
+     * @var UserPremiumRepository
+     */
+    private $premiumRepository;
+    /**
+     * @var InvoiceItemRepository
+     */
+    private $invoiceItemRepository;
 
     /**
      * AccountApiController constructor.
@@ -44,13 +69,26 @@ class AccountApiController extends BaseController
      * @param InvoiceRepository $invoiceRepository
      * @param UserRepository $userRepository
      * @param UserAccountRepository $accountRepository
+     * @param UserPaymentRepository $paymentRepository
+     * @param UserPremiumRepository $premiumRepository
+     * @param InvoiceItemRepository $invoiceItemRepository
      */
-    public function __construct(UserActivityRepository $activityRepository, InvoiceRepository $invoiceRepository, UserRepository $userRepository, UserAccountRepository $accountRepository)
+    public function __construct(
+        UserActivityRepository $activityRepository,
+        InvoiceRepository $invoiceRepository,
+        UserRepository $userRepository,
+        UserAccountRepository $accountRepository,
+        UserPaymentRepository $paymentRepository,
+        UserPremiumRepository $premiumRepository,
+        InvoiceItemRepository $invoiceItemRepository)
     {
         $this->activityRepository = $activityRepository;
         $this->invoiceRepository = $invoiceRepository;
         $this->userRepository = $userRepository;
         $this->accountRepository = $accountRepository;
+        $this->paymentRepository = $paymentRepository;
+        $this->premiumRepository = $premiumRepository;
+        $this->invoiceItemRepository = $invoiceItemRepository;
     }
 
     public function loadLatestActivity()
@@ -98,8 +136,6 @@ class AccountApiController extends BaseController
 
     public function loadLatestInvoice()
     {
-        $stripe = new Stripe(env("STRIPE_SECRET"));
-
         $invoices = $this->invoiceRepository->listForUser(auth()->user()->id, 5);
         //dd($invoices);
         ob_start();
@@ -109,7 +145,7 @@ class AccountApiController extends BaseController
             <tr>
                 <td><?= $invoice->date->format('d/m/Y') ?></td>
                 <td><?= Generator::formatCurrency($invoice->total); ?></td>
-                <td><a class="kt-font-success kt-font-bold"><i class="la la-download"></i> </a></td>
+                <td><a href="<?= route('Account.Invoice.show', $invoice->id) ?>" class="kt-font-success kt-font-bold"><i class="la la-download"></i> </a></td>
             </tr>
         <?php endforeach; ?>
     <?php else: ?>
@@ -179,10 +215,126 @@ class AccountApiController extends BaseController
             $this->userRepository->delete(auth()->user()->id);
 
             $this->sendResponse("Done", "Done");
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             $this->sendError("Erreur Système", [
                 "error" => $exception->getMessage()
             ]);
         }
+    }
+
+    public function verifCarte()
+    {
+        $data = $this->paymentRepository->getForUser(auth()->user()->id);
+
+        if ($data->stripe_id == null) {
+            return $this->sendResponse(false, "Aucune Carte");
+        } else {
+            return $this->sendResponse(true, "Carte Disponible");
+        }
+    }
+
+    public function addMethodPayment(Request $request)
+    {
+        //dd($request->all());
+        $customer = new Customer();
+        $pm = new PaymentMethod();
+        $subscription = new Subscription();
+
+        $client_id = auth()->user()->account->customer_id;
+        if($client_id == null){
+            $cs = $customer->create(auth()->user()->email, auth()->user()->name);
+            $this->accountRepository->addCustomerId($cs->id);
+        }else{
+            $cs = $customer->retrieve($client_id);
+        }
+
+        try {
+            $method = $pm->create($request->number, $request->exp_month, $request->exp_year, $request->cvc);
+            $over = $pm->attachToCustomer($cs->id, $method->id);
+
+
+            $card_brand = CreditCard::validCreditCard($request->number);
+
+            $this->paymentRepository->update(auth()->user()->id, $over->id, $card_brand['type'], Str::substr($request->number, 12, 4));
+            $customer->update($cs->id, [
+                "invoice_settings" => [
+                    "default_payment_method" => $over->id
+                ]
+            ]);
+
+            try {
+                $subs = $subscription->create($cs->id, $request->plan);
+                $premium = $this->premiumRepository->update(auth()->user()->id, 1, now(), Carbon::createFromTimestamp($subs->current_period_end));
+
+                $this->registerInvoice($subs->latest_invoice);
+
+                dispatch(new NewSubscriptionJob(auth()->user(), $premium))->delay(now()->addMinute())->onQueue('account');
+                return $this->sendResponse($premium->premium_end->format('d/m/Y'), "Création de la souscription");
+            }catch (StripeException $exception) {
+                return $this->sendError("Erreur lors de la souscription", [
+                    "errors" => $exception->getMessage()
+                ]);
+            }
+        }catch (StripeException $exception) {
+            return $this->sendError("Erreur de Création de moyen de paiement", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+
+
+    }
+
+    private function registerInvoice($latest_invoice_id) {
+        $invoice = new Invoice();
+        $in = $invoice->retrieve($latest_invoice_id);
+
+        try {
+            $inc = $this->invoiceRepository->create(
+                auth()->user()->id,
+                $in->number,
+                Carbon::createFromTimestamp($in->created),
+                number_format($in->total/100, 2, '.', ' ')
+            );
+
+            foreach ($in->lines->all() as $item) {
+                $this->invoiceItemRepository->create($inc->id, $item->description, 1, number_format($item->amount/100, 2, '.', ' '), number_format($item->amount/100, 2, '.', ' '));
+            }
+
+            return $this->sendResponse($inc, "Création de facture");
+        }catch (\Exception $exception) {
+            return $this->sendError("Erreur création facture", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+
+    }
+
+    public function invoice($invoice_id) {
+        $invoice = $this->invoiceRepository->get($invoice_id);
+        ob_start();
+        ?>
+        <?php foreach ($invoice->items as $item): ?>
+            <tr>
+                <td><?= $item->item; ?></td>
+                <td><?= Generator::formatCurrency($item->unitPrice); ?></td>
+                <td><?= $item->qte; ?></td>
+                <td><?= $item->total_price; ?></td>
+            </tr>
+        <?php endforeach; ?>
+        <?php
+        $items = ob_get_clean();
+
+        $array = [
+            "invoice_id" => $invoice->id,
+            "user" => [
+                "name" => $invoice->user->name,
+                "email" => $invoice->user->email
+            ],
+            "number_invoice" => $invoice->number_invoice,
+            "date" => $invoice->date->format('d/m/Y'),
+            "total" => Generator::formatCurrency($invoice->total)
+        ];
+
+        return $this->sendResponse(["invoice" => $array, "items" => $items], "Invoice");
     }
 }

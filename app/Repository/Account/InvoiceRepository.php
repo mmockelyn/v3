@@ -29,5 +29,22 @@ class InvoiceRepository
             ->get();
     }
 
+    public function create($id, $number, $createFromTimestamp, $number_format)
+    {
+        return $this->invoice->newQuery()
+            ->create([
+                "user_id" => $id,
+                "numberInvoice" => $number,
+                "date" => $createFromTimestamp,
+                "total" => $number_format
+            ]);
+    }
+
+    public function get($invoice_id)
+    {
+        return $this->invoice->newQuery()
+            ->find($invoice_id);
+    }
+
 }
 

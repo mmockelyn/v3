@@ -20,5 +20,21 @@ class UserPremiumRepository
         $this->userPremium = $userPremium;
     }
 
+    public function update($id, $int, $now, $createFromTimestamp)
+    {
+        $this->userPremium->newQuery()
+            ->where('user_id', $id)
+            ->first()
+            ->update([
+                "premium" => $int,
+                "premium_start" => $now,
+                "premium_end" => $createFromTimestamp
+            ]);
+
+        return $this->userPremium->newQuery()
+            ->where('user_id', $id)
+            ->first();
+    }
+
 }
 

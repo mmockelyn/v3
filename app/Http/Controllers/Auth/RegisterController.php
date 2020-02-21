@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Model\Account\UserAccount;
 use App\Model\Account\UserPayment;
+use App\Packages\Stripe\Core\Customer;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Cartalyst\Stripe\Api\Customers;
@@ -84,15 +86,15 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
-        $stripe = new Stripe(env("STRIPE_SECRET"));
+        $customer = new Customer();
 
-        $customer = $stripe->customers()->create([
-            'email' => $user->email,
-            "name" => $user->name
-        ]);
+        $cs = $customer->create($user->email, $user->name);
 
-        UserPayment::where('user_id', $user->id)->first()
-            ->update(["stripe_id" => $customer->id]);
+        UserAccount::where('user_id', $user->id)
+            ->first()
+            ->update(["customer_id" => $cs->id]);
+
+        return null;
     }
 
 }

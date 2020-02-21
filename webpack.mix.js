@@ -22,6 +22,8 @@ mix.js('resources/js/app.js', 'public/js')
 
     .js('resources/js/account/index.js', 'public/js/account')
     .js('resources/js/account/account.js', 'public/js/account')
+    .js('resources/js/account/premium.js', 'public/js/account')
+    .js('resources/js/account/invoice.js', 'public/js/account')
 
 
     .sass('resources/sass/app.scss', 'public/css');

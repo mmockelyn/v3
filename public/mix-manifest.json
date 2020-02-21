@@ -1,6 +1,8 @@
 {
     "/js/account/account.js": "/js/account/account.js",
     "/js/account/index.js": "/js/account/index.js",
+    "/js/account/invoice.js": "/js/account/invoice.js",
+    "/js/account/premium.js": "/js/account/premium.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/js/auth/login.js": "/js/auth/login.js",

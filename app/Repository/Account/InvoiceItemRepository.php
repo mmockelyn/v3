@@ -20,5 +20,17 @@ class InvoiceItemRepository
         $this->invoiceItem = $invoiceItem;
     }
 
+    public function create($id, $description, $int, $number_format, $number_format1)
+    {
+        return $this->invoiceItem->newQuery()
+            ->create([
+                "invoice_id" => $id,
+                "item" => $description,
+                "qte" => $int,
+                "unitPrice" => $number_format,
+                "total_price" => $number_format1
+            ]);
+    }
+
 }
 

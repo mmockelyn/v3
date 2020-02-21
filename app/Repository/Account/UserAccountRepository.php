@@ -53,5 +53,15 @@ class UserAccountRepository
         return null;
     }
 
+    public function addCustomerId($id)
+    {
+        $this->userAccount->newQuery()
+            ->where('user_id', auth()->user()->id)
+            ->first()
+            ->update(['customer_id' => $id]);
+
+        return null;
+    }
+
 }
 

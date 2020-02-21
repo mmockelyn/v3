@@ -15,4 +15,11 @@ class AccountController extends Controller
     {
         return view('account.index');
     }
+
+    public function invoiceShow($invoice_id)
+    {
+        return view('account.invoice.show', [
+            "invoice_id" => $invoice_id
+        ]);
+    }
 }

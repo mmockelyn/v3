@@ -27,7 +27,7 @@ Route::group(["namespace" => "Front"], function () {
         Route::get('{id}/gallery', ["as" => "Front.Route.gallery", "uses" => "RouteController@gallery"]);
         Route::get('{id}/labs', ["as" => "Front.Route.labs", "uses" => "RouteController@labs"]);
         Route::get('{id}/download', ["as" => "Front.Route.download", "uses" => "RouteController@download"]);
-        Route::group(["prefix" => "{id}/version", "namespace" => "Version"], function (){
+        Route::group(["prefix" => "{id}/version", "namespace" => "Version"], function () {
             Route::get('{version_id}', ["as" => 'Route.Version.info', "uses" => "VersionController@info"]);
         });
     });
@@ -39,7 +39,7 @@ Route::group(["namespace" => "Front"], function () {
         Route::get('{category_id}/{subcategory_id}/{asset_id}', ["as" => "Front.Download.show", "uses" => "DownloadController@show"]);
     });
 
-    Route::group(["prefix" => "tutoriel", "namespace" => "Tutoriel"], function (){
+    Route::group(["prefix" => "tutoriel", "namespace" => "Tutoriel"], function () {
         Route::get('/', ["as" => "Front.Tutoriel.index", "uses" => "TutorielController@index"]);
         Route::get('{subcategory_id}', ["as" => "Front.Tutoriel.list", "uses" => "TutorielController@list"]);
         Route::get('{subcategory_id}/{tutoriel_id}', ["as" => "Front.Tutoriel.show", "uses" => "TutorielController@show"]);
@@ -47,7 +47,7 @@ Route::group(["namespace" => "Front"], function () {
         Route::get('{subcategory_id}/{tutoriel_id}/source', ["as" => "Front.Tutoriel.source", "uses" => "TutorielController@source"]);
     });
 
-    Route::group(["prefix" => "wiki", "namespace" => "Wiki"], function (){
+    Route::group(["prefix" => "wiki", "namespace" => "Wiki"], function () {
         Route::get('/', ["as" => "Front.Wiki.index", "uses" => "WikiController@index"]);
         Route::get('{category_id}', ["as" => "Front.Wiki.sub", "uses" => "WikiController@sub"]);
         Route::get('{category_id}/{sub_id}', ["as" => "Front.Wiki.list", "uses" => "WikiController@list"]);
@@ -57,19 +57,31 @@ Route::group(["namespace" => "Front"], function () {
     });
 });
 
-Route::group(["middleware" => ["auth", "verified"], "prefix" => "account", "namespace" => "Account"], function (){
+Route::group(["middleware" => ["auth", "verified"], "prefix" => "account", "namespace" => "Account"], function () {
     Route::get('/', ["as" => "Account.index", "uses" => "AccountController@index"]);
-    Route::get('premium/subscribe', 'AccountPremiumController@subscribe');
+    Route::get('/invoice/{invoice_id}', ["as" => "Account.Invoice.show", "uses" => "AccountController@invoiceShow"]);
+
+    Route::group(["prefix" => "premium"], function () {
+        route::get('/', ["as" => "Account.Premium.index", "uses" => "AccountPremiumController@index"]);
+        route::post('/', ["as" => "Account.Premium.subscribe", "uses" => "AccountPremiumController@subscribe"]);
+
+        Route::get('/extends', ["as" => "Account.Premium.extends", "uses" => "AccountPremiumController@extends"]);
+        Route::post('/extends', ["as" => "Account.Premium.updateAbo", "uses" => "AccountPremiumController@updateAbo"]);
+    });
 
     Route::group(["prefix" => "api"], function () {
         Route::get('latestActivity', 'AccountApiController@loadLatestActivity');
         Route::get('latestInvoice', 'AccountApiController@loadLatestInvoice');
+        Route::get('delete', 'AccountApiController@delete');
+        Route::get('verifCarte', 'AccountApiController@verifCarte');
+        Route::get('/invoice/{invoice_id}', 'accountApiController@invoice');
 
         Route::post('update', ["as" => "Account.update", "uses" => "AccountApiController@update"]);
         Route::post('updatePass', ["as" => "Account.updatePass", "uses" => "AccountApiController@updatePass"]);
-
+        Route::post('addMethodPayment', ["as" => "Account.addMethodPayment", "uses" => "AccountApiController@addMethodPayment"]);
         Route::post('social/disconnect', 'AccountApiController@disconnect');
-        Route::get('delete', 'AccountApiController@delete');
+
+
     });
 });
 
@@ -81,3 +93,4 @@ Route::group(["prefix" => "provider", "namespace" => "Provider"], function () {
 Auth::routes(['verify' => true]);
 
 Route::get('logout', 'Auth\LoginController@logout');
+Route::get('/test', 'TestController@test');
