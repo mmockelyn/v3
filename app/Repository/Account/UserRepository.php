@@ -45,6 +45,15 @@ class UserRepository
             ->update([
                 "password" => bcrypt($password)
             ]);
+
+        return null;
+    }
+
+    public function delete($id)
+    {
+        $this->user->newQuery()
+            ->find($id)
+            ->delete();
     }
 
 }

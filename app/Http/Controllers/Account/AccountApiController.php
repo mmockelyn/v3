@@ -7,6 +7,8 @@ use App\HelpersClass\Account\AccountActivityHelper;
 use App\HelpersClass\Generator;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
+use App\Jobs\Account\UpdateInfoJob;
+use App\Jobs\Account\UpdatePassJob;
 use App\Notifications\Account\UpdateInfoNotification;
 use App\Notifications\Account\UpdatePasswordNotification;
 use App\Repository\Account\InvoiceRepository;
@@ -145,8 +147,7 @@ class AccountApiController extends BaseController
                 $request->trainz_id
             );
 
-            auth()->user()->notify(new UpdateInfoNotification(auth()->user()));
-            event(new UpdateInfoEvent(auth()->user()));
+            dispatch(new UpdateInfoJob(auth()->user()))->delay(now()->addMinute())->onQueue('account');
 
             return $this->sendResponse("Done !", "Done");
         } catch (\Exception $exception) {
@@ -163,11 +164,24 @@ class AccountApiController extends BaseController
                 auth()->user()->id,
                 $request->password
             );
-            auth()->user()->notify(new UpdatePasswordNotification(auth()->user()));
+            dispatch(new UpdatePassJob(auth()->user()))->delay(now()->addMinute())->onQueue('account');
             return $this->sendResponse("Done !", "Done");
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function delete()
+    {
+        try {
+            $this->userRepository->delete(auth()->user()->id);
+
+            $this->sendResponse("Done", "Done");
+        }catch (\Exception $exception) {
+            $this->sendError("Erreur Système", [
+                "error" => $exception->getMessage()
             ]);
         }
     }

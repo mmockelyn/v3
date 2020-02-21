@@ -13,3 +13,9 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
+laravel-echo-server.json
+laravel-echo-server.lock
+horizon.log
+composer.lock
+package-lock.json

@@ -69,6 +69,7 @@ Route::group(["middleware" => ["auth", "verified"], "prefix" => "account", "name
         Route::post('updatePass', ["as" => "Account.updatePass", "uses" => "AccountApiController@updatePass"]);
 
         Route::post('social/disconnect', 'AccountApiController@disconnect');
+        Route::get('delete', 'AccountApiController@delete');
     });
 });
 

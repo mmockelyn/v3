@@ -1,5 +1,6 @@
 import * as $ from "jquery";
 import {reloadNotifBar} from "./../core";
+import * as swal from "sweetalert2";
 
 function checkPassword() {
     let password = document.querySelector('#password')
@@ -7,11 +8,11 @@ function checkPassword() {
 
     confirm_password.addEventListener('keyUp', function (e) {
         e.preventDefault()
-        if(confirm_password.value !== password.value) {
+        if (confirm_password.value !== password.value) {
             password.classList.add('is-invalid')
             confirm_password.classList.add('is-invalid')
             $("#feedback").html(`<div class='invalid-feedback'>Les mot de passes ne correspondent pas !</div>`)
-        }else{
+        } else {
             password.classList.add('is-valid')
             confirm_password.classList.add('is-valid')
             $("#feedback").html(`<div class='valid-feedback'>Nouveau mot de passe accepter</div>`)
@@ -54,7 +55,49 @@ function updatePassword() {
     })
 }
 
-$("#formEditInfo").on('submit', function(e) {
+function trashAccount() {
+    let btn = document.querySelector('#btnTrashAccount')
+
+    btn.addEventListener('click', function (event) {
+        event.preventDefault()
+        swal.fire({
+            title: 'Etes-vous sur ?',
+            text: "Cette opération est irréversible !",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Oui, supprimer mon compte!',
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                return fetch("/account/api/delete")
+                    .then(response => {
+                        if(!response.ok) {
+                            throw new Error(response.statusText)
+                        }
+                        return response
+                    })
+                    .catch(error => {
+                        swal.showValidationMessage(
+                            `Erreur: ${error}`
+                        )
+                    })
+            },
+            allowOutsideClick: () => !swal.isLoading()
+        }).then(function(result) {
+            if (result.value) {
+                swal.fire({
+                    title: "Compte Supprimer",
+                    text: "Votre compte à été supprimer avec succès",
+                    type: "success"
+                })
+                setTimeout(function (e) {
+                    window.location.href='/'
+                }, 2500)
+            }
+        });
+    })
+}
+
+$("#formEditInfo").on('submit', function (e) {
     e.preventDefault()
     let form = $(this)
     let btn = form.find('button')
@@ -80,7 +123,7 @@ $("#formEditInfo").on('submit', function(e) {
                 alert.style.display = 'block'
 
                 Array.from(data.data.errors).forEach((error) => {
-                    $("#errors").html('<li>'+error+'</li>')
+                    $("#errors").html('<li>' + error + '</li>')
                 })
 
                 KTApp.unprogress(btn)
@@ -99,3 +142,4 @@ $("#formEditInfo").on('submit', function(e) {
 
 checkPassword()
 updatePassword()
+trashAccount()
