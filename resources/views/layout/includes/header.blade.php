@@ -1,4 +1,4 @@
-<div id="kt_header" class="kt-header kt-grid__item  kt-header--fixed " data-ktheader-minimize="on">
+<div id="kt_header" class="kt-header kt-grid__item  kt-header--fixed " data-ktheader-minimize="off">
     <div class="kt-header__top">
         <div class="kt-container ">
 

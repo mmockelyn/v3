@@ -2,6 +2,8 @@
 
 ## Liste des Taches
 
+- [Général](#Général)
+
 ### Général
 
 - [ ] Création du thème
@@ -17,4 +19,10 @@
 - [ ] Gestion des factures et moyen de paiement
 - [ ] Système premium
 
+### Blog
 
+- [ ] Création de l'acceuil
+- [ ] Page Article
+    - [ ] Système Commentaire
+    
+###     
