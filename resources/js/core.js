@@ -3,7 +3,8 @@ export function reloadNotifBar() {
     let value = parseInt(countNotifBar.textContent)
     if(value === 0) {
         let iconEl = $(".kt-header__topbar-icon")
-        iconEl.append('<span id="countNotifBar" class="kt-hidden- kt-badge kt-badge--danger">'+parseInt(value+1)+'</span>')
+        iconEl.classList.remove('kt-hidden')
+        iconEl.textContent = 1
     }else{
         countNotifBar.textContent = parseInt(value+1);
     }
