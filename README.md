@@ -12,13 +12,13 @@
 
 ### Général <a id='general'></a>
 
-- [ ] Création du thème
-- [ ] Adaptation du thème (menu, interface, disposition)
-- [ ] Système Usuel (Authentification)
+- [x] Création du thème
+- [x] Adaptation du thème (menu, interface, disposition)
+- [x] Système Usuel (Authentification)
 
 ### Gestion de compte <a id='account'></a>
 
-- [ ] Création de l'acceuil
+- [x] Création de l'acceuil
 - [ ] Gestion de compte
 - [ ] Système de badge (Facultatif)
 - [ ] Gestion des contributions
