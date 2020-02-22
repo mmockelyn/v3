@@ -583,7 +583,7 @@ class AccountApiController extends BaseController
             try {
                 $this->paymentRepository->delete($pm_id);
 
-                $this->sendResponse($pm, "Suppression du mode de paiement");
+                return $this->sendResponse($pm, "Suppression du mode de paiement");
             }catch (\Exception $exception) {
                 return $this->sendError("Erreur Delete PaymentMethod", [
                     "errors" => $exception->getMessage()
@@ -593,6 +593,15 @@ class AccountApiController extends BaseController
             return $this->sendError("Erreur Detach Stripe PaymentMethod", [
                 "errors" => $exception->getMessage()
             ]);
+        }
+    }
+
+    public function connect()
+    {
+        if(auth()->guard()) {
+            return null;
+        }else{
+            return null;
         }
     }
 

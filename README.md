@@ -28,8 +28,8 @@
 ### Blog <a id='blog'></a>
 
 - [x] Création de l'acceuil
-- [ ] Page Article
-    - [ ] Système Commentaire
+- [x] Page Article
+    - [x] Système Commentaire
     
 ### Route <a id='route'></a>
 

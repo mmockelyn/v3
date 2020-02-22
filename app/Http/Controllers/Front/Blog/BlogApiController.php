@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Front\Blog;
 use App\HelpersClass\Blog\BlogHelper;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
+use App\Notifications\Blog\PostNewComment;
+use App\Repository\Blog\BlogCommentRepository;
 use App\Repository\Blog\BlogRepository;
 use Illuminate\Http\Request;
 
@@ -14,14 +16,20 @@ class BlogApiController extends BaseController
      * @var BlogRepository
      */
     private $blogRepository;
+    /**
+     * @var BlogCommentRepository
+     */
+    private $blogCommentRepository;
 
     /**
      * BlogApiController constructor.
      * @param BlogRepository $blogRepository
+     * @param BlogCommentRepository $blogCommentRepository
      */
-    public function __construct(BlogRepository $blogRepository)
+    public function __construct(BlogRepository $blogRepository, BlogCommentRepository $blogCommentRepository)
     {
         $this->blogRepository = $blogRepository;
+        $this->blogCommentRepository = $blogCommentRepository;
     }
 
     public function loadCarousel()
@@ -93,5 +101,41 @@ class BlogApiController extends BaseController
         $content = ob_get_clean();
 
         return $this->sendResponse($content, "Liste des news");
+    }
+
+    public function postComment($blog_id, Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            "comment" => "required|min:5"
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError("Erreur Validation", ["errors" => $validator->errors()->all()], 203);
+        }
+
+        try {
+            $data = $this->blogCommentRepository->create($blog_id, auth()->user()->id, $request->comment);
+            $blog = $this->blogRepository->get($blog_id);
+
+            auth()->user()->notify(new PostNewComment($blog));
+            return $this->sendResponse($data, "Post d'un commentaire");
+        }catch (\Exception $exception) {
+            return $this->sendError("Erreur Système", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function deleteComment(Request $request, $blog_id, $comment_id)
+    {
+        try {
+            $this->blogCommentRepository->delete($comment_id);
+
+            return $this->sendResponse("Done", "Suppression du commentaire");
+        }catch (\Exception $exception) {
+            return $this->sendError("Erreur de suppression d'un commentaire", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
     }
 }

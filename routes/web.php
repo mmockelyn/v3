@@ -23,6 +23,9 @@ Route::group(["namespace" => "Front"], function () {
         Route::group(["prefix" => "api"], function () {
             Route::get('loadCarousel', 'BlogApiController@loadCarousel');
             Route::get('loadNews', 'BlogApiController@loadNews');
+
+            Route::post('{article_id}/comments', ["as" => "Blog.Comment.post", "uses" => "BlogApiController@postComment"]);
+            Route::get('{article_id}/comment/{comment_id}', ["as" => "Blog.Comment.delete", "uses" => "BlogApiController@deleteComment"]);
         });
     });
 
@@ -84,6 +87,7 @@ Route::group(["middleware" => ["auth", "verified"], "prefix" => "account", "name
         Route::get('/invoice/{invoice_id}', 'accountApiController@invoice');
         Route::get('contrib/blog', 'AccountApiController@loadContribBlog');
         Route::get('contrib/tutoriel', 'AccountApiController@loadContribTutoriel');
+        Route::get('connect', 'AccountApiController@connect');
 
         Route::get('/deletePayment/{pm_id}', 'AccountApiController@deletePayment');
 

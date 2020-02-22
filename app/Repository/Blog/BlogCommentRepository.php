@@ -29,6 +29,7 @@ class BlogCommentRepository
         return $this->blogComment->newQuery()
             ->where('blog_id', $article_id)
             ->published()
+            ->orderBy('updated_at', 'desc')
             ->get()
             ->load('user');
     }
@@ -63,6 +64,13 @@ class BlogCommentRepository
             ->orderBy('updated_at', 'asc')
             ->limit($limit)
             ->get();
+    }
+
+    public function delete($comment_id)
+    {
+        return $this->blogComment->newQuery()
+            ->find($comment_id)
+            ->delete();
     }
 
 }

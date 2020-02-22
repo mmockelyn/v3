@@ -19,6 +19,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/index.js', 'public/js')
 
     .js('resources/js/blog/index.js', 'public/js/blog')
+    .js('resources/js/blog/show.js', 'public/js/blog')
 
     .js('resources/js/auth/login.js', 'public/js/auth')
 
