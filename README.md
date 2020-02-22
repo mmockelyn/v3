@@ -27,7 +27,7 @@
 
 ### Blog <a id='blog'></a>
 
-- [ ] Création de l'acceuil
+- [x] Création de l'acceuil
 - [ ] Page Article
     - [ ] Système Commentaire
     

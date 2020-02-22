@@ -10763,6 +10763,22 @@ function () {
         });
       });
     }
+  }, {
+    key: "loadNewsless",
+    value: function loadNewsless() {
+      var divEl = document.querySelector('#loadNewslesss');
+      KTApp.block(divEl, {
+        overlayColor: '#000000',
+        type: 'v2',
+        state: 'success',
+        size: 'lg',
+        message: 'Chargement des news...'
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0__["get"]('/blog/api/loadNews').done(function (data) {
+        KTApp.unblock(divEl);
+        divEl.innerHTML = data.data;
+      });
+    }
   }]);
 
   return BlogIndex;
@@ -10771,6 +10787,7 @@ function () {
 var Init = function Init() {
   var blogIndex = new BlogIndex();
   blogIndex.loadCarousel();
+  blogIndex.loadNewsless();
 };
 
 Init();

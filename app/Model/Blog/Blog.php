@@ -29,6 +29,11 @@ class Blog extends Model
         return $query->orderBy('published_at', 'asc');
     }
 
+    public function scopeOrderDesc($query)
+    {
+        return $query->orderBy('published_at', 'desc');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

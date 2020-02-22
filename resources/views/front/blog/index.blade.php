@@ -25,6 +25,11 @@
             </div>
         </div>
     </div>
+    <div class="kt-portlet">
+        <div class="kt-portlet__body">
+            <div id="loadNewslesss" class="kt-scroll" data-scroll="true" style="height: 800px"></div>
+        </div>
+    </div>
 @endsection
 
 @section("script")

@@ -27,12 +27,31 @@ class BlogIndex {
                 });
             })
     }
+
+    loadNewsless() {
+        let divEl = document.querySelector('#loadNewslesss')
+
+        KTApp.block(divEl, {
+            overlayColor: '#000000',
+            type: 'v2',
+            state: 'success',
+            size: 'lg',
+            message: 'Chargement des news...'
+        })
+
+        $.get('/blog/api/loadNews')
+            .done((data) => {
+                KTApp.unblock(divEl)
+                divEl.innerHTML = data.data
+            })
+    }
 }
 
 
 const Init = function () {
     let blogIndex = new BlogIndex()
     blogIndex.loadCarousel()
+    blogIndex.loadNewsless()
 }
 
 Init()

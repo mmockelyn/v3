@@ -22,6 +22,7 @@ Route::group(["namespace" => "Front"], function () {
 
         Route::group(["prefix" => "api"], function () {
             Route::get('loadCarousel', 'BlogApiController@loadCarousel');
+            Route::get('loadNews', 'BlogApiController@loadNews');
         });
     });
 

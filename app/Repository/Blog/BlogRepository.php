@@ -24,7 +24,7 @@ class BlogRepository
     {
         return $this->blog->newQuery()
             ->published()
-            ->orderAsc()
+            ->orderDesc()
             ->get()
             ->load('comments', 'category', 'tags');
     }
@@ -33,7 +33,7 @@ class BlogRepository
     {
         return $this->blog->newQuery()
             ->published()
-            ->orderAsc()
+            ->orderDesc()
             ->limit($lenght)
             ->get()
             ->load('comments', 'category', 'tags');
