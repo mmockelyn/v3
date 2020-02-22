@@ -9,5 +9,6 @@
     "/js/auth/login.js": "/js/auth/login.js",
     "/js/blog/index.js": "/js/blog/index.js",
     "/js/blog/show.js": "/js/blog/show.js",
-    "/js/index.js": "/js/index.js"
+    "/js/index.js": "/js/index.js",
+    "/js/route/index.js": "/js/route/index.js"
 }

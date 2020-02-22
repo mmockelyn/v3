@@ -21,6 +21,8 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/blog/index.js', 'public/js/blog')
     .js('resources/js/blog/show.js', 'public/js/blog')
 
+    .js('resources/js/route/index.js', 'public/js/route')
+
     .js('resources/js/auth/login.js', 'public/js/auth')
 
     .js('resources/js/account/index.js', 'public/js/account')

@@ -13,9 +13,9 @@ class Route extends Model
         return $this->hasMany(RouteAnomalie::class);
     }
 
-    public function builds()
+    public function build()
     {
-        return $this->hasMany(RouteBuild::class);
+        return $this->hasOne(RouteBuild::class);
     }
 
     public function compatibilities()
