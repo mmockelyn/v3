@@ -52,5 +52,13 @@ class UserPaymentRepository
             ]);
     }
 
+    public function delete($pm_id)
+    {
+        return $this->userPayment->newQuery()
+            ->where('stripe_id', $pm_id)
+            ->first()
+            ->delete();
+    }
+
 }
 

@@ -80,6 +80,8 @@ Route::group(["middleware" => ["auth", "verified"], "prefix" => "account", "name
         Route::get('contrib/blog', 'AccountApiController@loadContribBlog');
         Route::get('contrib/tutoriel', 'AccountApiController@loadContribTutoriel');
 
+        Route::get('/deletePayment/{pm_id}', 'AccountApiController@deletePayment');
+
         Route::post('update', ["as" => "Account.update", "uses" => "AccountApiController@update"]);
         Route::post('updatePass', ["as" => "Account.updatePass", "uses" => "AccountApiController@updatePass"]);
         Route::post('addMethodPayment', ["as" => "Account.addMethodPayment", "uses" => "AccountApiController@addMethodPayment"]);

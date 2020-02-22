@@ -40,6 +40,13 @@ class PaymentMethod extends Stripe
         ]);
     }
 
+    public function detachToCustomer($pm_id)
+    {
+        $pm = \Stripe\PaymentMethod::retrieve($pm_id);
+        $pm->detach();
+        return $pm;
+    }
+
     public function listByCustomer($customer_id)
     {
         return \Stripe\PaymentMethod::all([

@@ -155,7 +155,6 @@ class AccountIndex {
 class Invoice {
     viewInvoice() {
         let btns = document.querySelectorAll('#btnViewInvoice')
-        console.log(btns)
 
         Array.from(btns).forEach((btn) => {
             btn.addEventListener('click', function() {
@@ -217,6 +216,9 @@ class PaymentMethod {
             success: function (data) {
                 KTApp.unblock(div)
                 div.innerHTML = data.data
+
+                let payment = new PaymentMethod()
+                payment.deleteMethodPayment()
             },
             error: function (jqxhr) {
                 KTApp.unblock(div)
@@ -244,7 +246,7 @@ class PaymentMethod {
                 statusCode: {
                     200: function (data) {
                         KTApp.unprogress(btn)
-                        KTUtil.animateClass($("table tbody").prepend(data.data), 'flipInX animated')
+                        $("#listingModePayments").prepend(data.data)
                         $("#addPaymentMethod").modal('hide')
                         console.log(data)
                     },
@@ -267,6 +269,48 @@ class PaymentMethod {
             })
         })
     }
+
+    deleteMethodPayment() {
+        let btns = document.querySelectorAll('#btnDeleteMethod')
+
+        Array.from(btns).forEach((btn) => {
+            btn.addEventListener('click', function (event) {
+                event.preventDefault()
+                KTApp.progress(btn)
+
+                let pm_id = btn.dataset.id
+
+                $.ajax({
+                    url: '/account/api/deletePayment/'+pm_id,
+                    statusCode: {
+                        200: function (data) {
+                            KTApp.unprogress(btn)
+                            toastr.success("Le mode de paiement à été supprimer avec succès !", "Succès")
+                            setTimeout(function () {
+                                window.location.reload()
+                            }, 1200)
+                        },
+                        500: function (jqxhr) {
+                            KTApp.unprogress(btn)
+                            toastr.error("Erreur lors de la suppression du mode de paiement !", "Erreur Système")
+                            console.error(jqxhr.responseJSON)
+                        }
+                    }
+                })
+            })
+        })
+    }
+
+    reloadPaymentMethod() {
+        let btn = document.querySelector('#btnReloadMethod')
+
+        btn.addEventListener('click', function (event) {
+            event.preventDefault()
+            let payment = new PaymentMethod()
+            payment.getListMethod()
+
+        })
+    }
 }
 
 const init = function () {
@@ -285,6 +329,8 @@ const init = function () {
     let payment = new PaymentMethod()
     payment.getListMethod()
     payment.createMethodPayment()
+    payment.deleteMethodPayment()
+    payment.reloadPaymentMethod()
 }
 
 init();

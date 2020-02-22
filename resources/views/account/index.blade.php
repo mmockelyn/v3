@@ -452,7 +452,7 @@
                     </div>
                     <div class="kt-portlet__head-toolbar">
                         <div class="kt-portlet__head-actions">
-                            <a id="btnReloadInvoices" href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md">
+                            <a id="btnReloadMethod" href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md">
                                 <i class="flaticon2-refresh"></i>
                             </a>
                             <a data-toggle="modal" href="#addPaymentMethod" class="btn btn-clean btn-sm btn-icon btn-icon-md">

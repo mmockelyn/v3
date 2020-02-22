@@ -35645,7 +35645,6 @@ function () {
     key: "viewInvoice",
     value: function viewInvoice() {
       var btns = document.querySelectorAll('#btnViewInvoice');
-      console.log(btns);
       Array.from(btns).forEach(function (btn) {
         btn.addEventListener('click', function () {
           var id = btn.dataset.id;
@@ -35713,6 +35712,8 @@ function () {
         success: function success(data) {
           KTApp.unblock(div);
           div.innerHTML = data.data;
+          var payment = new PaymentMethod();
+          payment.deleteMethodPayment();
         },
         error: function error(jqxhr) {
           KTApp.unblock(div);
@@ -35738,7 +35739,7 @@ function () {
           statusCode: {
             200: function _(data) {
               KTApp.unprogress(btn);
-              KTUtil.animateClass(jquery__WEBPACK_IMPORTED_MODULE_0__("table tbody").prepend(data.data), 'flipInX animated');
+              jquery__WEBPACK_IMPORTED_MODULE_0__("#listingModePayments").prepend(data.data);
               jquery__WEBPACK_IMPORTED_MODULE_0__("#addPaymentMethod").modal('hide');
               console.log(data);
             },
@@ -35761,6 +35762,45 @@ function () {
         });
       });
     }
+  }, {
+    key: "deleteMethodPayment",
+    value: function deleteMethodPayment() {
+      var btns = document.querySelectorAll('#btnDeleteMethod');
+      Array.from(btns).forEach(function (btn) {
+        btn.addEventListener('click', function (event) {
+          event.preventDefault();
+          KTApp.progress(btn);
+          var pm_id = btn.dataset.id;
+          jquery__WEBPACK_IMPORTED_MODULE_0__["ajax"]({
+            url: '/account/api/deletePayment/' + pm_id,
+            statusCode: {
+              200: function _(data) {
+                KTApp.unprogress(btn);
+                toastr.success("Le mode de paiement à été supprimer avec succès !", "Succès");
+                setTimeout(function () {
+                  window.location.reload();
+                }, 1200);
+              },
+              500: function _(jqxhr) {
+                KTApp.unprogress(btn);
+                toastr.error("Erreur lors de la suppression du mode de paiement !", "Erreur Système");
+                console.error(jqxhr.responseJSON);
+              }
+            }
+          });
+        });
+      });
+    }
+  }, {
+    key: "reloadPaymentMethod",
+    value: function reloadPaymentMethod() {
+      var btn = document.querySelector('#btnReloadMethod');
+      btn.addEventListener('click', function (event) {
+        event.preventDefault();
+        var payment = new PaymentMethod();
+        payment.getListMethod();
+      });
+    }
   }]);
 
   return PaymentMethod;
@@ -35780,6 +35820,8 @@ var init = function init() {
   var payment = new PaymentMethod();
   payment.getListMethod();
   payment.createMethodPayment();
+  payment.deleteMethodPayment();
+  payment.reloadPaymentMethod();
 };
 
 init();

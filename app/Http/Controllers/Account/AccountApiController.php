@@ -573,6 +573,29 @@ class AccountApiController extends BaseController
 
     }
 
+    public function deletePayment($pm_id)
+    {
+        $paymentMethod = new PaymentMethod();
+
+        try {
+            $pm = $paymentMethod->detachToCustomer($pm_id);
+
+            try {
+                $this->paymentRepository->delete($pm_id);
+
+                $this->sendResponse($pm, "Suppression du mode de paiement");
+            }catch (\Exception $exception) {
+                return $this->sendError("Erreur Delete PaymentMethod", [
+                    "errors" => $exception->getMessage()
+                ]);
+            }
+        }catch (StripeException $exception) {
+            return $this->sendError("Erreur Detach Stripe PaymentMethod", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+    }
+
     private function registerInvoice($latest_invoice_id) {
         $invoice = new Invoice();
         $in = $invoice->retrieve($latest_invoice_id);
