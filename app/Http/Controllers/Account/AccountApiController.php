@@ -25,6 +25,8 @@ use App\Repository\Account\UserActivityRepository;
 use App\Repository\Account\UserPaymentRepository;
 use App\Repository\Account\UserPremiumRepository;
 use App\Repository\Account\UserRepository;
+use App\Repository\Blog\BlogCommentRepository;
+use App\Repository\Tutoriel\TutorielCommentRepository;
 use Carbon\Carbon;
 use Cartalyst\Stripe\Exception\StripeException;
 use Cartalyst\Stripe\Stripe;
@@ -62,6 +64,14 @@ class AccountApiController extends BaseController
      * @var InvoiceItemRepository
      */
     private $invoiceItemRepository;
+    /**
+     * @var BlogCommentRepository
+     */
+    private $blogCommentRepository;
+    /**
+     * @var TutorielCommentRepository
+     */
+    private $tutorielCommentRepository;
 
     /**
      * AccountApiController constructor.
@@ -72,6 +82,8 @@ class AccountApiController extends BaseController
      * @param UserPaymentRepository $paymentRepository
      * @param UserPremiumRepository $premiumRepository
      * @param InvoiceItemRepository $invoiceItemRepository
+     * @param BlogCommentRepository $blogCommentRepository
+     * @param TutorielCommentRepository $tutorielCommentRepository
      */
     public function __construct(
         UserActivityRepository $activityRepository,
@@ -80,7 +92,8 @@ class AccountApiController extends BaseController
         UserAccountRepository $accountRepository,
         UserPaymentRepository $paymentRepository,
         UserPremiumRepository $premiumRepository,
-        InvoiceItemRepository $invoiceItemRepository)
+        InvoiceItemRepository $invoiceItemRepository,
+        BlogCommentRepository $blogCommentRepository, TutorielCommentRepository $tutorielCommentRepository)
     {
         $this->activityRepository = $activityRepository;
         $this->invoiceRepository = $invoiceRepository;
@@ -89,6 +102,8 @@ class AccountApiController extends BaseController
         $this->paymentRepository = $paymentRepository;
         $this->premiumRepository = $premiumRepository;
         $this->invoiceItemRepository = $invoiceItemRepository;
+        $this->blogCommentRepository = $blogCommentRepository;
+        $this->tutorielCommentRepository = $tutorielCommentRepository;
     }
 
     public function loadLatestActivity()
@@ -337,4 +352,101 @@ class AccountApiController extends BaseController
 
         return $this->sendResponse(["invoice" => $array, "items" => $items], "Invoice");
     }
+
+    public function loadContribBlog() {
+        $datas = $this->blogCommentRepository->getLastForUser(5);
+        ob_start();
+        ?>
+        <div class="kt-timeline-v3">
+            <div class="kt-timeline-v3__items">
+                <?php foreach ($datas as $data): ?>
+                <?php if($data->state == 0): ?>
+                        <div class="kt-timeline-v3__item kt-timeline-v3__item--danger">
+                            <span class="kt-timeline-v3__item-time"><?= $data->updated_at->format('d/m'); ?></span>
+                            <div class="kt-timeline-v3__item-desc">
+                        <span class="kt-timeline-v3__item-text">
+                            <?= $data->comment; ?>
+                        </span>
+                                <br>
+                                <span class="kt-timeline-v3__item-user-name">
+                            <a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
+                                <?= $data->blog->title; ?> | Posté le <?= $data->blog->published_at->format('d/m/Y à H:i') ?>
+                            </a>
+                        </span>
+                            </div>
+                        </div>
+                <?php else: ?>
+                        <div class="kt-timeline-v3__item kt-timeline-v3__item--success">
+                            <span class="kt-timeline-v3__item-time"><?= $data->updated_at->format('d/m'); ?></span>
+                            <div class="kt-timeline-v3__item-desc">
+                        <span class="kt-timeline-v3__item-text">
+                            <?= $data->comment; ?>
+                        </span>
+                                <br>
+                                <span class="kt-timeline-v3__item-user-name">
+                            <a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
+                                <?= $data->blog->title; ?> | Posté le <?= $data->blog->published_at->format('d/m/Y à H:i') ?>
+                            </a>
+                        </span>
+                            </div>
+                        </div>
+                <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php
+        $content = ob_get_clean();
+
+        return $this->sendResponse($content, "Contribution");
+    }
+
+    public function loadContribTutoriel()
+    {
+        $datas = $this->tutorielCommentRepository->getLastForUser(5);
+        ob_start();
+        ?>
+        <div class="kt-timeline-v3">
+            <div class="kt-timeline-v3__items">
+                <?php foreach ($datas as $data): ?>
+                    <?php if($data->published == 0): ?>
+                        <div class="kt-timeline-v3__item kt-timeline-v3__item--danger">
+                            <span class="kt-timeline-v3__item-time"><?= $data->published_at; ?></span>
+                            <div class="kt-timeline-v3__item-desc">
+                        <span class="kt-timeline-v3__item-text">
+                            <?= $data->content; ?>
+                        </span>
+                                <br>
+                                <span class="kt-timeline-v3__item-user-name">
+                            <a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
+                                <?= $data->tutoriel->title; ?> | Posté le <?= $data->tutoriel->published_at->format('d/m/Y à H:i') ?>
+                            </a>
+                        </span>
+                            </div>
+                        </div>
+                    <?php else: ?>
+                        <div class="kt-timeline-v3__item kt-timeline-v3__item--success">
+                            <span class="kt-timeline-v3__item-time"><?= $data->published_at->format('d/m'); ?></span>
+                            <div class="kt-timeline-v3__item-desc">
+                        <span class="kt-timeline-v3__item-text">
+                            <?= $data->content; ?>
+                        </span>
+                                <br>
+                                <span class="kt-timeline-v3__item-user-name">
+                            <a href="#" class="kt-link kt-link--dark kt-timeline-v3__itek-link">
+                                <?= $data->tutoriel->title; ?> | Posté le <?= $data->tutoriel->published_at->format('d/m/Y à H:i') ?>
+                            </a>
+                        </span>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php
+        $content = ob_get_clean();
+
+        return $this->sendResponse($content, "Contribution");
+    }
+
+
 }

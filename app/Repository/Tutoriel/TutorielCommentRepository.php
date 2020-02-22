@@ -29,5 +29,14 @@ class TutorielCommentRepository
             ->load('user');
     }
 
+    public function getLastForUser($int = null)
+    {
+        return $this->tutorielComment->newQuery()
+            ->where('user_id', auth()->user()->id)
+            ->limit($int)
+            ->get()
+            ->load('tutoriel');
+    }
+
 }
 

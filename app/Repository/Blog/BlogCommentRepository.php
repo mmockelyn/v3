@@ -56,5 +56,14 @@ class BlogCommentRepository
             ->get()->last()->load('user');
     }
 
+    public function getLastForUser($limit = null)
+    {
+        return $this->blogComment->newQuery()
+            ->where('user_id', auth()->user()->id)
+            ->orderBy('updated_at', 'asc')
+            ->limit($limit)
+            ->get();
+    }
+
 }
 

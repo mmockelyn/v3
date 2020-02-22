@@ -10757,6 +10757,72 @@ function () {
         div.innerHTML = data.data;
       });
     }
+  }, {
+    key: "reloadContrib",
+    value: function reloadContrib() {
+      var btns = document.querySelectorAll('#btnReloadContrib');
+      Array.from(btns).forEach(function (btn) {
+        btn.addEventListener('click', function (event) {
+          event.preventDefault();
+          var action = btn.dataset.action;
+          var account = new AccountIndex();
+
+          if (action === 'blog') {
+            account.getLoadContribBlog();
+          } else {
+            account.getLoadContribTutoriel();
+          }
+        });
+      });
+    }
+  }, {
+    key: "getLoadContribBlog",
+    value: function getLoadContribBlog() {
+      var div = document.querySelector('#loadContribBlog');
+      KTApp.block(div, {
+        overlayColor: '#000000',
+        type: 'v2',
+        state: 'success',
+        size: 'lg',
+        message: 'Chargement des Contributions...'
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0__["ajax"]({
+        url: '/account/api/contrib/blog',
+        success: function success(data) {
+          KTApp.unblock(div);
+          div.innerHTML = data.data;
+        },
+        error: function error(jqxhr) {
+          KTApp.unblock(div);
+          toastr.error("Erreur lors du chargement des contribution: Blog", "Erreur Système");
+          console.error(jqxhr.responseText);
+        }
+      });
+    }
+  }, {
+    key: "getLoadContribTutoriel",
+    value: function getLoadContribTutoriel() {
+      var div = document.querySelector('#loadContribTutoriel');
+      KTApp.block(div, {
+        overlayColor: '#000000',
+        type: 'v2',
+        state: 'success',
+        size: 'lg',
+        message: 'Chargement des Contributions...'
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_0__["ajax"]({
+        url: '/account/api/contrib/tutoriel',
+        success: function success(data) {
+          KTApp.unblock(div);
+          div.innerHTML = data.data;
+        },
+        error: function error(jqxhr) {
+          KTApp.unblock(div);
+          toastr.error("Erreur lors du chargement des contribution: Tutoriel", "Erreur Système");
+          console.error(jqxhr.responseText);
+        }
+      });
+    }
   }]);
 
   return AccountIndex;
@@ -10766,6 +10832,9 @@ var init = function init() {
   var account = new AccountIndex();
   account.getLatestActivity();
   account.getLastInvoice();
+  account.getLoadContribBlog();
+  account.getLoadContribTutoriel();
+  account.reloadContrib();
 };
 
 init();

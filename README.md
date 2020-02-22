@@ -21,9 +21,9 @@
 - [x] Création de l'acceuil
 - [x] Gestion de compte
 - [ ] Système de badge (Facultatif)
-- [ ] Gestion des contributions
+- [x] Gestion des contributions
 - [ ] Gestion des factures et moyen de paiement
-- [ ] Système premium
+- [x] Système premium
 
 ### Blog <a id='blog'></a>
 

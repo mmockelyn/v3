@@ -75,6 +75,8 @@ Route::group(["middleware" => ["auth", "verified"], "prefix" => "account", "name
         Route::get('delete', 'AccountApiController@delete');
         Route::get('verifCarte', 'AccountApiController@verifCarte');
         Route::get('/invoice/{invoice_id}', 'accountApiController@invoice');
+        Route::get('contrib/blog', 'AccountApiController@loadContribBlog');
+        Route::get('contrib/tutoriel', 'AccountApiController@loadContribTutoriel');
 
         Route::post('update', ["as" => "Account.update", "uses" => "AccountApiController@update"]);
         Route::post('updatePass', ["as" => "Account.updatePass", "uses" => "AccountApiController@updatePass"]);

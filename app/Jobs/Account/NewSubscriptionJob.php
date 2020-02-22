@@ -41,6 +41,6 @@ class NewSubscriptionJob implements ShouldQueue
      */
     public function handle()
     {
-        auth()->user()->notify(new NewSubscription($this->user, $this->subscription));
+        $this->user->notify(new NewSubscription($this->user, $this->subscription));
     }
 }
