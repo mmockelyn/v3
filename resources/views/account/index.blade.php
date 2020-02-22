@@ -31,6 +31,9 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#contrib" role="tab">Mes Contributions</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#invoice" role="tab">Mes Factures</a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane active" id="dashboard" role="tabpanel">
