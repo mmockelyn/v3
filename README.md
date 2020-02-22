@@ -22,7 +22,7 @@
 - [x] Gestion de compte
 - [ ] Système de badge (Facultatif)
 - [x] Gestion des contributions
-- [ ] Gestion des factures et moyen de paiement
+- [x] Gestion des factures et moyen de paiement
 - [x] Système premium
 
 ### Blog <a id='blog'></a>

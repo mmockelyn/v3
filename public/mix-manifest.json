@@ -5,6 +5,8 @@
     "/js/account/premium.js": "/js/account/premium.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/css/blog.css": "/css/blog.css",
     "/js/auth/login.js": "/js/auth/login.js",
+    "/js/blog/index.js": "/js/blog/index.js",
     "/js/index.js": "/js/index.js"
 }

@@ -1,0 +1,31 @@
+.tz-blog {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.tz-blog .tz-blog__head {
+    background: linear-gradient(90deg, #FB5A5A 0%, #326CDC 41.22%);
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background-size: cover;
+    padding: 80px 0;
+}
+
+.tz-blog .tz-blog__head .tz-blog__icons {
+    padding-left: 125px;
+}
+
+.tz-blog .tz-blog__head .tz-blog__title {
+    font-size: 70px;
+    font-weight: bold;
+    color: white;
+}
+
+#slickCarousel {
+    width: 80%;
+}
+#slickCarousel div{
+    padding-left: 5px;
+    ///height: 300px;
+}

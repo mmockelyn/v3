@@ -19,6 +19,10 @@ Route::group(["namespace" => "Front"], function () {
     Route::group(["prefix" => "blog", "namespace" => "Blog"], function () {
         Route::get('/', ["as" => "Front.Blog.index", "uses" => "BlogController@index"]);
         Route::get('{slug}', ["as" => "Front.Blog.show", "uses" => "BlogController@show"]);
+
+        Route::group(["prefix" => "api"], function () {
+            Route::get('loadCarousel', 'BlogApiController@loadCarousel');
+        });
     });
 
     Route::group(["prefix" => "route", "namespace" => "Route"], function () {
