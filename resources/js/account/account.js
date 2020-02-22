@@ -6,7 +6,7 @@ function checkPassword() {
     let password = document.querySelector('#password')
     let confirm_password = document.querySelector('#confirm_password')
 
-    confirm_password.addEventListener('keyUp', function (e) {
+    confirm_password.addEventListener('keyup', function (e) {
         e.preventDefault()
         if (confirm_password.value !== password.value) {
             password.classList.add('is-invalid')

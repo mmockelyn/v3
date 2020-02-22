@@ -23,16 +23,16 @@
 @section("content")
     <ul class="nav nav-tabs nav-fill nav-tabs-line" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#dashboard" role="tab">Tableau de Bord</a>
+            <a class="nav-link active" data-toggle="tab" href="#dashboard" role="tab"><i class="la la-dashboard"></i> Tableau de Bord</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#account" role="tab">Mon Compte</a>
+            <a class="nav-link" data-toggle="tab" href="#account" role="tab"><i class="la la-user-md"></i> Mon Compte</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#contrib" role="tab">Mes Contributions</a>
+            <a class="nav-link" data-toggle="tab" href="#contrib" role="tab"><i class="la la-pencil-square"></i> Mes Contributions</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#invoice" role="tab">Mes Factures</a>
+            <a class="nav-link" data-toggle="tab" href="#invoice" role="tab"><i class="la la-euro"></i> Mes Factures</a>
         </li>
     </ul>
     <div class="tab-content">
@@ -389,6 +389,124 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="invoice" role="tabpanel">
+            <div class="kt-portlet">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+					<span class="kt-portlet__head-icon">
+						<i class="la la-euro"></i>
+					</span>
+                        <h3 class="kt-portlet__head-title">
+                            Liste de mes factures
+                        </h3>
+                    </div>
+                    <div class="kt-portlet__head-toolbar">
+                        <div class="kt-portlet__head-actions">
+                            <a id="btnReloadInvoices" href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md">
+                                <i class="flaticon2-refresh"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+                    <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
+                        <div class="row align-items-center">
+                            <div class="col-xl-8 order-2 order-xl-1">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                        <div class="kt-input-icon kt-input-icon--left">
+                                            <input type="text" class="form-control" placeholder="Rechercher..." id="generalSearch">
+                                            <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                                <span><i class="la la-search"></i></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-bordered">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Date de la Facture</th>
+                            <th>Total de la facture</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody id="listingInvoices"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="kt-portlet">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+					<span class="kt-portlet__head-icon">
+						<i class="la la-credit-card"></i>
+					</span>
+                        <h3 class="kt-portlet__head-title">
+                            Liste de mes modes de paiements
+                        </h3>
+                    </div>
+                    <div class="kt-portlet__head-toolbar">
+                        <div class="kt-portlet__head-actions">
+                            <a id="btnReloadInvoices" href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md">
+                                <i class="flaticon2-refresh"></i>
+                            </a>
+                            <a data-toggle="modal" href="#addPaymentMethod" class="btn btn-clean btn-sm btn-icon btn-icon-md">
+                                <i class="flaticon2-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+                    <table class="table table-striped table-bordered">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>Carte</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody id="listingModePayments"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addPaymentMethod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajout d'un mode de Paiement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form id="formCreatePaymentMethod" action="{{ route('Account.createMethodPayment') }}" class="kt-form">
+                    @csrf
+                    @include("layout.includes.alert")
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <input type="text" id="card_number" class="form-control" name="number" placeholder="Numéro de la carte" required>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" id="card_exp_month" class="form-control" name="exp_month" required placeholder="MM">
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" id="card_exp_year" class="form-control" name="exp_year" required placeholder="AA">
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" id="card_cvc" class="form-control" name="cvc" required placeholder="XXX">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" id="btnSubmit" class="btn btn-success">Valider</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

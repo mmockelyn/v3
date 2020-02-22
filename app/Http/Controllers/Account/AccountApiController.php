@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Account;
 
 use App\Events\Account\UpdateInfoEvent;
 use App\HelpersClass\Account\AccountActivityHelper;
+use App\HelpersClass\Account\AccountHelper;
 use App\HelpersClass\Generator;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
@@ -299,31 +300,6 @@ class AccountApiController extends BaseController
 
     }
 
-    private function registerInvoice($latest_invoice_id) {
-        $invoice = new Invoice();
-        $in = $invoice->retrieve($latest_invoice_id);
-
-        try {
-            $inc = $this->invoiceRepository->create(
-                auth()->user()->id,
-                $in->number,
-                Carbon::createFromTimestamp($in->created),
-                number_format($in->total/100, 2, '.', ' ')
-            );
-
-            foreach ($in->lines->all() as $item) {
-                $this->invoiceItemRepository->create($inc->id, $item->description, 1, number_format($item->amount/100, 2, '.', ' '), number_format($item->amount/100, 2, '.', ' '));
-            }
-
-            return $this->sendResponse($inc, "Création de facture");
-        }catch (\Exception $exception) {
-            return $this->sendError("Erreur création facture", [
-                "errors" => $exception->getMessage()
-            ]);
-        }
-
-    }
-
     public function invoice($invoice_id) {
         $invoice = $this->invoiceRepository->get($invoice_id);
         ob_start();
@@ -360,7 +336,7 @@ class AccountApiController extends BaseController
         <div class="kt-timeline-v3">
             <div class="kt-timeline-v3__items">
                 <?php foreach ($datas as $data): ?>
-                <?php if($data->state == 0): ?>
+                    <?php if($data->state == 0): ?>
                         <div class="kt-timeline-v3__item kt-timeline-v3__item--danger">
                             <span class="kt-timeline-v3__item-time"><?= $data->updated_at->format('d/m'); ?></span>
                             <div class="kt-timeline-v3__item-desc">
@@ -375,7 +351,7 @@ class AccountApiController extends BaseController
                         </span>
                             </div>
                         </div>
-                <?php else: ?>
+                    <?php else: ?>
                         <div class="kt-timeline-v3__item kt-timeline-v3__item--success">
                             <span class="kt-timeline-v3__item-time"><?= $data->updated_at->format('d/m'); ?></span>
                             <div class="kt-timeline-v3__item-desc">
@@ -390,7 +366,7 @@ class AccountApiController extends BaseController
                         </span>
                             </div>
                         </div>
-                <?php endif; ?>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -448,5 +424,205 @@ class AccountApiController extends BaseController
         return $this->sendResponse($content, "Contribution");
     }
 
+    public function invoices(Request $request)
+    {
+        if($request->state == 'search'){
+            $datas = $this->invoiceRepository->listForUserByDate($request->q);
+            ob_start();
+            ?>
+            <?php if(count($datas) == 0): ?>
+                <tr>
+                    <td colspan="4" class="text-center">Aucune Facture de disponible</td>
+                </tr>
+            <?php else: ?>
+                <?php foreach ($datas as $data): ?>
+                    <tr>
+                        <td><?= $data->id; ?></td>
+                        <td><?= $data->date->format('d/m/Y'); ?></td>
+                        <td><?= Generator::formatCurrency($data->total); ?></td>
+                        <td>
+                            <button id="btnViewInvoice" data-id="<?= $data->id; ?>" class="btn btn-sm btn-primary btn-icon"><i class="la la-eye"></i> </button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <?php
+            $content = ob_get_clean();
+
+            return $this->sendResponse($content, "Liste des factures par date");
+        }else {
+            $datas = $this->invoiceRepository->listForUser(auth()->user()->id);
+            ob_start();
+            ?>
+            <?php if(count($datas) == 0): ?>
+                <tr>
+                    <td colspan="4" class="text-center">Aucune Facture de disponible</td>
+                </tr>
+            <?php else: ?>
+                <?php foreach ($datas as $data): ?>
+                    <tr>
+                        <td><?= $data->id; ?></td>
+                        <td><?= $data->date->format('d/m/Y'); ?></td>
+                        <td><?= Generator::formatCurrency($data->total); ?></td>
+                        <td>
+                            <button id="btnViewInvoice" data-id="<?= $data->id; ?>" class="btn btn-sm btn-primary btn-icon"><i class="la la-eye"></i> </button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <?php
+            $content = ob_get_clean();
+
+            return $this->sendResponse($content, "Liste des factures");
+        }
+    }
+
+    public function loadPayments() {
+        $payment = new PaymentMethod();
+        try {
+            $pms = $payment->listByCustomer(auth()->user()->account->customer_id);
+        }catch (StripeException $exception) {
+            return $this->sendError("Erreur de chargement des modes de paiements", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+        ob_start();
+        ?>
+        <?php if(count($pms) == 0): ?>
+            <tr>
+                <td colspan="2" class="text-center">Aucun Moyen de paiement enregistrer</td>
+            </tr>
+        <?php else: ?>
+            <?php foreach ($pms as $pm): ?>
+                <tr <?php if(Carbon::createFromTimestamp(strtotime('01-'.$pm->card->exp_month.'-'.$pm->card->exp_year)) <= now()): ?> class="table-danger" <?php endif; ?>>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-1"><i class="<?= AccountHelper::typeCardIcon($pm->card->brand) ?> la-3x"></i> </div>
+                            <div class="col-md-11">
+                                <strong>XXXX XXXX XXXX <?= $pm->card->last4; ?></strong><br>
+                                <i>Expiration: <?= $pm->card->exp_month; ?>/<?= $pm->card->exp_year; ?></i>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <?php if(count($pms) >= 2): ?>
+                            <button id="btnDeleteMethod" data-id="<?= $pm->id; ?>" class="btn btn-sm btn-danger btn-icon"><i class="la la-trash-o"></i> </button>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <?php
+        $content = ob_get_clean();
+
+        return $this->sendResponse($content, "Liste des moyens de paiement");
+    }
+
+    public function createMethodPayment(Request $request)
+    {
+        $customer = new Customer();
+        $PaymentMethod = new PaymentMethod();
+
+        //dd($request->all());
+
+        $card = $this->verifCardNumber($request->number);
+        $this->verifCardValidity($request->exp_month, $request->exp_year);
+        //$this->verifCardCvc($request->cvc, $card['type']);
+
+        try {
+            $pm = $PaymentMethod->create($request->number, $request->exp_month, $request->exp_year, $request->cvc);
+            $PaymentMethod->attachToCustomer(auth()->user()->account->customer_id, $pm->id);
+
+            try {
+                $data = $this->paymentRepository->create($pm->id, $card['type'], Str::substr($request->number, 12, 4));
+                $pms = $PaymentMethod->listByCustomer(auth()->user()->account->customer_id);
+                $pm = $PaymentMethod->get($data->stripe_id);
+                ob_start();
+                ?>
+                <tr <?php if(Carbon::createFromTimestamp(strtotime('01-'.$pm->card->exp_month.'-'.$pm->card->exp_year)) <= now()): ?> class="table-danger" <?php endif; ?>>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-1"><i class="<?= AccountHelper::typeCardIcon($pm->card->brand) ?> la-3x"></i> </div>
+                            <div class="col-md-11">
+                                <strong>XXXX XXXX XXXX <?= $pm->card->last4; ?></strong><br>
+                                <i>Expiration: <?= $pm->card->exp_month; ?>/<?= $pm->card->exp_year; ?></i>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <?php if(count($pms) >= 2): ?>
+                            <button id="btnDeleteMethod" data-id="<?= $pm->id; ?>" class="btn btn-sm btn-danger btn-icon"><i class="la la-trash-o"></i> </button>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <?php
+                $content = ob_get_clean();
+
+                return $this->sendResponse($content, "Nouveau Moyen de paiement");
+            }catch (\Exception $exception) {
+                return $this->sendError("Erreur Système createMethodPayment Database", [
+                    "errors" => $exception->getMessage()
+                ]);
+            }
+
+        }catch (StripeException $exception) {
+            return $this->sendError("Erreur Systeme PaymentMethod Stripe", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+
+    }
+
+    private function registerInvoice($latest_invoice_id) {
+        $invoice = new Invoice();
+        $in = $invoice->retrieve($latest_invoice_id);
+
+        try {
+            $inc = $this->invoiceRepository->create(
+                auth()->user()->id,
+                $in->number,
+                Carbon::createFromTimestamp($in->created),
+                number_format($in->total/100, 2, '.', ' ')
+            );
+
+            foreach ($in->lines->all() as $item) {
+                $this->invoiceItemRepository->create($inc->id, $item->description, 1, number_format($item->amount/100, 2, '.', ' '), number_format($item->amount/100, 2, '.', ' '));
+            }
+
+            return $this->sendResponse($inc, "Création de facture");
+        }catch (\Exception $exception) {
+            return $this->sendError("Erreur création facture", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+
+    }
+
+    private function verifCardNumber($card_number) {
+        $data = CreditCard::validCreditCard($card_number);
+
+        if($data['valid'] == true) {
+            return $data;
+        }else{
+            return $this->sendError("Carte Invalide", "Le numéro de la carte est invalide", 203);
+        }
+    }
+
+    private function verifCardValidity($exp_month, $exp_year) {
+        if(Carbon::createFromTimestamp(strtotime('01-'.$exp_month.'-'.$exp_year)) <= now()) {
+            return $this->sendError("Carte Invalide", "La carte est arrivée à expiration. Veuillez contacter votre banque !", 203);
+        }else{
+            return null;
+        }
+    }
+
+    private function verifCardCvc($cvc, $type) {
+        $data = CreditCard::validCvc($cvc, $type);
+        if($data == true) {
+            return $data;
+        }else{
+            return $this->sendError("Carte Invalide", "Le code de sécurité est invalide !", 203);
+        }
+    }
 
 }

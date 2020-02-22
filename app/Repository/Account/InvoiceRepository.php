@@ -46,5 +46,13 @@ class InvoiceRepository
             ->find($invoice_id);
     }
 
+    public function listForUserByDate($q)
+    {
+        return $this->invoice->newQuery()
+            ->where('user_id', auth()->user()->id)
+            ->where('date', 'like', '%'.$q.'%')
+            ->get();
+    }
+
 }
 

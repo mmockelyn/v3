@@ -39,4 +39,17 @@ class PaymentMethod extends Stripe
             'customer' => $customer_id
         ]);
     }
+
+    public function listByCustomer($customer_id)
+    {
+        return \Stripe\PaymentMethod::all([
+            "customer" => $customer_id,
+            "type" => 'card'
+        ]);
+    }
+
+    public function get($pm_id)
+    {
+        return \Stripe\PaymentMethod::retrieve($pm_id);
+    }
 }

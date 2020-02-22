@@ -51,6 +51,16 @@ class AccountHelper
 
     public static function typeCardIcon($type_card)
     {
-
+        switch ($type_card) {
+            case 'visa': return 'la la-cc-visa'; break;
+            case 'amex': return 'la la-cc-amex'; break;
+            case 'diners-club': return 'la la-cc-diners-club'; break;
+            case 'discover': return 'la la-cc-discover'; break;
+            case 'jcb': return 'la la-cc-jcb'; break;
+            case 'mastercard': return 'la la-cc-mastercard'; break;
+            case 'paypal': return 'la la-cc-paypal'; break;
+            case 'stripe': return 'la la-cc-stripe'; break;
+            default: return 'la la-cc';
+        }
     }
 }

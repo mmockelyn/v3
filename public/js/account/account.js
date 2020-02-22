@@ -13642,7 +13642,7 @@ __webpack_require__.r(__webpack_exports__);
 function checkPassword() {
   var password = document.querySelector('#password');
   var confirm_password = document.querySelector('#confirm_password');
-  confirm_password.addEventListener('keyUp', function (e) {
+  confirm_password.addEventListener('keyup', function (e) {
     e.preventDefault();
 
     if (confirm_password.value !== password.value) {

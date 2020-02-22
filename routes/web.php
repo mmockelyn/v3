@@ -74,6 +74,8 @@ Route::group(["middleware" => ["auth", "verified"], "prefix" => "account", "name
         Route::get('latestInvoice', 'AccountApiController@loadLatestInvoice');
         Route::get('delete', 'AccountApiController@delete');
         Route::get('verifCarte', 'AccountApiController@verifCarte');
+        Route::get('invoices', 'AccountApiController@invoices');
+        Route::get('loadPayments', 'AccountApiController@loadPayments');
         Route::get('/invoice/{invoice_id}', 'accountApiController@invoice');
         Route::get('contrib/blog', 'AccountApiController@loadContribBlog');
         Route::get('contrib/tutoriel', 'AccountApiController@loadContribTutoriel');
@@ -81,6 +83,7 @@ Route::group(["middleware" => ["auth", "verified"], "prefix" => "account", "name
         Route::post('update', ["as" => "Account.update", "uses" => "AccountApiController@update"]);
         Route::post('updatePass', ["as" => "Account.updatePass", "uses" => "AccountApiController@updatePass"]);
         Route::post('addMethodPayment', ["as" => "Account.addMethodPayment", "uses" => "AccountApiController@addMethodPayment"]);
+        Route::post('createMethodPayment', ["as" => "Account.createMethodPayment", "uses" => "AccountApiController@createMethodPayment"]);
         Route::post('social/disconnect', 'AccountApiController@disconnect');
 
 

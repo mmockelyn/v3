@@ -1,4 +1,7 @@
 import * as $ from "jquery";
+require('datatables.net-bs4');
+require('datatables.net-buttons-bs4');
+import modal from 'bootstrap'
 
 class AccountIndex {
 
@@ -49,19 +52,30 @@ class AccountIndex {
                 let action = btn.dataset.action
                 let account = new AccountIndex()
 
-                if(action === 'blog') {
+                if (action === 'blog') {
                     account.getLoadContribBlog()
-                }else{
+                } else {
                     account.getLoadContribTutoriel()
                 }
             })
         })
     }
 
+    reloadInvoices() {
+        let btn = document.querySelector('#btnReloadInvoices')
+
+        btn.addEventListener('click', function (event) {
+            event.preventDefault()
+            let account = new AccountIndex()
+            account.getListInvoices()
+
+        })
+    }
+
     getLoadContribBlog() {
         let div = document.querySelector('#loadContribBlog')
 
-        KTApp.block(div,{
+        KTApp.block(div, {
             overlayColor: '#000000',
             type: 'v2',
             state: 'success',
@@ -86,7 +100,7 @@ class AccountIndex {
     getLoadContribTutoriel() {
         let div = document.querySelector('#loadContribTutoriel')
 
-        KTApp.block(div,{
+        KTApp.block(div, {
             overlayColor: '#000000',
             type: 'v2',
             state: 'success',
@@ -108,6 +122,151 @@ class AccountIndex {
         })
     }
 
+    getListInvoices() {
+        let div = document.querySelector('#listingInvoices')
+
+        KTApp.block(div, {
+            overlayColor: '#000000',
+            type: 'v2',
+            state: 'success',
+            size: 'lg',
+            message: 'Chargement des factures...'
+        })
+
+        $.ajax({
+            url: '/account/api/invoices',
+            success: function (data) {
+                KTApp.unblock(div)
+                div.innerHTML = data.data
+
+                let invoice = new Invoice()
+                invoice.viewInvoice()
+            },
+            error: function (jqxhr) {
+                KTApp.unblock(div)
+                toastr.error("Erreur lors du chargement des factures", "Erreur système")
+                console.error(jqxhr.responseText)
+            }
+        })
+    }
+
+}
+
+class Invoice {
+    viewInvoice() {
+        let btns = document.querySelectorAll('#btnViewInvoice')
+        console.log(btns)
+
+        Array.from(btns).forEach((btn) => {
+            btn.addEventListener('click', function() {
+                let id = btn.dataset.id
+                window.location.href='/account/invoice/'+id
+            })
+        })
+    }
+
+    loadSearch() {
+        let searchInp = document.querySelector('#generalSearch')
+        let div = document.querySelector('#listingInvoices')
+
+        searchInp.addEventListener('keyup', function (e) {
+            e.preventDefault()
+
+            KTApp.block(div, {
+                overlayColor: '#000000',
+                type: 'v2',
+                state: 'success',
+                size: 'lg',
+                message: 'Chargement des factures...'
+            })
+
+            $.ajax({
+                url: '/account/api/invoices',
+                data: {
+                    state: 'search',
+                    q: $(this).val()
+                },
+                success: function (data) {
+                    KTApp.unblock(div)
+                    div.innerHTML = data.data
+                },
+                error: function (jqxhr) {
+                    KTApp.unblock(div)
+                    toastr.error("Erreur lors du chargement des factures", "Erreur système")
+                    console.error(jqxhr.responseText)
+                }
+            })
+        })
+    }
+}
+
+class PaymentMethod {
+    getListMethod() {
+        let div = document.querySelector('#listingModePayments')
+
+        KTApp.block(div, {
+            overlayColor: '#000000',
+            type: 'v2',
+            state: 'success',
+            size: 'lg',
+            message: 'Chargement des moyens de paiements...'
+        })
+
+        $.ajax({
+            url: '/account/api/loadPayments',
+            success: function (data) {
+                KTApp.unblock(div)
+                div.innerHTML = data.data
+            },
+            error: function (jqxhr) {
+                KTApp.unblock(div)
+                toastr.error("Erreur lors du chargement des moyens de paiements", "Erreur système")
+                console.error(jqxhr.responseText)
+            }
+        })
+    }
+
+    createMethodPayment() {
+        let form = $("#formCreatePaymentMethod")
+
+
+        form.on('submit', function (e) {
+            e.preventDefault()
+            let url = form.attr('action')
+            let btn = form.find('#btnSubmit')
+            let data = form.serializeArray()
+            KTApp.progress(btn)
+
+            $.ajax({
+                url: url,
+                method: "POST",
+                data: data,
+                statusCode: {
+                    200: function (data) {
+                        KTApp.unprogress(btn)
+                        KTUtil.animateClass($("table tbody").prepend(data.data), 'flipInX animated')
+                        $("#addPaymentMethod").modal('hide')
+                        console.log(data)
+                    },
+                    203: function (data) {
+                        KTApp.unprogress(btn)
+                        let alertEl = document.querySelector('#alertFormError')
+                        alertEl.style.display = 'block'
+                        let errorsEl = $('#errors')
+                        Array.from(data.data.errors).forEach((item) => {
+                            errorsEl.html(`<li>${item}</li>`)
+                        })
+                        console.error(data)
+                    },
+                    500: function (jqxhr) {
+                        KTApp.unprogress(btn)
+                        toastr.error("Erreur Traitement", "Erreur Système")
+                        console.error(jqxhr)
+                    }
+                }
+            })
+        })
+    }
 }
 
 const init = function () {
@@ -117,6 +276,15 @@ const init = function () {
     account.getLoadContribBlog()
     account.getLoadContribTutoriel()
     account.reloadContrib()
+    account.getListInvoices()
+    account.reloadInvoices()
+
+    let invoice = new Invoice()
+    invoice.loadSearch()
+
+    let payment = new PaymentMethod()
+    payment.getListMethod()
+    payment.createMethodPayment()
 }
 
 init();

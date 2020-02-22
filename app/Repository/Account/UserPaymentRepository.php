@@ -41,5 +41,16 @@ class UserPaymentRepository
         return null;
     }
 
+    public function create($id, $type, $substr)
+    {
+        return $this->userPayment->newQuery()
+            ->create([
+                "user_id" => auth()->user()->id,
+                "stripe_id" => $id,
+                "card_brand" => $type,
+                "card_last_four" => $substr
+            ]);
+    }
+
 }
 
