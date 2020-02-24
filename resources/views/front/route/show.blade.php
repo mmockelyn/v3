@@ -177,6 +177,149 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane" id="download" role="tabpanel">
+                    <div class="card mb-3">
+                        <div class="row no-gutters" style="border-radius: 15px">
+                            <div class="col-md-4">
+                                <img src="/storage/route/{{ $route->id }}/route.png" class="card-img" alt="...">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body">
+                                    <h3 class="title">Dernières Version</h3>
+                                    <table class="tz-route__table" style="width: 100%">
+                                        <tr>
+                                            <td class="kt-font-bolder">Version</td>
+                                            <td class="text-right">{{ \App\HelpersClass\Route\RouteDownloadHelpers::getLatestDownload($route->id, 'version') }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="kt-font-bolder">Build</td>
+                                            <td class="text-right">{{ \App\HelpersClass\Route\RouteDownloadHelpers::getLatestDownload($route->id, 'build') }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="kt-font-bolder">Type</td>
+                                            <td class="text-right">{{ \App\HelpersClass\Route\RouteDownloadHelpers::getRouteTypeReleaseText(\App\HelpersClass\Route\RouteDownloadHelpers::getLatestDownload($route->id, 'route_type_release_id')) }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <a class="col-md-2 kt-bg-info text-center" style="cursor: pointer" href="{{ \App\HelpersClass\Route\RouteDownloadHelpers::getLatestDownload($route->id, 'linkDownload') }}">
+                                <span class="iconify" data-inline="false" data-icon="whh:circledownload" style="font-size: 72px; color: white; margin-top: 35%;"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card mb-3 mt-lg-9">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="/storage/route/map.png" class="card-img" alt="Map">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Map</h5>
+                                    @foreach(\App\HelpersClass\Route\RouteDownloadHelpers::getDownloadMapList($route->id) as $download)
+                                        <div class="card" style="box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <div class="row">
+                                                            <div class="col-md-10">
+                                                                V{{ $download->version }}:{{ $download->build }}
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <span class="badge badge-success">{{ $download->typeRelease->name }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <a  href="{{ $download->linkDownload }}"><span class="iconify kt-font-danger" data-inline="false" data-icon="whh:circledownload" style="font-size: 24px;"></span></a>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <a id="btnNotes" data-downloadid="{{ $download->id }}"><span class="iconify kt-font-info" data-inline="false" data-icon="bx:bx-note" style="font-size: 24px;"></span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3 mt-lg-9">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="/storage/route/session.png" class="card-img" alt="Map">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Sessions</h5>
+                                    @foreach(\App\HelpersClass\Route\RouteDownloadHelpers::getDownloadSessionList($route->id) as $download)
+                                        <div class="card" style="box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <div class="row">
+                                                            <div class="col-md-10">
+                                                                V{{ $download->version }}:{{ $download->build }}
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <span class="badge badge-success">{{ $download->typeRelease->name }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <a  href="{{ $download->linkDownload }}"><span class="iconify kt-font-danger" data-inline="false" data-icon="whh:circledownload" style="font-size: 24px;"></span></a>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <a id="btnNotes" data-downloadid="{{ $download->id }}"><span class="iconify kt-font-info" data-inline="false" data-icon="bx:bx-note" style="font-size: 24px;"></span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="note" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="" class="card-img" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4 class="text-center kt-font-bold">Version</h4>
+                                            <h1 id="versionText" class="title text-center"></h1>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h4 class="text-center kt-font-bold">Build</h4>
+                                            <h1 id="buildText" class="title text-center"></h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <div id="description"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

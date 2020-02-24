@@ -29,6 +29,8 @@ Route::group(["prefix" => "route", 'namespace' => "Api\Route"], function () {
     Route::get('{route_id}/loadTaskTodo', 'RouteController@loadTaskTodo');
     Route::get('{route_id}/loadTaskProgress', 'RouteController@loadTaskProgress');
     Route::get('{route_id}/loadTaskFinished', 'RouteController@loadTaskFinished');
+
+    Route::get('{route_id}/download/{download_id}', 'RouteController@getDownload');
 });
 
 Route::group(["prefix" => "download", "namespace" => "Api\Download"], function () {

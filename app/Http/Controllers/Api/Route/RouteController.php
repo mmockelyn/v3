@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Route;
 
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
+use App\Repository\Route\RouteAnomalieRepository;
+use App\Repository\Route\RouteDownloadRepository;
 use App\Repository\Route\RouteGalleryCategoryRepository;
 use App\Repository\Route\RouteGalleryRepository;
 use App\Repository\Route\RouteUpdaterRepository;
@@ -33,6 +35,14 @@ class RouteController extends BaseController
      * @var RouteGalleryRepository
      */
     private $routeGalleryRepository;
+    /**
+     * @var RouteAnomalieRepository
+     */
+    private $routeAnomalieRepository;
+    /**
+     * @var RouteDownloadRepository
+     */
+    private $routeDownloadRepository;
 
     /**
      * RouteController constructor.
@@ -41,18 +51,24 @@ class RouteController extends BaseController
      * @param RouteVersionGareRepository $routeVersionGareRepository
      * @param RouteGalleryCategoryRepository $galleryCategoryRepository
      * @param RouteGalleryRepository $routeGalleryRepository
+     * @param RouteAnomalieRepository $routeAnomalieRepository
+     * @param RouteDownloadRepository $routeDownloadRepository
      */
     public function __construct(
         RouteUpdaterRepository $routeUpdaterRepository,
         RouteVersionRepository $versionRepository,
         RouteVersionGareRepository $routeVersionGareRepository,
-        RouteGalleryCategoryRepository $galleryCategoryRepository, RouteGalleryRepository $routeGalleryRepository)
+        RouteGalleryCategoryRepository $galleryCategoryRepository,
+        RouteGalleryRepository $routeGalleryRepository,
+        RouteAnomalieRepository $routeAnomalieRepository, RouteDownloadRepository $routeDownloadRepository)
     {
         $this->routeUpdaterRepository = $routeUpdaterRepository;
         $this->versionRepository = $versionRepository;
         $this->routeVersionGareRepository = $routeVersionGareRepository;
         $this->galleryCategoryRepository = $galleryCategoryRepository;
         $this->routeGalleryRepository = $routeGalleryRepository;
+        $this->routeAnomalieRepository = $routeAnomalieRepository;
+        $this->routeDownloadRepository = $routeDownloadRepository;
     }
 
     public function updaters()
@@ -272,5 +288,75 @@ class RouteController extends BaseController
         $content = ob_get_clean();
 
         return $this->sendResponse($content, "Gallerie");
+    }
+
+    public function loadTaskTodo($route_id)
+    {
+        $datas = $this->routeAnomalieRepository->getOnTodo($route_id);
+        ob_start();
+        ?>
+        <div class="kt-list-timeline">
+            <div class="kt-list-timeline__items">
+                <?php foreach ($datas as $data): ?>
+                    <div class="kt-list-timeline__item">
+                        <span class="kt-list-timeline__badge kt-list-timeline__badge--danger"></span>
+                        <span class="kt-list-timeline__text"><?= $data->anomalie; ?></span>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php
+        $content = ob_get_clean();
+
+        return $this->sendResponse($content, "Liste des taches a effectuer");
+    }
+
+    public function loadTaskProgress($route_id)
+    {
+        $datas = $this->routeAnomalieRepository->getOnProgress($route_id);
+        ob_start();
+        ?>
+        <div class="kt-list-timeline">
+            <div class="kt-list-timeline__items">
+                <?php foreach ($datas as $data): ?>
+                    <div class="kt-list-timeline__item">
+                        <span class="kt-list-timeline__badge kt-list-timeline__badge--warning"></span>
+                        <span class="kt-list-timeline__text"><?= $data->anomalie; ?></span>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php
+        $content = ob_get_clean();
+
+        return $this->sendResponse($content, "Liste des taches en cours");
+    }
+
+    public function loadTaskFinished($route_id)
+    {
+        $datas = $this->routeAnomalieRepository->getOnFinished($route_id);
+        ob_start();
+        ?>
+        <div class="kt-list-timeline">
+            <div class="kt-list-timeline__items">
+                <?php foreach ($datas as $data): ?>
+                    <div class="kt-list-timeline__item">
+                        <span class="kt-list-timeline__badge kt-list-timeline__badge--success"></span>
+                        <span class="kt-list-timeline__text"><?= $data->correction; ?></span>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php
+        $content = ob_get_clean();
+
+        return $this->sendResponse($content, "Liste des taches terminer");
+    }
+
+    public function getDownload($route_id, $download_id)
+    {
+        $data = $this->routeDownloadRepository->getVersion($download_id);
+
+        return $this->sendResponse($data->toArray(), "Get Download");
     }
 }

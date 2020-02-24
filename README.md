@@ -47,8 +47,8 @@
 - [x] Page Description   
 - [x] Page Version   
 - [x] Page Gallery  
-- [ ] Page Avancement  
-- [ ] Page Téléchargement
+- [x] Page Avancement  
+- [x] Page Téléchargement
 
 ### Téléchargement <a id='download'></a>
 

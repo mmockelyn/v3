@@ -1,4 +1,5 @@
 import * as $ from "jquery";
+import modal from 'bootstrap'
 const fancybox = require('fancybox/dist/js/jquery.fancybox')
 const map = require('./map.js')
 
@@ -97,7 +98,7 @@ class RouteShow {
     }
 
     loadTodoTask() {
-        let tree = document.querySelector('js-tree-todo')
+        let tree = document.querySelector('.js-tree-todo')
 
         KTApp.block(tree, {
             overlayColor: '#000000',
@@ -108,6 +109,70 @@ class RouteShow {
         })
 
         $.get('/api/route/'+route_id+'/loadTaskTodo')
+            .done((data) => {
+                tree.innerHTML = data.data
+            })
+    }
+
+    loadTodoProgress() {
+        let tree = document.querySelector('.js-tree-progress')
+
+        KTApp.block(tree, {
+            overlayColor: '#000000',
+            type: 'v2',
+            state: 'success',
+            size: 'lg',
+            message: 'Chargement des taches...'
+        })
+
+        $.get('/api/route/'+route_id+'/loadTaskProgress')
+            .done((data) => {
+                tree.innerHTML = data.data
+            })
+    }
+
+    loadTodoFinished() {
+        let tree = document.querySelector('.js-tree-finish')
+
+        KTApp.block(tree, {
+            overlayColor: '#000000',
+            type: 'v2',
+            state: 'success',
+            size: 'lg',
+            message: 'Chargement des taches...'
+        })
+
+        $.get('/api/route/'+route_id+'/loadTaskFinished')
+            .done((data) => {
+                tree.innerHTML = data.data
+            })
+    }
+
+    showNote() {
+        let btns = document.querySelectorAll('#btnNotes')
+
+        Array.from(btns).forEach((btn) => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault()
+                let download_id = btn.dataset.downloadid
+
+                $.get('/api/route/'+route_id+'/download/'+download_id)
+                    .done((data) => {
+                        let modal = $("#note")
+                        let title = modal.find('.modal-title')
+                        let content = modal.find('.modal-body')
+                        title.html(`Note de version V${data.data.version}:${data.data.build}`)
+                        content.find('img').attr('src', '/storage/route/'+data.data.route_id+'/v_'+data.data.version+'.png')
+                        content.find('#versionText').html(data.data.version)
+                        content.find('#buildText').html(data.data.build)
+                        content.find('#description').html(data.data.note)
+
+                        modal.modal('show')
+
+                        console.log(data)
+                    })
+            })
+        })
     }
 }
 
@@ -115,6 +180,10 @@ const Init = function () {
     let route = new RouteShow()
     route.loadVersion()
     route.loadGallery()
+    route.loadTodoTask()
+    route.loadTodoProgress()
+    route.loadTodoFinished()
+    route.showNote()
 
     KTApp.block(div,{
         overlayColor: '#000000',
