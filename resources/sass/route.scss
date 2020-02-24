@@ -1,0 +1,120 @@
+.tz-route__description {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.tz-route__description .tz-route__head_img {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background-size: cover;
+    background: no-repeat center;
+    padding: 250px 0;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
+}
+
+.tz-route__description .tz-route__stat {
+    width: 80%;
+    height: 170px;
+    background: #EAE6E6;
+    border-radius: 10px;
+    margin: 50px auto;
+}
+
+.tz-route__description .tz-route__stat .col-md-3 {
+    margin-top: 25px;
+    margin-left: 25px;
+}
+
+.tz-route__description .tz-route__stat .col-md-6 {
+
+    table {
+        width: 100%;
+        height: auto;
+        margin-top: 50px;
+
+        tr {
+            font-size: 15px;
+            margin: 20px 0;
+        }
+    }
+}
+
+.tz-route__description .tz-route__stat .col-md-3 .percentage {
+    margin: 20px;
+    width: 50px;
+    height: 50px;
+    position: relative;
+}
+
+#btnVersions:last-child {
+    background-color: #dd2e35 !important;
+}
+
+.tz-route__img {
+    border-radius: 4px;
+}
+
+.tz-route__video {
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+#map {
+    height: 350px;
+    .marker {
+
+    }
+    .leaflet-popup {
+        margin-bottom: 16px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 5px 10px;
+        text-align: center;
+        box-shadow: 0px 10px rgba(0,0,0,0.3);
+        background-color: #FFF;
+    }
+    .leaflet-popup::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        margin-left: -8px;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid #FFF;
+    }
+    .leaflet-popup.marker {
+        .leaflet-popup-content-wrapper {
+            background: transparent;
+            color: inherit;
+            box-shadow: none;
+            text-align: inherit;
+            .leaflet-popup-tip-container {
+                display: none;
+            }
+            .leaflet-popup-content {
+                text-align: inherit;
+                color: inherit;
+                margin: 0;
+            }
+        }
+    }
+    .leaflet-popup.marker.is-active{
+        .leaflet-popup-content-wrapper {
+            z-index: 300;
+            background: #5b86ff;
+            color: #FFF;
+        }
+        .leaflet-popup-content-wrapper::after {
+            border-top-color: #5b86ff;
+        }
+    }
+}
+
+.tz-route__percent_text {
+    font-size: 52px;
+    text-align: center;
+}

@@ -3,6 +3,7 @@
 namespace App\HelpersClass\Route;
 
 use App\Model\Route\Route;
+use App\Model\Route\RouteAnomalie;
 use App\Model\Route\RouteBuild;
 use App\Model\Route\RouteDownload;
 use Illuminate\Support\Str;
@@ -32,6 +33,34 @@ class RouteHelpers
                 return 'badge bg-teal-500';
             default:
                 return null;
+        }
+    }
+
+    public static function PercentLab($route_id) {
+        $anomalies = new RouteAnomalie();
+
+        $totalAnomalie = $anomalies->newQuery()->where('route_id', $route_id)->count();
+        $totalAnomalieCheck = $anomalies->newQuery()->where('route_id', $route_id)->where('state', 2)->count();
+
+        $percent = ($totalAnomalie/100)*$totalAnomalieCheck * 100;
+
+        return $percent;
+    }
+
+    public static function colorPercentLab($route_id) {
+        $anomalies = new RouteAnomalie();
+
+        $totalAnomalie = $anomalies->newQuery()->where('route_id', $route_id)->count();
+        $totalAnomalieCheck = $anomalies->newQuery()->where('route_id', $route_id)->where('state', 2)->count();
+
+        $percent = ($totalAnomalie/100)*$totalAnomalieCheck * 100;
+
+        if($percent >= 0 && $percent <= 33) {
+            return 'kt-font-danger';
+        }elseif($percent > 33 && $percent <= 66) {
+            return 'kt-font-warning';
+        }else{
+            return 'kt-font-success';
         }
     }
 

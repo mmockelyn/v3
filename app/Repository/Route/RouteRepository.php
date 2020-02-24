@@ -30,8 +30,7 @@ class RouteRepository
     public function get($id)
     {
         return $this->route->newQuery()
-            ->find($id)
-            ->load('anomalies', 'builds', 'compatibilities', 'downloads', 'galleries', 'timelines', 'versions');
+            ->find($id);
     }
 
 }
