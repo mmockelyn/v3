@@ -12,6 +12,7 @@
         "annaghd/php-credit-card-validator-plus": "dev-master",
         "cartalyst/stripe-laravel": "^11.0",
         "fideloper/proxy": "^4.0",
+        "fruitcake/laravel-cors": "^1.0",
         "laravel/framework": "^6.2",
         "laravel/horizon": "^3.7",
         "laravel/socialite": "^4.3",

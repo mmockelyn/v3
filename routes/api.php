@@ -35,6 +35,7 @@ Route::group(["prefix" => "route", 'namespace' => "Api\Route"], function () {
 
 Route::group(["prefix" => "download", "namespace" => "Api\Download"], function () {
     Route::get('latest', 'DownloadController@latest');
+    Route::get('{asset_id}/loadMesh', 'DownloadController@loadMesh');
 });
 
 Route::group(["prefix" => "tutoriel", "namespace" => "Api\Tutoriel"], function () {

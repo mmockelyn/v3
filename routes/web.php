@@ -45,6 +45,9 @@ Route::group(["namespace" => "Front"], function () {
         Route::get('{category_id}', ["as" => "Front.Download.category", "uses" => "DownloadController@category"]);
         Route::get('{category_id}/{subcategory_id}', ["as" => "Front.Download.list", "uses" => "DownloadController@list"]);
         Route::get('{category_id}/{subcategory_id}/{asset_id}', ["as" => "Front.Download.show", "uses" => "DownloadController@show"]);
+        Route::get('{category_id}/{subcategory_id}/{asset_id}/mesh', ["as" => "Front.Download.mesh", "uses" => "DownloadController@mesh"]);
+        Route::get('{category_id}/{subcategory_id}/{asset_id}/config', ["as" => "Front.Download.config", "uses" => "DownloadController@config"]);
+        Route::get('{category_id}/{subcategory_id}/{asset_id}/download', ["as" => "Front.Download.download", "uses" => "DownloadController@download"]);
     });
 
     Route::group(["prefix" => "tutoriel", "namespace" => "Tutoriel"], function () {

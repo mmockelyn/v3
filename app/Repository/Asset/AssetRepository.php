@@ -53,5 +53,14 @@ class AssetRepository
             ->get();
     }
 
+    public function updateCountDownload($asset_id, $newCount)
+    {
+        $this->asset->newQuery()
+            ->find($asset_id)
+            ->update(["countDownload" => $newCount]);
+
+        return null;
+    }
+
 }
 

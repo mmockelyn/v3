@@ -26,6 +26,9 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/route/map.js', 'public/js/route')
 
     .js('resources/js/download/index.js', 'public/js/download')
+    .js('resources/js/download/mesh.js', 'public/js/download')
+
+    .js('resources/js/tutoriel/index.js', 'public/js/tutoriel')
 
     .js('resources/js/auth/login.js', 'public/js/auth')
 
@@ -38,6 +41,7 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/route.scss', 'public/css')
     .sass('resources/sass/download.scss', 'public/css')
+    .sass('resources/sass/tutoriel.scss', 'public/css')
     .sass('resources/sass/blog.scss', 'public/css');
 
 mix.webpackConfig({

@@ -76,4 +76,11 @@ class DownloadController extends BaseController
 
         return $this->sendResponse($content, "Derniers Objets");
     }
+
+    public function loadMesh($asset_id)
+    {
+        $data = $this->assetRepository->get($asset_id);
+
+        return $this->sendResponse($data->toArray(), "Load Mesh");
+    }
 }

@@ -29,7 +29,7 @@
     <div class="kt-portlet">
         <div class="kt-portlet__body">
             @foreach($sub->assets as $download)
-            <a href="" class="card mb-3 mt-3">
+            <a href="{{ route('Front.Download.show', [$download->asset_category_id, $download->asset_sub_category_id, $download->id]) }}" class="card mb-3 mt-3">
                 <div class="row no-gutters">
                     <div class="col-md-4">
                         @if(file_exists('/storage/download/'.$download->id.'.png'))
