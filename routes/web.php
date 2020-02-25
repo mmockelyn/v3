@@ -38,7 +38,6 @@ Route::group(["namespace" => "Front"], function () {
         Route::group(["prefix" => "{id}/version", "namespace" => "Version"], function () {
             Route::get('{version_id}', ["as" => 'Route.Version.info', "uses" => "VersionController@info"]);
         });
-
     });
 
     Route::group(["prefix" => "download", "namespace" => "Download"], function () {

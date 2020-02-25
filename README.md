@@ -52,9 +52,9 @@
 
 ### Téléchargement <a id='download'></a>
 
-- [ ] Page accueil
-- [ ] Page Categorie
-- [ ] Page Listes
+- [x] Page accueil
+- [x] Page Categorie
+- [x] Page Listes
 - [ ] Page Vue
 
 ### Tutoriel <a id='tutoriel'></a>
