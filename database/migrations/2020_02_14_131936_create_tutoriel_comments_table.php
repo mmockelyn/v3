@@ -19,7 +19,7 @@ class CreateTutorielCommentsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->longText('content');
             $table->integer('published')->default(1)->comment("Publier ou non");
-            $table->timestamp('published_at')->nullable();
+            $table->timestamp('published_at')->default(now());
 
             $table->foreign('tutoriel_id')->references('id')->on('tutoriels')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

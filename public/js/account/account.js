@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 14);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -13783,28 +13783,60 @@ trashAccount();
 /*!******************************!*\
   !*** ./resources/js/core.js ***!
   \******************************/
-/*! exports provided: reloadNotifBar */
+/*! exports provided: reloadNotifBar, blockElement, unblockElement, addPremium */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reloadNotifBar", function() { return reloadNotifBar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "blockElement", function() { return blockElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unblockElement", function() { return unblockElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addPremium", function() { return addPremium; });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
 function reloadNotifBar() {
   var countNotifBar = document.querySelector('#countNotifBar');
   var value = parseInt(countNotifBar.textContent);
 
   if (value === 0) {
-    var iconEl = $(".kt-header__topbar-icon");
+    var iconEl = jquery__WEBPACK_IMPORTED_MODULE_0__(".kt-header__topbar-icon");
     iconEl.classList.remove('kt-hidden');
     iconEl.textContent = 1;
   } else {
     countNotifBar.textContent = parseInt(value + 1);
   }
 }
+function blockElement(el, message) {
+  var state = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
+  return KTApp.block(el, {
+    overlayColor: '#000000',
+    type: 'v2',
+    state: state,
+    size: 'lg',
+    message: message
+  });
+}
+function unblockElement(el) {
+  return KTApp.unblock(el);
+}
+function addPremium() {
+  jquery__WEBPACK_IMPORTED_MODULE_0__["get"]('/account/api/isPremium').done(function (data) {
+    if (data.data == 'true') {
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'on');
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'on');
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'on');
+    } else {
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'off');
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'off');
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
+    }
+  });
+}
 
 /***/ }),
 
-/***/ 12:
+/***/ 14:
 /*!***********************************************!*\
   !*** multi ./resources/js/account/account.js ***!
   \***********************************************/

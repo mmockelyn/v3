@@ -8,6 +8,7 @@ use App\Model\Account\UserActivity;
 use App\Model\Account\UserPayment;
 use App\Model\Account\UserPremium;
 use App\Model\Account\UserSocial;
+use App\Model\Account\UserView;
 use App\Model\Blog\BlogComment;
 use App\Model\Tutoriel\Tutoriel;
 use App\Model\Tutoriel\TutorielComment;
@@ -86,9 +87,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Tutoriel::class);
     }
-    
+
     public function invoices()
     {
         return $this->hasMany(Invoice::class);
+    }
+
+    public function views()
+    {
+        return $this->hasMany(UserView::class);
     }
 }

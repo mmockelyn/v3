@@ -2,6 +2,7 @@
 
 namespace App\Model\Tutoriel;
 
+use App\Model\Account\UserView;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -52,6 +53,11 @@ class Tutoriel extends Model
     public function technologies()
     {
         return $this->hasMany(TutorielTechnologie::class);
+    }
+
+    public function views()
+    {
+        return $this->hasMany(UserView::class);
     }
 
     public function scopeLoader($query)

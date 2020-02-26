@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         \SocialiteProviders\Manager\ServiceProvider::class,
+        \LinkThrow\Ffmpeg\Provider\FfmpegServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -226,6 +227,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'FFMPEG' => \Linkthrow\Ffmpeg\Facade\FfmpegFacade::class,
 
     ],
 

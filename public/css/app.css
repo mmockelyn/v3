@@ -56363,6 +56363,18 @@ svg.leaflet-image-layer.leaflet-interactive path {
   font-size: 2.6rem;
 }
 
+.kt-media.kt-media--xxxxl span {
+  width: 230px;
+  height: 230px;
+  font-size: 3.2rem;
+}
+
+.kt-media.kt-media--xxxxl img {
+  width: 230px;
+  height: 230px;
+  font-size: 3.2rem;
+}
+
 .mt-lg-6 {
   margin-top: 4.5rem !important;
 }

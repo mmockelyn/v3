@@ -56,6 +56,16 @@ Route::group(["namespace" => "Front"], function () {
         Route::get('{subcategory_id}/{tutoriel_id}', ["as" => "Front.Tutoriel.show", "uses" => "TutorielController@show"]);
         Route::get('{subcategory_id}/{tutoriel_id}/video', ["as" => "Front.Tutoriel.video", "uses" => "TutorielController@video"]);
         Route::get('{subcategory_id}/{tutoriel_id}/source', ["as" => "Front.Tutoriel.source", "uses" => "TutorielController@source"]);
+
+
+
+        Route::group(["prefix" => "api"], function (){
+            Route::get('{tutoriel_id}/viewLater', 'TutorielApiController@viewLater');
+            Route::get('{tutoriel_id}/view', 'TutorielApiController@view');
+
+            Route::post('{tutoriel_id}/comments', ["as" => "Tutoriel.Comment.post", "uses" => "TutorielApiController@postComment"]);
+            Route::get('{tutoriel_id}/comment/{comment_id}', ["as" => "Tutoriel.Comment.delete", "uses" => "TutorielApiController@deleteComment"]);
+        });
     });
 
     Route::group(["prefix" => "wiki", "namespace" => "Wiki"], function () {
@@ -91,6 +101,7 @@ Route::group(["middleware" => ["auth", "verified"], "prefix" => "account", "name
         Route::get('contrib/blog', 'AccountApiController@loadContribBlog');
         Route::get('contrib/tutoriel', 'AccountApiController@loadContribTutoriel');
         Route::get('connect', 'AccountApiController@connect');
+        Route::get('isPremium', 'AccountApiController@isPremium');
 
         Route::get('/deletePayment/{pm_id}', 'AccountApiController@deletePayment');
 

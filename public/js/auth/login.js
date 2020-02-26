@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -314,7 +314,7 @@ jQuery(document).ready(function () {
 
 /***/ }),
 
-/***/ 10:
+/***/ 12:
 /*!******************************************!*\
   !*** multi ./resources/js/auth/login.js ***!
   \******************************************/

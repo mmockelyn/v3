@@ -40,6 +40,10 @@ Route::group(["prefix" => "download", "namespace" => "Api\Download"], function (
 
 Route::group(["prefix" => "tutoriel", "namespace" => "Api\Tutoriel"], function () {
     Route::get('latest', 'TutorielController@latest');
+    Route::get('{sub_id}/listTutoriel', 'TutorielController@listTutoriel');
+    Route::get('{tutoriel_id}', 'TutorielController@tutoriel');
+    Route::get('{tutoriel_id}/viewLater', 'TutorielController@viewLater');
+    Route::get('{tutoriel_id}/view', 'TutorielController@view');
 });
 
 Route::get('search', 'SearchController@search');

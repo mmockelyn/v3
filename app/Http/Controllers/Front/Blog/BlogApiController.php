@@ -6,6 +6,7 @@ use App\HelpersClass\Blog\BlogHelper;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
 use App\Notifications\Blog\PostNewComment;
+use App\Notifications\Blog\PostNewCommentOther;
 use App\Repository\Blog\BlogCommentRepository;
 use App\Repository\Blog\BlogRepository;
 use Illuminate\Http\Request;
@@ -118,6 +119,9 @@ class BlogApiController extends BaseController
             $blog = $this->blogRepository->get($blog_id);
 
             auth()->user()->notify(new PostNewComment($blog));
+            foreach ($blog->comments as $comment) {
+                $comment->user->notify(new PostNewCommentOther($blog));
+            }
             return $this->sendResponse($data, "Post d'un commentaire");
         }catch (\Exception $exception) {
             return $this->sendError("Erreur Système", [

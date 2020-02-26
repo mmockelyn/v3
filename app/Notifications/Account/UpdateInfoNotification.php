@@ -65,6 +65,7 @@ class UpdateInfoNotification extends Notification
             "icon" => "flaticon-user-settings",
             "icon_color" => "success",
             "type" => "event",
+            "state" => 2,
             "title" => "Modification des informations",
             "text" => "Vos modification ont été exécuter avec succès",
             "date" => now(),

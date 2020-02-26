@@ -64,6 +64,7 @@ class UpdatePasswordNotification extends Notification
             "icon" => "fa fa-key",
             "icon_color" => "success",
             "type" => "event",
+            "state" => 2,
             "title" => "Modification de votre mot de passe",
             "text" => "La modification de votre mot de passe à été exécuter avec succès",
             "date" => now(),

@@ -18,5 +18,7 @@
     "/js/route/index.js": "/js/route/index.js",
     "/js/route/map.js": "/js/route/map.js",
     "/js/route/show.js": "/js/route/show.js",
-    "/js/tutoriel/index.js": "/js/tutoriel/index.js"
+    "/js/tutoriel/index.js": "/js/tutoriel/index.js",
+    "/js/tutoriel/list.js": "/js/tutoriel/list.js",
+    "/js/tutoriel/show.js": "/js/tutoriel/show.js"
 }

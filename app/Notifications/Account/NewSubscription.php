@@ -73,6 +73,7 @@ Si vous ne souhaiter plus bénéficier de notre offre, vous pouvez résillier à
             "icon" => "fa fa-certificate",
             "icon_color" => "warning",
             "type" => "alert",
+            "state" => 2,
             "title" => "Premium",
             "text" => "Vous bénéficier désormais de l'offre PREMIUM",
             "date" => now(),

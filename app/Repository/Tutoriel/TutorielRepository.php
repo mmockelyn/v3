@@ -24,7 +24,7 @@ class TutorielRepository
     {
         return $this->tutoriel->newQuery()
             ->where('published', 1)
-            ->orderBy('published_at', 'asc')
+            ->orderBy('published_at', 'desc')
             ->limit($limit)
             ->get()
             ->load('category', 'subcategory', 'tags', 'comments', 'requis', 'sources', 'technologies');
@@ -51,7 +51,7 @@ class TutorielRepository
             ->where('tutoriel_sub_category_id', $subcategory_id)
             ->where('published', 1)
             ->orWhere('published', 2)
-            ->orderBy('published_at', 'asc')
+            ->orderBy('published_at', 'desc')
             ->get()
             ->load('category', 'subcategory', 'tags', 'comments', 'requis', 'sources', 'technologies');
     }
@@ -62,6 +62,26 @@ class TutorielRepository
             ->where('title', 'like', '%'.$get.'%')
             ->limit(10)
             ->get();
+    }
+
+    public function filterBy($sub_id, $filter)
+    {
+        switch ($filter) {
+            case 'all':
+                return $this->listForCategory($sub_id); break;
+            case 'asc':
+                return $this->tutoriel->newQuery()
+                    ->where('tutoriel_sub_category_id', $sub_id)
+                    ->where('published', 1)
+                    ->orWhere('published', 2)
+                    ->orderBy('published_at', 'desc')
+                    ->get()
+                    ->load('category', 'subcategory', 'tags', 'comments', 'requis', 'sources', 'technologies');
+            case 'desc':
+                return $this->listForCategory($sub_id); break;
+
+            default: return $this->listForCategory($sub_id);
+        }
     }
 
 }

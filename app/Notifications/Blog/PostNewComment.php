@@ -63,8 +63,9 @@ class PostNewComment extends Notification
             "icon" => "fa fa-comment",
             "icon_color" => "success",
             "type" => "alert",
+            "state" => 2,
             "title" => "Vous avez poster un nouveau commentaire",
-            "text" => "Vous avez poster un nouveau commentaire sur l'article: <strong>".$this->blog->title."</strong>",
+            "text" => "Vous avez poster un nouveau commentaire sur l'article:<br> <strong>".$this->blog->title."</strong>",
             "date" => now(),
             "link" => route('Front.Blog.show', $this->blog->slug)
         ];

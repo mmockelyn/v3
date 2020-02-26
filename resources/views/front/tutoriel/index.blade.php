@@ -9,6 +9,7 @@
 @endsection
 
 @section("content")
+    <div id="TutorielIndex"></div>
     <div class="kt-portlet">
         <div class="kt-portlet__body">
             <div class="tz-blog">
@@ -32,20 +33,13 @@
                 <div class="row">
                     @foreach($category->subcategories as $subcategory)
                     <div class="col-md-4">
-                        <a href="" class="tz-tutoriel_btn_category">
+                        <a href="{{ route('Front.Tutoriel.list', $subcategory->id) }}" class="tz-tutoriel_btn_category">
                             <img src="/storage/tutoriel/categorie/button_{{ $subcategory->short }}.png" class="img-fluid" alt="">
                         </a>
                     </div>
                     @endforeach
                 </div>
             @endforeach
-            <div class="row">
-                <div class="col-md-3">
-                    <a href="" class="tz-tutoriel_btn_category tz-bg__grad_red">
-                        <img src="/storage/tutoriel/categorie/button_" alt="">
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
     <div class="kt-portlet">
@@ -59,7 +53,8 @@
                 </h3>
             </div>
         </div>
-        <div class="kt-portlet__body" id="loadLatestTutoriel">
+        <div class="kt-portlet__body">
+            <div class="row"  id="loadLatestTutoriel"></div>
         </div>
     </div>
 @endsection
