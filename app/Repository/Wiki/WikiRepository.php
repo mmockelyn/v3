@@ -44,5 +44,22 @@ class WikiRepository
             ->get();
     }
 
+    public function all()
+    {
+        return $this->wiki->newQuery()
+            ->where('published', 1)
+            ->orderByDesc('published_at')
+            ->get();
+    }
+
+    public function allLimit($limit = 5)
+    {
+        return $this->wiki->newQuery()
+            ->where('published', 1)
+            ->orderByDesc('published_at')
+            ->limit($limit)
+            ->get();
+    }
+
 }
 

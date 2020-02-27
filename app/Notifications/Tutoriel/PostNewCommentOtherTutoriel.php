@@ -7,13 +7,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PostNewCommentTutoriel extends Notification
+class PostNewCommentOtherTutoriel extends Notification
 {
     use Queueable;
     /**
      * @var
      */
-    public $blog;
+    private $blog;
 
     /**
      * Create a new notification instance.
@@ -64,10 +64,10 @@ class PostNewCommentTutoriel extends Notification
             "icon_color" => "success",
             "type" => "alert",
             "state" => 2,
-            "title" => "Vous avez poster un nouveau commentaire",
-            "text" => "Vous avez poster un nouveau commentaire sur le tutoriel:<br> <strong>".$this->blog->title."</strong>",
+            "title" => "Un nouveau commentaire à été poster.",
+            "text" => "Un nouveau commentaire à été poster sur le tutoriel:<br> <strong>".$this->blog->title."</strong>",
             "date" => now(),
-            "link" => route('Front.Tutoriel.show', $this->blog->slug)
+            "link" => route('Front.Tutoriel.show', [$this->blog->subcategory->id, $this->blog->id])
         ];
     }
 }

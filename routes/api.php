@@ -46,4 +46,8 @@ Route::group(["prefix" => "tutoriel", "namespace" => "Api\Tutoriel"], function (
     Route::get('{tutoriel_id}/view', 'TutorielController@view');
 });
 
+Route::group(["prefix" => "wiki", "namespace" => "Api\Wiki"], function (){
+    Route::get('search', 'WikiController@search');
+});
+
 Route::get('search', 'SearchController@search');

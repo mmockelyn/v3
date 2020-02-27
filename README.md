@@ -55,19 +55,19 @@
 - [x] Page accueil
 - [x] Page Categorie
 - [x] Page Listes
-- [ ] Page Vue
+- [x] Page Vue
 
 ### Tutoriel <a id='tutoriel'></a>
 
-- [ ] Page Acceuil
-- [ ] Page Liste
-- [ ] Page Vue
-    - [ ] Système commentaire
+- [x] Page Acceuil
+- [x] Page Liste
+- [x] Page Vue
+    - [x] Système commentaire
     
 ### Wiki <a id='wiki'></a>
 
-- [ ] Page acceuil
-    - [ ] Système de recherche
+- [x] Page acceuil
+    - [x] Système de recherche
 - [ ] Page Liste        
 - [ ] Page Vue        
 

@@ -32,6 +32,8 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/tutoriel/list.js', 'public/js/tutoriel')
     .js('resources/js/tutoriel/show.js', 'public/js/tutoriel')
 
+    .js('resources/js/wiki/index.js', 'public/js/wiki')
+
     .js('resources/js/auth/login.js', 'public/js/auth')
 
     .js('resources/js/account/index.js', 'public/js/account')

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Front\Tutoriel;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Controller;
-use App\Notifications\Blog\PostNewComment;
 use App\Notifications\Tutoriel\PostNewCommentOtherTutoriel;
 use App\Notifications\Tutoriel\PostNewCommentTutoriel;
 use App\Repository\Account\UserViewRepository;
