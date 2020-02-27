@@ -10,6 +10,13 @@
 - [Téléchargement](#download)
 - [Tutoriel](#tutoriel)
 - [Wiki](#wiki)
+- [Administration](#admin)
+    - [Blog](#admin_blog)
+    - [Route](#admin_route)
+    - [Objets](#admin_objets)
+    - [Tutoriel](#admin_tutoriel)
+    - [Wiki](#admin_wiki)
+    - [Utilisateur](#admin_user)
 
 ### Général <a id='general'></a>
 
@@ -69,6 +76,41 @@
 - [x] Page acceuil
     - [x] Système de recherche
 - [x] Page Liste        
-- [x] Page Vue        
+- [x] Page Vue       
+
+## Administration <a id='admin'></a>
+- [ ] Tableau de Bord
+    - [ ] Statistique revenue
+    - [ ] Signalement de commentaires (Si non publier)
+    - [ ] Derniers Commentaire Blog
+    - [ ] Derniers Commentaire Tutoriel
+    
+    
+### Blog <a id='admin_blog'></a> 
+- [ ] Tableau de Bord
+    - [ ] Statistique
+        - Nombre d'article
+        - Moyenne de commentaire par article
+        - Nombre de commentaire total
+    - [ ] Derniers Commentaire
+    - [ ] Derniers Articles
+    - [ ] Bouton Accès Rapide (Création d'un articles)
+    
+- [ ] Gestion des Catégorie
+    - [ ] Liste des catégories
+    - [ ] Création d'une catégorie    
+    - [ ] Edition d'une catégorie    
+    - [ ] Suppression d'une catégorie   
+    
+- [ ] Gestion des Articles
+    - [ ] Liste des articles
+    - [ ] Création d'un article     
+    - [ ] Edition d'un article     
+    - [ ] Suppresion d'un article     
+    - [ ] Fiche d'un article
+        - Information usuel
+        - Possibilité de publier ou non l'article
+        - Liste des commentaires     
+        
 
   
