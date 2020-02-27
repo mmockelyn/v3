@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class Install extends Command
 {
@@ -63,15 +64,12 @@ class Install extends Command
             case 'local':
                 exec('cp .env.example .env');
                 $this->line("Définition des variables d'environnement Principal");
-                putenv("APP_ENV=local");
-                putenv("APP_DEBUG=true");
-                putenv("APP_URL=https://v3.trainznation.io");
+                Str::replaceFirst('APP_ENV=', 'APP_ENV=local', file_get_contents('.env'));
+                Str::replaceFirst('APP_DEBUG=', 'APP_DEBUG=true', file_get_contents('.env'));
+                Str::replaceFirst('APP_URL=', 'APP_URL=https://v3.trainznation.io', file_get_contents('.env'));
 
                 $this->line("Définition des variables d'environnement de base de donnée");
-                putenv("DB_HOST=192.168.10.10");
-                putenv("DB_DATABASE=v3.trainznation");
-                putenv("DB_USERNAME=homestead");
-                putenv("DB_PASSWORD=secret");
+                Str::replaceFirst('DB_HOST=', 'DB_HOST=192.168.10.10', file_get_contents('.env'));
 
                 $this->line("Définition des variables d'environnement Redis");
                 putenv("REDIS_HOST=127.0.0.1");
@@ -141,7 +139,7 @@ class Install extends Command
     {
         $this->line("Création de la base de donnée");
         try {
-            $this->call('migrate');
+            $this->call('migrate:fresh');
         } catch (\Exception $exception) {
             $this->error($exception->getMessage());
         }
