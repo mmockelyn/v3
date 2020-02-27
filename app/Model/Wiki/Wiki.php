@@ -18,4 +18,15 @@ class Wiki extends Model
     {
         return $this->belongsTo(WikiSubCategory::class, 'wiki_sub_category_id');
     }
+
+    public function sommaires()
+    {
+        return $this->hasMany(WikiArticleSommaire::class);
+    }
+
+    public function contents()
+    {
+        return $this->hasMany(WikiArticleContent::class);
+    }
+
 }

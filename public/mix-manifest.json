@@ -21,5 +21,6 @@
     "/js/tutoriel/index.js": "/js/tutoriel/index.js",
     "/js/tutoriel/list.js": "/js/tutoriel/list.js",
     "/js/tutoriel/show.js": "/js/tutoriel/show.js",
-    "/js/wiki/index.js": "/js/wiki/index.js"
+    "/js/wiki/index.js": "/js/wiki/index.js",
+    "/js/wiki/show.js": "/js/wiki/show.js"
 }

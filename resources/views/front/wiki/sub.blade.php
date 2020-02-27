@@ -40,31 +40,29 @@
             </div>
         </div>
     </div>
-    @foreach($categories as $category)
-        <div class="row">
-            @foreach($category->subcategories as $subcategory)
-                <div class="col-lg-4">
-                    <a href="{{ route('Front.Wiki.list', [$category->id, $subcategory->id]) }}" class="kt-portlet kt-iconbox kt-iconbox--animate-slow">
-                        <div class="kt-portlet__body">
-                            <div class="kt-iconbox__body">
-                                <div class="kt-iconbox__icon">
-                                    <i class="{{ $subcategory->icon }} la-5x"></i>
-                                </div>
-                                <div class="kt-iconbox__desc">
-                                    <h3 class="kt-iconbox__title">
-                                        {{ $subcategory->name }}
-                                    </h3>
-                                    <div class="kt-iconbox__content">
-                                        {{ $subcategory->description }}
-                                    </div>
+    <div class="row">
+        @foreach($category->subcategories as $subcategory)
+            <div class="col-lg-4">
+                <a href="#" class="kt-portlet kt-iconbox kt-iconbox--animate-slow">
+                    <div class="kt-portlet__body">
+                        <div class="kt-iconbox__body">
+                            <div class="kt-iconbox__icon">
+                                <i class="{{ $subcategory->icon }} la-5x"></i>
+                            </div>
+                            <div class="kt-iconbox__desc">
+                                <h3 class="kt-iconbox__title">
+                                    {{ $subcategory->name }}
+                                </h3>
+                                <div class="kt-iconbox__content">
+                                    {{ $subcategory->description }}
                                 </div>
                             </div>
                         </div>
-                    </a>
-                </div>
-            @endforeach
-        </div>
-    @endforeach
+                    </div>
+                </a>
+            </div>
+        @endforeach
+    </div>
     <div class="kt-notification">
         @foreach($articles as $article)
         <a href="{{ route('Front.Wiki.show', [$article->category->id, $article->subcategory->id, $article->id]) }}" class="kt-notification__item">

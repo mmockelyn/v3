@@ -68,7 +68,7 @@
 
 - [x] Page acceuil
     - [x] Système de recherche
-- [ ] Page Liste        
-- [ ] Page Vue        
+- [x] Page Liste        
+- [x] Page Vue        
 
   

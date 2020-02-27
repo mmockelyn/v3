@@ -25,7 +25,7 @@ class WikiRepository
         return $this->wiki->newQuery()
             ->where('wiki_sub_category_id', $subcategory_id)
             ->where('published', 1)
-            ->orderBy('published_at', 'asc')
+            ->orderBy('published_at', 'desc')
             ->get();
     }
 
@@ -58,6 +58,15 @@ class WikiRepository
             ->where('published', 1)
             ->orderByDesc('published_at')
             ->limit($limit)
+            ->get();
+    }
+
+    public function getFromCategory($category_id)
+    {
+        return $this->wiki->newQuery()
+            ->where('wiki_category_id', $category_id)
+            ->where('published', 1)
+            ->orderBy('published_at', 'desc')
             ->get();
     }
 

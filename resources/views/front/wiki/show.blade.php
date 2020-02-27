@@ -12,7 +12,7 @@
         <div class="kt-container ">
             <div class="kt-sc__top">
                 <h3 class="kt-sc__title">
-                    WIKI
+                    WIKI | {{ $article->category->name }} | {{ $article->subcategory->name }} | {{ $article->title }}
                 </h3>
             </div>
             <div class="kt-sc__bottom">
@@ -40,49 +40,47 @@
             </div>
         </div>
     </div>
-    @foreach($categories as $category)
-        <div class="row">
-            @foreach($category->subcategories as $subcategory)
-                <div class="col-lg-4">
-                    <a href="{{ route('Front.Wiki.list', [$category->id, $subcategory->id]) }}" class="kt-portlet kt-iconbox kt-iconbox--animate-slow">
-                        <div class="kt-portlet__body">
-                            <div class="kt-iconbox__body">
-                                <div class="kt-iconbox__icon">
-                                    <i class="{{ $subcategory->icon }} la-5x"></i>
-                                </div>
-                                <div class="kt-iconbox__desc">
-                                    <h3 class="kt-iconbox__title">
-                                        {{ $subcategory->name }}
-                                    </h3>
-                                    <div class="kt-iconbox__content">
-                                        {{ $subcategory->description }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+    <div class="row" data-sticky-container>
+        <div class="col-md-3">
+            <div class="kt-portlet sticky" data-sticky="true" data-margin-top="120" data-sticky-for="1023" data-sticky-class="kt-sticky">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                            Sommaire
+                        </h3>
+                    </div>
                 </div>
-            @endforeach
-        </div>
-    @endforeach
-    <div class="kt-notification">
-        @foreach($articles as $article)
-        <a href="{{ route('Front.Wiki.show', [$article->category->id, $article->subcategory->id, $article->id]) }}" class="kt-notification__item">
-            <div class="kt-notification__item-icon" data-toggle="kt-tooltip" title="{{ $article->subcategory->name }}"><i class="{{ $article->subcategory->icon }}"></i> </div>
-            <div class="kt-notification__item-details">
-                <div class="kt-notification__item-title">
-                    {{ $article->title }}
-                </div>
-                <div class="kt-notification__item-time">
-                    {{ $article->published_at->diffForHumans() }}
+                <div class="kt-portlet__body">
+                    <ul class="kt-nav kt-nav--bold kt-nav--md-space kt-nav--v3 kt-margin-t-20 kt-margin-b-20 nav nav-tabs" role="tablist">
+                        @foreach($article->sommaires as $sommaire)
+                        <li class="kt-nav__item">
+                            <a class="kt-nav__link" data-toggle="tab" href="#{{ \Illuminate\Support\Str::slug($sommaire->title, '_') }}" role="tab">
+                                <span class="kt-nav__link-text">{{ $sommaire->title }}</span>
+                            </a>
+                        </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
-        </a>
-        @endforeach
+        </div>
+        <div class="col-md-9">
+            <div class="tab-content">
+                @foreach($article->contents as $content)
+                <div class="tab-pane" id="{{ \Illuminate\Support\Str::slug($content->sommaire->title, '_') }}" role="tabpanel">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__body">
+                            {!! $content->content !!}
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 
 @endsection
 
 @section("script")
     <script src="{{ asset('js/wiki/index.js') }}"></script>
+    <script src="{{ asset('js/wiki/show.js') }}"></script>
 @endsection
