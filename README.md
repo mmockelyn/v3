@@ -79,11 +79,11 @@
 - [x] Page Vue       
 
 ## Administration <a id='admin'></a>
-- [ ] Tableau de Bord
-    - [ ] Statistique revenue
-    - [ ] Signalement de commentaires (Si non publier)
-    - [ ] Derniers Commentaire Blog
-    - [ ] Derniers Commentaire Tutoriel
+- [x] Tableau de Bord
+    - [x] Statistique revenue
+    - [x] Signalement de commentaires (Si non publier)
+    - [x] Derniers Commentaire Blog
+    - [x] Derniers Commentaire Tutoriel
     
     
 ### Blog <a id='admin_blog'></a> 

@@ -50,4 +50,16 @@ Route::group(["prefix" => "wiki", "namespace" => "Api\Wiki"], function (){
     Route::get('search', 'WikiController@search');
 });
 
+Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function (){
+    Route::get('loadSignalement', 'AdminController@loadSignalement');
+
+    Route::group(["prefix" => "blog"], function (){
+        Route::get('latest', 'BlogController@loadLatest');
+    });
+
+    Route::group(["prefix" => "tutoriel"], function (){
+        Route::get('/latest', 'TutorielController@loadLatest');
+    });
+});
+
 Route::get('search', 'SearchController@search');

@@ -128,5 +128,16 @@ class TutorielHelper
         $data = $comment->newQuery()->where('tutoriel_id', $article_id)->where('published', 1)->get()->last();
         return $data->published_at;
     }
+
+    public static function stateTutoriel($published)
+    {
+        if($published == 2){
+            return 'kt-font-danger';
+        }elseif($published == 1) {
+            return 'kt-font-warning';
+        }else{
+            return 'kt-font-success';
+        }
+    }
 }
 

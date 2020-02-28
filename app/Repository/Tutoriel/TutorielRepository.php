@@ -84,5 +84,15 @@ class TutorielRepository
         }
     }
 
+    public function all()
+    {
+        return $this->tutoriel->newQuery()->get();
+    }
+
+    public function allWL($limit = null)
+    {
+        return $this->tutoriel->newQuery()->limit($limit)->get();
+    }
+
 }
 

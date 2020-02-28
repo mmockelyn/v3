@@ -49,5 +49,35 @@ class BlogHelper
         $data = $comment->newQuery()->where('blog_id', $article_id)->where('state', 1)->get()->last();
         return $data->updated_at;
     }
+
+    public static function countArticle()
+    {
+        $blog = new Blog();
+        return $blog->newQuery()->where('published', 1)->get()->count();
+    }
+
+    public static function countCommentaires()
+    {
+        $comment = new BlogComment();
+        $countComment = $comment->newQuery()->where('state', 1)->get()->count();
+
+        return $countComment;
+    }
+
+    public static function moyCommentArticle()
+    {
+        $comment = new BlogComment();
+        $blog = new Blog();
+
+        $countArticle = $blog->newQuery()->where('published', 1)->get()->count();
+        $countComment = $comment->newQuery()->where('state', 1)->get()->count();
+
+        return round($countComment/$countArticle, 0);
+    }
+
+    public static function publishArticle($state)
+    {
+        if($state == 0){return 'kt-font-danger';}else{return 'kt-font-success';}
+    }
 }
 

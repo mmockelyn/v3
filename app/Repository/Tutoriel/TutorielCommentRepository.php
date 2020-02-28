@@ -59,5 +59,11 @@ class TutorielCommentRepository
             ->delete();
     }
 
+    public function all()
+    {
+        return $this->tutorielComment->newQuery()
+            ->get();
+    }
+
 }
 

@@ -5,7 +5,7 @@
             <!-- begin:: Brand -->
             <div class="kt-header__brand   kt-grid__item" id="kt_header_brand">
                 <div class="kt-header__brand-logo">
-                    <a href="{{ route('Front.index') }}">
+                    <a href="{{ route('Back.dashboard') }}">
                         <img alt="Logo" src="/storage/logos/logo-long.png" width="150"/>
                     </a>
                 </div>
@@ -46,7 +46,6 @@
 
                 <!--end: Search -->
 
-                @auth()
                     <!--begin: Notifications -->
                         <div class="kt-header__topbar-item dropdown">
                             <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,10px">
@@ -350,9 +349,6 @@
                                     <div class="kt-notification__custom kt-space-between">
                                         <a href="{{ route('logout') }}" class="btn btn-label btn-label-brand btn-sm btn-bold">Deconnexion</a>
                                         <a href="custom/user/login-v2.html" target="_blank" class="btn btn-clean btn-sm btn-bold">Premium</a>
-                                        @if(auth()->user()->group == 1)
-                                            <a href="{{ route('Back.dashboard') }}" target="_blank" class="btn btn-label btn-label-warning btn-sm btn-bold">Administration</a>
-                                        @endif
                                     </div>
                                 </div>
 
@@ -361,13 +357,6 @@
                         </div>
 
                         <!--end: User bar -->
-                @else
-                    <div class="kt-header__topbar-item">
-                        <a href="{{ route('login') }}" class="btn btn-primary btn-elevate-hover btn-pill">
-                            <i class="flaticon-user"></i> Connexion
-                        </a>
-                    </div>
-                @endauth
             </div>
 
             <!-- end:: Header Topbar -->
@@ -381,45 +370,59 @@
             <div class="kt-header-menu-wrapper" id="kt_header_menu_wrapper">
                 <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile ">
                     <ul class="kt-menu__nav ">
-                        <li class="kt-menu__item {{ \App\HelpersClass\Generator::currentRoute(route('Front.index')) }} kt-menu__item--rel">
-                            <a href="{{ route('Front.index') }}" class="kt-menu__link">
+                        <li class="kt-menu__item {{ \App\HelpersClass\Generator::currentRoute(route('Back.dashboard')) }} kt-menu__item--rel ">
+                            <a href="{{ route('Back.dashboard') }}" class="kt-menu__link">
                                 <span class="kt-menu__link-icon la la-mobile-phone"  style="color: #646c9a"></span>
                                 <span class="kt-menu__link-text">Acceuil</span>
                                 <i class="kt-menu__ver-arrow la la-angle-right"></i>
                             </a>
                         </li>
-                        <li class="kt-menu__item {{ \App\HelpersClass\Generator::currentRoute(route('Front.Blog.index')) }} kt-menu__item--rel">
-                            <a href="{{ route('Front.Blog.index') }}" class="kt-menu__link">
+                        <li class="kt-menu__item {{ \App\HelpersClass\Generator::currentRoute(route('Back.Blog.index')) }} kt-menu__item--rel">
+                            <a href="{{ route('Back.Blog.index') }}" class="kt-menu__link">
                                 <span class="kt-menu__link-icon la la-newspaper-o" style="color: #646c9a"></span>
                                 <span class="kt-menu__link-text">Blog</span>
                                 <i class="kt-menu__ver-arrow la la-angle-right"></i>
                             </a>
                         </li>
-                        <li class="kt-menu__item {{ \App\HelpersClass\Generator::currentRoute(route('Front.Route.index')) }} kt-menu__item--rel">
-                            <a href="{{ route('Front.Route.index') }}" class="kt-menu__link">
+                        <li class="kt-menu__item {{ \App\HelpersClass\Generator::currentRoute(route('Back.Route.index')) }} kt-menu__item--rel">
+                            <a href="{{ route('Back.Route.index') }}" class="kt-menu__link">
                                 <span class="kt-menu__link-icon la la-road" style="color: #646c9a"></span>
                                 <span class="kt-menu__link-text">Route</span>
                                 <i class="kt-menu__ver-arrow la la-angle-right"></i>
                             </a>
                         </li>
-                        <li class="kt-menu__item {{ \App\HelpersClass\Generator::currentRoute(route('Front.Download.index')) }} kt-menu__item--rel">
-                            <a href="{{ route('Front.Download.index') }}" class="kt-menu__link">
+                        <li class="kt-menu__item {{ \App\HelpersClass\Generator::currentRoute(route('Back.Objet.index')) }} kt-menu__item--rel">
+                            <a href="{{ route('Back.Objet.index') }}" class="kt-menu__link">
                                 <span class="kt-menu__link-icon la la-cubes" style="color: #646c9a"></span>
-                                <span class="kt-menu__link-text">Téléchargement</span>
+                                <span class="kt-menu__link-text">Objets</span>
                                 <i class="kt-menu__ver-arrow la la-angle-right"></i>
                             </a>
                         </li>
-                        <li class="kt-menu__item {{ \App\HelpersClass\Generator::currentRoute(route('Front.Tutoriel.index')) }} kt-menu__item--rel">
-                            <a href="{{ route('Front.Tutoriel.index') }}" class="kt-menu__link">
+                        <li class="kt-menu__item {{ \App\HelpersClass\Generator::currentRoute(route('Back.Tutoriel.index')) }} kt-menu__item--rel">
+                            <a href="{{ route('Back.Tutoriel.index') }}" class="kt-menu__link">
                                 <span class="kt-menu__link-icon la la-youtube-play" style="color: #646c9a"></span>
                                 <span class="kt-menu__link-text">Tutoriels</span>
                                 <i class="kt-menu__ver-arrow la la-angle-right"></i>
                             </a>
                         </li>
-                        <li class="kt-menu__item {{ \App\HelpersClass\Generator::currentRoute(route('Front.Wiki.index')) }} kt-menu__item--rel">
-                            <a href="{{ route('Front.Wiki.index') }}" class="kt-menu__link">
+                        <li class="kt-menu__item {{ \App\HelpersClass\Generator::currentRoute(route('Back.Wiki.index')) }} kt-menu__item--rel">
+                            <a href="{{ route('Back.Wiki.index') }}" class="kt-menu__link">
                                 <span class="kt-menu__link-icon la la-wikipedia-w" style="color: #646c9a"></span>
                                 <span class="kt-menu__link-text">Wiki</span>
+                                <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                            </a>
+                        </li>
+                        <li class="kt-menu__item {{ \App\HelpersClass\Generator::currentRoute(route('Back.User.index')) }} kt-menu__item--rel">
+                            <a href="{{ route('Back.User.index') }}" class="kt-menu__link">
+                                <span class="kt-menu__link-icon la la-wikipedia-w" style="color: #646c9a"></span>
+                                <span class="kt-menu__link-text">Utilisateurs</span>
+                                <i class="kt-menu__ver-arrow la la-angle-right"></i>
+                            </a>
+                        </li>
+                        <li class="kt-menu__item {{ \App\HelpersClass\Generator::currentRoute(route('Back.Slideshow.index')) }} kt-menu__item--rel">
+                            <a href="{{ route('Back.Slideshow.index') }}" class="kt-menu__link">
+                                <span class="kt-menu__link-icon la la-wikipedia-w" style="color: #646c9a"></span>
+                                <span class="kt-menu__link-text">Slideshow</span>
                                 <i class="kt-menu__ver-arrow la la-angle-right"></i>
                             </a>
                         </li>
@@ -440,6 +443,7 @@
                             </div>
                         </div>
                     </div>
+                    <button class="btn btn-primary" id="btnRefreshCache">Rafraichir le cache</button>
                 </div>
             </div>
 

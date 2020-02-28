@@ -42,6 +42,8 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/account/premium.js', 'public/js/account')
     .js('resources/js/account/invoice.js', 'public/js/account')
 
+    .js('resources/js/admin/index.js', 'public/js/admin')
+
 
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/route.scss', 'public/css')

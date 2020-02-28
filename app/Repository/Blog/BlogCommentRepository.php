@@ -73,5 +73,11 @@ class BlogCommentRepository
             ->delete();
     }
 
+    public function all()
+    {
+        return $this->blogComment->newQuery()
+            ->get();
+    }
+
 }
 

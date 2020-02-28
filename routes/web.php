@@ -78,6 +78,43 @@ Route::group(["namespace" => "Front"], function () {
     });
 });
 
+Route::group(["prefix" => "administrator", "namespace" => "Admin"], function (){
+    Route::get('/', ["as" => "Back.dashboard", "uses" => "HomeController@dashboard"]);
+
+    Route::group(["prefix" => "blog", "namespace" => "Blog"], function (){
+        Route::get('/', ["as" => "Back.Blog.index", "uses" => "BlogController@index"]);
+    });
+
+    Route::group(["prefix" => "route", "namespace" => "Route"], function (){
+        Route::get('/', ["as" => "Back.Route.index", "uses" => "RouteController@index"]);
+    });
+
+    Route::group(["prefix" => "objet", "namespace" => "Objet"], function (){
+        Route::get('/', ["as" => "Back.Objet.index", "uses" => "ObjetController@index"]);
+    });
+
+
+    Route::group(["prefix" => "tutoriel", "namespace" => "Tutoriel"], function (){
+        Route::get('/', ["as" => "Back.Tutoriel.index", "uses" => "TutorielController@index"]);
+    });
+
+    Route::group(["prefix" => "wiki", "namespace" => "Wiki"], function (){
+        Route::get('/', ["as" => "Back.Wiki.index", "uses" => "WikiController@index"]);
+    });
+
+    Route::group(["prefix" => "user", "namespace" => "User"], function (){
+        Route::get('/', ["as" => "Back.User.index", "uses" => "UserController@index"]);
+    });
+
+    Route::group(["prefix" => "slideshow", "namespace" => "Slideshow"], function (){
+        Route::get('/', ["as" => "Back.Slideshow.index", "uses" => "SlideshowController@index"]);
+    });
+
+    Route::group(["prefix" => "commerce", "namespace" => "Commerce"], function (){
+        Route::get('/', ["as" => "Back.Commerce.index", "uses" => "CommerceController@index"]);
+    });
+});
+
 Route::group(["middleware" => ["auth", "verified"], "prefix" => "account", "namespace" => "Account"], function () {
     Route::get('/', ["as" => "Account.index", "uses" => "AccountController@index"]);
     Route::get('/invoice/{invoice_id}', ["as" => "Account.Invoice.show", "uses" => "AccountController@invoiceShow"]);

@@ -1,7 +1,9 @@
 <?php
 namespace App\Repository\Account;
 
+use App\HelpersClass\Generator;
 use App\Model\Account\Invoice;
+use Carbon\Carbon;
 
 class InvoiceRepository
 {
@@ -52,6 +54,15 @@ class InvoiceRepository
             ->where('user_id', auth()->user()->id)
             ->where('date', 'like', '%'.$q.'%')
             ->get();
+    }
+
+    public function loadChartData($firstMonth, $LastMonth)
+    {
+        $data = $this->invoice->newQuery()
+            ->whereBetween('date', [Carbon::createFromTimestamp(strtotime($firstMonth)), Carbon::createFromTimestamp(strtotime($LastMonth))])
+            ->sum('total');
+
+        return Generator::formatCurrency($data);
     }
 
 }

@@ -43,6 +43,11 @@ class BlogRepository
         return $this->blog->newQuery();
     }
 
+    public function list()
+    {
+        return $this->all()->get();
+    }
+
     public function allPaginate()
     {
         return $this->all()->paginate(10);
@@ -69,6 +74,11 @@ class BlogRepository
             ->where('title', 'like', '%'.$get.'%')
             ->limit(10)
             ->get();
+    }
+
+    public function listForLimit($int)
+    {
+        return $this->all()->limit($int)->get();
     }
 
 

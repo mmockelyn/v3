@@ -3,6 +3,7 @@
     "/js/account/index.js": "/js/account/index.js",
     "/js/account/invoice.js": "/js/account/invoice.js",
     "/js/account/premium.js": "/js/account/premium.js",
+    "/js/admin/index.js": "/js/admin/index.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/route.css": "/css/route.css",

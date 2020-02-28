@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "annaghd/php-credit-card-validator-plus": "dev-master",
+        "arielmejiadev/larapex-charts": "^1.0",
         "cartalyst/stripe-laravel": "^11.0",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",
@@ -19,14 +20,15 @@
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
         "league/flysystem-sftp": "~1.0",
+        "linkthrow/ffmpeg": "dev-master",
+        "predis/predis": "^1.1",
         "socialiteproviders/discord": "^2.0",
         "socialiteproviders/facebook": "^1.0",
         "socialiteproviders/twitter": "^3.0",
         "stripe/stripe-php": "^7.25",
         "thomaswelton/laravel-gravatar": "~1.0",
         "thujohn/twitter": "^2.2",
-        "yajra/laravel-datatables": "1.5",
-        "linkthrow/ffmpeg": "dev-master"
+        "yajra/laravel-datatables": "1.5"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
