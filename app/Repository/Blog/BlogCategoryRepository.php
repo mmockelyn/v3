@@ -26,5 +26,20 @@ class BlogCategoryRepository
             ->get();
     }
 
+    public function delete($category_id)
+    {
+        return $this->blogCategory->newQuery()
+            ->find($category_id)
+            ->delete();
+    }
+
+    public function create($name)
+    {
+        return $this->blogCategory->newQuery()
+            ->create([
+                "name" => $name
+            ]);
+    }
+
 }
 

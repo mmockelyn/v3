@@ -86,6 +86,7 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
 
         Route::group(["prefix" => "category"], function (){
             Route::get('/', ["as" => "Back.Blog.Category.index", "uses" => "BlogCategoryController@index"]);
+            Route::get('{category_id}/delete', ["as" => "Back.Blog.Category.delete", "uses" => "BlogCategoryController@delete"]);
         });
 
         Route::group(["prefix" => "article"], function (){

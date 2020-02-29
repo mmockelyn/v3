@@ -97,10 +97,10 @@
     - [x] Bouton Accès Rapide (Création d'un articles)
     
 - [ ] Gestion des Catégorie
-    - [ ] Liste des catégories
-    - [ ] Création d'une catégorie    
+    - [x] Liste des catégories
+    - [x] Création d'une catégorie    
     - [ ] Edition d'une catégorie    
-    - [ ] Suppression d'une catégorie   
+    - [x] Suppression d'une catégorie   
     
 - [ ] Gestion des Articles
     - [ ] Liste des articles

@@ -28,7 +28,8 @@
         "stripe/stripe-php": "^7.25",
         "thomaswelton/laravel-gravatar": "~1.0",
         "thujohn/twitter": "^2.2",
-        "yajra/laravel-datatables": "1.5"
+        "yajra/laravel-datatables": "1.5",
+        "yoeunes/toastr": "^1.2"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

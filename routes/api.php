@@ -46,19 +46,24 @@ Route::group(["prefix" => "tutoriel", "namespace" => "Api\Tutoriel"], function (
     Route::get('{tutoriel_id}/view', 'TutorielController@view');
 });
 
-Route::group(["prefix" => "wiki", "namespace" => "Api\Wiki"], function (){
+Route::group(["prefix" => "wiki", "namespace" => "Api\Wiki"], function () {
     Route::get('search', 'WikiController@search');
 });
 
-Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function (){
+Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
     Route::get('loadSignalement', 'AdminController@loadSignalement');
 
-    Route::group(["prefix" => "blog"], function (){
+    Route::group(["prefix" => "blog"], function () {
         Route::get('latest', 'BlogController@loadLatest');
         Route::get('comment/latest', 'BlogController@loadCommentLatest');
+
+        Route::group(["prefix" => "category"], function () {
+            Route::post('liste', 'BlogCategoryController@list');
+            Route::post('create', 'BlogCategoryController@create');
+        });
     });
 
-    Route::group(["prefix" => "tutoriel"], function (){
+    Route::group(["prefix" => "tutoriel"], function () {
         Route::get('/latest', 'TutorielController@loadLatest');
     });
 });

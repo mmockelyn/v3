@@ -45,6 +45,8 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/admin/index.js', 'public/js/admin')
 
     .js('resources/js/admin/blog/index.js', 'public/js/admin/blog')
+    .js('resources/js/admin/blog/category/index.js', 'public/js/admin/blog/category')
+
 
 
     .sass('resources/sass/app.scss', 'public/css')
