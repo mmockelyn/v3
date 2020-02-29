@@ -4,6 +4,7 @@
     "/js/account/invoice.js": "/js/account/invoice.js",
     "/js/account/premium.js": "/js/account/premium.js",
     "/js/admin/blog/article/index.js": "/js/admin/blog/article/index.js",
+    "/js/admin/blog/article/show.js": "/js/admin/blog/article/show.js",
     "/js/admin/blog/category/index.js": "/js/admin/blog/category/index.js",
     "/js/admin/blog/index.js": "/js/admin/blog/index.js",
     "/js/admin/index.js": "/js/admin/index.js",

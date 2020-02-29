@@ -12,6 +12,7 @@
         "annaghd/php-credit-card-validator-plus": "dev-master",
         "arielmejiadev/larapex-charts": "^1.0",
         "cartalyst/stripe-laravel": "^11.0",
+        "divineomega/laravel-offensive-validation-rule": "^1.2",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",
         "google/apiclient": "^2.0",

@@ -4,7 +4,7 @@ import {blockElement, unblockElement} from '../core'
 function loadSignalement() {
     let el = document.querySelector('#signalement')
 
-    blockElement(el, 'Chargements des signalement...')
+    //blockElement(el, 'Chargements des signalement...')
 
     $.get('/api/admin/loadSignalement')
         .done((data) => {

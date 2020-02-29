@@ -81,5 +81,36 @@ class BlogCommentRepository
             ->get();
     }
 
+    public function allFromArticle($article_id, $limit = null)
+    {
+        return $this->blogComment->newQuery()
+            ->where('blog_id', $article_id)
+            ->limit($limit)
+            ->orderByDesc('updated_at')
+            ->get();
+    }
+
+    public function get($comment_id)
+    {
+        return $this->blogComment->newQuery()
+            ->find($comment_id);
+    }
+
+    public function publish($comment_id)
+    {
+        return $this->get($comment_id)->update([
+            "state" => 1,
+            "updated_at" => now()
+        ]);
+    }
+
+    public function unpublish($comment_id)
+    {
+        return $this->get($comment_id)->update([
+            "state" => 0,
+            "updated_at" => now()
+        ]);
+    }
+
 }
 

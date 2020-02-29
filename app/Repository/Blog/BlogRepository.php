@@ -97,6 +97,33 @@ class BlogRepository
             ]);
     }
 
+    public function delete($article_id)
+    {
+        return $this->blog->newQuery()
+            ->find($article_id)
+            ->delete();
+    }
+
+    public function publish($article_id)
+    {
+        return $this->blog->newQuery()
+            ->find($article_id)
+            ->update([
+                "published" => 1,
+                "published_at" => now()
+            ]);
+    }
+
+    public function unpublish($article_id)
+    {
+        return $this->blog->newQuery()
+            ->find($article_id)
+            ->update([
+                "published" => 0,
+                "published_at" => null
+            ]);
+    }
+
 
 }
 

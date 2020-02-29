@@ -53,7 +53,7 @@ Route::group(["prefix" => "wiki", "namespace" => "Api\Wiki"], function () {
 Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
     Route::get('loadSignalement', 'AdminController@loadSignalement');
 
-    Route::group(["prefix" => "blog"], function () {
+    Route::group(["prefix" => "blog", "namespace" => "Blog"], function () {
         Route::get('latest', 'BlogController@loadLatest');
         Route::get('comment/latest', 'BlogController@loadCommentLatest');
 
@@ -65,6 +65,18 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
         Route::group(["prefix" => "article"], function (){
             Route::post('liste', 'BlogArticleController@list');
             Route::post('create', 'BlogArticleController@create');
+            Route::get('{article_id}', 'BlogArticleController@get');
+            Route::get('{article_id}/verifPublish', 'BlogArticleController@verifPublish');
+            Route::get('{article_id}/publish', 'BlogArticleController@publish');
+            Route::get('{article_id}/unpublish', 'BlogArticleController@unpublish');
+
+            Route::post('{article_id}/comment/load', 'BlogCommentController@loadComments');
+            Route::get('{article_id}/comment/{comment_id}/publish', 'BlogCommentController@publish');
+            Route::get('{article_id}/comment/{comment_id}/unpublish', 'BlogCommentController@unpublish');
+
+            Route::post('{article_id}/tag', 'BlogTagController@store');
+            Route::post('{article_id}/tag/load', 'BlogTagController@load');
+            Route::get('{article_id}/tag/{tag_id}/delete', 'BlogTagController@delete');
         });
     });
 
