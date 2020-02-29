@@ -2,6 +2,7 @@
 namespace App\Repository\Blog;
 
 use App\Model\Blog\Blog;
+use Illuminate\Support\Str;
 
 class BlogRepository
 {
@@ -43,9 +44,12 @@ class BlogRepository
         return $this->blog->newQuery();
     }
 
-    public function list()
+    public function list($sort = null, $query = null)
     {
-        return $this->all()->get();
+        return $this->all()
+            ->orderBy($sort['field'], $sort['sort'])
+            ->where('title', 'like', '%'.$query.'%')
+            ->get();
     }
 
     public function allPaginate()
@@ -79,6 +83,18 @@ class BlogRepository
     public function listForLimit($int)
     {
         return $this->all()->limit($int)->get();
+    }
+
+    public function create($category_id, $title, $short_content)
+    {
+        return $this->blog->newQuery()
+            ->create([
+                "categorie_id" => $category_id,
+                "title" => $title,
+                "slug" => Str::slug($title),
+                "short_content" => $short_content,
+                "content" => "<i>".$short_content."</i>"
+            ]);
     }
 
 

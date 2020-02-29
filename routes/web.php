@@ -92,7 +92,7 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
         });
 
         Route::group(["prefix" => "article"], function (){
-            Route::get('/', ["as" => "Back.Blog.Article.index", "uses" => "BlogController@article"]);
+            Route::get('/', ["as" => "Back.Blog.Article.index", "uses" => "BlogArticleController@article"]);
         });
     });
 

@@ -1,4 +1,5 @@
 import * as $ from "jquery";
+import tooltip from 'bootstrap'
 
 export function reloadNotifBar() {
     let countNotifBar = document.querySelector('#countNotifBar')
@@ -41,5 +42,6 @@ export function addPremium() {
         })
 }
 
+$('[data-toggle="kt-tooltip"]').tooltip()
 
 

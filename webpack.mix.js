@@ -46,6 +46,7 @@ mix.js('resources/js/app.js', 'public/js')
 
     .js('resources/js/admin/blog/index.js', 'public/js/admin/blog')
     .js('resources/js/admin/blog/category/index.js', 'public/js/admin/blog/category')
+    .js('resources/js/admin/blog/article/index.js', 'public/js/admin/blog/article')
 
 
 

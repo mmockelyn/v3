@@ -61,6 +61,11 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::post('liste', 'BlogCategoryController@list');
             Route::post('create', 'BlogCategoryController@create');
         });
+
+        Route::group(["prefix" => "article"], function (){
+            Route::post('liste', 'BlogArticleController@list');
+            Route::post('create', 'BlogArticleController@create');
+        });
     });
 
     Route::group(["prefix" => "tutoriel"], function () {
