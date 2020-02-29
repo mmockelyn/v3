@@ -41,5 +41,18 @@ class BlogCategoryRepository
             ]);
     }
 
+    public function get($category_id)
+    {
+        return $this->blogCategory->newQuery()
+            ->find($category_id);
+    }
+
+    public function update($category_id, $name)
+    {
+        return $this->get($category_id)->update([
+            "name" => $name
+        ]);
+    }
+
 }
 

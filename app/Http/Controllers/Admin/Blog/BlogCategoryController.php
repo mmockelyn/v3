@@ -27,6 +27,26 @@ class BlogCategoryController extends Controller
         return view("admin.blog.category.index");
     }
 
+    public function edit($category_id)
+    {
+        return view("admin.blog.category.edit", [
+            "category" => $this->blogCategoryRepository->get($category_id)
+        ]);
+    }
+
+    public function update(Request $request, $category_id)
+    {
+        try {
+            $this->blogCategoryRepository->update($category_id, $request->name);
+
+            toastr()->success("La catégorie à été mis à jours", "Succès");
+            return redirect()->route('Back.Blog.Category.index');
+        }catch (\Exception $exception) {
+            toastr()->error("Erreur lors de la mise à jour de la catégorie", "Erreur Système");
+            return redirect()->route('Back.Blog.Category.index');
+        }
+    }
+
     public function delete($category_id)
     {
         try {
