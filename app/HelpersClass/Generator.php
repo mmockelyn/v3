@@ -78,6 +78,18 @@ class Generator
         return null;
     }
 
+    public static function currentRouteBack(...$routes)
+    {
+        foreach ($routes as $route){
+            if(request()->url() == $route){
+                return "kt-nav__item--active";
+            }else{
+                return null;
+            }
+        }
+        return null;
+    }
+
     public static function firsLetter(string $word, $length = 1)
     {
         if($length == 1) {

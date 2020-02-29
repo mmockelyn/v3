@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Packages\Google\Youtube\Search;
-use Google_Service_YouTube;
-use Illuminate\Support\Facades\Storage;
-use Inacho\CreditCard;
-use Linkthrow\Ffmpeg\Classes\FFMPEG;
+
+use Carbon\Carbon;
 
 class TestController extends Controller
 {
     public function test()
     {
+        //dd(now()->hour);
 
+        if(now()->hour >= 7 && now()->hour <= 18){
+            return 'jours';
+        }else{
+            return 'nuit';
+        }
     }
 }

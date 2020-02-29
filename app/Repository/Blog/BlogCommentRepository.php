@@ -73,9 +73,11 @@ class BlogCommentRepository
             ->delete();
     }
 
-    public function all()
+    public function all($limit = null)
     {
         return $this->blogComment->newQuery()
+            ->limit($limit)
+            ->orderByDesc('updated_at')
             ->get();
     }
 

@@ -87,14 +87,14 @@
     
     
 ### Blog <a id='admin_blog'></a> 
-- [ ] Tableau de Bord
-    - [ ] Statistique
+- [x] Tableau de Bord
+    - [x] Statistique
         - Nombre d'article
         - Moyenne de commentaire par article
         - Nombre de commentaire total
-    - [ ] Derniers Commentaire
-    - [ ] Derniers Articles
-    - [ ] Bouton Accès Rapide (Création d'un articles)
+    - [x] Derniers Commentaire
+    - [x] Derniers Articles
+    - [x] Bouton Accès Rapide (Création d'un articles)
     
 - [ ] Gestion des Catégorie
     - [ ] Liste des catégories

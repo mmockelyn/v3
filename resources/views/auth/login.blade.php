@@ -146,7 +146,11 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
                 </div>
             </div>
-            <div class="kt-grid__item kt-grid__item--fluid kt-grid__item--center kt-grid kt-grid--ver kt-login__content" style="background-image: url(/storage/other/back_login.jpg);">
+            @if(now()->hour >= 7 && now()->hour <= 18)
+                <div class="kt-grid__item kt-grid__item--fluid kt-grid__item--center kt-grid kt-grid--ver kt-login__content" style="background-image: url(/storage/other/back_login.jpg);">
+            @else
+                        <div class="kt-grid__item kt-grid__item--fluid kt-grid__item--center kt-grid kt-grid--ver kt-login__content" style="background-image: url(/storage/other/back_login_night.jpg);">
+            @endif
                 <div class="kt-login__section">
                     <div class="kt-login__block">
 

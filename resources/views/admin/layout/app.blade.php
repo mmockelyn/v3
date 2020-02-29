@@ -57,7 +57,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper " id="kt_wrapper">
 
             <!-- begin:: Header -->
-            @include("layout.includes.header")
+            @include("admin.layout.includes.header")
 
             <!-- end:: Header -->
             <div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
@@ -77,7 +77,7 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
 
             <!-- begin:: Footer -->
-            @include("layout.includes.footer")
+            @include("admin.layout.includes.footer")
 
             <!-- end:: Footer -->
         </div>

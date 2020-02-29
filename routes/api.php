@@ -55,6 +55,7 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function (){
 
     Route::group(["prefix" => "blog"], function (){
         Route::get('latest', 'BlogController@loadLatest');
+        Route::get('comment/latest', 'BlogController@loadCommentLatest');
     });
 
     Route::group(["prefix" => "tutoriel"], function (){

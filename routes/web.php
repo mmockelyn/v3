@@ -78,11 +78,19 @@ Route::group(["namespace" => "Front"], function () {
     });
 });
 
-Route::group(["prefix" => "administrator", "namespace" => "Admin"], function (){
+Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" => ["auth"]], function (){
     Route::get('/', ["as" => "Back.dashboard", "uses" => "HomeController@dashboard"]);
 
     Route::group(["prefix" => "blog", "namespace" => "Blog"], function (){
         Route::get('/', ["as" => "Back.Blog.index", "uses" => "BlogController@index"]);
+
+        Route::group(["prefix" => "category"], function (){
+            Route::get('/', ["as" => "Back.Blog.Category.index", "uses" => "BlogCategoryController@index"]);
+        });
+
+        Route::group(["prefix" => "article"], function (){
+            Route::get('/', ["as" => "Back.Blog.Article.index", "uses" => "BlogController@article"]);
+        });
     });
 
     Route::group(["prefix" => "route", "namespace" => "Route"], function (){
