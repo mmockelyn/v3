@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin\Route;
 
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
+use App\Repository\Core\GareRepository;
 use App\Repository\Route\RouteRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -15,14 +16,20 @@ class RouteController extends BaseController
      * @var RouteRepository
      */
     private $routeRepository;
+    /**
+     * @var GareRepository
+     */
+    private $gareRepository;
 
     /**
      * RouteController constructor.
      * @param RouteRepository $routeRepository
+     * @param GareRepository $gareRepository
      */
-    public function __construct(RouteRepository $routeRepository)
+    public function __construct(RouteRepository $routeRepository, GareRepository $gareRepository)
     {
         $this->routeRepository = $routeRepository;
+        $this->gareRepository = $gareRepository;
     }
 
     public function list(Request $request)
@@ -166,5 +173,12 @@ class RouteController extends BaseController
                 "errors" => $exception->getMessage()
             ]);
         }
+    }
+
+    public function searchGare(Request $request)
+    {
+        $data = $this->gareRepository->search($request->get('q'));
+
+        return $this->sendResponse($data, "Search Gare");
     }
 }

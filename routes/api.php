@@ -88,9 +88,22 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
         Route::get('list', 'RouteController@list');
         Route::post('create', 'RouteController@store');
         Route::put('{route_id}/editDescription', 'RouteController@editDescription');
+        Route::get('searchGare', 'RouteController@searchGare');
 
         Route::get('{route_id}/publish', 'RouteController@publish');
         Route::get('{route_id}/unpublish', 'RouteController@unpublish');
+
+        Route::group(["prefix" => "{route_id}/version"], function (){
+            Route::post('loadGares', 'RouteVersionController@loadGares');
+            Route::post('/', 'RouteVersionController@store');
+            Route::put('{version_id}/editDescription', 'RouteVersionController@editDescription');
+            Route::get('{version_id}/delete', 'RouteVersionController@deleteVersion');
+
+            Route::group(["prefix" => "{version_id}/gare"], function () {
+                Route::post('/', 'RouteVersionController@createGare');
+                Route::get('{gare_id}/delete', 'RouteVersionController@deleteGare');
+            });
+        });
     });
 
     Route::group(["prefix" => "tutoriel"], function () {

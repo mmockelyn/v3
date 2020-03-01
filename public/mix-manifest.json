@@ -11,6 +11,7 @@
     "/js/admin/index.js": "/js/admin/index.js",
     "/js/admin/route/index.js": "/js/admin/route/index.js",
     "/js/admin/route/show.js": "/js/admin/route/show.js",
+    "/js/admin/route/version.js": "/js/admin/route/version.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/route.css": "/css/route.css",

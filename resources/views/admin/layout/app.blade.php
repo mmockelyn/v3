@@ -69,6 +69,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     <!-- begin:: Content -->
                     <div class="kt-container  kt-grid__item kt-grid__item--fluid">
+                        @include("admin.layout.includes.alert")
                         @yield("content")
                     </div>
 

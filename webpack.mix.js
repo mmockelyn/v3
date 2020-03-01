@@ -52,6 +52,7 @@ mix.js('resources/js/app.js', 'public/js')
 
     .js('resources/js/admin/route/index.js', 'public/js/admin/route')
     .js('resources/js/admin/route/show.js', 'public/js/admin/route')
+    .js('resources/js/admin/route/version.js', 'public/js/admin/route')
 
 
 
