@@ -56,5 +56,11 @@ class UserRepository
             ->delete();
     }
 
+    public function all()
+    {
+        return $this->user->newQuery()
+            ->get();
+    }
+
 }
 

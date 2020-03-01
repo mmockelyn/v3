@@ -3,10 +3,12 @@
 namespace App\Model\Blog;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 
 class Blog extends Model
 {
+    use Notifiable;
     protected $guarded = [];
     public $timestamps = false;
     protected $dates = ["published_at"];

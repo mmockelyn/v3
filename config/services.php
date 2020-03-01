@@ -38,6 +38,7 @@ return [
     'facebook' => [
         'client_id' => "348094415702383",
         'client_secret' => "d3bd79de359f99258c2f6528e6e38bdb",
+        'access_token' => "EAAE8lwvZCCW8BAKK5YV1ZCoPdHyJP36CWLpdP0eaBPg8qSRgZB5jm2qrHOuqo2mtw83VRkgAeLwJaZCGjSc3Lh02AoSqfVwEObRKPTlswP4qiJtRkkUPiONoNsNi9mPUJHtk2nDCgWD8NLCG4YFIMeXWqiABhYZCWRokyLDxPWasBwhHqZBoTTOPOs9x6vZCZBovVV9FlpRL7amzIZCEz1U1hocZC3rNywZComlBZAUsTF9NjgZDZD",
         'redirect' => env('APP_URL').'/provider/callback/facebook'
     ],
 

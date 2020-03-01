@@ -16,6 +16,8 @@
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",
         "google/apiclient": "^2.0",
+        "laravel-notification-channels/facebook-poster": "^2.0",
+        "laravel-notification-channels/twitter": "^3.0",
         "laravel/framework": "^6.2",
         "laravel/horizon": "^3.7",
         "laravel/socialite": "^4.3",

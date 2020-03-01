@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Api\Admin\Blog;
 
 use App\Http\Controllers\Api\BaseController;
+use App\Notifications\Blog\ArticlePublish;
+use App\Notifications\Blog\ArticlePublishFacebook;
+use App\Notifications\Blog\ArticlePublishTwitter;
+use App\Repository\Account\UserRepository;
 use App\Repository\Blog\BlogCommentRepository;
 use App\Repository\Blog\BlogRepository;
 use Illuminate\Http\Request;
@@ -18,16 +22,22 @@ class BlogArticleController extends BaseController
      * @var BlogCommentRepository
      */
     private $blogCommentRepository;
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
 
     /**
      * BlogArticleController constructor.
      * @param BlogRepository $blogRepository
      * @param BlogCommentRepository $blogCommentRepository
+     * @param UserRepository $userRepository
      */
-    public function __construct(BlogRepository $blogRepository, BlogCommentRepository $blogCommentRepository)
+    public function __construct(BlogRepository $blogRepository, BlogCommentRepository $blogCommentRepository, UserRepository $userRepository)
     {
         $this->blogRepository = $blogRepository;
         $this->blogCommentRepository = $blogCommentRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function list(Request $request)
@@ -158,12 +168,28 @@ class BlogArticleController extends BaseController
 
     public function publish($article_id)
     {
+        $article = $this->blogRepository->get($article_id);
+
+        // Verif publication sur twitter
+
+        if($article->twitter == 1) {
+            $this->publishTo('twitter', $article);
+        }
+
+        // Verif Publication sur facebook
+        if($article->facebook == 1) {
+            $this->publishTo('facebook', $article);
+        }
+
+        // Publication utilisateur
+        $this->notifyAllUser($article);
+
         try {
             $this->blogRepository->publish($article_id);
 
             return $this->sendResponse("ok", "ok");
-        } catch (\Exception $exception) {
-            return $this->sendError("Erreur Système", [
+        }catch (\Exception $exception) {
+            return $this->sendError("Erreur système", [
                 "errors" => $exception->getMessage()
             ]);
         }
@@ -244,7 +270,7 @@ class BlogArticleController extends BaseController
             $this->blogRepository->updateTwitterText($article_id, $request->twitterText);
 
             return $this->sendResponse("ok", "ok");
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
@@ -257,10 +283,31 @@ class BlogArticleController extends BaseController
             $this->blogRepository->updateContent($article_id, $request->get('content'));
 
             return $this->sendResponse("ok", "ok");
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
+        }
+    }
+
+    private function notifyAllUser($article)
+    {
+        $users = $this->userRepository->all();
+
+        foreach ($users as $user) {
+            $user->notify(new ArticlePublish($article));
+        }
+    }
+
+    private function publishTo($provider, $article)
+    {
+        switch ($provider) {
+            case 'twitter':
+                $article->notify(new ArticlePublishTwitter($article));
+                break;
+
+            case 'facebook':
+                $article->notify(new ArticlePublishFacebook($article));
         }
     }
 }
