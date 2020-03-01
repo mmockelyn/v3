@@ -118,4 +118,53 @@ class RouteController extends BaseController
             return redirect()->back();
         }
     }
+
+    public function editDescription(Request $request, $route_id)
+    {
+        $validator = \Validator::make($request->all(), [
+            "description" => "required|min:5"
+        ]);
+
+        if($validator->fails()) {
+            return $this->sendError("Erreur de validation", [
+                "errors" => $validator->errors()->all()
+            ], 203);
+        }
+
+        try {
+            $this->routeRepository->updateDescription($route_id, $request->description);
+
+            return $this->sendResponse("ok", 'ok');
+        }catch (\Exception $exception) {
+            return $this->sendError("Erreur Système", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function publish($route_id)
+    {
+        try {
+            $this->routeRepository->publish($route_id);
+
+            return $this->sendResponse("OK", "ok");
+        }catch (\Exception $exception) {
+            return $this->sendError("Erreur Système", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function unpublish($route_id)
+    {
+        try {
+            $this->routeRepository->unpublish($route_id);
+
+            return $this->sendResponse("OK", "ok");
+        }catch (\Exception $exception) {
+            return $this->sendError("Erreur Système", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+    }
 }

@@ -25,9 +25,9 @@
                 <div class="kt-subheader__wrapper">
                     <a href="{{ route('Back.Route.index') }}" class="btn btn-sm btn-default"><i class="la la-arrow-circle-left"></i> Retour</a>
                     @if($route->published == 0)
-                        <a href="" class="btn btn-sm btn-outline-success"><i class="la la-check-square"></i> Publier</a>
+                        <button id="btnPublish" class="btn btn-sm btn-outline-success"><i class="la la-check-square"></i> Publier</button>
                     @else
-                        <a href="" class="btn btn-sm btn-outline-danger"><i class="la la-times-circle"></i> Dépublier</a>
+                        <button id="btnUnpublish" class="btn btn-sm btn-outline-danger"><i class="la la-times-circle"></i> Dépublier</button>
                     @endif
                 </div>
             </div>
@@ -36,6 +36,7 @@
 @endsection
 
 @section("content")
+    <div id="route" data-id="{{ $route->id }}" data-published="{{ $route->published }}"></div>
 <div class="row">
     <div class="col-md-3">
         <div class="card">
@@ -97,7 +98,7 @@
                     </div>
                 </div>
                 <hr  />
-                <form id="formEditDescription" action="" class="kt-form" method="post">
+                <form id="formEditDescription" action="/api/admin/route/{{ $route->id }}/editDescription" class="kt-form" method="post">
                     @csrf
                     @method('PUT')
                     <div class="form-group">

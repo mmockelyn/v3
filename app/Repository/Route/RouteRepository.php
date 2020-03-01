@@ -56,5 +56,34 @@ class RouteRepository
             ]);
     }
 
+    public function updateDescription($route_id, $description)
+    {
+        return $this->route->newQuery()
+            ->find($route_id)
+            ->update([
+                "description" => $description
+            ]);
+    }
+
+    public function publish($route_id)
+    {
+        return $this->route->newQuery()
+            ->find($route_id)
+            ->update([
+                "published" => 1,
+                "updated_at" => now()
+            ]);
+    }
+
+    public function unpublish($route_id)
+    {
+        return $this->route->newQuery()
+            ->find($route_id)
+            ->update([
+                "published" => 0,
+                "updated_at" => now()
+            ]);
+    }
+
 }
 

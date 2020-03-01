@@ -87,6 +87,10 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
     Route::group(["prefix" => "route", "namespace" => "Route"], function (){
         Route::get('list', 'RouteController@list');
         Route::post('create', 'RouteController@store');
+        Route::put('{route_id}/editDescription', 'RouteController@editDescription');
+
+        Route::get('{route_id}/publish', 'RouteController@publish');
+        Route::get('{route_id}/unpublish', 'RouteController@unpublish');
     });
 
     Route::group(["prefix" => "tutoriel"], function () {

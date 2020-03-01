@@ -20844,6 +20844,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var summernote__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! summernote */ "./node_modules/summernote/dist/summernote.js");
 /* harmony import */ var summernote__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(summernote__WEBPACK_IMPORTED_MODULE_0__);
 
+var route = $("#route");
+var route_id = route.attr('data-id');
+var route_published = route.attr('data-published');
+
+function submitDescriptionForm() {
+  var form = $("#formEditDescription");
+  form.on('submit', function (e) {
+    e.preventDefault();
+    var btn = form.find('button');
+    var data = form.serializeArray();
+    var url = form.attr('action');
+    KTApp.progress(btn);
+    $.ajax({
+      url: url,
+      method: 'PUT',
+      data: data,
+      statusCode: {
+        200: function _(data) {
+          KTApp.unprogress(btn);
+          toastr.success("La description à été mis à jour avec succès", "Succès");
+          setTimeout(function () {
+            window.location.reload();
+          }, 1200);
+        },
+        203: function _(data) {
+          KTApp.unprogress(btn);
+          Array.from(data.data.errors).forEach(function (error) {
+            toastr.warning(error, "Erreur de validation");
+          });
+        },
+        500: function _(jqxhr) {
+          KTApp.unprogress(btn);
+          toastr.error("Erreur lors de la modification de la description", "Erreur Système");
+          console.error(jqxhr);
+        }
+      }
+    });
+  });
+}
 
 function formFormat() {
   $(".summernote").summernote({
@@ -20851,7 +20890,54 @@ function formFormat() {
   });
 }
 
+function btnPublish() {
+  var btn = $("#btnPublish");
+  btn.on('click', function (e) {
+    e.preventDefault();
+    KTApp.progress(btn);
+    $.get('/api/admin/route/' + route_id + '/publish').done(function (data) {
+      KTApp.unprogress(btn);
+      toastr.success("La route à été publier", "Succès");
+      setTimeout(function () {
+        window.location.reload();
+      }, 1200);
+    }).fail(function (jqxhr) {
+      KTApp.unprogress(btn);
+      toastr.error("Erreur lors de la publication", "Erreur Système");
+      console.error(jqxhr);
+    });
+  });
+}
+
+function btnUnpublish() {
+  var btn = $("#btnUnpublish");
+  btn.on('click', function (e) {
+    e.preventDefault();
+    KTApp.progress(btn);
+    $.get('/api/admin/route/' + route_id + '/unpublish').done(function (data) {
+      KTApp.unprogress(btn);
+      toastr.success("La route à été dépublier", "Succès");
+      setTimeout(function () {
+        window.location.reload();
+      }, 1200);
+    }).fail(function (jqxhr) {
+      KTApp.unprogress(btn);
+      toastr.error("Erreur lors de la dépublication", "Erreur Système");
+      console.error(jqxhr);
+    });
+  });
+}
+
+if (route_published == 1) {
+  btnUnpublish();
+} else if (route_published == 0) {
+  btnPublish();
+} else {
+  console.log("Erreur");
+}
+
 formFormat();
+submitDescriptionForm();
 
 /***/ }),
 
