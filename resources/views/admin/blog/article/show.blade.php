@@ -16,7 +16,7 @@
                     <span class="kt-subheader__breadcrumbs-separator"></span>
                     <a href="{{ route('Back.Blog.index') }}" class="kt-subheader__breadcrumbs-link">Blog </a>
                     <span class="kt-subheader__breadcrumbs-separator"></span>
-                    <a href="{{ route('Back.Blog.Category.index') }}" class="kt-subheader__breadcrumbs-link">Article </a>
+                    <a href="{{ route('Back.Blog.Article.index') }}" class="kt-subheader__breadcrumbs-link">Article </a>
 
                     <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Fiche d'un article</span>
                 </div>

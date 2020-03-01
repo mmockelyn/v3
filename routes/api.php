@@ -69,6 +69,10 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::get('{article_id}/verifPublish', 'BlogArticleController@verifPublish');
             Route::get('{article_id}/publish', 'BlogArticleController@publish');
             Route::get('{article_id}/unpublish', 'BlogArticleController@unpublish');
+            Route::put('{article_id}/editInfo', 'BlogArticleController@editInfo');
+            Route::put('{article_id}/editThumbnail', 'BlogArticleController@editThumbnail');
+            Route::put('{article_id}/textTwitter', 'BlogArticleController@textTwitter');
+            Route::put('{article_id}/editDescription', 'BlogArticleController@editDescription');
 
             Route::post('{article_id}/comment/load', 'BlogCommentController@loadComments');
             Route::get('{article_id}/comment/{comment_id}/publish', 'BlogCommentController@publish');

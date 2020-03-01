@@ -38587,11 +38587,11 @@ td > .kt-radio.kt-radio--single {
 }
 
 .kt-avatar .kt-avatar__holder {
-  width: 120px;
+  width: 250px;
   height: 120px;
   border-radius: 3px;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
 }
 
 .kt-avatar .kt-avatar__upload {

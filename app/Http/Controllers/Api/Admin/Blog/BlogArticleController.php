@@ -156,9 +156,92 @@ class BlogArticleController extends BaseController
         }
     }
 
-    public function publish($article_id) {
+    public function publish($article_id)
+    {
         try {
             $this->blogRepository->publish($article_id);
+
+            return $this->sendResponse("ok", "ok");
+        } catch (\Exception $exception) {
+            return $this->sendError("Erreur Système", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function unpublish($article_id)
+    {
+        try {
+            $this->blogRepository->unpublish($article_id);
+
+            return $this->sendResponse("ok", "ok");
+        } catch (\Exception $exception) {
+            return $this->sendError("Erreur Système", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function editInfo(Request $request, $article_id)
+    {
+        //dd($request->all());
+        if ($request->exists('published')) {
+            $published = 1;
+        } else {
+            $published = 0;
+        }
+        if ($request->exists('twitter')) {
+            $twitter = 1;
+        } else {
+            $twitter = 0;
+        }
+        try {
+            $this->blogRepository->updateInfo(
+                $article_id,
+                $request->category_id,
+                $request->title,
+                $request->short_content,
+                $request->published,
+                $published,
+                $twitter
+            );
+
+            return $this->sendResponse("ok", 'ok');
+        } catch (\Exception $exception) {
+            return $this->sendError("Erreur", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function editThumbnail(Request $request, $article_id)
+    {
+        try {
+            $file = $request->file('images');
+            $request->file('images')->storeAs('blog', $article_id . '.png', 'public');
+
+            toastr()->success("L'image à été mise à jour", "Succès");
+            return redirect()->back();
+        } catch (\Exception $exception) {
+            toastr()->error("Erreur lors de la mise à jour de l'image", "Erreur Système");
+            return redirect()->back();
+        }
+    }
+
+    public function textTwitter(Request $request, $article_id)
+    {
+        $validator = \Validator::make($request->all(), [
+            "twitterText" => "max:280"
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError("Erreur de validation", [
+                "errors" => $validator->errors()->all()
+            ], 203);
+        }
+
+        try {
+            $this->blogRepository->updateTwitterText($article_id, $request->twitterText);
 
             return $this->sendResponse("ok", "ok");
         }catch (\Exception $exception) {
@@ -168,9 +251,10 @@ class BlogArticleController extends BaseController
         }
     }
 
-    public function unpublish($article_id) {
+    public function editDescription(Request $request, $article_id)
+    {
         try {
-            $this->blogRepository->unpublish($article_id);
+            $this->blogRepository->updateContent($article_id, $request->get('content'));
 
             return $this->sendResponse("ok", "ok");
         }catch (\Exception $exception) {

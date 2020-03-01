@@ -124,6 +124,39 @@ class BlogRepository
             ]);
     }
 
+    public function updateInfo($article_id, $categorie_id, $title, $short_content, $published, $published_at, $twitter)
+    {
+        $this->blog->newQuery()
+            ->find($article_id)
+            ->update([
+                "categorie_id" => $categorie_id,
+                "title" => $title,
+                "slug" => Str::slug($title),
+                "short_content" => $short_content,
+                "published" => $published,
+                "published_at" => $published_at,
+                "twitter" => $twitter
+            ]);
+    }
+
+    public function updateTwitterText($article_id, $twitterText)
+    {
+        return $this->blog->newQuery()
+            ->find($article_id)
+            ->update([
+                "twitterText" => $twitterText
+            ]);
+    }
+
+    public function updateContent($article_id, $content)
+    {
+        return $this->blog->newQuery()
+            ->find($article_id)
+            ->update([
+                "content" => $content
+            ]);
+    }
+
 
 }
 

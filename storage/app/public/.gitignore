@@ -1,3 +1,5 @@
+/blog/*.*
+!/blog/news.png
 /slideshow/*.*
 /tutoriel/*.*
 /route/*
