@@ -87,7 +87,12 @@
                     <div class="kt-portlet__head-toolbar">
                         <ul class="nav nav-tabs nav-tabs-line nav-tabs-line-danger nav-tabs-line-2x nav-tabs-line-right nav-tabs-bold" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#comments" role="tab">
+                                <a class="nav-link active" data-toggle="tab" href="#description" role="tab">
+                                    <i class="la la-pencil-square" aria-hidden="true"></i> Description
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#comments" role="tab">
                                     <i class="fa fa-comments" aria-hidden="true"></i> {{ \App\HelpersClass\Blog\BlogHelper::countCommentWithArticle($article->id) }} Commentaires
                                 </a>
                             </li>
@@ -101,7 +106,14 @@
                 </div>
                 <div class="kt-portlet__body">
                     <div class="tab-content">
-                        <div class="tab-pane active" id="comments" role="tabpanel">
+                        <div class="tab-pane active" id="description" role="tabpanel">
+                            <div class="card">
+                                <div class="card-body">
+                                    {!! $article->content !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="comments" role="tabpanel">
                             <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                                 <div class="row align-items-center">
                                     <div class="col-xl-8 order-2 order-xl-1">

@@ -24526,14 +24526,10 @@ loadTag();
 postTags();
 
 if (article_publish === '1') {
-  console.log('Article Publier');
   unpublish();
 } else if (article_publish === '0') {
-  console.log("Article Dépublier");
   publish();
-} else {
-  console.log('error');
-}
+} else {}
 
 var input = document.querySelector('#tag');
 new _yaireo_tagify__WEBPACK_IMPORTED_MODULE_2___default.a(input);

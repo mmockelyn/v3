@@ -364,13 +364,11 @@ loadComment()
 loadTag()
 postTags()
 if(article_publish === '1') {
-    console.log('Article Publier')
     unpublish()
 } else if(article_publish === '0') {
-    console.log("Article Dépublier")
     publish()
 }else{
-    console.log('error')
+
 }
 
 let input = document.querySelector('#tag');
