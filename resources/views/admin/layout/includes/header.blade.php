@@ -414,14 +414,14 @@
                         </li>
                         <li class="kt-menu__item {{ \App\HelpersClass\Generator::currentRoute(route('Back.User.index')) }} kt-menu__item--rel">
                             <a href="{{ route('Back.User.index') }}" class="kt-menu__link">
-                                <span class="kt-menu__link-icon la la-wikipedia-w" style="color: #646c9a"></span>
+                                <span class="kt-menu__link-icon la la-group" style="color: #646c9a"></span>
                                 <span class="kt-menu__link-text">Utilisateurs</span>
                                 <i class="kt-menu__ver-arrow la la-angle-right"></i>
                             </a>
                         </li>
                         <li class="kt-menu__item {{ \App\HelpersClass\Generator::currentRoute(route('Back.Slideshow.index')) }} kt-menu__item--rel">
                             <a href="{{ route('Back.Slideshow.index') }}" class="kt-menu__link">
-                                <span class="kt-menu__link-icon la la-wikipedia-w" style="color: #646c9a"></span>
+                                <span class="kt-menu__link-icon la la-picture-o" style="color: #646c9a"></span>
                                 <span class="kt-menu__link-text">Slideshow</span>
                                 <i class="kt-menu__ver-arrow la la-angle-right"></i>
                             </a>

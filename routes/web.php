@@ -102,6 +102,7 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
 
     Route::group(["prefix" => "route", "namespace" => "Route"], function (){
         Route::get('/', ["as" => "Back.Route.index", "uses" => "RouteController@index"]);
+        Route::get('{route_id}', ["as" => "Back.Route.show", "uses" => "RouteController@show"]);
     });
 
     Route::group(["prefix" => "objet", "namespace" => "Objet"], function (){

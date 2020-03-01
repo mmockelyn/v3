@@ -63,7 +63,7 @@ class RouteController extends BaseController
                                 </div>
                             </div>
                             <div class="kt-widget19__action">
-                                <a href="#" class="btn btn-sm btn-label-brand btn-bold btn-block">En savoir plus...</a>
+                                <a href="<?= route('Back.Route.show', $data->id); ?>" class="btn btn-sm btn-label-brand btn-bold btn-block">En savoir plus...</a>
                             </div>
                         </div>
                     </div>
