@@ -84,6 +84,11 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
         });
     });
 
+    Route::group(["prefix" => "route", "namespace" => "Route"], function (){
+        Route::get('list', 'RouteController@list');
+        Route::post('create', 'RouteController@store');
+    });
+
     Route::group(["prefix" => "tutoriel"], function () {
         Route::get('/latest', 'TutorielController@loadLatest');
     });

@@ -33,5 +33,28 @@ class RouteRepository
             ->find($id);
     }
 
+    public function all()
+    {
+        return $this->route->newQuery()
+            ->get();
+    }
+
+    public function allForSearch($get)
+    {
+        return $this->route->newQuery()
+            ->where('name', 'like', '%'.$get.'%')
+            ->orWhere('description', 'like', '%'.$get.'%')
+            ->get();
+    }
+
+    public function create($name,$description)
+    {
+        return $this->route->newQuery()
+            ->create([
+                "name" => $name,
+                "description" => $description
+            ]);
+    }
+
 }
 
