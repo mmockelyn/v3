@@ -124,7 +124,7 @@ class BlogRepository
             ]);
     }
 
-    public function updateInfo($article_id, $categorie_id, $title, $short_content, $published, $published_at, $twitter)
+    public function updateInfo($article_id, $categorie_id, $title, $short_content, $published, $published_at, $twitter, $facebook)
     {
         $this->blog->newQuery()
             ->find($article_id)
@@ -135,7 +135,8 @@ class BlogRepository
                 "short_content" => $short_content,
                 "published" => $published,
                 "published_at" => $published_at,
-                "twitter" => $twitter
+                "twitter" => $twitter,
+                "facebook" => $facebook
             ]);
     }
 

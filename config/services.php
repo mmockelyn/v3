@@ -30,8 +30,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'twitter' => [
-        'client_id' => "CW3IB5TFJQfoJ3WwYrKiQp31h",
-        'client_secret' => "oovTnCZ6b5Ib4eGjZW59UkHR2B1wwGzzwNIBKQWqcrL5y1t0Vk",
+        'consumer_key'    => "CW3IB5TFJQfoJ3WwYrKiQp31h",
+        'consumer_secret' => "oovTnCZ6b5Ib4eGjZW59UkHR2B1wwGzzwNIBKQWqcrL5y1t0Vk",
+        'access_token'    => "1009074959304544257-40hw8f80eUEBDZQRn4I4rMHZNvkgud",
+        'access_secret'   => "fIccyA2up6EDV0D79nMyTLzFh0XbE520Hh9oQLI5TJgNG",
+        'client_id' => 'CW3IB5TFJQfoJ3WwYrKiQp31h',
+        'client_secret' => 'oovTnCZ6b5Ib4eGjZW59UkHR2B1wwGzzwNIBKQWqcrL5y1t0Vk',
         'redirect' => env("APP_URL").'/provider/callback/twitter'
     ],
 
@@ -40,6 +44,12 @@ return [
         'client_secret' => "d3bd79de359f99258c2f6528e6e38bdb",
         'access_token' => "EAAE8lwvZCCW8BAKK5YV1ZCoPdHyJP36CWLpdP0eaBPg8qSRgZB5jm2qrHOuqo2mtw83VRkgAeLwJaZCGjSc3Lh02AoSqfVwEObRKPTlswP4qiJtRkkUPiONoNsNi9mPUJHtk2nDCgWD8NLCG4YFIMeXWqiABhYZCWRokyLDxPWasBwhHqZBoTTOPOs9x6vZCZBovVV9FlpRL7amzIZCEz1U1hocZC3rNywZComlBZAUsTF9NjgZDZD",
         'redirect' => env('APP_URL').'/provider/callback/facebook'
+    ],
+
+    'facebook_poster' => [
+        'client_id' => "348094415702383",
+        'client_secret' => "d3bd79de359f99258c2f6528e6e38bdb",
+        'access_token' => "EAAE8lwvZCCW8BAKK5YV1ZCoPdHyJP36CWLpdP0eaBPg8qSRgZB5jm2qrHOuqo2mtw83VRkgAeLwJaZCGjSc3Lh02AoSqfVwEObRKPTlswP4qiJtRkkUPiONoNsNi9mPUJHtk2nDCgWD8NLCG4YFIMeXWqiABhYZCWRokyLDxPWasBwhHqZBoTTOPOs9x6vZCZBovVV9FlpRL7amzIZCEz1U1hocZC3rNywZComlBZAUsTF9NjgZDZD",
     ],
 
     'discord' => [

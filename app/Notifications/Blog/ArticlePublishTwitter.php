@@ -56,8 +56,7 @@ class ArticlePublishTwitter extends Notification
 
     public function toTwitter($notifiable)
     {
-        return (new TwitterStatusUpdate($this->blog->twitterText))
-            ->withImage(Storage::disk('public')->get('blog/'.$this->blog->id.'.png'));
+        return new TwitterStatusUpdate($this->blog->twitterText);
     }
 
     /**

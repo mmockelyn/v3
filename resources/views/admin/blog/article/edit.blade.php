@@ -80,8 +80,8 @@
                     </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-3 col-form-label">Publier</label>
-                        <div class="col-3">
+                        <label class="col-2 col-form-label">Publier</label>
+                        <div class="col-2">
 							<span class="kt-switch kt-switch--icon">
 								<label>
 									<input type="checkbox" @if($article->published == 1) checked="checked" @endif name="published" value="1">
@@ -89,11 +89,20 @@
 								</label>
 							</span>
                         </div>
-                        <label class="col-3 col-form-label">Twitter</label>
-                        <div class="col-3">
+                        <label class="col-2 col-form-label">Twitter</label>
+                        <div class="col-2">
 							<span class="kt-switch kt-switch--icon">
 								<label>
 									<input id="twitterCheck" type="checkbox" @if($article->twitter == 1) checked="checked" @endif name="twitter">
+									<span></span>
+								</label>
+							</span>
+                        </div>
+                        <label class="col-2 col-form-label">Facebook</label>
+                        <div class="col-2">
+							<span class="kt-switch kt-switch--icon">
+								<label>
+									<input id="facebookCheck" type="checkbox" @if($article->facebook == 1) checked="checked" @endif name="facebook">
 									<span></span>
 								</label>
 							</span>

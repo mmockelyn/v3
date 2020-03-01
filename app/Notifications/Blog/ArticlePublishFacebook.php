@@ -48,7 +48,6 @@ class ArticlePublishFacebook extends Notification
      */
     public function toFacebookPoster($notifiable) {
         return (new FacebookPosterPost($this->blog->title))
-            ->withImage(Storage::disk('public')->get('blog/'.$this->blog->id.'.png'))
             ->withLink(route('Front.Blog.show', $this->blog->slug));
     }
 

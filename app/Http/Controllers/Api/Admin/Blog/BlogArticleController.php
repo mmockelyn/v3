@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api\Admin\Blog;
 
 use App\Http\Controllers\Api\BaseController;
+use App\Jobs\Blog\ArticlePublishFacebookJob;
+use App\Jobs\Blog\ArticlePublishJob;
+use App\Jobs\Blog\ArticlePublishTwitterJob;
 use App\Notifications\Blog\ArticlePublish;
 use App\Notifications\Blog\ArticlePublishFacebook;
 use App\Notifications\Blog\ArticlePublishTwitter;
@@ -146,7 +149,7 @@ class BlogArticleController extends BaseController
             $errors[] .= "<li>L'article doit être publier sur twitter mais aucun texte n'à été définie</li>";
         }
 
-        if (Storage::disk('public')->exists('blog/' . $data->id . '/png') == false) {
+        if (Storage::disk('public')->exists('blog/' . $data->id . '.png') == false) {
             $errors[] .= "<li>L'image de l'article n'est pas définie</li>";
         }
 
@@ -210,16 +213,21 @@ class BlogArticleController extends BaseController
 
     public function editInfo(Request $request, $article_id)
     {
-        //dd($request->all());
-        if ($request->exists('published')) {
+        //dd($request->exists('published'));
+        if ($request->exists('published') == true) {
             $published = 1;
         } else {
             $published = 0;
         }
-        if ($request->exists('twitter')) {
+        if ($request->exists('twitter') == true) {
             $twitter = 1;
         } else {
             $twitter = 0;
+        }
+        if ($request->exists('facebook') == true) {
+            $facebook = 1;
+        } else {
+            $facebook = 0;
         }
         try {
             $this->blogRepository->updateInfo(
@@ -227,9 +235,10 @@ class BlogArticleController extends BaseController
                 $request->category_id,
                 $request->title,
                 $request->short_content,
-                $request->published,
                 $published,
-                $twitter
+                $request->published_at,
+                $twitter,
+                $facebook
             );
 
             return $this->sendResponse("ok", 'ok');
@@ -244,7 +253,17 @@ class BlogArticleController extends BaseController
     {
         try {
             $file = $request->file('images');
-            $request->file('images')->storeAs('blog', $article_id . '.png', 'public');
+            if(Storage::disk('public')->exists('blog/'.$article_id.'.png') == true) {
+                Storage::disk('public')->delete('blog/'.$article_id.'.png');
+
+                $request->file('images')->storeAs('blog', $article_id . '.png', 'public');
+
+                Storage::disk('public')->setVisibility('blog/'.$article_id.'.png', 'public');
+            }else{
+                $request->file('images')->storeAs('blog', $article_id . '.png', 'public');
+
+                Storage::disk('public')->setVisibility('blog/'.$article_id.'.png', 'public');
+            }
 
             toastr()->success("L'image à été mise à jour", "Succès");
             return redirect()->back();
@@ -292,22 +311,18 @@ class BlogArticleController extends BaseController
 
     private function notifyAllUser($article)
     {
-        $users = $this->userRepository->all();
-
-        foreach ($users as $user) {
-            $user->notify(new ArticlePublish($article));
-        }
+        dispatch(new ArticlePublishJob($article, $this->userRepository->all()))->delay(now()->addSeconds(10));
     }
 
     private function publishTo($provider, $article)
     {
         switch ($provider) {
             case 'twitter':
-                $article->notify(new ArticlePublishTwitter($article));
+                dispatch(new ArticlePublishTwitterJob($article))->delay(now()->addSeconds(10));
                 break;
 
             case 'facebook':
-                $article->notify(new ArticlePublishFacebook($article));
+                dispatch(new ArticlePublishFacebookJob($article))->delay(now()->addSeconds(10));
         }
     }
 }
