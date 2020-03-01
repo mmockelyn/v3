@@ -21,12 +21,96 @@
                     <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Tableau de Bord</span>
                 </div>
             </div>
+            <div class="kt-subheader__toolbar">
+                <div class="kt-subheader__wrapper">
+                    <a href="{{ route('Back.Route.index') }}" class="btn btn-sm btn-default"><i class="la la-arrow-circle-left"></i> Retour</a>
+                    @if($route->published == 0)
+                        <a href="" class="btn btn-sm btn-outline-success"><i class="la la-check-square"></i> Publier</a>
+                    @else
+                        <a href="" class="btn btn-sm btn-outline-danger"><i class="la la-times-circle"></i> Dépublier</a>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 @endsection
 
 @section("content")
-
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <ul class="kt-nav">
+                    <li class="kt-nav__item {{ \App\HelpersClass\Generator::currentRouteBack(route('Back.Route.show',$route->id)) }}">
+                        <a href="{{ route('Back.Route.show', $route->id) }}" class="kt-nav__link">
+                            <i class="kt-nav__link-icon la la-signal"></i>
+                            <span class="kt-nav__link-text">Tableau de Bord</span>
+                        </a>
+                    </li>
+                    <li class="kt-nav__item {{ \App\HelpersClass\Generator::currentRouteBack(route('Route.Version.index', $route->id)) }}">
+                        <a href="{{ route('Route.Version.index', $route->id) }}" class="kt-nav__link">
+                            <i class="kt-nav__link-icon la la-bars"></i>
+                            <span class="kt-nav__link-text">Version</span>
+                        </a>
+                    </li>
+                    <li class="kt-nav__item {{ \App\HelpersClass\Generator::currentRouteBack(route('Route.Gallery.index', $route->id)) }}">
+                        <a href="{{ route('Route.Gallery.index', $route->id) }}" class="kt-nav__link">
+                            <i class="kt-nav__link-icon la la-picture-o"></i>
+                            <span class="kt-nav__link-text">Gallerie</span>
+                        </a>
+                    </li>
+                    <li class="kt-nav__item {{ \App\HelpersClass\Generator::currentRouteBack(route('Route.Lab.index', $route->id)) }}">
+                        <a href="{{ route('Route.Lab.index', $route->id) }}" class="kt-nav__link">
+                            <i class="kt-nav__link-icon la la-flask"></i>
+                            <span class="kt-nav__link-text">Avancement</span>
+                        </a>
+                    </li>
+                    <li class="kt-nav__item {{ \App\HelpersClass\Generator::currentRouteBack(route('Route.Download.index', $route->id)) }}">
+                        <a href="{{ route('Route.Download.index', $route->id) }}" class="kt-nav__link">
+                            <i class="kt-nav__link-icon la la-download"></i>
+                            <span class="kt-nav__link-text">Téléchargement</span>
+                        </a>
+                    </li>
+                    <li class="kt-nav__item {{ \App\HelpersClass\Generator::currentRouteBack(route('Route.Config.index', $route->id)) }}">
+                        <a href="{{ route('Route.Config.index', $route->id) }}" class="kt-nav__link">
+                            <i class="kt-nav__link-icon la la-cogs"></i>
+                            <span class="kt-nav__link-text">Configuration</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-label">
+                    <h3 class="kt-portlet__head-title">
+                        Description
+                    </h3>
+                </div>
+            </div>
+            <div class="kt-portlet__body">
+                <div class="card">
+                    <div class="card-body">
+                        {!! $route->description !!}
+                    </div>
+                </div>
+                <hr  />
+                <form id="formEditDescription" action="" class="kt-form" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <textarea name="description" class="form-control summernote" cols="30" rows="10">{!! $route->description !!}</textarea>
+                    </div>
+                    <div class="kt-form__actions kt-form__actions--right">
+                        <button type="submit" class="btn btn-sm btn-success"><i class="la la-check"></i> Editer la description</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section("script")

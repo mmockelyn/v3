@@ -103,6 +103,26 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
     Route::group(["prefix" => "route", "namespace" => "Route"], function (){
         Route::get('/', ["as" => "Back.Route.index", "uses" => "RouteController@index"]);
         Route::get('{route_id}', ["as" => "Back.Route.show", "uses" => "RouteController@show"]);
+
+        Route::group(["prefix" => "{route_id}/version"], function (){
+            Route::get('/', ["as" => "Route.Version.index", "uses" => "RouteVersionController@index"]);
+        });
+
+        Route::group(["prefix" => "{route_id}/gallery"], function (){
+            Route::get('/', ["as" => "Route.Gallery.index", "uses" => "RouteGalleryController@index"]);
+        });
+
+        Route::group(["prefix" => "{route_id}/lab"], function (){
+            Route::get('/', ["as" => "Route.Lab.index", "uses" => "RouteLabController@index"]);
+        });
+
+        Route::group(["prefix" => "{route_id}/download"], function (){
+            Route::get('/', ["as" => "Route.Download.index", "uses" => "RouteDownloadController@index"]);
+        });
+
+        Route::group(["prefix" => "{route_id}/config"], function (){
+            Route::get('/', ["as" => "Route.Config.index", "uses" => "RouteConfigController@index"]);
+        });
     });
 
     Route::group(["prefix" => "objet", "namespace" => "Objet"], function (){
