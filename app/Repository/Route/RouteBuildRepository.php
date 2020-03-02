@@ -33,5 +33,15 @@ class RouteBuildRepository
             ->first();
     }
 
+    public function updateBuild($route_id, $newBuild)
+    {
+        return $this->routeBuild->newQuery()
+            ->where('route_id', $route_id)
+            ->first()
+            ->update([
+                "build" => $newBuild
+            ]);
+    }
+
 }
 

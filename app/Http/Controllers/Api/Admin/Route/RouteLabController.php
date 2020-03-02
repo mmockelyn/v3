@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api\Admin\Route;
 
 use function App\HelpersClass\list_filter;
+use App\HelpersClass\Route\RouteLabHelper;
 use App\Http\Controllers\Api\BaseController;
 use App\Repository\Route\RouteAnomalieRepository;
+use App\Repository\Route\RouteBuildRepository;
 use App\Repository\Route\RouteRepository;
 use Illuminate\Http\Request;
 
@@ -19,16 +21,22 @@ class RouteLabController extends BaseController
      * @var RouteAnomalieRepository
      */
     private $routeAnomalieRepository;
+    /**
+     * @var RouteBuildRepository
+     */
+    private $routeBuildRepository;
 
     /**
      * RouteLabController constructor.
      * @param RouteRepository $routeRepository
      * @param RouteAnomalieRepository $routeAnomalieRepository
+     * @param RouteBuildRepository $routeBuildRepository
      */
-    public function __construct(RouteRepository $routeRepository, RouteAnomalieRepository $routeAnomalieRepository)
+    public function __construct(RouteRepository $routeRepository, RouteAnomalieRepository $routeAnomalieRepository, RouteBuildRepository $routeBuildRepository)
     {
         $this->routeRepository = $routeRepository;
         $this->routeAnomalieRepository = $routeAnomalieRepository;
+        $this->routeBuildRepository = $routeBuildRepository;
     }
 
     public function store(Request $request, $route_id)
@@ -43,6 +51,11 @@ class RouteLabController extends BaseController
             return $this->sendError("Erreur de validation", [
                 "errors" => $validator->errors()->all()
             ]);
+        }
+
+        if($request->state == 2) {
+            $newBuild = RouteLabHelper::calcNewBuild($route_id);
+            $this->routeBuildRepository->updateBuild($route_id, $newBuild);
         }
 
         try {
@@ -161,6 +174,11 @@ class RouteLabController extends BaseController
                 $request->lieu,
                 $request->state
             );
+
+            if($request->state == 2) {
+                $newBuild = RouteLabHelper::calcNewBuild($route_id);
+                $this->routeBuildRepository->updateBuild($route_id, $newBuild);
+            }
 
             return $this->sendResponse("ok", "ok");
         }catch (\Exception $exception) {

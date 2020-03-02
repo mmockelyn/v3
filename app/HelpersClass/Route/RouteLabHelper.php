@@ -10,6 +10,7 @@ namespace App\HelpersClass\Route;
 
 
 use App\Model\Route\RouteAnomalie;
+use App\Model\Route\RouteBuild;
 
 class RouteLabHelper
 {
@@ -67,5 +68,15 @@ class RouteLabHelper
         $an = new RouteAnomalie();
 
         return $an->newQuery()->where('route_id', $route_id)->where('state', 2)->get();
+    }
+
+    public static function calcNewBuild($route_id) {
+        $tasks = self::countTaskTotal($route_id);
+        $build = new RouteBuild();
+        $dts = $build->newQuery()->where('route_id', $route_id)->first();
+
+        $sum = $dts->build * $tasks / ($tasks-1);
+
+        return round($sum, 0);
     }
 }

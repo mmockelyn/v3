@@ -160,9 +160,7 @@
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
-                    @if(\App\HelpersClass\Route\RouteLabHelper::labPercent($route->id) >= 85)
                     <button data-toggle="modal" data-target="#nextVersion" class="btn btn-lg btn-success"><i class="la la-check-circle"></i> Passer à la version {{ $route->build->version +1 }}</button>
-                    @endif
                 </div>
             </div>
             <div class="kt-portlet__body">
@@ -214,6 +212,44 @@
         </div>
     </div>
 </div>
+    <div class="modal fade" id="addAnomalie" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nouvelle anomalie</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form action="/api/admin/route/{{ $route->id }}/anomalie" class="kt-form" id="formAddAnomalie" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="anomalie">Anomalie</label>
+                            <input name="anomalie" class="form-control" placeholder="Quel est le problème ?">
+                        </div>
+                        <div class="form-group">
+                            <label for="correction">Correction <span class="required">*</span> </label>
+                            <input name="correction" class="form-control" placeholder="Quel solution est apporté ?">
+                        </div>
+                        <div class="form-group">
+                            <label for="lieu">Lieu <span class="required">*</span> </label>
+                            <input name="lieu" class="form-control" placeholder="Lieu de l'anomalie (Point de repère)">
+                        </div>
+                        <div class="form-group">
+                            <label for="state">Etat </label>
+                            <select class="form-control selectpicker bootstrap-select" name="state">
+                                <option value="0">Inscrit</option>
+                                <option value="1">En Cours</option>
+                                <option value="2">Terminer</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success"><i class="la la-check-square"></i> Valider</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="nextVersion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
