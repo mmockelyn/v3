@@ -27,5 +27,12 @@ class RouteGalleryCategoryRepository
             ->load('galleries');
     }
 
+    public function allForRoute($route_id)
+    {
+        return $this->routeGalleryCategory->newQuery()
+            ->where('route_id', $route_id)
+            ->get();
+    }
+
 }
 
