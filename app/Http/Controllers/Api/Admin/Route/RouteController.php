@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Api\Admin\Route;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
 use App\Repository\Core\GareRepository;
+use App\Repository\Route\RouteAnomalieRepository;
+use App\Repository\Route\RouteBuildRepository;
 use App\Repository\Route\RouteRepository;
+use App\Repository\Route\RouteTimelineRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -20,16 +23,38 @@ class RouteController extends BaseController
      * @var GareRepository
      */
     private $gareRepository;
+    /**
+     * @var RouteTimelineRepository
+     */
+    private $routeTimelineRepository;
+    /**
+     * @var RouteBuildRepository
+     */
+    private $routeBuildRepository;
+    /**
+     * @var RouteAnomalieRepository
+     */
+    private $routeAnomalieRepository;
 
     /**
      * RouteController constructor.
      * @param RouteRepository $routeRepository
      * @param GareRepository $gareRepository
+     * @param RouteTimelineRepository $routeTimelineRepository
+     * @param RouteBuildRepository $routeBuildRepository
+     * @param RouteAnomalieRepository $routeAnomalieRepository
      */
-    public function __construct(RouteRepository $routeRepository, GareRepository $gareRepository)
+    public function __construct(
+        RouteRepository $routeRepository,
+        GareRepository $gareRepository,
+        RouteTimelineRepository $routeTimelineRepository,
+        RouteBuildRepository $routeBuildRepository, RouteAnomalieRepository $routeAnomalieRepository)
     {
         $this->routeRepository = $routeRepository;
         $this->gareRepository = $gareRepository;
+        $this->routeTimelineRepository = $routeTimelineRepository;
+        $this->routeBuildRepository = $routeBuildRepository;
+        $this->routeAnomalieRepository = $routeAnomalieRepository;
     }
 
     public function list(Request $request)
@@ -180,5 +205,26 @@ class RouteController extends BaseController
         $data = $this->gareRepository->search($request->get('q'));
 
         return $this->sendResponse($data, "Search Gare");
+    }
+
+    public function nextVersion(Request $request, $route_id)
+    {
+        // Création du timeline
+        $tml = $this->routeTimelineRepository->create(
+            $route_id,
+            $request->version,
+            $request->description
+        );
+
+        // Changement de la version du build
+        $build = $this->routeBuildRepository->updateVersion($route_id, $request->version);
+
+        // Nettoyage des anomalies résolue
+        $anomalies = $this->routeAnomalieRepository->getOnFinished($route_id);
+        foreach ($anomalies as $anomaly) {
+            $this->routeAnomalieRepository->delete($anomaly->id);
+        }
+
+        return $this->sendResponse($build->toArray(), "ok");
     }
 }

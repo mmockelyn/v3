@@ -159,6 +159,11 @@
                         Laboratoire
                     </h3>
                 </div>
+                <div class="kt-portlet__head-toolbar">
+                    @if(\App\HelpersClass\Route\RouteLabHelper::labPercent($route->id) >= 85)
+                    <button data-toggle="modal" data-target="#nextVersion" class="btn btn-lg btn-success"><i class="la la-check-circle"></i> Passer à la version {{ $route->build->version +1 }}</button>
+                    @endif
+                </div>
             </div>
             <div class="kt-portlet__body">
 
@@ -209,73 +214,32 @@
         </div>
     </div>
 </div>
-    <div class="modal fade" id="addAnomalie" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="nextVersion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Nouvelle anomalie</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Passage à la version {{ $route->build->version +1 }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
-                <form action="/api/admin/route/{{ $route->id }}/anomalie" class="kt-form" id="formAddAnomalie" method="post">
+                <form action="/api/admin/route/{{ $route->id }}/nextVersion" class="kt-form" id="formNextVersion" method="post">
+                    @csrf
+                    <input type="hidden" name="version" value="{{ $route->build->version }}">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="anomalie">Anomalie</label>
-                            <input name="anomalie" class="form-control" placeholder="Quel est le problème ?">
-                        </div>
-                        <div class="form-group">
-                            <label for="correction">Correction <span class="required">*</span> </label>
-                            <input name="correction" class="form-control" placeholder="Quel solution est apporté ?">
-                        </div>
-                        <div class="form-group">
-                            <label for="lieu">Lieu <span class="required">*</span> </label>
-                            <input name="lieu" class="form-control" placeholder="Lieu de l'anomalie (Point de repère)">
-                        </div>
-                        <div class="form-group">
-                            <label for="state">Etat </label>
-                            <select class="form-control selectpicker bootstrap-select" name="state">
-                                <option value="0">Inscrit</option>
-                                <option value="1">En Cours</option>
-                                <option value="2">Terminer</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success"><i class="la la-check-square"></i> Valider</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="editAnomalie" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    </button>
-                </div>
-                <form action="/api/admin/route/{{ $route->id }}/anomalie" class="kt-form" id="formEditAnomalie" method="post">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="anomalie">Anomalie</label>
-                            <input name="anomalie" class="form-control" placeholder="Quel est le problème ?">
-                        </div>
-                        <div class="form-group">
-                            <label for="correction">Correction <span class="required">*</span> </label>
-                            <input name="correction" class="form-control" placeholder="Quel solution est apporté ?">
-                        </div>
-                        <div class="form-group">
-                            <label for="lieu">Lieu <span class="required">*</span> </label>
-                            <input name="lieu" class="form-control" placeholder="Lieu de l'anomalie (Point de repère)">
-                        </div>
-                        <div class="form-group">
-                            <label for="state">Etat </label>
-                            <select class="form-control selectpicker bootstrap-select" name="state">
-                                <option value="0">Inscrit</option>
-                                <option value="1">En Cours</option>
-                                <option value="2">Terminer</option>
-                            </select>
+                            <label for="description">Description de cette version</label>
+                            <textarea name="description" id="description" class="form-control summernote" cols="30" rows="10">
+                                <h2>Version {{ $route->build->version }}</h2>
+                                <ul>
+                                    @foreach(\App\HelpersClass\Route\RouteLabHelper::getFinishedTask($route->id) as $task)
+                                        @if(empty($task->anomalie))
+                                            <li><strong>Néant:</strong> {{ $task->correction }}</li>
+                                        @else
+                                            <li><strong>{{ $task->anomalie }}:</strong> {{ $task->correction }}</li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

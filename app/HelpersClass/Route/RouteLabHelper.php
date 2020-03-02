@@ -61,4 +61,11 @@ class RouteLabHelper
             case 2: return 'Terminer';
         }
     }
+
+    public static function getFinishedTask($route_id)
+    {
+        $an = new RouteAnomalie();
+
+        return $an->newQuery()->where('route_id', $route_id)->where('state', 2)->get();
+    }
 }

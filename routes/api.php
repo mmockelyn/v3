@@ -89,6 +89,7 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
         Route::post('create', 'RouteController@store');
         Route::put('{route_id}/editDescription', 'RouteController@editDescription');
         Route::get('searchGare', 'RouteController@searchGare');
+        Route::post('{route_id}/nextVersion', 'RouteController@nextVersion');
 
         Route::get('{route_id}/publish', 'RouteController@publish');
         Route::get('{route_id}/unpublish', 'RouteController@unpublish');

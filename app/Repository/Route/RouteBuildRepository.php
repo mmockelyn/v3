@@ -20,5 +20,18 @@ class RouteBuildRepository
         $this->routeBuild = $routeBuild;
     }
 
+    public function updateVersion($route_id, $version)
+    {
+        $bl =  $this->routeBuild->newQuery()
+            ->where('route_id', $route_id)
+            ->first()
+            ->update([
+                "version" => $version +1
+            ]);
+        return $this->routeBuild->newQuery()
+            ->where('route_id', $route_id)
+            ->first();
+    }
+
 }
 

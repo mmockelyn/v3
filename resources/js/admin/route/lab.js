@@ -1,4 +1,5 @@
 import KTDatatable from '../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js'
+import summernote from 'summernote'
 
 let route = $("#route")
 let route_id = route.attr('data-id')
@@ -175,6 +176,42 @@ function formAddAnomalie() {
     })
 }
 
+function formNextVersion() {
+    let form = $("#formNextVersion")
+
+    form.on('submit', function (e) {
+        e.preventDefault()
+        let btn = form.find('button')
+        let url = form.attr('action')
+        let data = form.serializeArray()
+
+        KTApp.progress(btn)
+
+        $.ajax({
+            url: url,
+            method: 'post',
+            data: data,
+            success: function (data) {
+                KTApp.unprogress(btn)
+                toastr.success("Passage à la <strong>"+parseInt(data.data.version)+"</strong> réussi", "Succès")
+                setTimeout(() => {
+                    window.location.reload()
+                })
+            },
+            error: function (err) {
+                KTApp.unprogress(btn)
+                toastr.error("Erreur lors du passage à la version suivante", "Erreur Système 500")
+                console.error(err)
+            }
+        })
+    })
+}
+
+$('.summernote').summernote({
+    height: '350px'
+})
+
 
 loadTable()
 formAddAnomalie()
+formNextVersion()
