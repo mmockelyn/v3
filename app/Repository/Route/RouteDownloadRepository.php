@@ -44,5 +44,12 @@ class RouteDownloadRepository
             ->find($version_id);
     }
 
+    public function listAllFromRoute($route_id)
+    {
+        return $this->routeDownload->newQuery()
+            ->where('route_id', $route_id)
+            ->get();
+    }
+
 }
 

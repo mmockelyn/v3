@@ -122,6 +122,11 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::put('{anomalie_id}/edit', 'RouteLabController@updateAnomalie');
             Route::get('{anomalie_id}/delete', 'RouteLabController@deleteAnomalie');
         });
+
+        Route::group(["prefix" => '{route_id}/download'], function (){
+            Route::post('loadDownload', 'RouteDownloadController@loadDownload');
+            Route::post('loadUpdater', 'RouteDownloadController@loadUpdater');
+        });
     });
 
     Route::group(["prefix" => "tutoriel"], function () {

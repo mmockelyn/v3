@@ -20,5 +20,11 @@ class RouteTypeReleaseRepository
         $this->routeTypeRelease = $routeTypeRelease;
     }
 
+    public function all()
+    {
+        return $this->routeTypeRelease->newQuery()
+            ->get();
+    }
+
 }
 

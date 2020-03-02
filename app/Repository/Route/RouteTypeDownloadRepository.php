@@ -20,5 +20,11 @@ class RouteTypeDownloadRepository
         $this->routeTypeDownload = $routeTypeDownload;
     }
 
+    public function all()
+    {
+        return $this->routeTypeDownload->newQuery()
+            ->get();
+    }
+
 }
 
