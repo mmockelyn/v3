@@ -20891,9 +20891,11 @@ function formWidget() {
 function loadLatLngField() {
   var field = document.querySelector('#name_gare');
   field.addEventListener('change', function (e) {
+    KTApp.block($("#addGare"));
     $.get('/api/admin/route/searchGare', {
       q: field.value
     }).done(function (data) {
+      KTApp.unblock($("#addGare"));
       $("#latitude").val(data.data.lat);
       $("#longitude").val(data.data["long"]);
       console.log(data.data.lat, data.data["long"]);
@@ -20937,10 +20939,39 @@ function formAddVersion() {
   });
 }
 
+function formAddGare() {
+  var form = $("#formAddGare");
+  form.on('submit', function (e) {
+    e.preventDefault();
+    var btn = form.find('button');
+    var url = form.attr('action');
+    var data = form.serializeArray();
+    KTApp.progress(btn);
+    $.ajax({
+      url: url,
+      method: 'post',
+      data: data,
+      success: function success(data) {
+        KTApp.unprogress(btn);
+        toastr.success("La gare <strong>".concat(data.data.name_gare, "</strong> \xE0 \xE9t\xE9 ajout\xE9 \xE0 la version <strong>").concat(data.data.route_version_id, "</strong> avec succ\xE8s"), "Succès");
+        setTimeout(function () {
+          window.location.reload();
+        }, 1500);
+      },
+      error: function error(jqxhr) {
+        KTApp.unprogress(btn);
+        toastr.error("Erreur lors de l'ajout de la gare", "Erreur Système 500");
+        console.error(jqxhr);
+      }
+    });
+  });
+}
+
 formWidget();
 submitEditDescription();
 formAddVersion();
 loadLatLngField();
+formAddGare();
 
 /***/ }),
 

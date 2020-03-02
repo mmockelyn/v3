@@ -41,19 +41,19 @@ function submitEditDescription() {
         })
     })
 }
-
 function formWidget() {
     $(".summernote").summernote()
     $("#depart, #arrive, #name_gare").selectpicker()
 
 }
-
 function loadLatLngField() {
     let field = document.querySelector('#name_gare')
 
     field.addEventListener('change', function (e) {
+        KTApp.block($("#addGare"))
         $.get('/api/admin/route/searchGare', {q: field.value})
             .done((data) => {
+                KTApp.unblock($("#addGare"))
                 $("#latitude").val(data.data.lat)
                 $("#longitude").val(data.data.long)
                 console.log(data.data.lat, data.data.long)
@@ -61,7 +61,6 @@ function loadLatLngField() {
     })
 
 }
-
 function formAddVersion() {
     let form = $("#formAddVersion")
 
@@ -100,7 +99,39 @@ function formAddVersion() {
         })
     })
 }
+function formAddGare() {
+    let form = $("#formAddGare")
+
+    form.on('submit', function (e) {
+        e.preventDefault()
+        let btn = form.find('button')
+        let url = form.attr('action')
+        let data = form.serializeArray()
+
+        KTApp.progress(btn)
+
+        $.ajax({
+            url: url,
+            method: 'post',
+            data: data,
+            success: function (data) {
+                KTApp.unprogress(btn)
+                toastr.success(`La gare <strong>${data.data.name_gare}</strong> à été ajouté à la version <strong>${data.data.route_version_id}</strong> avec succès`, "Succès")
+                setTimeout(() => {
+                    window.location.reload()
+                }, 1500)
+            },
+            error: function (jqxhr) {
+                KTApp.unprogress(btn)
+                toastr.error("Erreur lors de l'ajout de la gare", "Erreur Système 500")
+                console.error(jqxhr)
+            }
+        })
+    })
+}
+
 formWidget()
 submitEditDescription()
 formAddVersion()
 loadLatLngField()
+formAddGare()

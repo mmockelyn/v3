@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin\Route;
 
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
+use App\Repository\Route\RouteVersionGareRepository;
 use App\Repository\Route\RouteVersionRepository;
 use Illuminate\Http\Request;
 
@@ -13,14 +14,20 @@ class RouteVersionController extends BaseController
      * @var RouteVersionRepository
      */
     private $versionRepository;
+    /**
+     * @var RouteVersionGareRepository
+     */
+    private $routeVersionGareRepository;
 
     /**
      * RouteVersionController constructor.
      * @param RouteVersionRepository $versionRepository
+     * @param RouteVersionGareRepository $routeVersionGareRepository
      */
-    public function __construct(RouteVersionRepository $versionRepository)
+    public function __construct(RouteVersionRepository $versionRepository, RouteVersionGareRepository $routeVersionGareRepository)
     {
         $this->versionRepository = $versionRepository;
+        $this->routeVersionGareRepository = $routeVersionGareRepository;
     }
 
     public function loadGares(Request $request)
@@ -125,7 +132,43 @@ class RouteVersionController extends BaseController
 
     public function createGare(Request $request, $route_id, $version_id)
     {
+        if($request->exists('ter') == true) {$ter = 1;}else{$ter = 0;}
+        if($request->exists('tgv') == true) {$tgv = 1;}else{$tgv = 0;}
+        if($request->exists('metro') == true) {$metro = 1;}else{$metro = 0;}
+        if($request->exists('bus') == true) {$bus = 1;}else{$bus = 0;}
+        if($request->exists('tram') == true) {$tram = 1;}else{$tram = 0;}
+        try {
+            $gare = $this->routeVersionGareRepository->create(
+                $version_id,
+                $request->name_gare,
+                $request->type_gare,
+                $request->lat,
+                $request->long,
+                $ter,
+                $tgv,
+                $metro,
+                $bus,
+                $tram
+            );
 
+            return $this->sendResponse($gare, "ok");
+        }catch (\Exception $exception) {
+            return $this->sendError("Erreur Système", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function deleteGare($route_id, $version_id, $gare_id)
+    {
+        $gare = $this->routeVersionGareRepository->get($gare_id);
+        try {
+            $this->routeVersionGareRepository->delete($gare_id);
+
+            return redirect()->back()->with('type', 'success')->with('message', 'La gare <strong>'.$gare->name_gare.'</strong> à été supprimer avec succès');
+        }catch (\Exception $exception) {
+            return redirect()->back()->with('type', 'error')->with('message', $exception->getMessage());
+        }
     }
 
 }

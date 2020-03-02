@@ -27,5 +27,33 @@ class RouteVersionGareRepository
             ->get();
     }
 
+    public function create($version_id, $name_gare, $type_gare, $lat, $long, $ter, $tgv, $metro, $bus, $tram)
+    {
+        return $this->routeVersionGare->newQuery()
+            ->create([
+                "route_version_id"  => $version_id,
+                "name_gare" => $name_gare,
+                "type" => $type_gare,
+                "lat" => $lat,
+                "long" => $long,
+                "ter" => $ter,
+                "tgv" => $tgv,
+                "metro" => $metro,
+                "bus" => $bus,
+                "tram" => $tram
+            ]);
+    }
+
+    public function get($gare_id)
+    {
+        return $this->routeVersionGare->newQuery()
+            ->find($gare_id);
+    }
+
+    public function delete($gare_id)
+    {
+        return $this->get($gare_id)->delete();
+    }
+
 }
 
