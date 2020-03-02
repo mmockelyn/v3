@@ -101,7 +101,7 @@
                                                             </div>
                                                             <div class="kt-notification__item-details">
                                                                 <div class="kt-notification__item-title">
-                                                                    {{ $notification->data['title'] }}
+                                                                    {!!  $notification->data['title'] !!}
                                                                 </div>
                                                                 <div class="kt-notification__item-time">
                                                                     {{ $notification->updated_at->diffForHumans() }}
@@ -122,7 +122,7 @@
                                                             </div>
                                                             <div class="kt-notification__item-details">
                                                                 <div class="kt-notification__item-title">
-                                                                    {{ $notification->data['title'] }}
+                                                                    {!! $notification->data['title'] !!}
                                                                 </div>
                                                                 <div class="kt-notification__item-time">
                                                                     {{ $notification->updated_at->diffForHumans() }}
@@ -143,7 +143,7 @@
                                                             </div>
                                                             <div class="kt-notification__item-details">
                                                                 <div class="kt-notification__item-title">
-                                                                    {{ $notification->data['title'] }}
+                                                                    {!! $notification->data['title'] !!}
                                                                 </div>
                                                                 <div class="kt-notification__item-time">
                                                                     {{ $notification->updated_at->diffForHumans() }}
@@ -343,6 +343,16 @@
                                         <div class="kt-notification__item-details">
                                             <div class="kt-notification__item-title kt-font-bold">
                                                 Mon compte
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="{{ route('Back.Inbox.index') }}" class="kt-notification__item">
+                                        <div class="kt-notification__item-icon">
+                                            <i class="flaticon2-email kt-font-primary"></i>
+                                        </div>
+                                        <div class="kt-notification__item-details">
+                                            <div class="kt-notification__item-title kt-font-bold">
+                                                Boite de récéption
                                             </div>
                                         </div>
                                     </a>

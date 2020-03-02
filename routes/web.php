@@ -149,6 +149,10 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
     Route::group(["prefix" => "commerce", "namespace" => "Commerce"], function (){
         Route::get('/', ["as" => "Back.Commerce.index", "uses" => "CommerceController@index"]);
     });
+
+    Route::group(["prefix" => "inbox", "namespace" => "Inbox"], function (){
+        Route::get('/', ["as" => "Back.Inbox.index", "uses" => "InboxController@index"]);
+    });
 });
 
 Route::group(["middleware" => ["auth", "verified"], "prefix" => "account", "namespace" => "Account"], function () {
