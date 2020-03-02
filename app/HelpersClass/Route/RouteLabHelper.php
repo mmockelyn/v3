@@ -63,6 +63,15 @@ class RouteLabHelper
         }
     }
 
+    public static function stateBadge($state)
+    {
+        switch ($state) {
+            case 0: return 'kt-badge--danger';
+            case 1: return 'kt-badge--warning';
+            case 2: return 'kt-badge--success';
+        }
+    }
+
     public static function getFinishedTask($route_id)
     {
         $an = new RouteAnomalie();
@@ -78,5 +87,17 @@ class RouteLabHelper
         $sum = $dts->build * $tasks / ($tasks-1);
 
         return round($sum, 0);
+    }
+
+    public static function getOutFinishedTask($route_id)
+    {
+        $an = new RouteAnomalie();
+
+        return $an->newQuery()
+            ->where('route_id', $route_id)
+            ->where('state', 0)
+            ->orWhere('state', 1)
+            ->orderBy('state', 'desc')
+            ->get();
     }
 }

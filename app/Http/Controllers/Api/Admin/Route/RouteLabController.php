@@ -39,6 +39,86 @@ class RouteLabController extends BaseController
         $this->routeBuildRepository = $routeBuildRepository;
     }
 
+    public function loadState($route_id)
+    {
+        $route = $this->routeRepository->get($route_id);
+        ob_start()
+        ?>
+        <div class="kt-portlet__body  kt-portlet__body--fit">
+            <div class="row row-no-padding row-col-separator-lg">
+                <div class="col-md-6">
+                    <!--begin::Total Profit-->
+                    <div class="kt-widget24">
+                        <div class="kt-widget24__details">
+                            <div class="kt-widget24__info">
+                                <h4 class="kt-widget24__title">
+                                    Build Actuel
+                                </h4>
+                                <span class="kt-widget24__desc">
+					            Version <?= $route->build->version ?>
+					        </span>
+                            </div>
+
+                            <span class="kt-widget24__stats kt-font-brand">
+					        <?= $route->build->build ?>
+					    </span>
+                        </div>
+
+                        <div class="progress progress--sm">
+                            <?= RouteLabHelper::getProgressLab($route->id) ?>
+                        </div>
+
+                        <div class="kt-widget24__action">
+						<span class="kt-widget24__change">
+							Avancement
+						</span>
+                            <span class="kt-widget24__number">
+							<?= RouteLabHelper::labPercent($route->id) ?>%
+					    </span>
+                        </div>
+                    </div>
+                    <!--end::Total Profit-->
+                </div>
+                <div class="col-md-6">
+                    <div class="kt-widget1">
+                        <div class="kt-widget1__item">
+                            <div class="kt-widget1__danger">
+                                <h3 class="kt-widget1__title">Inscrites</h3>
+                            </div>
+                            <span class="kt-widget1__number kt-font-danger"><?= RouteLabHelper::countTask($route->id, 0) ?></span>
+                        </div>
+
+                        <div class="kt-widget1__item">
+                            <div class="kt-widget1__warning">
+                                <h3 class="kt-widget1__title">En Cours</h3>
+                            </div>
+                            <span class="kt-widget1__number kt-font-warning"><?= RouteLabHelper::countTask($route->id, 1) ?></span>
+                        </div>
+
+                        <div class="kt-widget1__item">
+                            <div class="kt-widget1__success">
+                                <h3 class="kt-widget1__title">Terminées</h3>
+                            </div>
+                            <span class="kt-widget1__number kt-font-success"><?= RouteLabHelper::countTask($route->id, 2) ?></span>
+                        </div>
+
+                        <div class="kt-widget1__item" style="border-top: 2px solid">
+                            <div class="kt-widget1__success">
+                                <h3 class="kt-widget1__title">Total de tache</h3>
+                            </div>
+                            <span class="kt-widget1__number kt-font-brand"><?= RouteLabHelper::countTaskTotal($route->id) ?></span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+        $content = ob_get_clean();
+
+        return $this->sendResponse($content, "OK");
+    }
+
     public function store(Request $request, $route_id)
     {
         $validator = \Validator::make($request->all(), [
@@ -162,6 +242,18 @@ class RouteLabController extends BaseController
         );
 
         return $result;
+    }
+
+    public function nextState(Request $request, $route_id)
+    {
+
+        foreach ($request->anomalie as $anomaly) {
+            $newBuild = RouteLabHelper::calcNewBuild($route_id);
+            $this->routeBuildRepository->updateBuild($route_id, $newBuild);
+            $this->routeAnomalieRepository->updateState($anomaly, 2);
+        }
+
+        return $this->sendResponse("ok", "ok");
     }
 
     public function updateAnomalie(Request $request, $route_id, $anomalie_id)

@@ -24391,12 +24391,58 @@ function formNextVersion() {
   });
 }
 
+function formNextState() {
+  var form = $("#formNextState");
+  form.on('submit', function (e) {
+    e.preventDefault();
+    var btn = form.find('button');
+    var url = form.attr('action');
+    var data = form.serializeArray();
+    KTApp.progress(btn);
+    $.ajax({
+      url: url,
+      method: 'put',
+      data: data,
+      success: function success(data) {
+        KTApp.unprogress(btn);
+        toastr.success("Les anomalies selectionner sont passée à <strong>Terminer</strong>", "Succès");
+        $(".modal").modal('hide');
+        tableau.reload();
+        portletStat();
+        form[0].reset();
+      },
+      error: function error(err) {
+        KTApp.unprogress(btn);
+        toastr.error("Erreur lors du passage à un état supérieur pour les anomalies", "Erreur Système 500");
+        console.error(err);
+      }
+    });
+  });
+}
+
+function portletStat() {
+  var portlet = $("#portlet_stat_build");
+  KTApp.block(portlet, {
+    overlayColor: '#ffffff',
+    type: 'Chargement...',
+    state: 'success',
+    opacity: 0.3,
+    size: 'lg'
+  });
+  $.get('/api/admin/route/' + route_id + '/anomalie/loadStat').done(function (data) {
+    KTApp.unblock(portlet);
+    portlet.html(data.data);
+  });
+}
+
 $('.summernote').summernote({
   height: '350px'
 });
+portletStat();
 loadTable();
 formAddAnomalie();
 formNextVersion();
+formNextState();
 
 /***/ }),
 

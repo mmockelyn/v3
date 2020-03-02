@@ -115,8 +115,10 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
         });
 
         Route::group(["prefix" => "{route_id}/anomalie"], function(){
+            Route::get('loadStat', 'RouteLabController@loadState');
             Route::post('/', 'RouteLabController@store');
             Route::post('loadAnomalies', "RouteLabController@loadAnomalies");
+            Route::put('nextState', 'RouteLabController@nextState');
             Route::put('{anomalie_id}/edit', 'RouteLabController@updateAnomalie');
             Route::get('{anomalie_id}/delete', 'RouteLabController@deleteAnomalie');
         });

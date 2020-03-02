@@ -32,76 +32,8 @@
 
 @section("content")
     <div id="route" data-id="{{ $route->id }}" data-published="{{ $route->published }}"></div>
-    <div class="kt-portlet">
-        <div class="kt-portlet__body  kt-portlet__body--fit">
-            <div class="row row-no-padding row-col-separator-lg">
-                <div class="col-md-6">
-                    <!--begin::Total Profit-->
-                    <div class="kt-widget24">
-                        <div class="kt-widget24__details">
-                            <div class="kt-widget24__info">
-                                <h4 class="kt-widget24__title">
-                                    Build Actuel
-                                </h4>
-                                <span class="kt-widget24__desc">
-					            Version {{ $route->build->version }}
-					        </span>
-                            </div>
+    <div class="kt-portlet" id="portlet_stat_build">
 
-                            <span class="kt-widget24__stats kt-font-brand">
-					        {{ $route->build->build }}
-					    </span>
-                        </div>
-
-                        <div class="progress progress--sm">
-                            {!! \App\HelpersClass\Route\RouteLabHelper::getProgressLab($route->id) !!}
-                        </div>
-
-                        <div class="kt-widget24__action">
-						<span class="kt-widget24__change">
-							Avancement
-						</span>
-                            <span class="kt-widget24__number">
-							{{ \App\HelpersClass\Route\RouteLabHelper::labPercent($route->id) }}%
-					    </span>
-                        </div>
-                    </div>
-                    <!--end::Total Profit-->
-                </div>
-                <div class="col-md-6">
-                    <div class="kt-widget1">
-                        <div class="kt-widget1__item">
-                            <div class="kt-widget1__danger">
-                                <h3 class="kt-widget1__title">Inscrites</h3>
-                            </div>
-                            <span class="kt-widget1__number kt-font-danger">{{ \App\HelpersClass\Route\RouteLabHelper::countTask($route->id, 0) }}</span>
-                        </div>
-
-                        <div class="kt-widget1__item">
-                            <div class="kt-widget1__warning">
-                                <h3 class="kt-widget1__title">En Cours</h3>
-                            </div>
-                            <span class="kt-widget1__number kt-font-warning">{{ \App\HelpersClass\Route\RouteLabHelper::countTask($route->id, 1) }}</span>
-                        </div>
-
-                        <div class="kt-widget1__item">
-                            <div class="kt-widget1__success">
-                                <h3 class="kt-widget1__title">Terminées</h3>
-                            </div>
-                            <span class="kt-widget1__number kt-font-success">{{ \App\HelpersClass\Route\RouteLabHelper::countTask($route->id, 2) }}</span>
-                        </div>
-
-                        <div class="kt-widget1__item" style="border-top: 2px solid">
-                            <div class="kt-widget1__success">
-                                <h3 class="kt-widget1__title">Total de tache</h3>
-                            </div>
-                            <span class="kt-widget1__number kt-font-brand">{{ \App\HelpersClass\Route\RouteLabHelper::countTaskTotal($route->id) }}</span>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 <div class="row" data-sticky-container>
     <div class="col-md-3">
@@ -160,7 +92,9 @@
                     </h3>
                 </div>
                 <div class="kt-portlet__head-toolbar">
+                    @if(\App\HelpersClass\Route\RouteLabHelper::labPercent($route->id) >= 85)
                     <button data-toggle="modal" data-target="#nextVersion" class="btn btn-lg btn-success"><i class="la la-check-circle"></i> Passer à la version {{ $route->build->version +1 }}</button>
+                    @endif
                 </div>
             </div>
             <div class="kt-portlet__body">
@@ -196,10 +130,13 @@
                             </div>
                         </div>
                         <div class="col-xl-4 order-1 order-xl-2 kt-align-right">
-                            <a data-toggle="modal" href="#addAnomalie" class="btn btn-default kt-hidden-">
-                                <i class="la la-plus-square"></i> Nouvelle anomalie
+                            <a data-toggle="modal" href="#addAnomalie" class="btn btn-icon btn-outline-info kt-hidden-">
+                                <i class="la la-plus-square" data-toggle="kt-tooltip" title="Nouvelle anomalie"></i>
                             </a>
                             <div class="kt-separator kt-separator--border-dashed kt-separator--space-lg d-xl-none"></div>
+                            <a data-toggle="modal" href="#nextState" class="btn btn-icon btn-outline-success kt-hidden-">
+                                <i class="la la-check-square" data-toggle="kt-tooltip" title="Terminer des anomalie"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -280,6 +217,51 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success"><i class="la la-check-square"></i> Valider</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="nextState" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Terminer des anomalies</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form action="/api/admin/route/{{ $route->id }}/anomalie/nextState" class="kt-form" id="formNextState" method="post">
+                    <div class="modal-body">
+                        <table class="table table-bordered">
+                            <thead class="kt-bg-fill-brand">
+                            <tr>
+                                <th></th>
+                                <th>Anomalie</th>
+                                <th>Correction</th>
+                                <th>State</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach(\App\HelpersClass\Route\RouteLabHelper::getOutFinishedTask($route->id) as $task)
+                                <tr>
+                                    <td>
+                                        <div class="kt-checkbox-list">
+                                            <label class="kt-checkbox">
+                                                <input type="checkbox" name="anomalie[]" value="{{ $task->id }}">
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>{{ $task->anomalie }}</td>
+                                    <td>{{ $task->correction }}</td>
+                                    <td><span class="kt-badge {{ \App\HelpersClass\Route\RouteLabHelper::stateBadge($task->state) }} kt-badge--inline kt-badge--pill">{{ \App\HelpersClass\Route\RouteLabHelper::stateText($task->state) }}</span></td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Changer l'état</button>
                     </div>
                 </form>
             </div>

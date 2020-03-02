@@ -11,7 +11,7 @@ function loadTable() {
             type: 'remote',
             source: {
                 read: {
-                    url: '/api/admin/route/'+route_id+'/anomalie/loadAnomalies',
+                    url: '/api/admin/route/' + route_id + '/anomalie/loadAnomalies',
                     // sample custom headers
                     // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
                     map: function (raw) {
@@ -55,14 +55,14 @@ function loadTable() {
             {
                 field: 'anomalie',
                 title: "Anomalie",
-                width:250,
+                width: 250,
                 sortable: false,
                 autoHide: false
             },
             {
                 field: 'correction',
                 title: "Correction",
-                width:250,
+                width: 250,
                 sortable: false,
                 autoHide: false
             },
@@ -128,7 +128,7 @@ function loadTable() {
     tableau = table
 
 
-    $('#kt_form_status').on('change', function() {
+    $('#kt_form_status').on('change', function () {
         table.search($(this).val().toLowerCase(), 'state');
     });
 
@@ -146,17 +146,17 @@ function formAddAnomalie() {
 
         KTApp.progress(btn)
 
-       $.ajax({
+        $.ajax({
             url: url,
             method: 'post',
             data: data,
             statusCode: {
                 200: function (data) {
                     KTApp.unprogress(btn)
-                    if(data.data.anomalie !== '') {
-                        toastr.success("La Correction <strong>"+data.data.correction+"</strong> à été ajoutée", "Succès")
-                    }else{
-                        toastr.success("L'anomalie <strong>"+data.data.anomalie+"</strong> à été ajoutée", "Succès")
+                    if (data.data.anomalie !== '') {
+                        toastr.success("La Correction <strong>" + data.data.correction + "</strong> à été ajoutée", "Succès")
+                    } else {
+                        toastr.success("L'anomalie <strong>" + data.data.anomalie + "</strong> à été ajoutée", "Succès")
                     }
                     $(".modal").modal('hide')
                     tableau.reload();
@@ -193,7 +193,7 @@ function formNextVersion() {
             data: data,
             success: function (data) {
                 KTApp.unprogress(btn)
-                toastr.success("Passage à la <strong>"+parseInt(data.data.version)+"</strong> réussi", "Succès")
+                toastr.success("Passage à la <strong>" + parseInt(data.data.version) + "</strong> réussi", "Succès")
                 setTimeout(() => {
                     window.location.reload()
                 })
@@ -207,11 +207,62 @@ function formNextVersion() {
     })
 }
 
+function formNextState() {
+    let form = $("#formNextState")
+
+    form.on('submit', function (e) {
+        e.preventDefault()
+        let btn = form.find('button')
+        let url = form.attr('action')
+        let data = form.serializeArray()
+
+        KTApp.progress(btn)
+
+        $.ajax({
+            url: url,
+            method: 'put',
+            data: data,
+            success: function (data) {
+                KTApp.unprogress(btn)
+                toastr.success("Les anomalies selectionner sont passée à <strong>Terminer</strong>", "Succès")
+                $(".modal").modal('hide')
+                tableau.reload()
+                portletStat()
+                form[0].reset()
+            },
+            error: function (err) {
+                KTApp.unprogress(btn)
+                toastr.error("Erreur lors du passage à un état supérieur pour les anomalies", "Erreur Système 500")
+                console.error(err)
+            }
+        })
+    })
+}
+
+function portletStat() {
+    let portlet = $("#portlet_stat_build")
+
+    KTApp.block(portlet, {
+        overlayColor: '#ffffff',
+        type: 'Chargement...',
+        state: 'success',
+        opacity: 0.3,
+        size: 'lg'
+    })
+
+    $.get('/api/admin/route/'+route_id+'/anomalie/loadStat')
+        .done((data) => {
+            KTApp.unblock(portlet)
+            portlet.html(data.data)
+        })
+}
+
 $('.summernote').summernote({
     height: '350px'
 })
 
-
+portletStat()
 loadTable()
 formAddAnomalie()
 formNextVersion()
+formNextState()

@@ -88,5 +88,12 @@ class RouteAnomalieRepository
             ->delete();
     }
 
+    public function updateState($anomalie_id, $state)
+    {
+        return $this->get($anomalie_id)->update([
+            "state" => $state
+        ]);
+    }
+
 }
 
