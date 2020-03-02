@@ -34,5 +34,21 @@ class RouteGalleryCategoryRepository
             ->get();
     }
 
+    public function delete($id)
+    {
+        return $this->routeGalleryCategory->newQuery()
+            ->find($id)
+            ->delete();
+    }
+
+    public function create($route_id, $get)
+    {
+        return $this->routeGalleryCategory->newQuery()
+            ->create([
+                "route_id" => $route_id,
+                "name" => $get
+            ]);
+    }
+
 }
 

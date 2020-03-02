@@ -2139,7 +2139,87 @@ function uploadFile() {
   });
 }
 
+function formAddCategory() {
+  var form = $("#formAddCategory");
+  form.on('submit', function (e) {
+    e.preventDefault();
+    var btn = form.find('button');
+    var url = form.attr('action');
+    var data = form.serializeArray();
+    KTApp.progress(btn);
+    $.ajax({
+      url: url,
+      method: 'post',
+      data: data,
+      success: function success(data) {
+        KTApp.unprogress(btn);
+        toastr.success("La catégorie <strong>" + data.data.name + "</strong> à été ajouté", "Succès");
+        setTimeout(function () {
+          window.location.reload();
+        }, 1500);
+      },
+      error: function error(_error) {
+        KTApp.unprogress(btn);
+        toastr.error("Erreur lors de la création de la catégorie", "Erreur système 500");
+        console.error(_error);
+      }
+    });
+  });
+}
+
+function formDeleteCategory() {
+  var form = $("#formDeleteCategory");
+  form.on('submit', function (e) {
+    e.preventDefault();
+    var btn = form.find('button');
+    var url = form.attr('action');
+    var data = form.serializeArray();
+    KTApp.progress(btn);
+    $.ajax({
+      url: url,
+      method: 'DELETE',
+      data: data,
+      success: function success(data) {
+        KTApp.unprogress(btn);
+        toastr.success("Le ou les catégorie selectionnées ont été supprimer", "Succès");
+        setTimeout(function () {
+          window.location.reload();
+        }, 1500);
+      },
+      error: function error(jqxhr) {
+        KTApp.unprogress(btn);
+        toastr.error("Erreur lors de la suppression des catégories", "Erreur système 500");
+        console.error(jqxhr);
+      }
+    });
+  });
+}
+
+function deleteGallery() {
+  var btns = document.querySelectorAll('.kt-avatar__cancel');
+  Array.from(btns).forEach(function (btn) {
+    btn.addEventListener('click', function (event) {
+      event.preventDefault();
+      KTApp.block(btn.parentNode);
+      $.get(btn.getAttribute('href')).done(function (data) {
+        btn.parentNode.style.display = 'none';
+        toastr.success("L'image à bien été supprimer", "Succès");
+      }).fail(function (jqxhr) {
+        KTApp.unblock(btn.parentNode);
+        toastr.error("Erreur lors de la suppression de l'image", "Erreur système 500");
+        console.log(jqxhr);
+      });
+    });
+  });
+}
+
+$(".modal").on('hidden.bs.modal', function () {
+  window.location.reload();
+});
 uploadFile();
+formAddCategory();
+formDeleteCategory();
+deleteGallery();
 
 /***/ }),
 

@@ -46,10 +46,16 @@ class BlogRepository
 
     public function list($sort = null, $query = null)
     {
-        return $this->all()
-            ->orderBy($sort['field'], $sort['sort'])
-            ->where('title', 'like', '%'.$query.'%')
-            ->get();
+        if($query == null) {
+            return $this->all()
+                ->get();
+        }else{
+            return $this->all()
+                ->orderBy($sort['field'], $sort['sort'])
+                ->where('title', 'like', '%'.$query.'%')
+                ->get();
+        }
+
     }
 
     public function allPaginate()

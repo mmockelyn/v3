@@ -57348,3 +57348,30 @@ svg.leaflet-image-layer.leaflet-interactive path {
   margin-bottom: 9rem !important;
 }
 
+.tz-gallery {
+  position: relative;
+  display: inline-block;
+}
+
+.tz-gallery .tz-button__delete {
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: auto;
+  right: -10px;
+  bottom: -5px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.1);
+  display: none;
+}
+
+.tz-gallery .tz-button__delete i {
+  transition: all 0.3s;
+  color: #74788d;
+  font-size: 0.9rem;
+}
+

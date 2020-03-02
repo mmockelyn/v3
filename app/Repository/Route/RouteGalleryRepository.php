@@ -47,5 +47,18 @@ class RouteGalleryRepository
             ]);
     }
 
+    public function delete($id)
+    {
+        return $this->routeGallery->newQuery()
+            ->find($id)
+            ->delete();
+    }
+
+    public function get($gallery_id)
+    {
+        return $this->routeGallery->newQuery()
+            ->find($gallery_id);
+    }
+
 }
 

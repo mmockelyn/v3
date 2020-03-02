@@ -107,7 +107,10 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
         });
 
         Route::group(["prefix" => "{route_id}/gallery"], function (){
+            Route::post('addCategory', 'RouteGalleryController@addCategory');
             Route::post('uploadFile', 'RouteGalleryController@uploadFile');
+            Route::delete('deleteCategory', 'RouteGalleryController@deleteCategory');
+            Route::get('{gallery_id}/delete', 'RouteGalleryController@deleteGallery');
         });
     });
 

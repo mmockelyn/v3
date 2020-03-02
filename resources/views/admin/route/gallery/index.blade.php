@@ -25,6 +25,7 @@
                 <div class="kt-subheader__wrapper">
                     <a href="{{ route('Back.Route.index') }}" class="btn btn-sm btn-default"><i class="la la-arrow-circle-left"></i> Retour</a>
                     <button data-toggle="modal" data-target="#addCategory" class="btn btn-outline-brand"><i class="la la-plus-circle"></i> Nouvelle catégorie de gallerie</button>
+                    <button data-toggle="modal" data-target="#deleteCategory" class="btn btn-icon btn-outline-danger"><i class="la la-times-circle" data-toggle="kt-tooltip" title="Supprimer une catégorie"></i></button>
                 </div>
             </div>
         </div>
@@ -105,7 +106,12 @@
                             @foreach($galleries as $gallery)
                                 <div class="col-md-4 mb-lg-3">
                                     @if(\Illuminate\Support\Facades\Storage::disk('public')->exists('route/'.$route->id.'/gallery/'.$gallery->filename) == true)
-                                        <a href="/storage/route/{{ $route->id }}/gallery/{{ $gallery->filename }}" class="fancybox"><img src="/storage/route/{{ $route->id }}/gallery/{{ $gallery->filename }}" class="img-fluid" alt=""></a>
+                                        <a href="/storage/route/{{ $route->id }}/gallery/{{ $gallery->filename }}" class="fancybox">
+                                            <img src="/storage/route/{{ $route->id }}/gallery/{{ $gallery->filename }}" class="img-fluid" alt="">
+                                        </a>
+                                        <a href="/api/admin/route/{{ $route->id }}/gallery/{{ $gallery->id }}/delete" class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="Supprimer l'images">
+                                            <i class="fa fa-times kt-font-danger"></i>
+                                        </a>
                                     @else
                                         <img src="https://via.placeholder.com/300" class="img-fluid" alt="">
                                     @endif
@@ -159,6 +165,59 @@
         </div>
     </div>
     @endforeach
+    <div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter une catégorie</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form action="/api/admin/route/{{ $route->id }}/gallery/addCategory" class="kt-form" id="formAddCategory" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Nom de la catégorie</label>
+                            <input type="text" class="form-control" name="name">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary"><i class="la la-check"></i> Valider</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="deleteCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Supprimer une catégorie </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form action="/api/admin/route/{{ $route->id }}/gallery/deleteCategory" class="kt-form" id="formDeleteCategory" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <p>Selectionnez la ou les catégories à supprimer</p>
+                            <div class="kt-checkbox-list">
+                                @foreach($categories as $category)
+                                <label class="kt-checkbox">
+                                    <input type="checkbox" name="categories[]" value="{{ $category->id }}"> {{ $category->name }}
+                                    <span></span>
+                                </label>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger"><i class="la la-times"></i> Supprimer les catégories</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section("script")
