@@ -100,11 +100,27 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="card">
-                                    @if(\Illuminate\Support\Facades\Storage::disk('public')->exists('route/'.$version->id.'/route.png') == true)
-                                        <img class="card-img-top" src="/storage/route/{{ $version->id }}/route.png" alt="Card image cap">
-                                    @else
-                                        <img class="card-img-top" src="https://via.placeholder.com/300" alt="Card image cap">
-                                    @endif
+                                        <form action="/api/admin/route/{{ $route->id }}/version/{{ $version->id }}/editThumbnail" class="kt-form" id="formEditImage" method="post" enctype="multipart/form-data">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="kt-avatar kt-avatar--outline" id="kt_user_avatar_{{ $version->id }}">
+                                                @if(\Illuminate\Support\Facades\Storage::disk('public')->exists('route/'.$route->id.'/'.$version->id.'.png') == true)
+                                                    <img class="card-img-top" src="/storage/route/{{ $route->id }}/{{ $version->id }}.png" alt="Card image cap">
+                                                @else
+                                                    <img class="card-img-top" src="https://via.placeholder.com/300" alt="Card image cap">
+                                                @endif
+                                                    <label class="kt-avatar__upload" data-toggle="kt-tooltip" title="" data-original-title="Changez l'image">
+                                                        <i class="fa fa-pen"></i>
+                                                        <input type="file" name="images" accept=".png, .jpg, .jpeg">
+                                                    </label>
+                                                    <span class="kt-avatar__cancel" data-toggle="kt-tooltip" title="" data-original-title="Supprimer l'image">
+															<i class="fa fa-times kt-font-danger"></i>
+														</span>
+                                                    <button type="submit" class="kt-avatar__submit" data-toggle="kt-tooltip" title="" data-original-title="modifier l'image">
+															<i class="fa fa-check kt-font-success"></i>
+														</button>
+                                            </div>
+                                        </form>
                                     <div class="card-body">
                                         <h5 class="card-title">Version {{ $version->version }}</h5>
                                         <table class="table">
@@ -143,7 +159,7 @@
 
                                     </div>
                                     <div class="kt-portlet__body">
-                                        {!! $route->description !!}
+                                        {!! $version->description !!}
                                         <hr>
                                         <form action="/api/admin/route/{{ $route->id }}/version/{{ $version->id }}/editDescription" class="kt-form" id="formEditDescription" method="post">
                                             @csrf
@@ -376,4 +392,9 @@
 @section("script")
     @toastr_render
     <script src="{{ asset('js/admin/route/version.js') }}"></script>
+    @foreach($versions as $version)
+    <script type="text/javascript">
+        let avatar<?= $version->id ?> = KTAvatar('kt_user_avatar_<?= $version->id; ?>')
+    </script>
+    @endforeach
 @endsection

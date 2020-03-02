@@ -20885,7 +20885,7 @@ function submitEditDescription() {
 
 function formWidget() {
   $(".summernote").summernote();
-  $("#depart, #arrive, #name_gare").selectpicker();
+  $("#depart, #arrive, #name_gare").selectpicker(); //let avatar = KTAvatar('kt_user_avatar_1')
 }
 
 function loadLatLngField() {

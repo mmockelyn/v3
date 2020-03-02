@@ -97,6 +97,7 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::post('loadGares', 'RouteVersionController@loadGares');
             Route::post('/', 'RouteVersionController@store');
             Route::put('{version_id}/editDescription', 'RouteVersionController@editDescription');
+            Route::put('{version_id}/editThumbnail', 'RouteVersionController@editThumbnail');
             Route::get('{version_id}/delete', 'RouteVersionController@deleteVersion');
 
             Route::group(["prefix" => "{version_id}/gare"], function () {
