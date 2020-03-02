@@ -105,6 +105,10 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
                 Route::get('{gare_id}/delete', 'RouteVersionController@deleteGare');
             });
         });
+
+        Route::group(["prefix" => "{route_id}/gallery"], function (){
+            Route::post('uploadFile', 'RouteGalleryController@uploadFile');
+        });
     });
 
     Route::group(["prefix" => "tutoriel"], function () {

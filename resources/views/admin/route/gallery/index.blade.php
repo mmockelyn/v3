@@ -101,9 +101,6 @@
             <div class="kt-portlet__body">
                 <div class="tab-content">
                     <div class="tab-pane active" id="all" role="tabpanel">
-                        <div class="text-right">
-                            <button class="btn btn-outline-info"><i class="la la-plus"></i> Ajouter des images</button>
-                        </div>
                         <div class="row">
                             @foreach($galleries as $gallery)
                                 <div class="col-md-4 mb-lg-3">
@@ -119,7 +116,7 @@
                     @foreach($categories as $category)
                         <div class="tab-pane" id="{{ \Illuminate\Support\Str::slug($category->name) }}" role="tabpanel">
                             <div class="text-right">
-                                <button class="btn btn-outline-info"><i class="la la-plus"></i> Ajouter des images</button>
+                                <button data-toggle="modal" data-target="#addImage_{{ $category->id }}" class="btn btn-outline-info"><i class="la la-plus"></i> Ajouter des images</button>
                             </div>
                             <div class="row">
                                 @foreach($category->galleries as $gallery)
@@ -139,9 +136,32 @@
         </div>
     </div>
 </div>
+    @foreach($categories as $category)
+    <div class="modal fade" id="addImage_{{ $category->id }}" data-category="{{ $category->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajout d'images à la gallerie</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form action="" class="kt-form dropzone dropzone-default dropzone-brand" id="formAddImage">
+                    <div class="modal-body">
+                        <input type="hidden" id="category_id" name="cat" value="{{ $category->id }}">
+                        <div class="dropzone-msg dz-message needsclick">
+                            <h3 class="dropzone-msg-title">Déposez des fichiers ici ou cliquez pour télécharger.</h3>
+                            <span class="dropzone-msg-desc">Aucune limitation de taille de fichier</span><br>
+                            <span class="dropzone-msg-desc">Fichier images uniquement (jpg,jpeg,png,bmp,etc...)</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endforeach
 @endsection
 
 @section("script")
     @toastr_render
-    <script src="{{ asset('js/admin/route/show.js') }}"></script>
+    <script src="{{ asset('js/admin/route/gallery.js') }}"></script>
 @endsection

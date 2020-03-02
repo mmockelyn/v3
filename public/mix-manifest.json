@@ -9,11 +9,11 @@
     "/js/admin/blog/category/index.js": "/js/admin/blog/category/index.js",
     "/js/admin/blog/index.js": "/js/admin/blog/index.js",
     "/js/admin/index.js": "/js/admin/index.js",
+    "/js/admin/route/gallery.js": "/js/admin/route/gallery.js",
     "/js/admin/route/index.js": "/js/admin/route/index.js",
     "/js/admin/route/show.js": "/js/admin/route/show.js",
     "/js/admin/route/version.js": "/js/admin/route/version.js",
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
     "/css/route.css": "/css/route.css",
     "/css/download.css": "/css/download.css",
     "/css/tutoriel.css": "/css/tutoriel.css",
@@ -31,5 +31,6 @@
     "/js/tutoriel/list.js": "/js/tutoriel/list.js",
     "/js/tutoriel/show.js": "/js/tutoriel/show.js",
     "/js/wiki/index.js": "/js/wiki/index.js",
-    "/js/wiki/show.js": "/js/wiki/show.js"
+    "/js/wiki/show.js": "/js/wiki/show.js",
+    "/css/app.css": "/css/app.css"
 }

@@ -37,5 +37,15 @@ class RouteGalleryRepository
             ->load('category');
     }
 
+    public function create($route_id, $category_id, $filename)
+    {
+        return $this->routeGallery->newQuery()
+            ->create([
+                "route_id" => $route_id,
+                "route_gallery_category_id" => $category_id,
+                "filename" => $filename
+            ]);
+    }
+
 }
 
