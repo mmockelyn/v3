@@ -33,9 +33,9 @@
 
 @section("content")
     <div id="route" data-id="{{ $route->id }}" data-published="{{ $route->published }}"></div>
-<div class="row">
+<div class="row" data-sticky-container>
     <div class="col-md-3">
-        <div class="card">
+        <div class="card sticky" data-sticky="true" data-margin-top="100px" data-sticky-for="1023" data-sticky-class="kt-sticky">
             <div class="card-body">
                 <ul class="kt-nav">
                     <li class="kt-nav__item {{ \App\HelpersClass\Generator::currentRouteBack(route('Back.Route.show',$route->id)) }}">

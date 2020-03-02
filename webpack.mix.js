@@ -54,6 +54,8 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/admin/route/show.js', 'public/js/admin/route')
     .js('resources/js/admin/route/version.js', 'public/js/admin/route')
     .js('resources/js/admin/route/gallery.js', 'public/js/admin/route')
+    .js('resources/js/admin/route/lab.js', 'public/js/admin/route')
+    .js('resources/js/admin/route/lab_edit.js', 'public/js/admin/route')
 
 
 

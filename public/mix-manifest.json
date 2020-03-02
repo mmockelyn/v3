@@ -11,6 +11,8 @@
     "/js/admin/index.js": "/js/admin/index.js",
     "/js/admin/route/gallery.js": "/js/admin/route/gallery.js",
     "/js/admin/route/index.js": "/js/admin/route/index.js",
+    "/js/admin/route/lab.js": "/js/admin/route/lab.js",
+    "/js/admin/route/lab_edit.js": "/js/admin/route/lab_edit.js",
     "/js/admin/route/show.js": "/js/admin/route/show.js",
     "/js/admin/route/version.js": "/js/admin/route/version.js",
     "/js/app.js": "/js/app.js",

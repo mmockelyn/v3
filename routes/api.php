@@ -112,6 +112,13 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::delete('deleteCategory', 'RouteGalleryController@deleteCategory');
             Route::get('{gallery_id}/delete', 'RouteGalleryController@deleteGallery');
         });
+
+        Route::group(["prefix" => "{route_id}/anomalie"], function(){
+            Route::post('/', 'RouteLabController@store');
+            Route::post('loadAnomalies', "RouteLabController@loadAnomalies");
+            Route::put('{anomalie_id}/edit', 'RouteLabController@updateAnomalie');
+            Route::get('{anomalie_id}/delete', 'RouteLabController@deleteAnomalie');
+        });
     });
 
     Route::group(["prefix" => "tutoriel"], function () {

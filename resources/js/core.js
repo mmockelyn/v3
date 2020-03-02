@@ -1,6 +1,5 @@
 import * as $ from "jquery";
 import tooltip from 'bootstrap'
-import select2 from 'select2'
 
 
 export function reloadNotifBar() {
@@ -57,7 +56,6 @@ function hidingAlerting() {
 hidingAlerting()
 
 $('[data-toggle="kt-tooltip"]').tooltip()
-$(".select2").select2()
 
 
 

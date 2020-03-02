@@ -114,6 +114,7 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
 
         Route::group(["prefix" => "{route_id}/lab"], function (){
             Route::get('/', ["as" => "Route.Lab.index", "uses" => "RouteLabController@index"]);
+            Route::get('{anomalie_id}/edit', ["as" => "Route.Lab.edit", "uses" => "RouteLabController@edit"]);
         });
 
         Route::group(["prefix" => "{route_id}/download"], function (){

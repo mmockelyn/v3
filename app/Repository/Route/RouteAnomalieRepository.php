@@ -44,5 +44,49 @@ class RouteAnomalieRepository
             ->get();
     }
 
+    public function listFromRoute($route_id)
+    {
+        return $this->routeAnomalie->newQuery()
+            ->where('route_id', $route_id)
+            ->get();
+    }
+
+    public function create($route_id, $anomalie, $correction, $lieu, $state)
+    {
+        return $this->routeAnomalie->newQuery()
+            ->create([
+                "route_id" => $route_id,
+                "anomalie" => $anomalie,
+                "correction" => $correction,
+                "lieu" => $lieu,
+                "state" => $state
+            ]);
+    }
+
+    public function get($anomalie_id)
+    {
+        return $this->routeAnomalie->newQuery()
+            ->find($anomalie_id);
+    }
+
+    public function update($anomalie_id, $anomalie, $correction, $lieu, $state)
+    {
+        return $this->routeAnomalie->newQuery()
+            ->find($anomalie_id)
+            ->update([
+                "anomalie" => $anomalie,
+                "correction" => $correction,
+                "lieu" => $lieu,
+                "state" => $state
+            ]);
+    }
+
+    public function delete($anomalie_id)
+    {
+        return $this->routeAnomalie->newQuery()
+            ->find($anomalie_id)
+            ->delete();
+    }
+
 }
 

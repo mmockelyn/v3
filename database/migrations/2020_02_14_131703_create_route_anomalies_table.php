@@ -16,7 +16,7 @@ class CreateRouteAnomaliesTable extends Migration
         Schema::create('route_anomalies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('route_id')->unsigned();
-            $table->text('anomalie');
+            $table->text('anomalie')->nullable();
             $table->text('correction');
             $table->string('lieu');
             $table->integer('state')->default(0)->comment("0: Non Commencer |1: En cours |2: Terminer");
