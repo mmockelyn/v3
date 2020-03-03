@@ -11,7 +11,7 @@ class ClearAllCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'clear:all';
+    protected $signature = 'trainz:clear';
 
     /**
      * The console command description.
