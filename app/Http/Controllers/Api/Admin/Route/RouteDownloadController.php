@@ -43,7 +43,8 @@ class RouteDownloadController extends BaseController
                 "typedownload" => $download->typeDownload->name,
                 "typerelease" => $download->typeRelease->name,
                 "published" => $download->published,
-                "linkDownload" => $download->linkDownload
+                "linkDownload" => $download->linkDownload,
+                "note" => $download->note
             ];
         }
 
@@ -221,5 +222,80 @@ class RouteDownloadController extends BaseController
         );
 
         return $result;
+    }
+
+    public function storeDownload(Request $request, $route_id)
+    {
+        $validator = \Validator::make($request->all(), [
+            "version" => "required",
+            "build" => "required",
+            "linkDownload" => "required|url"
+        ]);
+
+        if($validator->fails()) {
+            return $this->sendError("Ereur de validation", [
+                "errors" => $validator->errors()->all()
+            ]);
+        }
+
+        try {
+            if($request->exists('published') == true){$published = 1;}else{$published = 0;}
+            $download = $this->routeDownloadRepository->create(
+                $route_id,
+                $request->version,
+                $request->build,
+                $request->type_download,
+                $request->type_release,
+                $request->linkDownload,
+                $request->note,
+                $published
+            );
+
+            return $this->sendResponse($download, "OK");
+        }catch (\Exception $exception) {
+            return $this->sendError("Erreur Système", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function storeUpdater(Request $request, $route_id)
+    {
+        $validator = \Validator::make($request->all(), [
+            "version" => "required",
+            "build" => "required",
+            "linkRelease" => "required|url"
+        ]);
+
+        if($validator->fails()) {
+            return $this->sendError("Ereur de validation", [
+                "errors" => $validator->errors()->all()
+            ]);
+        }
+
+        try {
+            if($request->exists('latest') == true){
+                $latest = 1;
+                $updates = $this->routeUpdaterRepository->listForRoute($route_id);
+                foreach ($updates as $update) {
+                    $this->routeUpdaterRepository->updateLatestNone($update->id);
+                }
+            }else{
+                $latest = 0;
+            }
+            $download = $this->routeUpdaterRepository->create(
+                $route_id,
+                $request->version,
+                $request->build,
+                $latest,
+                $request->linkRelease
+            );
+
+            return $this->sendResponse($download, "OK");
+        }catch (\Exception $exception) {
+            return $this->sendError("Erreur Système", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
     }
 }

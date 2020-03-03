@@ -101,6 +101,12 @@ function loadTableDownload() {
                 autoHide: true,
             },
             {
+                field: 'note',
+                title: 'Note de Version',
+                sortable: false,
+                autoHide: true,
+            },
+            {
                 field: 'actions',
                 title: 'Actions',
                 sortable: false,
@@ -215,12 +221,13 @@ function loadTableUpdater() {
                 sortable: true,
                 width: 60,
                 autoHide: false,
+                textAlign: 'center',
                 template: function (row) {
                     let latestes = {
                         0: {'title': 'Non', 'icon': 'la la-times-circle', 'class': 'kt-font-danger'},
                         1: {'title': 'Oui', 'icon': 'la la-check-circle', 'class': 'kt-font-success'},
                     };
-                    return `<i class="${latestes[row.latest]} ${latestes[row.class]}" data-toggle="kt-tooltip" title="" data-original-title="${latestes[row.title]}"></i>`
+                    return `<i class="${latestes[row.latest].icon} ${latestes[row.latest].class} la-2x" data-toggle="kt-tooltip" title="${latestes[row.latest].title}"></i>`
                 }
             },
             {
@@ -231,8 +238,8 @@ function loadTableUpdater() {
                 width: 60,
                 template: function (row) {
                     return `
-                    <a href="" class="btn btn-sm btn-outline-info btn-icon" data-toggle="kt-tooltip" title="Editer la MAJ"><i class="la la-edit"></i> </a>
-                    <a href="" class="btn btn-sm btn-outline-danger btn-icon" data-toggle="kt-tooltip" title="Supprimer la MAJ"><i class="la la-trash"></i> </a>
+                    <a href="/administrator/route/${route_id}/download/updater/${row.id}/edit" class="btn btn-sm btn-outline-info btn-icon" data-toggle="kt-tooltip" title="Editer la MAJ"><i class="la la-edit"></i> </a>
+                    <a href="/api/admin/route/${route_id}/download/updater/${row.id}/delete" class="btn btn-sm btn-outline-danger btn-icon" data-toggle="kt-tooltip" title="Supprimer la MAJ"><i class="la la-trash"></i> </a>
                     `;
                 }
             }
@@ -264,11 +271,91 @@ function loadTableUpdater() {
 
     tableauUpdater = tableUpdater
 }
+function addFormDownload() {
+    let form = $("#formAddDownload")
+
+    form.on('submit', function (e) {
+        e.preventDefault()
+        let btn = form.find('button')
+        let url = form.attr('action')
+        let data = form.serializeArray()
+
+        KTApp.progress(btn)
+
+        $.ajax({
+            url: url,
+            method: 'post',
+            data: data,
+            statusCode: {
+                200: function (data) {
+                    KTApp.unprogress(btn)
+                    toastr.success("Le téléchargement à été ajouté avec succès", "Succès");
+                    form[0].reset()
+                    $(".modal").modal('hide')
+                    tableauDownload.reload()
+                },
+                203: function (data) {
+                    KTApp.unprogress(btn)
+                    Array.from(data.data.errors).forEach((err) => {
+                        toastr.warning(err, "Erreur de validation")
+                    })
+                },
+                500: function (data) {
+                    KTApp.unprogress(btn)
+                    toastr.error("Erreur lors de l'ajout du téléchargement", "Erreur Système 500")
+                    console.error(data)
+                }
+            }
+        })
+    })
+}
+function addFormUpdater() {
+    let form = $("#formAddUpdater")
+
+    form.on('submit', function (e) {
+        e.preventDefault()
+        let btn = form.find('button')
+        let url = form.attr('action')
+        let data = form.serializeArray()
+
+        KTApp.progress(btn)
+
+        $.ajax({
+            url: url,
+            method: 'post',
+            data: data,
+            statusCode: {
+                200: function (data) {
+                    KTApp.unprogress(btn)
+                    toastr.success("La mise à jour à été ajouté avec succès", "Succès");
+                    form[0].reset()
+                    $(".modal").modal('hide')
+                    tableauUpdater.reload()
+                },
+                203: function (data) {
+                    KTApp.unprogress(btn)
+                    Array.from(data.data.errors).forEach((err) => {
+                        toastr.warning(err, "Erreur de validation")
+                    })
+                },
+                500: function (data) {
+                    KTApp.unprogress(btn)
+                    toastr.error("Erreur lors de l'ajout de la mise à jour", "Erreur Système 500")
+                    console.error(data)
+                }
+            }
+        })
+    })
+}
 
 $('.summernote').summernote({
     height: '350px'
 })
 
+$("#type_download, #type_release").selectpicker()
+
 loadTableDownload()
 loadTableUpdater()
+addFormDownload()
+addFormUpdater()
 

@@ -158,7 +158,7 @@
 						<i class="la la-upload"></i>
 					</span>
                         <h3 class="kt-portlet__head-title">
-                            Système de Mise à jorus
+                            Système de Mise à jours
                         </h3>
                     </div>
                 </div>
@@ -196,7 +196,129 @@
             </div>
         </div>
 </div>
-
+    <div class="modal fade" id="addDownload" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajout d'un nouveau téléchargement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form action="/api/admin/route/{{ $route->id }}/download/storeDownload" class="kt-form" id="formAddDownload" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="version">Version</label>
+                                    <input type="text" class="form-control" name="version" value="{{ $route->build->version }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="build">Build</label>
+                                    <input type="text" class="form-control" name="build" value="{{ $route->build->build }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="type_download">Type de téléchargement</label>
+                                    <select id="type_download" class="form-control bootstrap-select" name="type_download">
+                                        <option value=""></option>
+                                        @foreach($typeDownloads as $typeDownload)
+                                            <option value="{{ $typeDownload->id }}">{{ $typeDownload->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="type_release">Type de Release</label>
+                                    <select id="type_release" class="form-control bootstrap-select" name="type_release">
+                                        <option value=""></option>
+                                        @foreach($typeReleases as $typeRelease)
+                                            <option value="{{ $typeRelease->id }}">{{ $typeRelease->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="linkDownload">Lien de téléchargement</label>
+                            <input type="text" class="form-control" name="linkDownload" value="https://download.trainznation.eu/">
+                        </div>
+                        <div class="form-group">
+                            <label for="note">Note de téléchargement</label>
+                            <textarea name="note" id="note" class="form-control summernote" cols="30" rows="10"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="published">Ce téléchargement est-il publier ?</label><br>
+                            <span class="kt-switch">
+								<label>
+									<input type="checkbox" checked="checked" name="published">
+									<span></span>
+								</label>
+							</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success"><i class="la la-check"></i> Valider</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addUpdater" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajout d'une nouvelle mise à jour</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form action="/api/admin/route/{{ $route->id }}/download/storeUpdater" class="kt-form" id="formAddUpdater" method="post">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="version">Version</label>
+                                    <input type="text" class="form-control" name="version" value="{{ $route->build->version }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="build">Build</label>
+                                    <input type="text" class="form-control" name="build" value="{{ $route->build->build }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="linkRelease">Lien de la release</label>
+                                    <input type="text" class="form-control" name="linkRelease" value="https://download.trainznation.eu/">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="latest">Dernière mise à jour ?</label><br>
+                                <span class="kt-switch">
+								<label>
+									<input type="checkbox" name="latest">
+									<span></span>
+								</label>
+							</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success"><i class="la la-check"></i> Valider</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section("script")

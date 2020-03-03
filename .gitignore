@@ -5,7 +5,6 @@
 /vendor
 /.idea
 /.idea/*.*
-/resources/demo5/
 .env
 .env.backup
 .phpunit.result.cache

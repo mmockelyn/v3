@@ -119,6 +119,8 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
 
         Route::group(["prefix" => "{route_id}/download"], function (){
             Route::get('/', ["as" => "Route.Download.index", "uses" => "RouteDownloadController@index"]);
+            Route::get('{download_id}/edit', ["as" => "Route.Download.edit", "uses" => "RouteDownloadController@editDownload"]);
+            Route::get('updater/{updater_id}/edit', ["as" => "Route.Download.editd", "uses" => "RouteDownloadController@editUpdater"]);
         });
 
         Route::group(["prefix" => "{route_id}/config"], function (){

@@ -126,6 +126,13 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
         Route::group(["prefix" => '{route_id}/download'], function (){
             Route::post('loadDownload', 'RouteDownloadController@loadDownload');
             Route::post('loadUpdater', 'RouteDownloadController@loadUpdater');
+            Route::post('storeDownload', 'RouteDownloadController@storeDownload');
+            Route::post('storeUpdater', 'RouteDownloadController@storeUpdater');
+
+            Route::put('{download_id}/edit', 'RouteDownloadController@updateDownload');
+            Route::get('{download_id}/delete', 'RouteDownloadController@deleteDownload');
+            Route::put('/updater/{updater_id}/edit', 'RouteDownloadController@updateUpdater');
+            Route::get('/updater/{updater_id}/delete', 'RouteDownloadController@deleteUpdater');
         });
     });
 

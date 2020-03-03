@@ -24293,6 +24293,11 @@ function loadTableDownload() {
       sortable: false,
       autoHide: true
     }, {
+      field: 'note',
+      title: 'Note de Version',
+      sortable: false,
+      autoHide: true
+    }, {
       field: 'actions',
       title: 'Actions',
       sortable: false,
@@ -24394,6 +24399,7 @@ function loadTableUpdater() {
       sortable: true,
       width: 60,
       autoHide: false,
+      textAlign: 'center',
       template: function template(row) {
         var latestes = {
           0: {
@@ -24407,7 +24413,7 @@ function loadTableUpdater() {
             'class': 'kt-font-success'
           }
         };
-        return "<i class=\"".concat(latestes[row.latest], " ").concat(latestes[row["class"]], "\" data-toggle=\"kt-tooltip\" title=\"\" data-original-title=\"").concat(latestes[row.title], "\"></i>");
+        return "<i class=\"".concat(latestes[row.latest].icon, " ").concat(latestes[row.latest]["class"], " la-2x\" data-toggle=\"kt-tooltip\" title=\"").concat(latestes[row.latest].title, "\"></i>");
       }
     }, {
       field: 'actions',
@@ -24416,7 +24422,7 @@ function loadTableUpdater() {
       autoHide: false,
       width: 60,
       template: function template(row) {
-        return "\n                    <a href=\"\" class=\"btn btn-sm btn-outline-info btn-icon\" data-toggle=\"kt-tooltip\" title=\"Editer la MAJ\"><i class=\"la la-edit\"></i> </a>\n                    <a href=\"\" class=\"btn btn-sm btn-outline-danger btn-icon\" data-toggle=\"kt-tooltip\" title=\"Supprimer la MAJ\"><i class=\"la la-trash\"></i> </a>\n                    ";
+        return "\n                    <a href=\"/administrator/route/".concat(route_id, "/download/updater/").concat(row.id, "/edit\" class=\"btn btn-sm btn-outline-info btn-icon\" data-toggle=\"kt-tooltip\" title=\"Editer la MAJ\"><i class=\"la la-edit\"></i> </a>\n                    <a href=\"/api/admin/route/").concat(route_id, "/download/updater/").concat(row.id, "/delete\" class=\"btn btn-sm btn-outline-danger btn-icon\" data-toggle=\"kt-tooltip\" title=\"Supprimer la MAJ\"><i class=\"la la-trash\"></i> </a>\n                    ");
       }
     }],
     translate: {
@@ -24446,11 +24452,86 @@ function loadTableUpdater() {
   tableauUpdater = tableUpdater;
 }
 
+function addFormDownload() {
+  var form = $("#formAddDownload");
+  form.on('submit', function (e) {
+    e.preventDefault();
+    var btn = form.find('button');
+    var url = form.attr('action');
+    var data = form.serializeArray();
+    KTApp.progress(btn);
+    $.ajax({
+      url: url,
+      method: 'post',
+      data: data,
+      statusCode: {
+        200: function _(data) {
+          KTApp.unprogress(btn);
+          toastr.success("Le téléchargement à été ajouté avec succès", "Succès");
+          form[0].reset();
+          $(".modal").modal('hide');
+          tableauDownload.reload();
+        },
+        203: function _(data) {
+          KTApp.unprogress(btn);
+          Array.from(data.data.errors).forEach(function (err) {
+            toastr.warning(err, "Erreur de validation");
+          });
+        },
+        500: function _(data) {
+          KTApp.unprogress(btn);
+          toastr.error("Erreur lors de l'ajout du téléchargement", "Erreur Système 500");
+          console.error(data);
+        }
+      }
+    });
+  });
+}
+
+function addFormUpdater() {
+  var form = $("#formAddUpdater");
+  form.on('submit', function (e) {
+    e.preventDefault();
+    var btn = form.find('button');
+    var url = form.attr('action');
+    var data = form.serializeArray();
+    KTApp.progress(btn);
+    $.ajax({
+      url: url,
+      method: 'post',
+      data: data,
+      statusCode: {
+        200: function _(data) {
+          KTApp.unprogress(btn);
+          toastr.success("La mise à jour à été ajouté avec succès", "Succès");
+          form[0].reset();
+          $(".modal").modal('hide');
+          tableauUpdater.reload();
+        },
+        203: function _(data) {
+          KTApp.unprogress(btn);
+          Array.from(data.data.errors).forEach(function (err) {
+            toastr.warning(err, "Erreur de validation");
+          });
+        },
+        500: function _(data) {
+          KTApp.unprogress(btn);
+          toastr.error("Erreur lors de l'ajout de la mise à jour", "Erreur Système 500");
+          console.error(data);
+        }
+      }
+    });
+  });
+}
+
 $('.summernote').summernote({
   height: '350px'
 });
+$("#type_download, #type_release").selectpicker();
 loadTableDownload();
 loadTableUpdater();
+addFormDownload();
+addFormUpdater();
 
 /***/ }),
 

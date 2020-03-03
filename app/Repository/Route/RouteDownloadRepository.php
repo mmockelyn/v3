@@ -48,7 +48,24 @@ class RouteDownloadRepository
     {
         return $this->routeDownload->newQuery()
             ->where('route_id', $route_id)
+            ->orderBy('id', 'desc')
             ->get();
+    }
+
+    public function create($route_id, $version, $build, $type_download, $type_release, $linkDownload, $note, $published)
+    {
+        return $this->routeDownload->newQuery()
+            ->create([
+                "route_id" => $route_id,
+                "name" => "Name",
+                "version" => $version,
+                "build" => $build,
+                "route_type_download_id" => $type_download,
+                "route_type_release_id" => $type_release,
+                "linkDownload" => $linkDownload,
+                "note" => $note,
+                "published" => $published
+            ]);
     }
 
 }
