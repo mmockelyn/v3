@@ -35,6 +35,15 @@ class UserAccountTest extends TestCase
         $this->assertEquals(1, count($account));
     }
 
+    function edit_account_password() {
+        $user = $this->createUser();
+        $user->update([
+            "password" => bcrypt("0001")
+        ]);
+
+        $this->assertEquals(1, $user);
+    }
+
     protected function createUser()
     {
         $user = factory(User::class)->create();
@@ -46,7 +55,7 @@ class UserAccountTest extends TestCase
         $account = factory(UserAccount::class)->create([
             "user_id" => $user->getId()
         ]);
-        return $account;
+        return collect($account);
     }
 
 }

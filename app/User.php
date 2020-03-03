@@ -100,7 +100,7 @@ class User extends Authenticatable
 
     public function getId()
     {
-        return 'id';
+        return $this->id;
     }
 
     public function createAccount()
