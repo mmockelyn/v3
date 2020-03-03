@@ -97,4 +97,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserView::class);
     }
+
+    public function getId()
+    {
+        return 'id';
+    }
+
+    public function createAccount()
+    {
+        $this->account()->create([
+            "user_id" => $this->getId()
+        ]);
+    }
 }

@@ -5,8 +5,9 @@
 use App\Model;
 use Faker\Generator as Faker;
 
-$factory->define(Model\Tutoriel\TutorielCategory::class, function (Faker $faker) {
+$factory->define(Model::class, function (Faker $faker) {
     return [
-        "name" => "Test d'une catégorie"
+        "tutoriel_id" => 1,
+        "name" => "Technologie utiliser"
     ];
 });

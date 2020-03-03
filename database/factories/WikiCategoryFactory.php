@@ -5,8 +5,8 @@
 use App\Model;
 use Faker\Generator as Faker;
 
-$factory->define(Model\Blog\BlogCategory::class, function (Faker $faker) {
+$factory->define(Model\Wiki\WikiCategory::class, function (Faker $faker) {
     return [
-        'name'  => "Catégorie ".rand(0,25000)
+        "name" => "Catégorie d'un wiki"
     ];
 });

@@ -15,7 +15,6 @@ class CreateRouteDownloadsTable extends Migration
     {
         Schema::create('route_downloads', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
             $table->bigInteger('route_id')->unsigned();
             $table->string('version');
             $table->string('build');
@@ -24,6 +23,7 @@ class CreateRouteDownloadsTable extends Migration
             $table->string('linkDownload');
             $table->longText('note')->nullable();
             $table->integer('published')->default(0)->comment("Publier ou non");
+            $table->uuid('uuid');
             $table->timestamps();
 
 

@@ -5,8 +5,8 @@
 use App\Model;
 use Faker\Generator as Faker;
 
-$factory->define(Model\Tutoriel\TutorielCategory::class, function (Faker $faker) {
+$factory->define(Model\Account\UserSocial::class, function (Faker $faker) {
     return [
-        "name" => "Test d'une catégorie"
+        "user_id" => 1,
     ];
 });
