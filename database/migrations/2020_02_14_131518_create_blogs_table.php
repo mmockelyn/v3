@@ -24,6 +24,7 @@ class CreateBlogsTable extends Migration
             $table->timestamp('published_at')->nullable();
             $table->integer('twitter')->default(0)->comment("Si publier sur twitter");
             $table->text("twitterText")->nullable();
+            $table->integer('facebook')->default(0);
 
         });
     }

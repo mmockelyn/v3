@@ -30,6 +30,8 @@ class CreateTutorielsTable extends Migration
             $table->string('time')->nullable()->comment("Durée de la vidéo");
             $table->timestamp('published_at')->nullable();
             $table->integer('difficulte')->default(0)->comment("0: Facile |1: Intermédiaire |2: Difficile");
+            $table->integer('demo')->default(0);
+            $table->string('linkDemo')->nullable();
             $table->timestamps();
         });
     }

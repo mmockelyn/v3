@@ -24,6 +24,7 @@ class CreateUserAccountsTable extends Migration
             $table->string("pseudo_facebook")->nullable();
             $table->string('trainz_id')->nullable();
             $table->integer('point')->default(0)->comment("Nombre de point définie par l'achèvement de diverse action sur le site");
+            $table->string('customer_id')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

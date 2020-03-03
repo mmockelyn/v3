@@ -24,5 +24,6 @@ $factory->define(User::class, function (Faker $faker) {
         'email_verified_at' => now(),
         'password' => bcrypt('0000'), // password
         'remember_token' => Str::random(10),
+        "group" => rand(0,1)
     ];
 });
