@@ -72,7 +72,11 @@ class BlogHelper
         $countArticle = $blog->newQuery()->where('published', 1)->get()->count();
         $countComment = $comment->newQuery()->where('state', 1)->get()->count();
 
-        return round($countComment/$countArticle, 0);
+        if(($countArticle != 0 && $countComment != 0) ||($countArticle != 0 || $countComment != 0)) {
+            return round($countComment/$countArticle, 0);
+        }else{
+            return 0;
+        }
     }
 
     public static function publishArticle($state)
