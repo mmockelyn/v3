@@ -26,5 +26,20 @@ class RouteTypeDownloadRepository
             ->get();
     }
 
+    public function delete($type_id)
+    {
+        return $this->routeTypeDownload->newQuery()
+            ->find($type_id)
+            ->delete();
+    }
+
+    public function create($name)
+    {
+        return $this->routeTypeDownload->newQuery()
+            ->create([
+                "name" => $name
+            ]);
+    }
+
 }
 

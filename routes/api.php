@@ -135,6 +135,15 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::put('/updater/{updater_id}/edit', 'RouteDownloadController@updateUpdater');
             Route::get('/updater/{updater_id}/delete', 'RouteDownloadController@deleteUpdater');
         });
+
+        Route::group(["prefix" => "config"], function (){
+            Route::post('loadTypeDownload', 'RouteConfigController@loadTypeDownload');
+            Route::post('loadTypeRelease', 'RouteConfigController@loadTypeRelease');
+            Route::get('type/{type_id}', 'RouteConfigController@deleteType');
+            Route::get('release/{release_id}', 'RouteConfigController@deleteTypeRelease');
+            Route::post('type', 'RouteConfigController@store');
+            Route::post('release', 'RouteConfigController@storeRelease');
+        });
     });
 
     Route::group(["prefix" => "tutoriel"], function () {

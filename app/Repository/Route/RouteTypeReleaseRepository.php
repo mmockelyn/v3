@@ -26,5 +26,20 @@ class RouteTypeReleaseRepository
             ->get();
     }
 
+    public function delete($type_id)
+    {
+        return $this->routeTypeRelease->newQuery()
+            ->find($type_id)
+            ->update();
+    }
+
+    public function create($name)
+    {
+        return $this->routeTypeRelease->newQuery()
+            ->create([
+                "name" => $name
+            ]);
+    }
+
 }
 

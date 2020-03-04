@@ -19,3 +19,4 @@ laravel-echo-server.lock
 horizon.log
 composer.lock
 package-lock.json
+/snippet

@@ -78,7 +78,110 @@
         </div>
     </div>
     <div class="col-md-9">
-
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-label">
+					<span class="kt-portlet__head-icon">
+						<i class="flaticon2-calendar-2"></i>
+					</span>
+                    <h3 class="kt-portlet__head-title">
+                        Type de Téléchargement
+                    </h3>
+                </div>
+            </div>
+            <div class="kt-portlet__body">
+                <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
+                    <div class="row align-items-center">
+                        <div class="col-xl-8 order-2 order-xl-1">
+                            &nbsp;
+                        </div>
+                        <div class="col-xl-4 order-1 order-xl-2 kt-align-right">
+                            <a data-toggle="modal" href="#addTypeDownload" class="btn btn-default kt-hidden-">
+                                <i class="la la-cart-plus"></i> Nouveau Type de téléchargement
+                            </a>
+                            <div class="kt-separator kt-separator--border-dashed kt-separator--space-lg d-xl-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-portlet__body kt-portlet__body--fit">
+                <div class="kt-datatable table table-bordered" id="listeTypeDownload"></div>
+            </div>
+        </div>
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-label">
+					<span class="kt-portlet__head-icon">
+						<i class="flaticon2-calendar-2"></i>
+					</span>
+                    <h3 class="kt-portlet__head-title">
+                        Type de Release
+                    </h3>
+                </div>
+            </div>
+            <div class="kt-portlet__body">
+                <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
+                    <div class="row align-items-center">
+                        <div class="col-xl-8 order-2 order-xl-1">
+                            &nbsp;
+                        </div>
+                        <div class="col-xl-4 order-1 order-xl-2 kt-align-right">
+                            <a data-toggle="modal" href="#addTypeRelease" class="btn btn-default kt-hidden-">
+                                <i class="la la-cart-plus"></i> Nouveau Type de Release
+                            </a>
+                            <div class="kt-separator kt-separator--border-dashed kt-separator--space-lg d-xl-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-portlet__body kt-portlet__body--fit">
+                <div class="kt-datatable table table-bordered" id="listeTypeRelease"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addTypeDownload" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajout d'un nouveau type de téléchargement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form action="/api/admin/route/config/type" class="kt-form" id="formAddTypeDownload" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Nom du type</label>
+                            <input type="text" class="form-control" name="name" placeholder="Nom du type de téléchargement">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success"><i class="la la-check"></i> Valider</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addTypeRelease" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajout d'un nouveau type de release</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form action="/api/admin/route/config/release" class="kt-form" id="formAddTypeRelease" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Nom du type</label>
+                            <input type="text" class="form-control" name="name" placeholder="Nom du type de release">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success"><i class="la la-check"></i> Valider</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
