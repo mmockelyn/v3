@@ -131,24 +131,40 @@ function loadLatestObjets() {
         columns: [
             {
                 field: 'id',
-                title: "#",
+                title: "Identifiant",
                 sortable: true,
-                width: 30,
                 type: 'number',
+                autoHide: true
             },
             {
-                field: 'name',
-                title: "Type",
-                width: 250,
+                field: 'designation',
+                title: "Designation",
                 sortable: false,
                 autoHide: false
+            },
+            {
+                field: "category_id",
+                title: "Catégorie",
+                autoHide: true,
+            },
+            {
+                field: 'published',
+                title: "Publier",
+                sortable: false,
+                autoHide: true,
+                template: function (row) {
+                    let published = {
+                        0:{'title': 'Non publier', 'icon': 'la la-times-circle la-3x', 'class': 'kt-font-danger'},
+                        1:{'title': 'Publier', 'icon': 'la la-check-circle la-3x', 'class': 'kt-font-success'},
+                    };
+                    return `<i class="${published[row.published].icon} ${published[row.published].class}" data-toggle="kt-tooltip" title="${published[row.published].title}"></i>`
+                }
             },
             {
                 field: 'actions',
                 title: "Action",
                 sortable: false,
                 autoHide: false,
-                width: 100,
                 template: function (row) {
                     return `
                     <a href="/api/admin/objet/objet/${row.id}/delete" class="btn btn-sm btn-icon btn-danger" data-toggle="kt-tooltip" title="Supprimer l'objet"><i class="la la-trash"></i> </a>

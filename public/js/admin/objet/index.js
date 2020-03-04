@@ -3569,22 +3569,44 @@ function loadLatestObjets() {
     pagination: true,
     columns: [{
       field: 'id',
-      title: "#",
+      title: "Identifiant",
       sortable: true,
-      width: 30,
-      type: 'number'
+      type: 'number',
+      autoHide: true
     }, {
-      field: 'name',
-      title: "Type",
-      width: 250,
+      field: 'designation',
+      title: "Designation",
       sortable: false,
       autoHide: false
+    }, {
+      field: "category_id",
+      title: "Catégorie",
+      autoHide: true
+    }, {
+      field: 'published',
+      title: "Publier",
+      sortable: false,
+      autoHide: true,
+      template: function template(row) {
+        var published = {
+          0: {
+            'title': 'Non publier',
+            'icon': 'la la-times-circle la-3x',
+            'class': 'kt-font-danger'
+          },
+          1: {
+            'title': 'Publier',
+            'icon': 'la la-check-circle la-3x',
+            'class': 'kt-font-success'
+          }
+        };
+        return "<i class=\"".concat(published[row.published].icon, " ").concat(published[row.published]["class"], "\" data-toggle=\"kt-tooltip\" title=\"").concat(published[row.published].title, "\"></i>");
+      }
     }, {
       field: 'actions',
       title: "Action",
       sortable: false,
       autoHide: false,
-      width: 100,
       template: function template(row) {
         return "\n                    <a href=\"/api/admin/objet/objet/".concat(row.id, "/delete\" class=\"btn btn-sm btn-icon btn-danger\" data-toggle=\"kt-tooltip\" title=\"Supprimer l'objet\"><i class=\"la la-trash\"></i> </a>\n                    ");
       }

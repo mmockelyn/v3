@@ -63,7 +63,7 @@
                         <div class="kt-portlet__head">
                             <div class="kt-portlet__head-label">
                                 <span class="kt-portlet__head-icon">
-                                    <i class="flaticon2-comment"></i>
+                                    <i class="flaticon2-circle-vol-2"></i>
                                 </span>
                                 <h3 class="kt-portlet__head-title">
                                     Dernieres Catégories
@@ -79,7 +79,7 @@
                         <div class="kt-portlet__head">
                             <div class="kt-portlet__head-label">
 					<span class="kt-portlet__head-icon">
-						<i class="la la-newspaper-o"></i>
+						<i class="la la-cubes"></i>
 					</span>
                                 <h3 class="kt-portlet__head-title">
                                     Derniers Objets
