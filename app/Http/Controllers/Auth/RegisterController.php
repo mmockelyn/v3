@@ -50,7 +50,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -65,7 +65,7 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \App\User
      */
     protected function create(array $data)
@@ -80,12 +80,16 @@ class RegisterController extends Controller
     /**
      * The user has been registered.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $user
+     * @param  \Illuminate\Http\Request $request
+     * @param  mixed $user
      * @return mixed
      */
     protected function registered(Request $request, $user)
     {
+        $this->storeAccount($user);
+        $this->createPremium($user);
+        $this->createSocial($user);
+
         $customer = new Customer();
 
         $cs = $customer->create($user->email, $user->name);
@@ -95,6 +99,25 @@ class RegisterController extends Controller
             ->update(["customer_id" => $cs->id]);
 
         return null;
+    }
+
+    protected function storeAccount(User $user)
+    {
+        $account = $user->createAccount();
+    }
+
+    protected function createPremium(User $user)
+    {
+        $premium = $user->premium()->create([
+            "user_id" => $user->getId(),
+        ]);
+    }
+
+    protected function createSocial(User $user)
+    {
+        $social = $user->social()->create([
+            "user_id" => $user->getId()
+        ]);
     }
 
 }

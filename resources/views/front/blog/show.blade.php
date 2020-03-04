@@ -15,7 +15,7 @@
                 <div class="tz-blog__body">
                     <div class="title">{{ $blog->title }}</div>
                     <div class="subtitle">Posté le {{ $blog->published_at->format('d/m/Y à H:i') }}</div>
-                    <div class="content">{{ $blog->content }}</div>
+                    <div class="content">{!! $blog->content !!}</div>
                 </div>
                 <hr>
                 <div class="tz-blog__comments">
