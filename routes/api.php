@@ -51,7 +51,7 @@ Route::group(["prefix" => "wiki", "namespace" => "Api\Wiki"], function () {
 });
 
 Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
-    Route::get('loadSignalement', 'AdminController@loadSignalement');
+    Route::post('loadSignalement', 'AdminController@loadSignalement');
 
     Route::group(["prefix" => "blog", "namespace" => "Blog"], function () {
         Route::get('latest', 'BlogController@loadLatest');
