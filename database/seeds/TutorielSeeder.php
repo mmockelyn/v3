@@ -29,7 +29,6 @@ class TutorielSeeder extends Seeder
                 }else{
                     $published_at = null;
                 }
-                if($published == 1){$youtube_id = \Illuminate\Support\Str::random(8);}else{$youtube_id = null;}
                 if($published == 1){$time = rand(0,59).":".rand(0,59)." mins";}else{$time = null;}
 
                 \App\Model\Tutoriel\Tutoriel::create([
@@ -42,7 +41,6 @@ class TutorielSeeder extends Seeder
                     "content"   => "<i>".$short_content."</i><br><br>".$faker->realText(rand(250, 1000)),
                     "published" => $published,
                     "pathVideo" => "/tmp/sending/".rand(0,1000).".mp4",
-                    "youtube_id"    => $youtube_id,
                     "source"    => $source,
                     "premium"   => rand(0,1),
                     "time"  => $time,
