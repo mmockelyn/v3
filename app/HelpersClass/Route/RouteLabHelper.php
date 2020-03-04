@@ -33,7 +33,11 @@ class RouteLabHelper
         $countAnomalie = $anomalie->newQuery()->where('route_id', $route_id)->count();
         $countState = $anomalie->newQuery()->where('route_id', $route_id)->where('state', 2)->count();
 
-        $percent = round($countState * 100 / $countAnomalie, 0);
+        if($countAnomalie == 0 || $countState == 0) {
+            return 0;
+        }else{
+            $percent = round($countState * 100 / $countAnomalie, 0);
+        }
 
         return $percent;
     }

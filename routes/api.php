@@ -100,6 +100,7 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::put('{version_id}/editDescription', 'RouteVersionController@editDescription');
             Route::put('{version_id}/editThumbnail', 'RouteVersionController@editThumbnail');
             Route::get('{version_id}/delete', 'RouteVersionController@deleteVersion');
+            Route::post('uploadVideo', 'RouteVersionController@uploadVideo');
 
             Route::group(["prefix" => "{version_id}/gare"], function () {
                 Route::post('/', 'RouteVersionController@createGare');

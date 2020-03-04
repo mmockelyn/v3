@@ -43,5 +43,15 @@ class RouteBuildRepository
             ]);
     }
 
+    public function create($route_id, $version, $build)
+    {
+        return $this->routeBuild->newQuery()
+            ->create([
+                "route_id" => $route_id,
+                "version" => $version,
+                "build" => $build
+            ]);
+    }
+
 }
 

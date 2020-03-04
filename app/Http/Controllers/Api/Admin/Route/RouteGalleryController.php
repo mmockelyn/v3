@@ -82,7 +82,7 @@ class RouteGalleryController extends BaseController
                             Storage::disk('public')->setVisibility($path.$file->getClientOriginalName(), 'public');
 
                             try {
-                                $this->routeGalleryRepository->create($request->get('cat'), $file->getClientOriginalName());
+                                $this->routeGalleryRepository->create($route_id, $request->get('cat'), $file->getClientOriginalName());
 
                                 dd("DONE");
                             }catch (\Exception $exception) {

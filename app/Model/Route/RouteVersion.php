@@ -17,4 +17,9 @@ class RouteVersion extends Model
     {
         return $this->hasMany(RouteVersionGare::class);
     }
+
+    public function getDistanceAttribute($value) {
+        $distance = $value / 100;
+        return number_format($distance, 2, ',', ' ');
+    }
 }

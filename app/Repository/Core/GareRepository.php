@@ -20,11 +20,13 @@ class GareRepository
         $this->gare = $gare;
     }
 
-    public function create($gare_alias_libelle_noncontraint)
+    public function create($gare_alias_libelle_noncontraint, $lat, $long)
     {
         return $this->gare->newQuery()
             ->create([
                 "name" => $gare_alias_libelle_noncontraint,
+                "lat" => $lat,
+                "long" => $long
             ]);
     }
 

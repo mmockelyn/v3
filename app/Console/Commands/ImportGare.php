@@ -12,7 +12,7 @@ class ImportGare extends Command
      *
      * @var string
      */
-    protected $signature = 'import:gare';
+    protected $signature = 'gare:import';
 
     /**
      * The console command description.
@@ -79,7 +79,20 @@ class ImportGare extends Command
 
         $bar->start();
         foreach ($jps->records as $gare) {
-            $this->gareRepository->create($gare->fields->gare_alias_libelle_noncontraint);
+            if(isset($gare->fields->pltf_latitude_entreeprincipale_wgs84) ||  isset($gare->fields->pltf_longitude_entreeprincipale_wgs84)) {
+                $this->gareRepository->create(
+                    $gare->fields->gare_alias_libelle_noncontraint,
+                    $gare->fields->pltf_latitude_entreeprincipale_wgs84,
+                    $gare->fields->pltf_longitude_entreeprincipale_wgs84
+                );
+            }else{
+                $this->gareRepository->create(
+                    $gare->fields->gare_alias_libelle_noncontraint,
+                    null,
+                    null
+                );
+            }
+
             $bar->advance();
         }
 

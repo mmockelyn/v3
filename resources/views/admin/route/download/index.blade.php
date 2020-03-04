@@ -247,7 +247,7 @@
                         </div>
                         <div class="form-group">
                             <label for="linkDownload">Lien de téléchargement</label>
-                            <input type="text" class="form-control" name="linkDownload" value="https://download.trainznation.eu/">
+                            <input type="text" class="form-control" name="linkDownload" value="https://download.trainznation.eu/v3/route/{{ $route->id }}/download/">
                         </div>
                         <div class="form-group">
                             <label for="note">Note de téléchargement</label>
@@ -298,7 +298,7 @@
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label for="linkRelease">Lien de la release</label>
-                                    <input type="text" class="form-control" name="linkRelease" value="https://download.trainznation.eu/">
+                                    <input type="text" class="form-control" name="linkRelease" value="https://download.trainznation.eu/v3/route/{{ $route->id }}/patcher/">
                                 </div>
                             </div>
                             <div class="col-md-4">

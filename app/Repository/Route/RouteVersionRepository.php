@@ -42,7 +42,7 @@ class RouteVersionRepository
             ]);
     }
 
-    public function create($route_id, $version, $name, $distance, $depart, $arrive, $linkVideo)
+    public function create($route_id, $version, $name, $distance, $depart, $arrive)
     {
         return $this->routeVersion->newQuery()
             ->create([
@@ -52,7 +52,7 @@ class RouteVersionRepository
                 "distance" => $distance,
                 "depart" => $depart,
                 "arrive" => $arrive,
-                "linkVideo" => $linkVideo
+                "linkVideo" => null
             ]);
     }
 
@@ -61,6 +61,16 @@ class RouteVersionRepository
         $this->routeVersion->newQuery()
             ->find($version_id)
             ->delete();
+        return null;
+    }
+
+    public function updateVideo($version_id, $pathFile)
+    {
+        $this->get($version_id)
+            ->update([
+                "linkVideo" => $pathFile
+            ]);
+
         return null;
     }
 

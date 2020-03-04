@@ -129,9 +129,22 @@ function formAddGare() {
         })
     })
 }
+function dropVideo() {
+    $(".dropzone").dropzone({
+        url: '/api/admin/route/'+route_id+'/version/uploadVideo',
+        paramName: 'video',
+        addRemoveLinks: true,
+        acceptedFiles: "video/*",
+        timeout: '60000',
+        success: function (data) {
+            toastr.success("Le fichier <strong>"+data.name+"</strong> à été uploader")
+        }
+    })
+}
 
 formWidget()
 submitEditDescription()
 formAddVersion()
 loadLatLngField()
 formAddGare()
+dropVideo()

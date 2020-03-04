@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Api\Admin\Route;
 
+use App\HelpersClass\Route\RouteHelpers;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
+use App\Repository\Route\RouteBuildRepository;
+use App\Repository\Route\RouteRepository;
 use App\Repository\Route\RouteVersionGareRepository;
 use App\Repository\Route\RouteVersionRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class RouteVersionController extends BaseController
 {
@@ -19,16 +23,32 @@ class RouteVersionController extends BaseController
      * @var RouteVersionGareRepository
      */
     private $routeVersionGareRepository;
+    /**
+     * @var RouteRepository
+     */
+    private $routeRepository;
+    /**
+     * @var RouteBuildRepository
+     */
+    private $routeBuildRepository;
 
     /**
      * RouteVersionController constructor.
      * @param RouteVersionRepository $versionRepository
      * @param RouteVersionGareRepository $routeVersionGareRepository
+     * @param RouteRepository $routeRepository
+     * @param RouteBuildRepository $routeBuildRepository
      */
-    public function __construct(RouteVersionRepository $versionRepository, RouteVersionGareRepository $routeVersionGareRepository)
+    public function __construct(
+        RouteVersionRepository $versionRepository,
+        RouteVersionGareRepository $routeVersionGareRepository,
+        RouteRepository $routeRepository, RouteBuildRepository $routeBuildRepository
+    )
     {
         $this->versionRepository = $versionRepository;
         $this->routeVersionGareRepository = $routeVersionGareRepository;
+        $this->routeRepository = $routeRepository;
+        $this->routeBuildRepository = $routeBuildRepository;
     }
 
     public function loadGares(Request $request)
@@ -67,6 +87,7 @@ class RouteVersionController extends BaseController
 
     public function store(Request $request, $route_id)
     {
+        $route = $this->routeRepository->get($route_id);
         $validator = \Validator::make($request->all(), [
             "version" => "required|numeric",
             "name" => "required",
@@ -85,9 +106,12 @@ class RouteVersionController extends BaseController
                 $request->name,
                 $request->distance,
                 $request->depart,
-                $request->arrive,
-                $request->linkVideo
+                $request->arrive
             );
+
+            if($route->build == null){
+                $this->routeBuildRepository->create($route_id, $request->version, 0);
+            }
 
             return $this->sendResponse($version, "ok");
         } catch (\Exception $exception) {
@@ -206,6 +230,48 @@ class RouteVersionController extends BaseController
             return redirect()->back()->with('type', 'success')->with('message', 'La gare <strong>' . $gare->name_gare . '</strong> à été supprimer avec succès');
         } catch (\Exception $exception) {
             return redirect()->back()->with('type', 'error')->with('message', $exception->getMessage());
+        }
+    }
+
+    public function uploadVideo(Request $request, $route_id) {
+        try {
+            $file = $request->file('video');
+            $path = 'route/'.$route_id.'/video/'.$request->get('version_id').'/';
+
+            if(Storage::disk('sftp')->exists($path.$file->getClientOriginalName()) == true) {
+                try {
+                    Storage::disk('sftp')->delete($path.$file->getClientOriginalName());
+                    $file->storeAs($path, $file->getClientOriginalName(), 'sftp');
+                    Storage::disk('sftp')->setVisibility($path.$file->getClientOriginalName(), 'public');
+
+                    try {
+                        $this->versionRepository->updateVideo($request->get('version_id'), env('APP_DSN_URL').$path.$file->getClientOriginalName());
+
+                        return $this->sendResponse('ok', 'ok');
+                    }catch (\Exception $exception) {
+                        return $exception->getMessage();
+                    }
+                }catch (FileException $exception) {
+                    return $exception->getMessage();
+                }
+            }else{
+                try {
+                    $file->storeAs($path, $file->getClientOriginalName(), 'sftp');
+                    Storage::disk('sftp')->setVisibility($path.$file->getClientOriginalName(), 'public');
+
+                    try {
+                        $this->versionRepository->updateVideo($request->get('version_id'), env('APP_DSN_URL').$path.$file->getClientOriginalName());
+
+                        return $this->sendResponse('ok', 'ok');
+                    }catch (\Exception $exception) {
+                        return $exception->getMessage();
+                    }
+                }catch (FileException $exception) {
+                    return $exception->getMessage();
+                }
+            }
+        }catch (\Exception $exception) {
+            return $exception->getMessage();
         }
     }
 
