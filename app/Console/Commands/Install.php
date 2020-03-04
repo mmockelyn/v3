@@ -118,7 +118,7 @@ class Install extends Command
                 break;
 
             case 'testing':
-                $this->call('migrate');
+                $this->call('migrate:fresh');
                 $this->call('db:seed', [
                     '--class' => "ProductionSeeder"
                 ]);
