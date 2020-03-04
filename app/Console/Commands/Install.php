@@ -37,158 +37,137 @@ class Install extends Command
      */
     public function handle()
     {
-        $bar = $this->output->createProgressBar(6);
+        $bar = $this->output->createProgressBar(10);
         $bar->start();
-        $this->line("Installation du site Trainznation");
-        $this->environnementFile();
+        $this->downSite();
+        $bar->advance();
+        $this->createEnvFile();
         $bar->advance();
         $this->generateKey();
         $bar->advance();
-        $this->createDatabase();
+        $this->accessDirectory();
         $bar->advance();
-        $this->seedingBase();
+        $this->migration();
         $bar->advance();
-        $this->startLaravelEchoServer();
+        $this->npmUpdate();
         $bar->advance();
-        $this->startLaravelHorizon();
+        $this->npmAsset();
+        $bar->advance();
+        $this->launchHorizon();
+        $bar->advance();
+        $this->launchEchoServer();
+        $bar->advance();
+        $this->upSite();
         $bar->advance();
         $bar->finish();
-        $this->line("Installation du site Trainznation Terminer");
+        $this->line("Installation du site trainznation effectuée");
+
         return null;
     }
 
-    private function environnementFile()
+    private function downSite()
     {
-        $env = $this->option('env');
+        $this->line("Mise en maintenance du site");
+        $this->line("###############################################");
+        $this->call('down');
+    }
+
+    private function createEnvFile()
+    {
+        $env = $this->argument('env');
+        $this->line("Création du fichier d'environnement");
+        $this->line("###############################################");
         switch ($env) {
             case 'local':
-                exec('cp .env.example .env');
-                $this->line("Définition des variables d'environnement Principal");
-                Str::replaceFirst('APP_ENV=', 'APP_ENV=local', file_get_contents('.env'));
-                Str::replaceFirst('APP_DEBUG=', 'APP_DEBUG=true', file_get_contents('.env'));
-                Str::replaceFirst('APP_URL=', 'APP_URL=https://v3.trainznation.io', file_get_contents('.env'));
-
-                $this->line("Définition des variables d'environnement de base de donnée");
-                Str::replaceFirst('DB_HOST=', 'DB_HOST=192.168.10.10', file_get_contents('.env'));
-
-                $this->line("Définition des variables d'environnement Redis");
-                putenv("REDIS_HOST=127.0.0.1");
-
-                $this->line("Définition des variables d'environnement Mail");
-                putenv("MAIL_HOST=192.168.10.10");
-                putenv("MAIL_PORT=1025");
-
-                $this->line("Définition des variables d'environnement Terminer");
+                exec('cp .env.local .env');
                 break;
+
             case 'testing':
-                exec('cp .env.example .env');
-                $this->line("Définition des variables d'environnement Principal");
-                putenv("APP_ENV=testing");
-                putenv("APP_DEBUG=true");
-                putenv("APP_URL=https://v3.trainznation.ts");
-
-                $this->line("Définition des variables d'environnement de base de donnée");
-                putenv("DB_HOST=192.168.1.26");
-                putenv("DB_DATABASE=v3.trainznation");
-                putenv("DB_USERNAME=root");
-                putenv("DB_PASSWORD=1992_Maxime");
-
-                $this->line("Définition des variables d'environnement Redis");
-                putenv("REDIS_HOST=127.0.0.1");
-
-                $this->line("Définition des variables d'environnement Mail");
-                putenv("MAIL_HOST=192.168.1.26");
-                putenv("MAIL_PORT=1025");
-
-                $this->line("Définition des variables d'environnement Terminer");
+                exec('cp .env.testing .env');
                 break;
 
             case 'production':
-                exec('cp .env.example .env');
-                $this->line("Définition des variables d'environnement Principal");
-                putenv("APP_ENV=production");
-                putenv("APP_DEBUG=false");
-                putenv("APP_URL=https://trainznation.eu");
-
-                $this->line("Définition des variables d'environnement de base de donnée");
-                putenv("DB_HOST=192.168.1.50");
-                putenv("DB_DATABASE=trainznation");
-                putenv("DB_USERNAME=root");
-                putenv("DB_PASSWORD=1992_Maxime");
-
-                $this->line("Définition des variables d'environnement Redis");
-                putenv("REDIS_HOST=127.0.0.1");
-
-                $this->line("Définition des variables d'environnement Mail");
-                putenv("MAIL_HOST=localhost");
-                putenv("MAIL_PORT=25");
-
-                $this->line("Définition des variables d'environnement Terminer");
-
+                exec('cp .env.prod .env');
         }
-
     }
 
     private function generateKey()
     {
-        $this->line("Déclaration de la clé");
+        $this->line("Generation de la clé");
+        $this->line("###############################################");
         $this->call('key:generate');
     }
 
-    private function createDatabase()
+    private function accessDirectory()
     {
-        $this->line("Création de la base de donnée");
-        try {
-            $this->call('migrate:fresh');
-        } catch (\Exception $exception) {
-            $this->error($exception->getMessage());
+        $this->line("Définition des accès aux fichiers");
+        $this->line("###############################################");
+        exec('chmod -R 777 /storage /bootstrap');
+    }
+
+    private function migration()
+    {
+        $this->line("Migration & Seeding");
+        $this->line("###############################################");
+
+        $env = $this->argument('env');
+
+        switch ($env) {
+            case 'local':
+                $this->call('migrate:fresh');
+                $this->call('db:seed', [
+                    '--class' => "DatabaseSeeder"
+                ]);
+                break;
+
+            case 'testing':
+                $this->call('migrate');
+                $this->call('db:seed', [
+                    '--class' => "DatabaseSeeder"
+                ]);
+                break;
+
+            case 'production':
+                $this->call('migrate');
+                $this->call('db:seed', [
+                    '--class' => "ProductionSeeder"
+                ]);
         }
     }
 
-    private function seedingBase()
+    private function npmUpdate()
     {
-        $this->line("Mise en place des données dans la base de donnée:" . env("DB_DATABASE"));
-        $env = $this->option('env');
-        try {
-            switch ($env) {
-                case 'local':
-                    $this->call('db:seed', [
-                        "--class" => "DatabaseSeeder"
-                    ]);
-                    break;
-                case 'testing':
-                    $this->call('db:seed', [
-                        "--class" => "DatabaseSeeder"
-                    ]);
-                    break;
-
-                case 'production':
-                    $this->call('db:seed', [
-                        "--class" => "ProductionSeeder"
-                    ]);
-            }
-        } catch (\Exception $exception) {
-            $this->error($exception->getMessage());
-        }
+        $this->line("Mise à jour NPM");
+        $this->line("###############################################");
+        exec("npm install");
     }
 
-    private function startLaravelEchoServer()
+    private function npmAsset()
+    {
+        $this->line("Build Assets With NPM");
+        $this->line("###############################################");
+        exec('npm run production');
+    }
+
+    private function launchHorizon()
+    {
+        $this->line("Lancement d'horizon");
+        $this->line("###############################################");
+        exec('screen -S trainznation_horizon -m php artisan horizon');
+    }
+
+    private function launchEchoServer()
     {
         $this->line("Lancement de Laravel Echo Server");
-        try {
-            exec('nohup laravel-echo-server start');
-        } catch (\Exception $exception) {
-            $this->error($exception->getMessage());
-        }
+        $this->line("###############################################");
+        exec('screen -S trainznation_echo -m laravel-echo-server start');
     }
 
-    private function startLaravelHorizon()
-    {
-        $this->line("Lancement de Laravel Horizon");
-        try {
-            exec('nohup php artisan horizon');
-        } catch (\Exception $exception) {
-            $this->error($exception->getMessage());
-        }
+    private function upSite() {
+        $this->line("Sortie du mode maintenance");
+        $this->line("###############################################");
+        $this->call('up');
     }
+
+
 }
