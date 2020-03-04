@@ -78,7 +78,7 @@ Route::group(["namespace" => "Front"], function () {
     });
 });
 
-Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" => ["auth"]], function (){
+Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" => ["web"]], function (){
     Route::get('/', ["as" => "Back.dashboard", "uses" => "HomeController@dashboard"]);
 
     Route::group(["prefix" => "blog", "namespace" => "Blog"], function (){
@@ -158,7 +158,7 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
     });
 });
 
-Route::group(["middleware" => ["auth", "verified"], "prefix" => "account", "namespace" => "Account"], function () {
+Route::group(["middleware" => ["web", "verified"], "prefix" => "account", "namespace" => "Account"], function () {
     Route::get('/', ["as" => "Account.index", "uses" => "AccountController@index"]);
     Route::get('/invoice/{invoice_id}', ["as" => "Account.Invoice.show", "uses" => "AccountController@invoiceShow"]);
 
@@ -200,7 +200,7 @@ Route::group(["prefix" => "provider", "namespace" => "Provider"], function () {
     Route::get('callback/{provider}', 'ProviderController@callback');
 });
 
-Auth::routes(['verify' => true]);
+Auth::routes();
 
 Route::get('logout', 'Auth\LoginController@logout');
 Route::get('/test', 'TestController@test');
