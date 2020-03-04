@@ -221,6 +221,5 @@
 @endsection
 
 @section("script")
-    @toastr_render
     <script src="{{ asset('js/admin/route/gallery.js') }}"></script>
 @endsection

@@ -390,7 +390,6 @@
 @endsection
 
 @section("script")
-    @toastr_render
     <script src="{{ asset('js/admin/route/version.js') }}"></script>
     @foreach($versions as $version)
     <script type="text/javascript">

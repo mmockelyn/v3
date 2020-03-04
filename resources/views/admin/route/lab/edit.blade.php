@@ -131,6 +131,5 @@
 @endsection
 
 @section("script")
-    @toastr_render
     <script src="{{ asset('js/admin/route/lab_edit.js') }}"></script>
 @endsection

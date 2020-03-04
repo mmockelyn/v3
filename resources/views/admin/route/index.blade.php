@@ -106,6 +106,5 @@
 @endsection
 
 @section("script")
-    @toastr_render
     <script src="{{ asset('js/admin/route/index.js') }}"></script>
 @endsection
