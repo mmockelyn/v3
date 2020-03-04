@@ -35,7 +35,8 @@ class AssetSeeder extends Seeder
                     "pricing"                   => $pricing,
                     "price"                     => $price,
                     "published"                 => $published,
-                    "published_at"              => $published_at
+                    "published_at"              => $published_at,
+                    "uuid"                      => $faker->uuid
                 ]);
             }
         }
