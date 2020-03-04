@@ -103,6 +103,7 @@ class Install extends Command
         $this->line("Définition des accès aux fichiers");
         $this->line("###############################################");
         exec('chmod -R 777 storage/ bootstrap/');
+        $this->call('storage:link');
     }
 
     private function migration()
