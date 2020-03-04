@@ -37,7 +37,7 @@ class Install extends Command
      */
     public function handle()
     {
-        $bar = $this->output->createProgressBar(10);
+        $bar = $this->output->createProgressBar(8);
         $bar->start();
         $this->downSite();
         $bar->advance();
@@ -48,10 +48,6 @@ class Install extends Command
         $this->accessDirectory();
         $bar->advance();
         $this->migration();
-        $bar->advance();
-        $this->npmUpdate();
-        $bar->advance();
-        $this->npmAsset();
         $bar->advance();
         $this->launchHorizon();
         $bar->advance();
@@ -134,20 +130,6 @@ class Install extends Command
                     '--class' => "ProductionSeeder"
                 ]);
         }
-    }
-
-    private function npmUpdate()
-    {
-        $this->line("Mise à jour NPM");
-        $this->line("###############################################");
-        exec("npm install");
-    }
-
-    private function npmAsset()
-    {
-        $this->line("Build Assets With NPM");
-        $this->line("###############################################");
-        exec('npm run production');
     }
 
     private function launchHorizon()
