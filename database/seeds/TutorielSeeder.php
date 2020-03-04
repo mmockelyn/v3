@@ -45,7 +45,6 @@ class TutorielSeeder extends Seeder
                     "premium"   => rand(0,1),
                     "time"  => $time,
                     "published_at"  => $published_at,
-                    "difficulte"    => rand(0,2)
                 ]);
             }
         }
