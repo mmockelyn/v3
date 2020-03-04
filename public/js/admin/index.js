@@ -21287,9 +21287,6 @@ function loadSignalement() {
     // column sorting
     sortable: true,
     pagination: true,
-    search: {
-      input: $('#generalSearch')
-    },
     columns: [{
       field: 'state',
       sortable: 'asc',
@@ -21313,6 +21310,7 @@ function loadSignalement() {
             'class': 'kt-font-danger'
           }
         };
+        $('[data-toggle="kt-tooltip"]').tooltip();
         return "<i class=\"".concat(status[row.state].icon, " ").concat(status[row.state]["class"], "\" style=\"font-size: 25px;\" data-toggle=\"kt-tooltip\" title=\"").concat(status[row.state].title, "\"></i>");
       }
     }, {
@@ -21368,6 +21366,10 @@ function loadSignalement() {
       }
     }
   });
+  $('#kt_form_state').on('change', function () {
+    table.search($(this).val().toLowerCase(), 'fd');
+  });
+  $("#kt_form_state").selectpicker();
 }
 
 function loadLatestArticle() {

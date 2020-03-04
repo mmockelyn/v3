@@ -36,10 +36,6 @@ function loadSignalement() {
         sortable: true,
 
         pagination: true,
-
-        search: {
-            input: $('#generalSearch'),
-        },
         columns: [
             {
                 field: 'state',
@@ -52,6 +48,7 @@ function loadSignalement() {
                         'warning':{'title': 'Attention', 'icon': 'flaticon2-warning', 'class': 'kt-font-warning'},
                         'danger':{'title': 'Erreur', 'icon': 'flaticon2-cross', 'class': 'kt-font-danger'},
                     };
+                    $('[data-toggle="kt-tooltip"]').tooltip()
                     return `<i class="${status[row.state].icon} ${status[row.state].class}" style="font-size: 25px;" data-toggle="kt-tooltip" title="${status[row.state].title}"></i>`
                 }
             },
@@ -107,6 +104,13 @@ function loadSignalement() {
             },
         },
     });
+
+    $('#kt_form_state').on('change', function () {
+        table.search($(this).val().toLowerCase(), 'fd');
+    });
+
+    $("#kt_form_state").selectpicker()
+
 }
 
 function loadLatestArticle() {
