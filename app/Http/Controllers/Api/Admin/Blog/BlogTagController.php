@@ -61,11 +61,9 @@ class BlogTagController extends BaseController
         try {
             $this->blogTagRepository->delete($tag_id);
 
-            toastr()->success("Tag supprimer", "Succès");
-            return redirect()->back();
+            return redirect()->back()->with('success', "Tag Supprimer");
         } catch (\Exception $exception) {
-            toastr()->error("Erreur lors de la suppression du tag", "Erreur Système");
-            return redirect()->back();
+            return redirect()->back()->with('error', "Erreur lors de la suppression du tag");
         }
     }
 }

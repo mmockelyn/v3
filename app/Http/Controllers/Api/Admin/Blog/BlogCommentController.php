@@ -57,11 +57,9 @@ class BlogCommentController extends BaseController
     {
         try {
             $this->blogCommentRepository->publish($comment_id);
-            toastr()->success("Le commentaire à été publier", "Succès");
-            return redirect()->back();
+            return redirect()->back()->with('success', "Le commentaire à été publier");
         }catch (\Exception $exception) {
-            toastr()->error("Erreur lors de la publication du commentaire", "Erreur Système");
-            return redirect()->back();
+            return redirect()->back()->with('error', "Erreur lors de la publication du commentaire");
         }
     }
 
@@ -69,11 +67,9 @@ class BlogCommentController extends BaseController
     {
         try {
             $this->blogCommentRepository->unpublish($comment_id);
-            toastr()->success("Le commentaire à été dépublier", "Succès");
-            return redirect()->back();
+            return redirect()->back()->with('success', "Le commentaire à été dépublier");
         }catch (\Exception $exception) {
-            toastr()->error("Erreur lors de la dépublication du commentaire", "Erreur Système");
-            return redirect()->back();
+            return redirect()->back()->with('error', "Erreur lors de la dépublication du commentaire");
         }
     }
 

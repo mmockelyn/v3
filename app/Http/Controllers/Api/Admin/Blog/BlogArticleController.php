@@ -265,11 +265,9 @@ class BlogArticleController extends BaseController
                 Storage::disk('public')->setVisibility('blog/'.$article_id.'.png', 'public');
             }
 
-            toastr()->success("L'image à été mise à jour", "Succès");
-            return redirect()->back();
+            return redirect()->back()->with('success', "L'image à été mise à jour avec succès");
         } catch (\Exception $exception) {
-            toastr()->error("Erreur lors de la mise à jour de l'image", "Erreur Système");
-            return redirect()->back();
+            return redirect()->back()->with("error", "Erreur lors de la mise à jour de l'image");
         }
     }
 
