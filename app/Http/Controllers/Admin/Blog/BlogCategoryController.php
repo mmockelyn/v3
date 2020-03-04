@@ -39,11 +39,9 @@ class BlogCategoryController extends Controller
         try {
             $this->blogCategoryRepository->update($category_id, $request->name);
 
-            toastr()->success("La catégorie à été mis à jours", "Succès");
-            return redirect()->route('Back.Blog.Category.index');
+            return redirect()->route('Back.Blog.Category.index')->with('success', "La catégorie à été mise à jours");
         }catch (\Exception $exception) {
-            toastr()->error("Erreur lors de la mise à jour de la catégorie", "Erreur Système");
-            return redirect()->route('Back.Blog.Category.index');
+            return redirect()->route('Back.Blog.Category.index')->with('error', "Erreur lors de la mise à jours du système");
         }
     }
 
@@ -51,11 +49,10 @@ class BlogCategoryController extends Controller
     {
         try {
             $this->blogCategoryRepository->delete($category_id);
-            toastr()->success("Une catégorie à été supprimer", "Succès");
-            return redirect()->back();
+
+            return redirect()->back()->with('success', "La catégorie à bien été supprimer");
         }catch (\Exception $exception){
-            toastr()->error("Suppression impossible", "Erreur Système");
-            return redirect()->back();
+            return redirect()->back()->with('error', "Erreur lors de la suppression de la catégorie");
         }
     }
 }

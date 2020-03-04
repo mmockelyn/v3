@@ -61,12 +61,9 @@ class BlogArticleController extends Controller
         try {
             $this->blogRepository->delete($article_id);
 
-            toastr()->success("Un article à été supprimer", "Succès");
-
-            return redirect()->back();
+            return redirect()->back()->with('succes', "L'article à bien été supprimer");
         }catch (\Exception $exception) {
-            toastr()->error("Erreur lors de la suppression d'un article", "Erreur Système");
-            return redirect()->back();
+            return redirect()->back()->with('error', "Erreur lors de la suppression de l'article");
         }
     }
 }
