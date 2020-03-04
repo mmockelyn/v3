@@ -128,9 +128,6 @@ class RouteController extends BaseController
         ]);
 
         if($validator->fails()) {
-            foreach ($validator->errors()->all() as $error) {
-                toastr()->warning($error, "Erreur de validation");
-            }
             return redirect()->back();
         }
 
@@ -139,15 +136,12 @@ class RouteController extends BaseController
 
             try {
                 $request->file('images')->storeAs('route/'.$route->id, 'route.png', 'public');
-                toastr()->success("La route <strong>".$route->name."</strong> à été créer avec succès", "Succès");
-                return redirect()->back();
+                return redirect()->back()->with('success', "La Route ".$route->name." à été créer");
             }catch (FileException $exception) {
-                toastr()->error($exception->getMessage(), "Erreur de transfere de fichier");
-                return redirect()->back();
+                return redirect()->back()->with('error', "Erreur lors du transfère de fichier: ".$exception->getMessage());
             }
         }catch (\Exception $exception) {
-            toastr()->error($exception->getMessage(), "Erreur Système");
-            return redirect()->back();
+            return redirect()->back()->with('error', $exception->getMessage());
         }
     }
 
