@@ -130,6 +130,16 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
 
     Route::group(["prefix" => "objet", "namespace" => "Objet"], function (){
         Route::get('/', ["as" => "Back.Objet.index", "uses" => "ObjetController@index"]);
+
+        Route::group(["prefix" => "category"], function (){
+            Route::get('/', ["as" => "Back.Objet.Category.index", "uses" => "ObjetCategoryController@index"]);
+
+            Route::get('{category_id}/delete', 'ObjetCategoryController@delete');
+        });
+
+        Route::group(["prefix" => "objet"], function (){
+            Route::get('/', ["as" => "Back.Objet.Objet.index", "uses" => "ObjetObjetController@index"]);
+        });
     });
 
 

@@ -62,6 +62,12 @@ class AssetRepository
         return null;
     }
 
+    public function all($limit = null)
+    {
+        return $this->asset->newQuery()
+            ->limit($limit)
+            ->get();
+    }
 
 
 }

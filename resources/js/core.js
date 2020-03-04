@@ -46,11 +46,45 @@ export function addPremium() {
 function hidingAlerting() {
     let alerts = document.querySelectorAll('#showAlerting')
 
-    /*Array.from(alerts).forEach((alert) => {
+    Array.from(alerts).forEach((alert) => {
         setTimeout(function () {
-            alert.hide()
+            fadeEffect('fadeOut', alert)
         }, 2500)
-    })*/
+    })
+}
+
+/**
+ *
+ * @param type fadeIn or fadeOut
+ * @param el element recuperer
+ */
+function fadeEffect(type, el){
+    if(type === 'fadeIn'){
+        let fadeEffect = setInterval(function () {
+            if(!el.style.opacity) {
+                el.style.opacity = 0;
+            }
+            if(el.style.opacity < 1) {
+                el.style.opacity += 0.1;
+            } else {
+                clearInterval(fadeEffect)
+            }
+        }, 200);
+        return fadeEffect;
+    }
+    if(type === 'fadeOut'){
+        let fadeEffect = setInterval(function () {
+            if(!el.style.opacity) {
+                el.style.opacity = 1;
+            }
+            if(el.style.opacity > 0) {
+                el.style.opacity -= 0.1;
+            } else {
+                clearInterval(fadeEffect)
+            }
+        }, 200);
+        return fadeEffect;
+    }
 }
 
 hidingAlerting()

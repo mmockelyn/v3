@@ -146,6 +146,23 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
         });
     });
 
+    Route::group(["prefix" => "objet", "namespace" => "Objet"], function (){
+        Route::post('loadLatestCategories', 'ObjetController@loadLatestCategories');
+        Route::post('loadLatestObjets', 'ObjetController@loadLatestObjets');
+
+        Route::group(["prefix" => "category"], function (){
+            Route::get('{category_id}/delete', 'ObjetCategoryController@delete');
+        });
+
+        Route::group(["prefix" => "subcategory"], function (){
+
+        });
+
+        Route::group(["prefix" => "objet"], function (){
+            Route::get('{objet_id}/delete', 'ObjetObjetController@delete');
+        });
+    });
+
     Route::group(["prefix" => "tutoriel"], function () {
         Route::get('/latest', 'TutorielController@loadLatest');
     });

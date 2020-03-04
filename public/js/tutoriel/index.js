@@ -17948,11 +17948,51 @@ function addPremium() {
 
 function hidingAlerting() {
   var alerts = document.querySelectorAll('#showAlerting');
-  /*Array.from(alerts).forEach((alert) => {
-      setTimeout(function () {
-          alert.hide()
-      }, 2500)
-  })*/
+  Array.from(alerts).forEach(function (alert) {
+    setTimeout(function () {
+      fadeEffect('fadeOut', alert);
+    }, 2500);
+  });
+}
+/**
+ *
+ * @param type fadeIn or fadeOut
+ * @param el element recuperer
+ */
+
+
+function fadeEffect(type, el) {
+  if (type === 'fadeIn') {
+    var _fadeEffect = setInterval(function () {
+      if (!el.style.opacity) {
+        el.style.opacity = 0;
+      }
+
+      if (el.style.opacity < 1) {
+        el.style.opacity += 0.1;
+      } else {
+        clearInterval(_fadeEffect);
+      }
+    }, 200);
+
+    return _fadeEffect;
+  }
+
+  if (type === 'fadeOut') {
+    var _fadeEffect2 = setInterval(function () {
+      if (!el.style.opacity) {
+        el.style.opacity = 1;
+      }
+
+      if (el.style.opacity > 0) {
+        el.style.opacity -= 0.1;
+      } else {
+        clearInterval(_fadeEffect2);
+      }
+    }, 200);
+
+    return _fadeEffect2;
+  }
 }
 
 hidingAlerting();
