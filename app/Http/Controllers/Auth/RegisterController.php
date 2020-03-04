@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\HelpersClass\Account\AdminHelper;
 use App\Http\Controllers\Controller;
 use App\Model\Account\UserAccount;
 use App\Model\Account\UserPayment;
+use App\Notifications\Account\AccountCreatedNotification;
 use App\Packages\Stripe\Core\Customer;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -97,6 +99,10 @@ class RegisterController extends Controller
         UserAccount::where('user_id', $user->id)
             ->first()
             ->update(["customer_id" => $cs->id]);
+
+        $user->notify(new AccountCreatedNotification($user));
+
+        AdminHelper::adminsNotification(new \App\Notifications\Admin\Account\AccountCreatedNotification($user));
 
         return null;
     }

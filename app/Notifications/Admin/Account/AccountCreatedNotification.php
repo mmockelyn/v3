@@ -2,6 +2,7 @@
 
 namespace App\Notifications\Admin\Account;
 
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -10,15 +11,20 @@ use Illuminate\Notifications\Notification;
 class AccountCreatedNotification extends Notification
 {
     use Queueable;
+    /**
+     * @var User
+     */
+    private $user;
 
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param User $user
      */
-    public function __construct()
+    public function __construct(User $user)
     {
         //
+        $this->user = $user;
     }
 
     /**
@@ -29,7 +35,7 @@ class AccountCreatedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -55,7 +61,14 @@ class AccountCreatedNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            "icon" => "fa fa-user",
+            "icon_color" => "success",
+            "type" => "log",
+            "state" => 2,
+            "title" => "Un nouvelle utilisateur est inscrit",
+            "text" => "Un nouvelle utilisateur est inscrit: .".$this->user->name,
+            "date" => now(),
+            "link" => null
         ];
     }
 }

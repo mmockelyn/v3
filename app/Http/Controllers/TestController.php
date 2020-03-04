@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 
+use App\Notifications\Account\AccountCreatedNotification;
+use App\User;
 use Carbon\Carbon;
 
 class TestController extends Controller
 {
     public function test()
     {
-        dd(file_exists(public_path('storage/blog/4.png')));
+        $user = User::find(1);
+        $user->notify(new AccountCreatedNotification($user));
     }
 }
