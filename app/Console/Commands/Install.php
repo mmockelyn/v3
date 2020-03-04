@@ -74,7 +74,7 @@ class Install extends Command
 
     private function createEnvFile()
     {
-        $env = $this->argument('env');
+        $env = $this->option('env');
         $this->line("Création du fichier d'environnement");
         $this->line("###############################################");
         switch ($env) {
@@ -110,7 +110,7 @@ class Install extends Command
         $this->line("Migration & Seeding");
         $this->line("###############################################");
 
-        $env = $this->argument('env');
+        $env = $this->option('env');
 
         switch ($env) {
             case 'local':
