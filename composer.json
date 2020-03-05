@@ -30,7 +30,9 @@
         "socialiteproviders/twitter": "^3.0",
         "stripe/stripe-php": "^7.25",
         "thomaswelton/laravel-gravatar": "~1.0",
-        "thujohn/twitter": "^2.2"
+        "thujohn/twitter": "^2.2",
+        "ext-json": "*",
+        "ext-simplexml": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

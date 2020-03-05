@@ -35,7 +35,7 @@ class RouteVersionHelper
 
     public static function listeGares()
     {
-        $gare = new Gare();
+        $gare = new Gare;
         $gares = $gare->newQuery()->orderBy('name', 'asc')->get();
 
         return $gares;

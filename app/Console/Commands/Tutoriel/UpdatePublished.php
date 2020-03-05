@@ -39,9 +39,9 @@ class UpdatePublished extends Command
      */
     public function handle()
     {
-        $userC = new User();
+        $userC = new User;
         $admins = $userC->newQuery()->where('group', 1)->get();
-        $tutoriel = new Tutoriel();
+        $tutoriel = new Tutoriel;
         $datas = $tutoriel->newQuery()
             ->where('published', 2)
             ->get();
@@ -55,9 +55,7 @@ class UpdatePublished extends Command
                 Tutoriel::find($data->id)
                     ->update(["published" => 1]);
 
-                $arr[] = [
-                    "name" => $data->title
-                ];
+                $arr[] = ["name" => $data->title];
                 $count++;
             }
         }

@@ -26,6 +26,7 @@ use Cartalyst\Stripe\Exception\StripeException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inacho\CreditCard;
+use Validator;
 
 class AccountApiController extends BaseController
 {

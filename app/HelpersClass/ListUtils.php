@@ -263,7 +263,7 @@ class ListUtils
         return 0;
     }
 }
-if(!function_exists('list_filter')){
+if ( ! function_exists('list_filter')){
     function list_filter( $list, $args = array(), $operator = 'AND' )
     {
         if ( ! is_array( $list ) ) {

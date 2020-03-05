@@ -4,19 +4,29 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
+/**
+ * ClearAllCommand
+ *
+ * @category ClearAllCommand
+ * @package  Syltheron
+ * @author   Syltheron <mmockelyn@gmail.com>
+ * @license  null GNU General Public License
+ * @link     https://gitlab.com/mmockelyn
+ */
+
 class ClearAllCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
-     * @var string
+     * @var string $signature
      */
     protected $signature = 'trainz:clear';
 
     /**
      * The console command description.
      *
-     * @var string
+     * @var string $description
      */
     protected $description = 'Nettoyage complet';
 

@@ -38,7 +38,7 @@ class TutorielHelper
 
     public static function countTutoriel()
     {
-        $tutoriel = new Tutoriel();
+        $tutoriel = new Tutoriel;
         return $tutoriel->newQuery()
             ->where('published', 1)
             ->count();
@@ -46,7 +46,7 @@ class TutorielHelper
 
     public static function countTimeAllTutoriel()
     {
-        $tutoriel = new Tutoriel();
+        $tutoriel = new Tutoriel;
         $time = $tutoriel->newQuery()
             ->sum('time');
         return round($time / 60, 0, PHP_ROUND_HALF_EVEN);
@@ -54,7 +54,7 @@ class TutorielHelper
 
     public static function countCommentFromTutoriel($tutoriel_id)
     {
-        $comments = new TutorielComment();
+        $comments = new TutorielComment;
 
         return $comments->newQuery()
             ->where('published', 1)
@@ -62,8 +62,9 @@ class TutorielHelper
             ->count();
     }
 
-    public static function getNameOfSubcategory($subcategory) {
-        $category = new TutorielSubCategory();
+    public static function getNameOfSubcategory($subcategory)
+    {
+        $category = new TutorielSubCategory;
         $data = $category->newQuery()->find($subcategory)->toArray();
 
         return $data['name'];
@@ -71,30 +72,33 @@ class TutorielHelper
 
     public static function countTimeTutorielFromCategory($subcategory)
     {
-        $tutoriel = new Tutoriel();
+        $tutoriel = new Tutoriel;
         $time = $tutoriel->newQuery()
             ->where('tutoriel_sub_category_id', $subcategory)
             ->sum('time');
         return round($time / 60, 0, PHP_ROUND_HALF_EVEN);
     }
 
-    public static function getInfoTutoriel($tutoriel_id, $field = null) {
-        $asset = new Tutoriel();
+    public static function getInfoTutoriel($tutoriel_id, $field = null)
+    {
+        $asset = new Tutoriel;
         $data = $asset->newQuery()->find($tutoriel_id);
 
         return $data->$field;
     }
 
-    public static function getImagesBackground($tutoriel_id) {
-        if(file_exists('/storage/tutoriel/background_'.$tutoriel_id.'.png')) {
-            return '/storage/tutoriel/background_'.$tutoriel_id.'.png';
-        }else{
+    public static function getImagesBackground($tutoriel_id)
+    {
+        if (file_exists('/storage/tutoriel/background_' . $tutoriel_id . '.png')) {
+            return '/storage/tutoriel/background_' . $tutoriel_id . '.png';
+        } else {
             return '/storage/tutoriel/background_tutoriel.png';
         }
     }
 
-    public static function getTagsFromTutoriel($tutoriel_id) {
-        $tutoriel = new Tutoriel();
+    public static function getTagsFromTutoriel($tutoriel_id)
+    {
+        $tutoriel = new Tutoriel;
 
         $data = $tutoriel->newQuery()->find($tutoriel_id)->load('tags')->toArray();
 
@@ -109,32 +113,32 @@ class TutorielHelper
 
     public static function getTutorielComments()
     {
-        $comment = new TutorielComment();
+        $comment = new TutorielComment;
         $data = $comment->newQuery()->where('published', 1)->get();
         return $data;
     }
 
     public static function getLatestCommentAutor($article_id)
     {
-        $comment = new TutorielComment();
+        $comment = new TutorielComment;
         $data = $comment->newQuery()->where('tutoriel_id', $article_id)->where('published', 1)->get()->last();
         return $data->user->name;
     }
 
     public static function getLatestCommentDate($article_id)
     {
-        $comment = new TutorielComment();
+        $comment = new TutorielComment;
         $data = $comment->newQuery()->where('tutoriel_id', $article_id)->where('published', 1)->get()->last();
         return $data->published_at;
     }
 
     public static function stateTutoriel($published)
     {
-        if($published == 2){
+        if ($published == 2) {
             return 'kt-font-danger';
-        }elseif($published == 1) {
+        } elseif ($published == 1) {
             return 'kt-font-warning';
-        }else{
+        } else {
             return 'kt-font-success';
         }
     }

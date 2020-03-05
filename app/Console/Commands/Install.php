@@ -111,23 +111,17 @@ class Install extends Command
         switch ($env) {
             case 'local':
                 $this->call('migrate:fresh');
-                $this->call('db:seed', [
-                    '--class' => "DatabaseSeeder"
-                ]);
+                $this->call('db:seed', ["--class" => "DatabaseSeeder"]);
                 break;
 
             case 'testing':
                 $this->call('migrate:fresh');
-                $this->call('db:seed', [
-                    '--class' => "ProductionSeeder"
-                ]);
+                $this->call('db:seed', ['--class' => "ProductionSeeder"]);
                 break;
 
             case 'production':
                 $this->call('migrate');
-                $this->call('db:seed', [
-                    '--class' => "ProductionSeeder"
-                ]);
+                $this->call('db:seed', ['--class' => "ProductionSeeder"]);
         }
     }
 
@@ -145,7 +139,8 @@ class Install extends Command
         exec('screen -S trainznation_echo -m laravel-echo-server start');
     }
 
-    private function upSite() {
+    private function upSite()
+    {
         $this->line("Sortie du mode maintenance");
         $this->line("###############################################");
         $this->call('up');
