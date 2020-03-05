@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Repository\Wiki\WikiCategoryRepository;
 use App\Repository\Wiki\WikiRepository;
 use App\Repository\Wiki\WikiSubCategoryRepository;
-use Illuminate\Http\Request;
 
 class WikiController extends Controller
 {

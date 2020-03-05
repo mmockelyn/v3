@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\Admin\Blog;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Controller;
 use App\Repository\Blog\BlogTagRepository;
 use Illuminate\Http\Request;
 

@@ -4,7 +4,6 @@ namespace App\HelpersClass\Route;
 
 use App\Model\Route\Route;
 use App\Model\Route\RouteAnomalie;
-use App\Model\Route\RouteBuild;
 use App\Model\Route\RouteDownload;
 use Illuminate\Support\Str;
 

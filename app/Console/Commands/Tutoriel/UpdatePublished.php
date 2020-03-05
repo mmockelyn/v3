@@ -5,9 +5,7 @@ namespace App\Console\Commands\Tutoriel;
 use App\Model\Tutoriel\Tutoriel;
 use App\Notifications\Admin\UpdateVideoNotification;
 use App\User;
-use Google_Service_YouTube;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
 
 class UpdatePublished extends Command
 {

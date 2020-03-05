@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Blog;
 
 use App\Http\Controllers\Controller;
 use App\Repository\Blog\BlogRepository;
-use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {

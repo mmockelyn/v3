@@ -2,7 +2,6 @@
 
 namespace App\HelpersClass\Tutoriel;
 
-use App\HelpersClass\Generator;
 use App\Model\Tutoriel\Tutoriel;
 use App\Model\Tutoriel\TutorielComment;
 use App\Model\Tutoriel\TutorielSubCategory;

@@ -12,7 +12,6 @@ use App\Model\Account\UserView;
 use App\Model\Blog\BlogComment;
 use App\Model\Tutoriel\Tutoriel;
 use App\Model\Tutoriel\TutorielComment;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 

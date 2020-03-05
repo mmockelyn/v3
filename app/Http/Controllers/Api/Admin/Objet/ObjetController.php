@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\Admin\Objet;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Controller;
 use App\Repository\Asset\AssetCategoryRepository;
 use App\Repository\Asset\AssetRepository;
 use Illuminate\Http\Request;

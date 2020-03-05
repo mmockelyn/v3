@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Repository\Asset\AssetCategoryRepository;
 use App\Repository\Asset\AssetRepository;
 use App\Repository\Asset\AssetSubCategoryRepository;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
 class DownloadController extends Controller
 {

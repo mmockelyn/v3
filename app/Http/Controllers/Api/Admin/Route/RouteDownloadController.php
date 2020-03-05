@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Api\Admin\Route;
 
-use function App\HelpersClass\list_filter;
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Controller;
 use App\Repository\Route\RouteDownloadRepository;
 use App\Repository\Route\RouteUpdaterRepository;
 use Illuminate\Http\Request;
+use function App\HelpersClass\list_filter;
 
 class RouteDownloadController extends BaseController
 {

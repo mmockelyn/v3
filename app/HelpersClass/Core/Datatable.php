@@ -11,7 +11,6 @@ namespace App\HelpersClass\Core;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
-
 class Datatable
 {
     public function render(Request $request,Collection $datas)

@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Front\Tutoriel;
 
 use App\Http\Controllers\Controller;
-use App\Notifications\Blog\PostNewComment;
 use App\Repository\Tutoriel\TutorielCategoryRepository;
 use App\Repository\Tutoriel\TutorielCommentRepository;
 use App\Repository\Tutoriel\TutorielRepository;
 use App\Repository\Tutoriel\TutorielSubCategoryRepository;
-use Illuminate\Http\Request;
 
 class TutorielController extends Controller
 {
