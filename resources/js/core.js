@@ -3,11 +3,11 @@ import tooltip from 'bootstrap'
 
 
 export function reloadNotifBar() {
-    let countNotifBar = document.querySelector('#countNotifBar')
-    let value = parseInt(countNotifBar.textContent)
+    let countNotifBar = document.querySelector('#countNotifBar');
+    let value = parseInt(countNotifBar.textContent);
     if(value === 0) {
-        let iconEl = $(".kt-header__topbar-icon")
-        iconEl.classList.remove('kt-hidden')
+        let iconEl = $(".kt-header__topbar-icon");
+        iconEl.classList.remove('kt-hidden');
         iconEl.textContent = 1
     }else{
         countNotifBar.textContent = parseInt(value+1);
@@ -31,11 +31,11 @@ export function unblockElement(el) {
 export function addPremium() {
     $.get('/account/api/isPremium')
         .done((data) => {
-            if(data.data == 'true') {
+            if (data.data === 'true') {
                 $("#TutorielIndex").attr('data-premium', 'on')
                 $("#TutorielList").attr('data-premium', 'on')
                 $("#TutorielShow").attr('data-premium', 'on')
-            }else{
+            } else {
                 $("#TutorielIndex").attr('data-premium', 'off')
                 $("#TutorielList").attr('data-premium', 'off')
                 $("#TutorielShow").attr('data-premium', 'off')
