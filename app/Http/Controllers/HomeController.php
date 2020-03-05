@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller

@@ -21,6 +21,12 @@ class ObjetCategoryController extends Controller
         $this->assetCategoryRepository = $assetCategoryRepository;
     }
 
+    public function index() {
+        return view("admin.objet.category.index", [
+            "categories" => $this->assetCategoryRepository->all()
+        ]);
+    }
+
     public function delete($category_id)
     {
         try {

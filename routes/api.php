@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -151,11 +152,13 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
         Route::post('loadLatestObjets', 'ObjetController@loadLatestObjets');
 
         Route::group(["prefix" => "category"], function (){
-            Route::get('{category_id}/delete', 'ObjetCategoryController@delete');
+            Route::post('list', 'ObjetCategoryController@list');
+            Route::post('/', 'ObjetCategoryController@store');
         });
 
         Route::group(["prefix" => "subcategory"], function (){
-
+            Route::post('list', 'ObjetSubCategoryController@list');
+            Route::post('/', 'ObjetSubCategoryController@store');
         });
 
         Route::group(["prefix" => "objet"], function (){

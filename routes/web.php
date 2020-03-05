@@ -133,8 +133,11 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
 
         Route::group(["prefix" => "category"], function (){
             Route::get('/', ["as" => "Back.Objet.Category.index", "uses" => "ObjetCategoryController@index"]);
-
             Route::get('{category_id}/delete', 'ObjetCategoryController@delete');
+        });
+
+        Route::group(["prefix" => "subcategory"], function (){
+            Route::get('{subcategory_id}/delete', 'ObjetSubCategoryController@delete');
         });
 
         Route::group(["prefix" => "objet"], function (){

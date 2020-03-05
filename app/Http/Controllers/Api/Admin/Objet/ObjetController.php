@@ -32,7 +32,7 @@ class ObjetController extends BaseController
     public function loadLatestCategories(Request $request)
     {
         $datas = $alldatas = $this->assetCategoryRepository->all(10)->toArray();
-        $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $request->all());
+        //$datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $request->all());
 
         $sort = !empty($datatable['sort']['sort']) ? $datatable['sort']['sort'] : 'asc';
         $field = !empty($datatable['sort']['field']) ? $datatable['sort']['field'] : 'id';

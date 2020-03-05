@@ -19,4 +19,9 @@ laravel-echo-server.lock
 horizon.log
 composer.lock
 package-lock.json
-/snippet
+/snippet/*.*
+/snippet/Metronic/
+/snippet/Metronic/datatable.md
+/snippet/Metronic/modal.md
+/snippet/Metronic/portlet.md
+/snippet/Modèle Email Beautymail.md

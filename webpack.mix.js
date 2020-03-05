@@ -60,6 +60,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/admin/route/config.js', 'public/js/admin/route')
 
     .js('resources/js/admin/objet/index.js', 'public/js/admin/objet')
+    .js('resources/js/admin/objet/category/index.js', 'public/js/admin/objet/category')
 
 
 

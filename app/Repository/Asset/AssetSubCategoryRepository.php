@@ -26,5 +26,26 @@ class AssetSubCategoryRepository
             ->find($subcategory_id);
     }
 
+    public function all($limit = null)
+    {
+        return $this->assetSubCategory->newQuery()
+            ->limit($limit)
+            ->get();
+    }
+
+    public function create($category_id, $name)
+    {
+        return $this->assetSubCategory->newQuery()
+            ->create([
+                "asset_category_id" => $category_id,
+                "name" => $name
+            ]);
+    }
+
+    public function delete($subcategory_id)
+    {
+        return $this->get($subcategory_id)->delete();
+    }
+
 }
 
