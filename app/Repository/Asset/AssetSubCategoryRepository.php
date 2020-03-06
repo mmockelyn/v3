@@ -47,5 +47,13 @@ class AssetSubCategoryRepository
         return $this->get($subcategory_id)->delete();
     }
 
+    public function allFromCategory($category_id, $limit = null)
+    {
+        return $this->assetSubCategory->newQuery()
+            ->where('asset_category_id', $category_id)
+            ->limit($limit)
+            ->get();
+    }
+
 }
 

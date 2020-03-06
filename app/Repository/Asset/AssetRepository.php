@@ -2,6 +2,7 @@
 namespace App\Repository\Asset;
 
 use App\Model\Asset\Asset;
+use Webpatser\Uuid\Uuid;
 
 class AssetRepository
 {
@@ -69,6 +70,17 @@ class AssetRepository
             ->get();
     }
 
+    public function create($category_id, $subcategory_id, $designation, $short_description, $uuid)
+    {
+        return $this->asset->newQuery()
+            ->create([
+                "asset_category_id" => $category_id,
+                "asset_sub_category_id" => $subcategory_id,
+                "designation" => $designation,
+                "short_description" => $short_description,
+                "uuid" => $uuid
+            ]);
+    }
 
 }
 

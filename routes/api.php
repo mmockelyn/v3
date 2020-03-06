@@ -156,13 +156,16 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::post('/', 'ObjetCategoryController@store');
         });
 
-        Route::group(["prefix" => "subcategory"], function (){
+        Route::group(["prefix" => "subcategory"], function () {
             Route::post('list', 'ObjetSubCategoryController@list');
             Route::post('/', 'ObjetSubCategoryController@store');
+            Route::get('{category_id}/list', 'ObjetSubCategoryController@listSub');
         });
 
-        Route::group(["prefix" => "objet"], function (){
-            Route::get('{objet_id}/delete', 'ObjetObjetController@delete');
+        Route::group(["prefix" => "objet"], function () {
+            Route::post('list', 'ObjetObjetController@list');
+            Route::post('', 'ObjetObjetController@store');
+            Route::put('{objet_id}', 'ObjetObjetController@update');
         });
     });
 

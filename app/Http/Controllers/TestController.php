@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 
+use Webpatser\Uuid\Uuid;
+
 class TestController extends Controller
 {
     public function test()
     {
-        dd(session()->all());
+        dd(Uuid::generate());
     }
 }
