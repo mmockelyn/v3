@@ -57267,6 +57267,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
   background: linear-gradient(180deg, #FFCCBC 0%, #D84315 100%);
 }
 
+.tz-font__grey {
+  color: #6b6b6b;
+}
+
 .required {
   color: #dd2e35;
 }

@@ -32,19 +32,24 @@ export function addPremium() {
     $.get('/account/api/isPremium')
         .done((data) => {
             if (data.data === 'true') {
-                $("#TutorielIndex").attr('data-premium', 'on')
-                $("#TutorielList").attr('data-premium', 'on')
+                $("#TutorielIndex").attr('data-premium', 'on');
+                $("#TutorielList").attr('data-premium', 'on');
                 $("#TutorielShow").attr('data-premium', 'on')
             } else {
-                $("#TutorielIndex").attr('data-premium', 'off')
-                $("#TutorielList").attr('data-premium', 'off')
+                $("#TutorielIndex").attr('data-premium', 'off');
+                $("#TutorielList").attr('data-premium', 'off');
                 $("#TutorielShow").attr('data-premium', 'off')
             }
         })
 }
 
+export function formatDate(date, format = 'LL') {
+    moment.locale('fr');
+    return moment(date).format(format)
+}
+
 function hidingAlerting() {
-    let alerts = document.querySelectorAll('#showAlerting')
+    let alerts = document.querySelectorAll('#showAlerting');
 
     Array.from(alerts).forEach((alert) => {
         setTimeout(function () {
@@ -87,9 +92,9 @@ function fadeEffect(type, el){
     }
 }
 
-hidingAlerting()
+hidingAlerting();
 
-$('[data-toggle="kt-tooltip"]').tooltip()
+$('[data-toggle="kt-tooltip"]').tooltip();
 
 
 

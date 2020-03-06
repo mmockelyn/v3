@@ -202,6 +202,5 @@
 @endsection
 
 @section("script")
-    @toastr_render
     <script src="{{ asset('js/admin/blog/article/edit.js') }}"></script>
 @endsection

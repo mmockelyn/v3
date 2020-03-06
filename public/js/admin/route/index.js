@@ -2920,8 +2920,8 @@
     for (var i = 0, len = elements.length; i < len; i++) {
       var _ret = _loop(i);
 
-      if (_ret === "continue") continue;
-    }
+      if (_ret === "continue")
+          }
 
     return createdDocument.body.innerHTML;
   }
@@ -7453,7 +7453,7 @@ function nodeName( elem, name ) {
 
   return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 
-};
+}
 var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
 
 
@@ -17864,18 +17864,18 @@ Popper.Defaults = Defaults;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/*!
- * 
- * Super simple wysiwyg editor v0.8.16
- * https://summernote.org
- * 
- * 
- * Copyright 2013- Alan Hong. and other contributors
- * summernote may be freely distributed under the MIT license.
- * 
- * Date: 2020-02-19T09:12Z
- * 
- */
+            /*!
+             *
+             * Super simple wysiwyg editor v0.8.16
+             * https://summernote.org
+             *
+             *
+             * Copyright 2013- Alan Hong. and other contributors
+             * summernote may be freely distributed under the MIT license.
+             *
+             * Date: 2020-02-19T09:12Z
+             *
+             */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
 		module.exports = factory(__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"));
@@ -22820,7 +22820,7 @@ function () {
 
           case TableResultAction.resultAction.RemoveCell:
             // Do not need remove cell because row will be deleted.
-            continue;
+
         }
       }
 
@@ -22879,7 +22879,7 @@ function () {
 
           case TableResultAction.resultAction.RemoveCell:
             dom.remove(actions[actionIndex].baseCell, true);
-            continue;
+
         }
       }
     }
@@ -28079,7 +28079,7 @@ loadFormElement();
 /*!******************************!*\
   !*** ./resources/js/core.js ***!
   \******************************/
-/*! exports provided: reloadNotifBar, blockElement, unblockElement, addPremium */
+/*! exports provided: reloadNotifBar, blockElement, unblockElement, addPremium, formatDate */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28088,6 +28088,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "blockElement", function() { return blockElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unblockElement", function() { return unblockElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addPremium", function() { return addPremium; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatDate", function() { return formatDate; });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
@@ -28131,6 +28132,11 @@ function addPremium() {
       jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
     }
   });
+}
+function formatDate(date) {
+  var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'LL';
+  moment.locale('fr');
+  return moment(date).format(format);
 }
 
 function hidingAlerting() {

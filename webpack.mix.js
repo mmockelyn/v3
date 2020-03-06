@@ -62,6 +62,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/admin/objet/index.js', 'public/js/admin/objet')
     .js('resources/js/admin/objet/category/index.js', 'public/js/admin/objet/category')
     .js('resources/js/admin/objet/objet/index.js', 'public/js/admin/objet/objet')
+    .js('resources/js/admin/objet/objet/show.js', 'public/js/admin/objet/objet')
 
 
 
