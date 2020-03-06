@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Front\Blog;
 
 use App\HelpersClass\Blog\BlogHelper;
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Controller;
 use App\Notifications\Blog\PostNewComment;
 use App\Notifications\Blog\PostNewCommentOther;
 use App\Repository\Blog\BlogCommentRepository;

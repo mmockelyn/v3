@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use League\Flysystem\File;
 
 class CreateRepository extends Command
 {
@@ -38,15 +37,15 @@ class CreateRepository extends Command
      */
     public function handle()
     {
-        if(empty($this->argument('dossier'))){
+        if (empty($this->argument('dossier'))) {
             $namespace = "namespace App\Repository;";
-        }else{
-            $namespace = "namespace App\Repository\\".$this->argument('dossier').";";
+        } else {
+            $namespace = "namespace App\Repository\\" . $this->argument('dossier') . ";";
         }
 
         $class = $this->argument('class');
 
-        $dossierOutput = app_path()."/Repository/".$this->argument('dossier');
+        $dossierOutput = app_path() . "/Repository/" . $this->argument('dossier');
 
         $content = "<?php
 $namespace
@@ -66,16 +65,17 @@ class $class
         ";
 
         $this->isDir($dossierOutput);
-        $stat = file_put_contents($dossierOutput."/".$class.".php", $content);
-        if($stat == false){
+        $stat = file_put_contents($dossierOutput . "/" . $class . ".php", $content);
+        if ($stat == false) {
             $this->error('Impossible de créer le fichier');
-        }else{
+        } else {
             $this->info("Fichier répertoire Créer");
         }
     }
 
-    private function isDir($dossier){
-        if(!is_dir($dossier)){
+    private function isDir($dossier)
+    {
+        if (!is_dir($dossier)) {
             mkdir($dossier);
         }
     }

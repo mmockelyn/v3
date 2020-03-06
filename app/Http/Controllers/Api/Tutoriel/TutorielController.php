@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\Tutoriel;
 use App\HelpersClass\Generator;
 use App\HelpersClass\Tutoriel\TutorielHelper;
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Controller;
 use App\Repository\Account\UserViewRepository;
 use App\Repository\Tutoriel\TutorielRepository;
 use Illuminate\Http\Request;

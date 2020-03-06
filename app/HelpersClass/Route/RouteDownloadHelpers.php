@@ -16,7 +16,7 @@ class RouteDownloadHelpers
 {
     public static function getLatestDownload($route_id, $field)
     {
-        $route = new RouteDownload();
+        $route = new RouteDownload;
 
         $data = $route->newQuery()->where('route_id', $route_id)
             ->where('route_type_download_id', 1)
@@ -29,7 +29,7 @@ class RouteDownloadHelpers
 
     public static function getDownloadMapList($route_id)
     {
-        $route = new RouteDownload();
+        $route = new RouteDownload;
 
         $data = $route->newQuery()->where('route_id', $route_id)
             ->where('route_type_download_id', 1)
@@ -42,7 +42,7 @@ class RouteDownloadHelpers
 
     public static function getDownloadSessionList($route_id)
     {
-        $route = new RouteDownload();
+        $route = new RouteDownload;
 
         $data = $route->newQuery()->where('route_id', $route_id)
             ->where('route_type_download_id', 3)
@@ -55,7 +55,7 @@ class RouteDownloadHelpers
 
     public static function getDownloadMap($download_id, $field)
     {
-        $route = new RouteDownload();
+        $route = new RouteDownload;
 
         $data = $route->newQuery()->find($download_id);
 
@@ -64,7 +64,7 @@ class RouteDownloadHelpers
 
     public static function getRouteTypeReleaseText($release_id)
     {
-        $route = new RouteTypeRelease();
+        $route = new RouteTypeRelease;
 
         $data = $route->newQuery()->find($release_id);
 

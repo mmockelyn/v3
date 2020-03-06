@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Api\Blog;
 use App\HelpersClass\Blog\BlogHelper;
 use App\HelpersClass\Generator;
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Controller;
 use App\Repository\Blog\BlogRepository;
-use Illuminate\Http\Request;
 
 class BlogController extends BaseController
 {

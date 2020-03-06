@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Front\Blog;
 use App\Http\Controllers\Controller;
 use App\Repository\Blog\BlogCommentRepository;
 use App\Repository\Blog\BlogRepository;
-use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {

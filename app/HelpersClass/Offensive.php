@@ -13,11 +13,6 @@ class Offensive
 {
     public static function blacklist()
     {
-        return [
-            "pop",
-            "bite",
-            "couille",
-            "merde"
-        ];
+        return ["pop", "bite", "couille", "merde"];
     }
 }

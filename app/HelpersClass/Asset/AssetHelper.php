@@ -10,17 +10,21 @@ class AssetHelper
 {
     public static function stateClassCompatibility($state)
     {
-        switch ($state)
-        {
-            case 0: return 'danger';
-            case 1: return 'warning';
-            case 2: return 'success';
-            default: return null;
+        switch ($state) {
+            case 0:
+                return 'danger';
+            case 1:
+                return 'warning';
+            case 2:
+                return 'success';
+            default:
+                return null;
         }
     }
 
-    public static function listOfCategories($viewArray = false) {
-        $categories = new AssetCategory();
+    public static function listOfCategories($viewArray = false)
+    {
+        $categories = new AssetCategory;
         $datas = $categories->newQuery()->get()->toArray();
         $array = [];
 
@@ -28,36 +32,40 @@ class AssetHelper
             $array[] = $data['name'];
         }
 
-        if($viewArray == false) {
+        if ($viewArray == false) {
             return implode(',', $array);
-        }else{
+        } else {
             return $array;
         }
     }
 
-    public static function getSubcategory($subcategory_id, $field = null) {
-        $category = new AssetSubCategory();
+    public static function getSubcategory($subcategory_id, $field = null)
+    {
+        $category = new AssetSubCategory;
         $data = $category->newQuery()->find($subcategory_id);
 
         return $data->$field;
     }
 
-    public static function countAssetFromCategory($subcategory_id) {
-        $asset = new Asset();
+    public static function countAssetFromCategory($subcategory_id)
+    {
+        $asset = new Asset;
         $data = $asset->newQuery()->where('asset_sub_category_id', $subcategory_id)->count();
 
         return $data;
     }
 
-    public static function getInfoAsset($asset_id, $field = null) {
-        $asset = new Asset();
+    public static function getInfoAsset($asset_id, $field = null)
+    {
+        $asset = new Asset;
         $data = $asset->newQuery()->find($asset_id);
 
         return $data->$field;
     }
 
-    public static function getAssetTags($asset_id) {
-        $asset = new Asset();
+    public static function getAssetTags($asset_id)
+    {
+        $asset = new Asset;
         $data = $asset->newQuery()->find($asset_id);
 
         $array = [];
@@ -71,7 +79,7 @@ class AssetHelper
 
     public static function countAssets()
     {
-        $asset = new Asset();
+        $asset = new Asset;
         $data = $asset->newQuery()
             ->where('published', 1)
             ->count();

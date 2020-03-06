@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\Route;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Controller;
 use App\Repository\Route\RouteAnomalieRepository;
 use App\Repository\Route\RouteDownloadRepository;
 use App\Repository\Route\RouteGalleryCategoryRepository;
@@ -11,7 +10,6 @@ use App\Repository\Route\RouteGalleryRepository;
 use App\Repository\Route\RouteUpdaterRepository;
 use App\Repository\Route\RouteVersionGareRepository;
 use App\Repository\Route\RouteVersionRepository;
-use Illuminate\Http\Request;
 
 class RouteController extends BaseController
 {

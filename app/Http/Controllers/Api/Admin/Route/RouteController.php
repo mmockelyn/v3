@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\Admin\Route;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Controller;
 use App\Repository\Core\GareRepository;
 use App\Repository\Route\RouteAnomalieRepository;
 use App\Repository\Route\RouteBuildRepository;

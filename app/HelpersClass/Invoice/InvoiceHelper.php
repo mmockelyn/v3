@@ -15,13 +15,14 @@ use Carbon\Carbon;
 
 class InvoiceHelper
 {
-    public static function loadRevenueIcomes($year = null) {
-        $inv = new Invoice();
-        if($year == null) {
-            $data = $inv->newQuery()->whereBetween('date', [Carbon::createFromTimestamp(strtotime('01-01-'.now()->year)), Carbon::createFromTimestamp(strtotime('31-12-'.now()->year))])
+    public static function loadRevenueIcomes($year = null)
+    {
+        $inv = new Invoice;
+        if ($year == null) {
+            $data = $inv->newQuery()->whereBetween('date', [Carbon::createFromTimestamp(strtotime('01-01-' . now()->year)), Carbon::createFromTimestamp(strtotime('31-12-' . now()->year))])
                 ->sum('total');
-        }else{
-            $data = $inv->newQuery()->whereBetween('date', [Carbon::createFromTimestamp(strtotime('01-01-'.$year)), Carbon::createFromTimestamp(strtotime('31-12-'.$year))])
+        } else {
+            $data = $inv->newQuery()->whereBetween('date', [Carbon::createFromTimestamp(strtotime('01-01-' . $year)), Carbon::createFromTimestamp(strtotime('31-12-' . $year))])
                 ->sum('total');
         }
 

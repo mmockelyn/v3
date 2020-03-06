@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin\Route;
 
-use function App\HelpersClass\list_filter;
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Controller;
 use App\Repository\Route\RouteTypeDownloadRepository;
 use App\Repository\Route\RouteTypeReleaseRepository;
 use Illuminate\Http\Request;

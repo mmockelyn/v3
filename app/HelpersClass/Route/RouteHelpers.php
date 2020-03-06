@@ -4,7 +4,6 @@ namespace App\HelpersClass\Route;
 
 use App\Model\Route\Route;
 use App\Model\Route\RouteAnomalie;
-use App\Model\Route\RouteBuild;
 use App\Model\Route\RouteDownload;
 use Illuminate\Support\Str;
 
@@ -12,7 +11,7 @@ class RouteHelpers
 {
     public static function imgLatestBuild($route_id)
     {
-        $download = new RouteDownload();
+        $download = new RouteDownload;
         $data = $download->newQuery()->where('route_id', $route_id)->get()->last();
 
         return Str::lower($data->typeRelease->name);
@@ -37,7 +36,7 @@ class RouteHelpers
     }
 
     public static function PercentLab($route_id) {
-        $anomalies = new RouteAnomalie();
+        $anomalies = new RouteAnomalie;
 
         $totalAnomalie = $anomalies->newQuery()->where('route_id', $route_id)->count();
         $totalAnomalieCheck = $anomalies->newQuery()->where('route_id', $route_id)->where('state', 2)->count();
@@ -48,7 +47,7 @@ class RouteHelpers
     }
 
     public static function colorPercentLab($route_id) {
-        $anomalies = new RouteAnomalie();
+        $anomalies = new RouteAnomalie;
 
         $totalAnomalie = $anomalies->newQuery()->where('route_id', $route_id)->count();
         $totalAnomalieCheck = $anomalies->newQuery()->where('route_id', $route_id)->where('state', 2)->count();
@@ -66,7 +65,7 @@ class RouteHelpers
 
     public static function getInfoRoute($route_id, $field = null)
     {
-        $route = new Route();
+        $route = new Route;
         $data = $route->newQuery()->find($route_id);
 
         return $data->$field;

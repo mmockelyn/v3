@@ -2,20 +2,13 @@
 
 namespace App\Http\Controllers\Account;
 
-use App\Events\Account\UpdateInfoEvent;
-use App\HelpersClass\Account\AccountActivityHelper;
 use App\HelpersClass\Account\AccountHelper;
 use App\HelpersClass\Generator;
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Controller;
 use App\Jobs\Account\NewSubscriptionJob;
 use App\Jobs\Account\UpdateInfoJob;
 use App\Jobs\Account\UpdatePassJob;
-use App\Model\Account\UserAccount;
-use App\Notifications\Account\UpdateInfoNotification;
-use App\Notifications\Account\UpdatePasswordNotification;
 use App\Packages\Stripe\Billing\Invoice;
-use App\Packages\Stripe\Billing\InvoiceItem;
 use App\Packages\Stripe\Billing\Subscription;
 use App\Packages\Stripe\Core\Customer;
 use App\Packages\Stripe\PaymentMethod\PaymentMethod;
@@ -30,10 +23,10 @@ use App\Repository\Blog\BlogCommentRepository;
 use App\Repository\Tutoriel\TutorielCommentRepository;
 use Carbon\Carbon;
 use Cartalyst\Stripe\Exception\StripeException;
-use Cartalyst\Stripe\Stripe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inacho\CreditCard;
+use Validator;
 
 class AccountApiController extends BaseController
 {

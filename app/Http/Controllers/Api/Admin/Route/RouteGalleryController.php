@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\Admin\Route;
 
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Controller;
 use App\Repository\Route\RouteGalleryCategoryRepository;
 use App\Repository\Route\RouteGalleryRepository;
 use Illuminate\Http\Request;

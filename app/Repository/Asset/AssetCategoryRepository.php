@@ -20,9 +20,10 @@ class AssetCategoryRepository
         $this->assetCategory = $assetCategory;
     }
 
-    public function all()
+    public function all($limit = null)
     {
         return $this->assetCategory->newQuery()
+            ->limit($limit)
             ->get();
     }
 
@@ -31,6 +32,21 @@ class AssetCategoryRepository
         return $this->assetCategory->newQuery()
             ->find($category_id)
             ->load('subcategories');
+    }
+
+    public function delete($category_id)
+    {
+        return $this->assetCategory->newQuery()
+            ->find($category_id)
+            ->delete();
+    }
+
+    public function create($name)
+    {
+        return $this->assetCategory->newQuery()
+            ->create([
+                "name" => $name
+            ]);
     }
 
 }

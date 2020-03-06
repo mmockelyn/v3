@@ -10,7 +10,6 @@ namespace App\Packages\Stripe\Core;
 
 
 use App\Packages\Stripe\Stripe;
-use Stripe\Charge;
 
 class Balance extends Stripe
 {

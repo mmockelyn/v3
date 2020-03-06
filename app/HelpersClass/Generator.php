@@ -32,14 +32,13 @@ class Generator
      */
     public static function formatCurrency($value, $currency = "euro")
     {
-        switch($currency)
-        {
+        switch ($currency) {
             case "euro":
-                return number_format($value, 2, ',', ' ')." €";
+                return number_format($value, 2, ',', ' ') . " €";
             case "dollard":
-                return number_format($value, 2, ',', ' ')." $";
+                return number_format($value, 2, ',', ' ') . " $";
             default:
-                return number_format($value, 2, ',', ' ')." €";
+                return number_format($value, 2, ',', ' ') . " €";
         }
     }
 
@@ -52,9 +51,9 @@ class Generator
      */
     public static function formatPlural(string $string, int $count)
     {
-        if($count > 1){
-            return $string.'s';
-        }else{
+        if ($count > 1) {
+            return $string . 's';
+        } else {
             return $string;
         }
     }
@@ -68,10 +67,10 @@ class Generator
      */
     public static function currentRoute(...$routes)
     {
-        foreach ($routes as $route){
-            if(request()->url() == $route){
+        foreach ($routes as $route) {
+            if (request()->url() == $route) {
                 return "kt-menu__item--here";
-            }else{
+            } else {
                 return null;
             }
         }
@@ -80,10 +79,10 @@ class Generator
 
     public static function currentRouteBack(...$routes)
     {
-        foreach ($routes as $route){
-            if(request()->url() == $route){
+        foreach ($routes as $route) {
+            if (request()->url() == $route) {
                 return "kt-nav__item--active";
-            }else{
+            } else {
                 return null;
             }
         }
@@ -92,9 +91,9 @@ class Generator
 
     public static function firsLetter(string $word, $length = 1)
     {
-        if($length == 1) {
+        if ($length == 1) {
             return Str::limit($word, 1, null);
-        }else {
+        } else {
             return Str::limit($word, $length, null);
         }
     }

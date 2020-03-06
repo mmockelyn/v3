@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Provider;
 use App\Http\Controllers\Controller;
 use App\Repository\Account\UserAccountRepository;
 use App\Repository\Account\UserSocialRepository;
-use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
 class ProviderController extends Controller
