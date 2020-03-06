@@ -20,3 +20,7 @@ horizon.log
 composer.lock
 package-lock.json
 /snippet
+
+storage/app/public/phpcs/phpcs.json
+
+storage/app/public/phpcs/phpcs.xml
