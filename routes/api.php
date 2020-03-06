@@ -165,6 +165,7 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
         Route::group(["prefix" => "objet"], function () {
             Route::post('list', 'ObjetObjetController@list');
             Route::post('', 'ObjetObjetController@store');
+            Route::get('{objet_id}', 'ObjetObjetController@get');
             Route::put('{objet_id}', 'ObjetObjetController@update');
         });
     });

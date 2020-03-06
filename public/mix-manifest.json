@@ -12,6 +12,7 @@
     "/js/admin/objet/category/index.js": "/js/admin/objet/category/index.js",
     "/js/admin/objet/index.js": "/js/admin/objet/index.js",
     "/js/admin/objet/objet/index.js": "/js/admin/objet/objet/index.js",
+    "/js/admin/objet/objet/show.js": "/js/admin/objet/objet/show.js",
     "/js/admin/route/config.js": "/js/admin/route/config.js",
     "/js/admin/route/download.js": "/js/admin/route/download.js",
     "/js/admin/route/gallery.js": "/js/admin/route/gallery.js",

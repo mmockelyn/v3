@@ -93,4 +93,10 @@ class ObjetObjetController extends BaseController
             return $this->sendError("Erreur", $exception->getMessage());
         }
     }
+
+    public function get($asset_id)
+    {
+        $data = $this->assetRepository->get($asset_id);
+        return $this->sendResponse($data, "ok");
+    }
 }

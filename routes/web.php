@@ -142,9 +142,9 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
 
         Route::group(["prefix" => "objet"], function (){
             Route::get('/', ["as" => "Back.Objet.Objet.index", "uses" => "ObjetObjetController@index"]);
-            Route::get('{objet_id}', 'ObjetObjetController@show');
-            Route::get('{objet_id}/edit', 'ObjetObjetController@edit');
-            Route::get('{objet_id}/delete', 'ObjetObjetController@edit');
+            Route::get('{objet_id}', ["as" => "Back.Objet.Objet.show", "uses" => 'ObjetObjetController@show']);
+            Route::get('{objet_id}/edit', ["as" => "Back.Objet.Objet.edit", "uses" => 'ObjetObjetController@edit']);
+            Route::get('{objet_id}/delete', ["as" => "Back.Objet.Objet.delete", "uses" => 'ObjetObjetController@delete']);
         });
     });
 
