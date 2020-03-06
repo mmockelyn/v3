@@ -2920,8 +2920,8 @@
     for (var i = 0, len = elements.length; i < len; i++) {
       var _ret = _loop(i);
 
-      if (_ret === "continue")
-          }
+      if (_ret === "continue") continue;
+    }
 
     return createdDocument.body.innerHTML;
   }
@@ -7453,7 +7453,7 @@ function nodeName( elem, name ) {
 
   return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 
-}
+};
 var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
 
 
@@ -21397,47 +21397,28 @@ loadLatestTutoriel();
 /***/ }),
 
 /***/ "./resources/js/core.js":
-        /*!******************************!*\
-          !*** ./resources/js/core.js ***!
-          \******************************/
-        /*! exports provided: reloadNotifBar, blockElement, unblockElement, addPremium, formatDate */
-        /***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*!******************************!*\
+  !*** ./resources/js/core.js ***!
+  \******************************/
+/*! exports provided: reloadNotifBar, blockElement, unblockElement, addPremium, formatDate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony export (binding) */
-            __webpack_require__.d(__webpack_exports__, "reloadNotifBar", function () {
-                return reloadNotifBar;
-            });
-            /* harmony export (binding) */
-            __webpack_require__.d(__webpack_exports__, "blockElement", function () {
-                return blockElement;
-            });
-            /* harmony export (binding) */
-            __webpack_require__.d(__webpack_exports__, "unblockElement", function () {
-                return unblockElement;
-            });
-            /* harmony export (binding) */
-            __webpack_require__.d(__webpack_exports__, "addPremium", function () {
-                return addPremium;
-            });
-            /* harmony export (binding) */
-            __webpack_require__.d(__webpack_exports__, "formatDate", function () {
-                return formatDate;
-            });
-            /* harmony import */
-            var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-            /* harmony import */
-            var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-            /* harmony import */
-            var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
-            /* harmony import */
-            var bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_1__);
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reloadNotifBar", function() { return reloadNotifBar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "blockElement", function() { return blockElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unblockElement", function() { return unblockElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addPremium", function() { return addPremium; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatDate", function() { return formatDate; });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_1__);
 
 
-            function reloadNotifBar() {
-                var countNotifBar = document.querySelector('#countNotifBar');
-                var value = parseInt(countNotifBar.textContent);
+function reloadNotifBar() {
+  var countNotifBar = document.querySelector('#countNotifBar');
+  var value = parseInt(countNotifBar.textContent);
 
   if (value === 0) {
     var iconEl = jquery__WEBPACK_IMPORTED_MODULE_0__(".kt-header__topbar-icon");
@@ -21463,22 +21444,21 @@ function unblockElement(el) {
 function addPremium() {
   jquery__WEBPACK_IMPORTED_MODULE_0__["get"]('/account/api/isPremium').done(function (data) {
     if (data.data === 'true') {
-        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'on');
-        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'on');
-        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'on');
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'on');
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'on');
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'on');
     } else {
-        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'off');
-        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'off');
-        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'off');
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'off');
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
     }
   });
 }
-
-            function formatDate(date) {
-                var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'LL';
-                moment.locale('fr');
-                return moment(date).format(format);
-            }
+function formatDate(date) {
+  var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'LL';
+  moment.locale('fr');
+  return moment(date).format(format);
+}
 
 function hidingAlerting() {
   var alerts = document.querySelectorAll('#showAlerting');
