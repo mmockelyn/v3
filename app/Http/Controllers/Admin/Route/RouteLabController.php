@@ -7,7 +7,6 @@ use App\Repository\Route\RouteAnomalieRepository;
 use App\Repository\Route\RouteBuildRepository;
 use App\Repository\Route\RouteRepository;
 use App\Repository\Route\RouteTimelineRepository;
-use Illuminate\Http\Request;
 
 class RouteLabController extends Controller
 {

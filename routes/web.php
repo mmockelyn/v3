@@ -130,6 +130,22 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
 
     Route::group(["prefix" => "objet", "namespace" => "Objet"], function (){
         Route::get('/', ["as" => "Back.Objet.index", "uses" => "ObjetController@index"]);
+
+        Route::group(["prefix" => "category"], function (){
+            Route::get('/', ["as" => "Back.Objet.Category.index", "uses" => "ObjetCategoryController@index"]);
+            Route::get('{category_id}/delete', 'ObjetCategoryController@delete');
+        });
+
+        Route::group(["prefix" => "subcategory"], function (){
+            Route::get('{subcategory_id}/delete', 'ObjetSubCategoryController@delete');
+        });
+
+        Route::group(["prefix" => "objet"], function (){
+            Route::get('/', ["as" => "Back.Objet.Objet.index", "uses" => "ObjetObjetController@index"]);
+            Route::get('{objet_id}', 'ObjetObjetController@show');
+            Route::get('{objet_id}/edit', 'ObjetObjetController@edit');
+            Route::get('{objet_id}/delete', 'ObjetObjetController@edit');
+        });
     });
 
 
@@ -204,3 +220,4 @@ Auth::routes();
 
 Route::get('logout', 'Auth\LoginController@logout');
 Route::get('/test', 'TestController@test');
+Route::get('/linter', 'HomeController@linter');

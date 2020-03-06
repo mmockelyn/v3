@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -143,6 +144,28 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::get('release/{release_id}', 'RouteConfigController@deleteTypeRelease');
             Route::post('type', 'RouteConfigController@store');
             Route::post('release', 'RouteConfigController@storeRelease');
+        });
+    });
+
+    Route::group(["prefix" => "objet", "namespace" => "Objet"], function (){
+        Route::post('loadLatestCategories', 'ObjetController@loadLatestCategories');
+        Route::post('loadLatestObjets', 'ObjetController@loadLatestObjets');
+
+        Route::group(["prefix" => "category"], function (){
+            Route::post('list', 'ObjetCategoryController@list');
+            Route::post('/', 'ObjetCategoryController@store');
+        });
+
+        Route::group(["prefix" => "subcategory"], function () {
+            Route::post('list', 'ObjetSubCategoryController@list');
+            Route::post('/', 'ObjetSubCategoryController@store');
+            Route::get('{category_id}/list', 'ObjetSubCategoryController@listSub');
+        });
+
+        Route::group(["prefix" => "objet"], function () {
+            Route::post('list', 'ObjetObjetController@list');
+            Route::post('', 'ObjetObjetController@store');
+            Route::put('{objet_id}', 'ObjetObjetController@update');
         });
     });
 

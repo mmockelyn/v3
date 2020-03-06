@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e38b46335e246a84c17f676a8e168db8",
+    "content-hash": "a64cdfe6d0127dd9a3c2aed8d4f10ca0",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -1455,16 +1455,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v7.0.2",
+            "version": "v7.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "cbd46c70bc747af5f80a4a257ff58fd533e3f815"
+                "reference": "b93848b43f1564521b3f0605f06a1b392391f6ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/cbd46c70bc747af5f80a4a257ff58fd533e3f815",
-                "reference": "cbd46c70bc747af5f80a4a257ff58fd533e3f815",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b93848b43f1564521b3f0605f06a1b392391f6ff",
+                "reference": "b93848b43f1564521b3f0605f06a1b392391f6ff",
                 "shasum": ""
             },
             "require": {
@@ -1555,7 +1555,7 @@
                 "ext-redis": "Required to use the Redis cache and queue drivers.",
                 "filp/whoops": "Required for friendly error pages in development (^2.4).",
                 "fzaninotto/faker": "Required to use the eloquent factory builder (^1.9.1).",
-                "guzzlehttp/guzzle": "Required to use the Mailgun mail driver and the ping methods on schedules (^6.3|^7.0).",
+                "guzzlehttp/guzzle": "Required to use the HTTP Client, Mailgun mail driver and the ping methods on schedules (^6.3|^7.0).",
                 "laravel/tinker": "Required to use the tinker console command (^2.0).",
                 "league/flysystem-aws-s3-v3": "Required to use the Flysystem S3 driver (^1.0).",
                 "league/flysystem-cached-adapter": "Required to use the Flysystem cache (^1.0).",
@@ -1602,20 +1602,20 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-03-03T22:20:03+00:00"
+            "time": "2020-03-04T22:37:20+00:00"
         },
         {
             "name": "laravel/horizon",
-            "version": "v4.0.0",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/horizon.git",
-                "reference": "77bf566651191d229c753fa99bcb49d483a11503"
+                "reference": "ff625c5255cf7bfa186634b660b5ee844d6fe4b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/horizon/zipball/77bf566651191d229c753fa99bcb49d483a11503",
-                "reference": "77bf566651191d229c753fa99bcb49d483a11503",
+                "url": "https://api.github.com/repos/laravel/horizon/zipball/ff625c5255cf7bfa186634b660b5ee844d6fe4b7",
+                "reference": "ff625c5255cf7bfa186634b660b5ee844d6fe4b7",
                 "shasum": ""
             },
             "require": {
@@ -1675,7 +1675,7 @@
                 "laravel",
                 "queue"
             ],
-            "time": "2020-03-03T13:39:43+00:00"
+            "time": "2020-03-05T07:08:25+00:00"
         },
         {
             "name": "laravel/socialite",
@@ -5155,6 +5155,60 @@
                 "php"
             ],
             "time": "2020-02-06T21:46:48+00:00"
+        },
+        {
+            "name": "webpatser/laravel-uuid",
+            "version": "3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webpatser/laravel-uuid.git",
+                "reference": "a7ce65cdabbc9970fc2a87fdf67b48e0b1641d23"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webpatser/laravel-uuid/zipball/a7ce65cdabbc9970fc2a87fdf67b48e0b1641d23",
+                "reference": "a7ce65cdabbc9970fc2a87fdf67b48e0b1641d23",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "fzaninotto/faker": "~1.4",
+                "phpunit/phpunit": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Webpatser\\Uuid\\UuidServiceProvider"
+                    ],
+                    "aliases": {
+                        "Uuid": "Webpatser\\Uuid\\Uuid"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Webpatser\\Uuid": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christoph Kempen",
+                    "email": "christoph@downsized.nl"
+                }
+            ],
+            "description": "Laravel package to generate and to validate a universally unique identifier (UUID) according to the RFC 4122 standard. Support for version 1, 3, 4 and 5 UUIDs are built-in.",
+            "homepage": "https://github.com/webpatser/uuid",
+            "keywords": [
+                "UUID RFC4122"
+            ],
+            "time": "2017-10-04T07:47:40+00:00"
         }
     ],
     "packages-dev": [
@@ -5639,16 +5693,16 @@
         },
         {
             "name": "facade/ignition",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "16e0df47042a42bcc855ec5ec5c5cff26d7b3f78"
+                "reference": "b8dbf7791c81619161270d580a64a30bad41b832"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/16e0df47042a42bcc855ec5ec5c5cff26d7b3f78",
-                "reference": "16e0df47042a42bcc855ec5ec5c5cff26d7b3f78",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/b8dbf7791c81619161270d580a64a30bad41b832",
+                "reference": "b8dbf7791c81619161270d580a64a30bad41b832",
                 "shasum": ""
             },
             "require": {
@@ -5674,6 +5728,9 @@
             },
             "type": "library",
             "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                },
                 "laravel": {
                     "providers": [
                         "Facade\\Ignition\\IgnitionServiceProvider"
@@ -5703,7 +5760,7 @@
                 "laravel",
                 "page"
             ],
-            "time": "2020-03-02T16:10:55+00:00"
+            "time": "2020-03-05T12:32:22+00:00"
         },
         {
             "name": "facade/ignition-contracts",
@@ -6099,56 +6156,6 @@
             "time": "2019-11-24T09:46:11+00:00"
         },
         {
-            "name": "mmockelyn/beautymail",
-            "version": "7.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mmockelyn/beautymail.git",
-                "reference": "dfe536d8226e128b2eaa4848fc6ffca5d41bf378"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mmockelyn/beautymail/zipball/dfe536d8226e128b2eaa4848fc6ffca5d41bf378",
-                "reference": "dfe536d8226e128b2eaa4848fc6ffca5d41bf378",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "4.*|5.*|^6.0.0|^7.0",
-                "pelago/emogrifier": "^3.0",
-                "php": ">=7.2.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Snowfire\\Beautymail\\BeautymailServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Snowfire\\Beautymail\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mockelyn Maxime",
-                    "email": "mmockelyn@mail.com"
-                }
-            ],
-            "description": "Send beautiful html emails with Laravel | Fork snowfire/beautymail",
-            "keywords": [
-                "email",
-                "html",
-                "laravel"
-            ],
-            "time": "2020-03-04T10:49:19+00:00"
-        },
-        {
             "name": "mockery/mockery",
             "version": "1.3.1",
             "source": {
@@ -6455,40 +6462,37 @@
             "time": "2020-02-10T12:49:03+00:00"
         },
         {
-            "name": "pelago/emogrifier",
-            "version": "v3.1.0",
+            "name": "overtrue/phplint",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/MyIntervals/emogrifier.git",
-                "reference": "f6a5c7d44612d86c3901c93f1592f5440e6b2cd8"
+                "url": "https://github.com/overtrue/phplint.git",
+                "reference": "deaee8c3459087ea5d17031206b8722a96dd330b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MyIntervals/emogrifier/zipball/f6a5c7d44612d86c3901c93f1592f5440e6b2cd8",
-                "reference": "f6a5c7d44612d86c3901c93f1592f5440e6b2cd8",
+                "url": "https://api.github.com/repos/overtrue/phplint/zipball/deaee8c3459087ea5d17031206b8722a96dd330b",
+                "reference": "deaee8c3459087ea5d17031206b8722a96dd330b",
                 "shasum": ""
             },
             "require": {
-                "ext-dom": "*",
-                "ext-libxml": "*",
-                "php": "^5.6 || ~7.0 || ~7.1 || ~7.2 || ~7.3 || ~7.4",
-                "symfony/css-selector": "^2.8 || ^3.0 || ^4.0 || ^5.0"
+                "ext-json": "*",
+                "php": ">=5.5.9",
+                "symfony/console": "^3.2|^4.0|^5.0",
+                "symfony/finder": "^3.0|^4.0|^5.0",
+                "symfony/process": "^3.0|^4.0|^5.0",
+                "symfony/yaml": "^3.0|^4.0|^5.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.15.3",
-                "phpmd/phpmd": "^2.7.0",
-                "phpunit/phpunit": "^5.7.27",
-                "squizlabs/php_codesniffer": "^3.5.0"
+                "jakub-onderka/php-console-highlighter": "^0.3.2 || ^0.4"
             },
+            "bin": [
+                "bin/phplint"
+            ],
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.0.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
-                    "Pelago\\": "src/"
+                    "Overtrue\\PHPLint\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -6497,36 +6501,18 @@
             ],
             "authors": [
                 {
-                    "name": "Oliver Klee",
-                    "email": "github@oliverklee.de"
-                },
-                {
-                    "name": "Zoli Szabó",
-                    "email": "zoli.szabo+github@gmail.com"
-                },
-                {
-                    "name": "John Reeve",
-                    "email": "jreeve@pelagodesign.com"
-                },
-                {
-                    "name": "Jake Hotson",
-                    "email": "jake@qzdesign.co.uk"
-                },
-                {
-                    "name": "Cameron Brooks"
-                },
-                {
-                    "name": "Jaime Prado"
+                    "name": "overtrue",
+                    "email": "anzhengchao@gmail.com"
                 }
             ],
-            "description": "Converts CSS styles into inline style attributes in your HTML code",
-            "homepage": "https://www.myintervals.com/emogrifier.php",
+            "description": "a php syntax check tool.",
             "keywords": [
-                "css",
-                "email",
-                "pre-processing"
+                "check",
+                "lint",
+                "phplint",
+                "syntax"
             ],
-            "time": "2019-12-26T19:37:31+00:00"
+            "time": "2019-12-07T13:46:15+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -6837,16 +6823,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.10.2",
+            "version": "v1.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "b4400efc9d206e83138e2bb97ed7f5b14b831cd9"
+                "reference": "451c3cd1418cf640de218914901e51b064abb093"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/b4400efc9d206e83138e2bb97ed7f5b14b831cd9",
-                "reference": "b4400efc9d206e83138e2bb97ed7f5b14b831cd9",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/451c3cd1418cf640de218914901e51b064abb093",
+                "reference": "451c3cd1418cf640de218914901e51b064abb093",
                 "shasum": ""
             },
             "require": {
@@ -6896,7 +6882,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2020-01-20T15:57:02+00:00"
+            "time": "2020-03-05T15:02:03+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -8156,6 +8142,65 @@
             "time": "2020-01-21T08:40:24+00:00"
         },
         {
+            "name": "symfony/yaml",
+            "version": "v5.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "a4b613d7e44f62941adff5a802cff70adee57d3f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/a4b613d7e44f62941adff5a802cff70adee57d3f",
+                "reference": "a4b613d7e44f62941adff5a802cff70adee57d3f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5",
+                "symfony/polyfill-ctype": "~1.8"
+            },
+            "conflict": {
+                "symfony/console": "<4.4"
+            },
+            "require-dev": {
+                "symfony/console": "^4.4|^5.0"
+            },
+            "suggest": {
+                "symfony/console": "For validating YAML files using the lint command"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Yaml\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "https://symfony.com",
+            "time": "2020-02-03T13:51:17+00:00"
+        },
+        {
             "name": "theseer/tokenizer",
             "version": "1.1.3",
             "source": {
@@ -8253,7 +8298,9 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.2"
+        "php": "^7.2",
+        "ext-json": "*",
+        "ext-simplexml": "*"
     },
     "platform-dev": []
 }

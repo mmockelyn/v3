@@ -3,11 +3,11 @@ import tooltip from 'bootstrap'
 
 
 export function reloadNotifBar() {
-    let countNotifBar = document.querySelector('#countNotifBar')
-    let value = parseInt(countNotifBar.textContent)
+    let countNotifBar = document.querySelector('#countNotifBar');
+    let value = parseInt(countNotifBar.textContent);
     if(value === 0) {
-        let iconEl = $(".kt-header__topbar-icon")
-        iconEl.classList.remove('kt-hidden')
+        let iconEl = $(".kt-header__topbar-icon");
+        iconEl.classList.remove('kt-hidden');
         iconEl.textContent = 1
     }else{
         countNotifBar.textContent = parseInt(value+1);
@@ -31,11 +31,11 @@ export function unblockElement(el) {
 export function addPremium() {
     $.get('/account/api/isPremium')
         .done((data) => {
-            if(data.data == 'true') {
+            if (data.data === 'true') {
                 $("#TutorielIndex").attr('data-premium', 'on')
                 $("#TutorielList").attr('data-premium', 'on')
                 $("#TutorielShow").attr('data-premium', 'on')
-            }else{
+            } else {
                 $("#TutorielIndex").attr('data-premium', 'off')
                 $("#TutorielList").attr('data-premium', 'off')
                 $("#TutorielShow").attr('data-premium', 'off')
@@ -46,11 +46,45 @@ export function addPremium() {
 function hidingAlerting() {
     let alerts = document.querySelectorAll('#showAlerting')
 
-    /*Array.from(alerts).forEach((alert) => {
+    Array.from(alerts).forEach((alert) => {
         setTimeout(function () {
-            alert.hide()
+            fadeEffect('fadeOut', alert)
         }, 2500)
-    })*/
+    })
+}
+
+/**
+ *
+ * @param type fadeIn or fadeOut
+ * @param el element recuperer
+ */
+function fadeEffect(type, el){
+    if(type === 'fadeIn'){
+        let fadeEffect = setInterval(function () {
+            if(!el.style.opacity) {
+                el.style.opacity = 0;
+            }
+            if(el.style.opacity < 1) {
+                el.style.opacity += 0.1;
+            } else {
+                clearInterval(fadeEffect)
+            }
+        }, 200);
+        return fadeEffect;
+    }
+    if(type === 'fadeOut'){
+        let fadeEffect = setInterval(function () {
+            if(!el.style.opacity) {
+                el.style.opacity = 1;
+            }
+            if(el.style.opacity > 0) {
+                el.style.opacity -= 0.1;
+            } else {
+                clearInterval(fadeEffect)
+            }
+        }, 200);
+        return fadeEffect;
+    }
 }
 
 hidingAlerting()

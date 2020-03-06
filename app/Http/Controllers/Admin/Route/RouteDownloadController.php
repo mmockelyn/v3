@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Repository\Route\RouteRepository;
 use App\Repository\Route\RouteTypeDownloadRepository;
 use App\Repository\Route\RouteTypeReleaseRepository;
-use Illuminate\Http\Request;
 
 class RouteDownloadController extends Controller
 {

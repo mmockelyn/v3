@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Front\Route;
 use App\Http\Controllers\Controller;
 use App\Repository\Route\RouteGalleryCategoryRepository;
 use App\Repository\Route\RouteRepository;
-use Illuminate\Http\Request;
 
 class RouteController extends Controller
 {

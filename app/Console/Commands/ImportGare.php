@@ -47,7 +47,7 @@ class ImportGare extends Command
             "dataset" => "referentiel-gares-voyageurs",
             "sort" => "gare_alias_libelle_noncontraint",
             "facet" => "gare_agencegc_libelle",
-            "rows"   => 3270,
+            "rows" => 3270,
             "facet" => "gare_regionsncf_libelle",
             "facet" => "gare_ug_libelle",
             "facet" => "pltf_departement_libellemin",
@@ -62,7 +62,7 @@ class ImportGare extends Command
         $ch = curl_init();
 
         curl_setopt_array($ch, array(
-            CURLOPT_URL => $endpoint.$psm,
+            CURLOPT_URL => $endpoint . $psm,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -79,13 +79,13 @@ class ImportGare extends Command
 
         $bar->start();
         foreach ($jps->records as $gare) {
-            if(isset($gare->fields->pltf_latitude_entreeprincipale_wgs84) ||  isset($gare->fields->pltf_longitude_entreeprincipale_wgs84)) {
+            if (isset($gare->fields->pltf_latitude_entreeprincipale_wgs84) || isset($gare->fields->pltf_longitude_entreeprincipale_wgs84)) {
                 $this->gareRepository->create(
                     $gare->fields->gare_alias_libelle_noncontraint,
                     $gare->fields->pltf_latitude_entreeprincipale_wgs84,
                     $gare->fields->pltf_longitude_entreeprincipale_wgs84
                 );
-            }else{
+            } else {
                 $this->gareRepository->create(
                     $gare->fields->gare_alias_libelle_noncontraint,
                     null,

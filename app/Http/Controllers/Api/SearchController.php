@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Repository\Asset\AssetRepository;
 use App\Repository\Blog\BlogRepository;
 use App\Repository\Tutoriel\TutorielRepository;

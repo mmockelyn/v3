@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Api\Admin\Route;
 
-use function App\HelpersClass\list_filter;
 use App\HelpersClass\Route\RouteLabHelper;
 use App\Http\Controllers\Api\BaseController;
 use App\Repository\Route\RouteAnomalieRepository;
 use App\Repository\Route\RouteBuildRepository;
 use App\Repository\Route\RouteRepository;
 use Illuminate\Http\Request;
-
+use function App\HelpersClass\list_filter;
 
 class RouteLabController extends BaseController
 {

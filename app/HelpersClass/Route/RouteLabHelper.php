@@ -29,7 +29,7 @@ class RouteLabHelper
 
     public static function labPercent($route_id)
     {
-        $anomalie = new RouteAnomalie();
+        $anomalie = new RouteAnomalie;
         $countAnomalie = $anomalie->newQuery()->where('route_id', $route_id)->count();
         $countState = $anomalie->newQuery()->where('route_id', $route_id)->where('state', 2)->count();
 
@@ -44,7 +44,7 @@ class RouteLabHelper
 
     public static function countTask($route_id, $state)
     {
-        $anomalie = new RouteAnomalie();
+        $anomalie = new RouteAnomalie;
         $count = $anomalie->newQuery()->where('route_id', $route_id)->where('state', $state)->count();
 
         return $count;
@@ -52,7 +52,7 @@ class RouteLabHelper
 
     public static function countTaskTotal($route_id)
     {
-        $anomalie = new RouteAnomalie();
+        $anomalie = new RouteAnomalie;
         $count = $anomalie->newQuery()->where('route_id', $route_id)->count();
 
         return $count;
@@ -78,14 +78,14 @@ class RouteLabHelper
 
     public static function getFinishedTask($route_id)
     {
-        $an = new RouteAnomalie();
+        $an = new RouteAnomalie;
 
         return $an->newQuery()->where('route_id', $route_id)->where('state', 2)->get();
     }
 
     public static function calcNewBuild($route_id) {
         $tasks = self::countTaskTotal($route_id);
-        $build = new RouteBuild();
+        $build = new RouteBuild;
         $dts = $build->newQuery()->where('route_id', $route_id)->first();
 
         $sum = $dts->build * $tasks / ($tasks-1);
@@ -95,7 +95,7 @@ class RouteLabHelper
 
     public static function getOutFinishedTask($route_id)
     {
-        $an = new RouteAnomalie();
+        $an = new RouteAnomalie;
 
         return $an->newQuery()
             ->where('route_id', $route_id)

@@ -4,6 +4,16 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
+/**
+ * CreateHelper
+ * Permet de créer un helper dynamiquement
+ *
+ * @category ClearAllCommand
+ * @package  Syltheron
+ * @author   Syltheron <mmockelyn@gmail.com>
+ * @license  null GNU General Public License
+ * @link     https://gitlab.com/mmockelyn
+ */
 class CreateHelper extends Command
 {
     /**
@@ -37,17 +47,18 @@ class CreateHelper extends Command
      */
     public function handle()
     {
-        if(empty($this->argument('dossier'))){
+        if (empty($this->argument('dossier'))) {
             $namespace = "namespace App\HelpersClass;";
-        }else{
-            $namespace = "namespace App\HelpersClass\\".$this->argument('dossier').";";
+        } else {
+            $namespace = "namespace App\HelpersClass\\" . $this->argument('dossier') . ";";
         }
 
         $class = $this->argument('class');
 
-        $dossierOutput = app_path()."/HelpersClass/".$this->argument('dossier');
+        $dossierOutput = app_path() . "/HelpersClass/" . $this->argument('dossier');
 
-        $content = "<?php
+        $content = "
+        <?php
 $namespace
 
 class $class
@@ -58,17 +69,18 @@ class $class
         ";
 
         $this->isDir($dossierOutput);
-        $stat = file_put_contents($dossierOutput."/".$class.".php", $content);
-        if($stat == false){
+        $stat = file_put_contents($dossierOutput . "/" . $class . ".php", $content);
+        if ($stat == false) {
             $this->error('Impossible de créer le fichier');
-        }else{
+        } else {
             $this->info("Fichier répertoire Créer");
         }
 
     }
 
-    private function isDir($dossier){
-        if(!is_dir($dossier)){
+    private function isDir($dossier)
+    {
+        if (!is_dir($dossier)) {
             mkdir($dossier);
         }
     }

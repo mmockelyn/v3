@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Route;
 
 use App\Http\Controllers\Controller;
 use App\Repository\Route\RouteRepository;
-use Illuminate\Http\Request;
 
 class RouteController extends Controller
 {

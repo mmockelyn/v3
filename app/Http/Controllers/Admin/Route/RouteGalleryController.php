@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Repository\Route\RouteGalleryCategoryRepository;
 use App\Repository\Route\RouteGalleryRepository;
 use App\Repository\Route\RouteRepository;
-use Illuminate\Http\Request;
 
 class RouteGalleryController extends Controller
 {

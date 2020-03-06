@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\HelpersClass\Tutoriel\TutorielHelper;
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Controller;
 use App\Repository\Tutoriel\TutorielRepository;
-use Illuminate\Http\Request;
 
 class TutorielController extends BaseController
 {
