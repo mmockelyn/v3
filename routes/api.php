@@ -172,6 +172,9 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::get('{objet_id}/unpublish', 'ObjetObjetController@unpublish');
             Route::post('{objet_id}/tag', 'ObjetObjetController@postTag');
             Route::post('{objet_id}/compatibility', 'ObjetObjetController@postCompatibility');
+            Route::post('{objet_id}/uploadDownloadFile', 'ObjetObjetController@uploadDownloadFile');
+            Route::post('{objet_id}/uploadFbx', 'ObjetObjetController@uploadFbx');
+            Route::post('{objet_id}/uploadConfigFile', 'ObjetObjetController@uploadConfigFile');
 
             Route::group(["prefix" => "{asset_id}/compatibility"], function () {
                 Route::post('/list', 'ObjetObjetController@compatibilitiesList');

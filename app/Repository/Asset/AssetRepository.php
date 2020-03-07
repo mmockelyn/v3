@@ -95,5 +95,13 @@ class AssetRepository
         ]);
     }
 
+    public function updateLinkDownload($asset_id, string $string)
+    {
+        return $this->get($asset_id)
+            ->update([
+                "downloadLink" => $string
+            ]);
+    }
+
 }
 

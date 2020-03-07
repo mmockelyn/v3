@@ -4,15 +4,19 @@ namespace App\Http\Controllers\Api\Admin\Objet;
 
 use App\HelpersClass\Asset\AssetHelper;
 use App\HelpersClass\Core\Datatable;
+use App\HelpersClass\Core\ZipFile;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
+use App\Jobs\Objet\ExtractFbxFile;
 use App\Repository\Asset\AssetCompatibilityRepository;
 use App\Repository\Asset\AssetRepository;
 use App\Repository\Asset\AssetTagRepository;
 use Exception;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Webpatser\Uuid\Uuid;
 
 class ObjetObjetController extends BaseController
@@ -123,12 +127,6 @@ class ObjetObjetController extends BaseController
         $data = $this->assetRepository->get($asset_id);
         $errors = collect();
 
-        if ($data->short_description == $data->description) {
-            $errors->push([
-                "<li>Aucune différence entre la description courte et la description longue.<br>Veuillez Emmettre une description longue différente de la description courte</li>"
-            ]);
-        }
-
         if (Storage::disk('public')->exists('download/' . $data->id . '.png') == false) {
             $errors->push([
                 "<li>L'image de l'article n'est pas définie</li>"
@@ -149,18 +147,12 @@ class ObjetObjetController extends BaseController
             }
         }
 
-        if ($data->mesh == 1) {
+        if ($data->config == 1) {
             if (Storage::disk('sftp')->exists('download/' . $data->id . '/config/config.txt') == false) {
                 $errors->push([
                     "<li>Le système prend en charge un visuel 3D mais le fichier est inexistant sur le serveur de partage</li>"
                 ]);
             }
-        }
-
-        if (count($data->tags) == 0) {
-            $errors->push([
-                "<li>Aucun tags de définie</li>"
-            ]);
         }
 
         if (count($errors) == 0) {
@@ -269,6 +261,173 @@ class ObjetObjetController extends BaseController
             return $this->sendResponse($datas->toArray(), "Liste des objets");
         } else {
             return $this->datatable->loadDatatable($request, $datas->toArray());
+        }
+    }
+
+    public function uploadDownloadFile(Request $request, $asset_id)
+    {
+        $data = $this->assetRepository->get($asset_id);
+        $file = $request->file('file');
+        $path = 'download/' . $asset_id . '/';
+        if (Storage::disk('sftp')->exists($path . $data->uuid . '.zip') == true) {
+            try {
+                Storage::disk('sftp')->delete($path . $data->uuid . '.zip');
+                try {
+                    $file->storeAs($path, $data->uuid . '.zip', 'sftp');
+                    try {
+                        Storage::disk('sftp')->setVisibility($path . $data->uuid . '.zip', 'public');
+                        try {
+                            $this->assetRepository->updateLinkDownload($asset_id, "https://download.trainznation.eu/v3/download/" . $asset_id . "/" . $data->uuid . ".zip");
+
+                            return $this->sendResponse(null, null);
+                        } catch (Exception $exception) {
+                            return $this->sendError("Erreur Système", [
+                                "error" => "Création en base échoué"
+                            ]);
+                        }
+                    } catch (FileException $exception) {
+                        return $this->sendError("Erreur Fichier", [
+                            "error" => "Impossible de modifier la visibilité du fichier"
+                        ]);
+                    }
+                } catch (FileException $exception) {
+                    return $this->sendError("Erreur Fichier", [
+                        "error" => "Transfère du fichier sur le serveur Echoué"
+                    ]);
+                }
+            } catch (FileException $exception) {
+                return $this->sendError("Erreur Fichier", [
+                    "error" => "Impossible de supprimer le fichier précédent"
+                ]);
+            }
+        } else {
+            try {
+                $file->storeAs($path, $data->uuid . '.zip', 'sftp');
+                try {
+                    Storage::disk('sftp')->setVisibility($path . $data->uuid . '.zip', 'public');
+                    try {
+                        $this->assetRepository->updateLinkDownload($asset_id, "https://download.trainznation.eu/v3/download/" . $asset_id . "/" . $data->uuid . ".zip");
+                        return $this->sendResponse(null, null);
+                    } catch (Exception $exception) {
+                        return $this->sendError("Erreur Système", [
+                            "error" => "Création en base échoué"
+                        ]);
+                    }
+                } catch (FileException $exception) {
+                    return $this->sendError("Erreur Fichier", [
+                        "error" => "Impossible de modifier la visibilité du fichier"
+                    ]);
+                }
+            } catch (FileException $exception) {
+                return $this->sendError("Erreur Fichier", [
+                    "error" => "Transfère du fichier sur le serveur Echoué"
+                ]);
+            }
+        }
+    }
+
+    public function uploadFbx(Request $request, $asset_id)
+    {
+        $data = $this->assetRepository->get($asset_id);
+        $file = $request->file('file');
+        $path = 'download/' . $asset_id . '/fbx/';
+        if (Storage::disk('sftp')->exists($path . $data->uuid . '.zip') == true) {
+            try {
+                Storage::disk('sftp')->delete($path . $data->uuid . '.zip');
+                try {
+                    $file->storeAs($path, $data->uuid . '.zip', 'sftp');
+                    try {
+                        Storage::disk('sftp')->setVisibility($path . $data->uuid . '.zip', 'public');
+                        ZipFile::fileFbx(Storage::disk('sftp')->get('download/' . $asset_id . '/fbx/' . $data->uuid . '.zip'), $asset_id);
+                        return $this->sendResponse(null, null);
+                    } catch (FileException $exception) {
+                        return $this->sendError("Erreur Fichier", [
+                            "error" => "Impossible de modifier la visibilité du fichier"
+                        ]);
+                    } catch (FileNotFoundException $e) {
+                        return $this->sendError("Erreur Fichier", [
+                            "error" => "Le Fichier n'existe pas sur le serveur"
+                        ]);
+                    }
+                } catch (FileException $exception) {
+                    return $this->sendError("Erreur Fichier", [
+                        "error" => "Transfère du fichier sur le serveur Echoué"
+                    ]);
+                }
+            } catch (FileException $exception) {
+                return $this->sendError("Erreur Fichier", [
+                    "error" => "Impossible de supprimer le fichier précédent"
+                ]);
+            }
+        } else {
+            try {
+                $file->storeAs($path, $data->uuid . '.zip', 'sftp');
+                try {
+                    Storage::disk('sftp')->setVisibility($path . $data->uuid . '.zip', 'public');
+                    ZipFile::fileFbx(Storage::disk('sftp')->get('download/' . $asset_id . '/fbx/' . $data->uuid . '.zip'), $asset_id);
+                } catch (FileException $exception) {
+                    return $this->sendError("Erreur Fichier", [
+                        "error" => "Impossible de modifier la visibilité du fichier"
+                    ]);
+                } catch (FileNotFoundException $e) {
+                    return $this->sendError("Erreur Fichier", [
+                        "error" => "Le Fichier n'existe pas sur le serveur"
+                    ]);
+                }
+            } catch (FileException $exception) {
+                return $this->sendError("Erreur Fichier", [
+                    "error" => "Transfère du fichier sur le serveur Echoué"
+                ]);
+            }
+        }
+        return null;
+    }
+
+    public function uploadConfigFile(Request $request, $asset_id)
+    {
+        $data = $this->assetRepository->get($asset_id);
+        $file = $request->file('file');
+        $path = 'download/' . $asset_id . '/config/';
+        if (Storage::disk('sftp')->exists($path . $file->getClientOriginalName()) == true) {
+            try {
+                Storage::disk('sftp')->delete($path . $file->getClientOriginalName());
+                try {
+                    $file->storeAs($path, 'config.txt', 'sftp');
+                    try {
+                        Storage::disk('sftp')->setVisibility($path . 'config.txt', 'public');
+
+                        return $this->sendResponse(null, null);
+                    } catch (FileException $exception) {
+                        return $this->sendError("Erreur Fichier", [
+                            "error" => "Impossible de modifier la visibilité du fichier"
+                        ]);
+                    }
+                } catch (FileException $exception) {
+                    return $this->sendError("Erreur Fichier", [
+                        "error" => "Transfère du fichier sur le serveur Echoué"
+                    ]);
+                }
+            } catch (FileException $exception) {
+                return $this->sendError("Erreur Fichier", [
+                    "error" => "Impossible de supprimer le fichier précédent"
+                ]);
+            }
+        } else {
+            try {
+                $file->storeAs($path, 'config.txt', 'sftp');
+                try {
+                    Storage::disk('sftp')->setVisibility($path . 'config.txt', 'public');
+                    return $this->sendResponse(null, null);
+                } catch (FileException $exception) {
+                    return $this->sendError("Erreur Fichier", [
+                        "error" => "Impossible de modifier la visibilité du fichier"
+                    ]);
+                }
+            } catch (FileException $exception) {
+                return $this->sendError("Erreur Fichier", [
+                    "error" => "Transfère du fichier sur le serveur Echoué"
+                ]);
+            }
         }
     }
 

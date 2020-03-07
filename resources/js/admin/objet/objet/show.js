@@ -415,6 +415,56 @@ function getAsset() {
     })
 }
 
+$("#formDownloadFile").dropzone({
+    url: '/api/admin/objet/objet/' + asset_id + '/uploadDownloadFile',
+    paramName: 'file',
+    addRemoveLinks: true,
+    acceptedFiles: ".cdp",
+    success: function (data) {
+        toastr.success("Le fichier <strong>" + data.name + "</strong> à été uploader")
+    },
+    error: function (data) {
+        toastr.error("Erreur: " + data.data.error, "Erreur")
+    }
+});
+$("#formUploadFbx").dropzone({
+    url: '/api/admin/objet/objet/' + asset_id + '/uploadFbx',
+    paramName: 'file',
+    addRemoveLinks: true,
+    acceptedFiles: ".zip",
+    success: function (data) {
+        toastr.success("Le fichier <strong>" + data.name + "</strong> à été uploader")
+    },
+    error: function (data) {
+        toastr.error("Erreur: " + data.data.error, "Erreur")
+    }
+});
+
+$("#formUploadConfig").dropzone({
+    url: '/api/admin/objet/objet/' + asset_id + '/uploadConfigFile',
+    paramName: 'file',
+    addRemoveLinks: true,
+    acceptedFiles: ".txt",
+    success: function (data) {
+        toastr.success("Le fichier <strong>" + data.name + "</strong> à été uploader")
+    },
+    error: function (data) {
+        toastr.error("Erreur: " + data.data.error, "Erreur")
+    }
+});
+
+$("#downloadFile").on('hide.bs.modal', function () {
+    window.location.reload()
+});
+
+$("#uploadFbx").on('hide.bs.modal', function () {
+    window.location.reload()
+});
+
+$("#uploadConfigFile").on('hide.bs.modal', function () {
+    window.location.reload()
+});
+
 showInfo();
 publishAsset();
 unpublishAsset();

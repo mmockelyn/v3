@@ -824,7 +824,7 @@ try {
 /***/ }),
 
 /***/ "./node_modules/@babel/runtime/regenerator/index.js":
-/*!**********************************************************!*\
+        /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
   \**********************************************************/
         /*! no static exports found */
@@ -1500,10 +1500,11 @@ try {
   * Copyright 2011-2019 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
-(function (global, factory) {
-   true ? factory(exports, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")) :
-  undefined;
-}(this, (function (exports, $, Popper) { 'use strict';
+            (function (global, factory) {
+                true ? factory(exports, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")) :
+                    undefined;
+            }(this, (function (exports, $, Popper) {
+                'use strict';
 
   $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
   Popper = Popper && Popper.hasOwnProperty('default') ? Popper['default'] : Popper;
@@ -4320,7 +4321,7 @@ try {
     };
 
     for (var i = 0, len = elements.length; i < len; i++) {
-      var _ret = _loop(i);
+        var _ret = _loop(i);
 
         if (_ret === "continue")
             }
@@ -22214,15 +22215,15 @@ var Popper = function () {
         /*! no static exports found */
         /***/ (function (module, exports) {
 
-var g;
+            var g;
 
 // This works in non-strict mode
-g = (function() {
-	return this;
-})();
+            g = (function () {
+                return this;
+            })();
 
-try {
-	// This works if eval is allowed (see CSP)
+            try {
+                // This works if eval is allowed (see CSP)
 	g = g || new Function("return this")();
 } catch (e) {
 	// This works if the window reference is available
@@ -25658,16 +25659,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             }
 
             function _showInfo() {
-  _showInfo = _asyncToGenerator(
-  /*#__PURE__*/
-  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-    var asset_title, asset_block, asset_category, asset_publish, asset_kuid, asset_price, asset_social, asset_downloaded, asset_mesh, asset_config;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            asset_title = document.querySelector('#asset_title');
-            asset_block = document.querySelector('#asset_block');
+                _showInfo = _asyncToGenerator(
+                    /*#__PURE__*/
+                    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+                        var asset_title, asset_block, asset_category, asset_publish, asset_kuid, asset_price,
+                            asset_social, asset_downloaded, asset_mesh, asset_config;
+                        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+                            while (1) {
+                                switch (_context.prev = _context.next) {
+                                    case 0:
+                                        asset_title = document.querySelector('#asset_title');
+                                        asset_block = document.querySelector('#asset_block');
             asset_category = document.querySelector('#asset_category');
             asset_publish = document.querySelector('#asset_publish');
             asset_kuid = document.querySelector('#asset_kuid');
@@ -25722,23 +25724,23 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               }
 
               if (response.config === 0) {
-                asset_social.style.color = '#6b6b6b';
-                asset_config.setAttribute('data-toggle', 'kt-tooltip');
-                asset_config.setAttribute('title', 'Désactivé');
+                  asset_social.style.color = '#6b6b6b';
+                  asset_config.setAttribute('data-toggle', 'kt-tooltip');
+                  asset_config.setAttribute('title', 'Désactivé');
               } else {
-                asset_social.style.color = '#235ebf';
-                asset_config.setAttribute('data-toggle', 'kt-tooltip');
-                asset_config.setAttribute('title', 'Activé');
+                  asset_social.style.color = '#235ebf';
+                  asset_config.setAttribute('data-toggle', 'kt-tooltip');
+                  asset_config.setAttribute('title', 'Activé');
               }
             });
 
-            case 13:
-            case "end":
-                return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
+                                    case 13:
+                                    case "end":
+                                        return _context.stop();
+                                }
+                            }
+                        }, _callee);
+                    }));
                 return _showInfo.apply(this, arguments);
             }
 
@@ -26044,6 +26046,51 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 });
             }
 
+            $("#formDownloadFile").dropzone({
+                url: '/api/admin/objet/objet/' + asset_id + '/uploadDownloadFile',
+                paramName: 'file',
+                addRemoveLinks: true,
+                acceptedFiles: ".cdp",
+                success: function success(data) {
+                    toastr.success("Le fichier <strong>" + data.name + "</strong> à été uploader");
+                },
+                error: function error(data) {
+                    toastr.error("Erreur: " + data.data.error, "Erreur");
+                }
+            });
+            $("#formUploadFbx").dropzone({
+                url: '/api/admin/objet/objet/' + asset_id + '/uploadFbx',
+                paramName: 'file',
+                addRemoveLinks: true,
+                acceptedFiles: ".zip",
+                success: function success(data) {
+                    toastr.success("Le fichier <strong>" + data.name + "</strong> à été uploader");
+                },
+                error: function error(data) {
+                    toastr.error("Erreur: " + data.data.error, "Erreur");
+                }
+            });
+            $("#formUploadConfig").dropzone({
+                url: '/api/admin/objet/objet/' + asset_id + '/uploadConfigFile',
+                paramName: 'file',
+                addRemoveLinks: true,
+                acceptedFiles: ".txt",
+                success: function success(data) {
+                    toastr.success("Le fichier <strong>" + data.name + "</strong> à été uploader");
+                },
+                error: function error(data) {
+                    toastr.error("Erreur: " + data.data.error, "Erreur");
+                }
+            });
+            $("#downloadFile").on('hide.bs.modal', function () {
+                window.location.reload();
+            });
+            $("#uploadFbx").on('hide.bs.modal', function () {
+                window.location.reload();
+            });
+            $("#uploadConfigFile").on('hide.bs.modal', function () {
+                window.location.reload();
+            });
             showInfo();
             publishAsset();
             unpublishAsset();
@@ -26054,15 +26101,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             /***/
         }),
 
-/***/ "./resources/js/core.js":
-/*!******************************!*\
+        /***/ "./resources/js/core.js":
+        /*!******************************!*\
   !*** ./resources/js/core.js ***!
   \******************************/
-/*! exports provided: reloadNotifBar, blockElement, unblockElement, addPremium, formatDate */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+        /*! exports provided: reloadNotifBar, blockElement, unblockElement, addPremium, formatDate */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reloadNotifBar", function() { return reloadNotifBar; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "blockElement", function() { return blockElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unblockElement", function() { return unblockElement; });

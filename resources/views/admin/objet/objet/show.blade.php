@@ -46,6 +46,165 @@
 
 @section("content")
     <div id="asset" data-id="{{ $asset->id }}"></div>
+    <div class="kt-portlet">
+        <div class="kt-portlet__head kt-bg-warning">
+            <div class="kt-portlet__head-label">
+					<span class="kt-portlet__head-icon">
+						<i class="la la-tasks"></i>
+					</span>
+                <h3 class="kt-portlet__head-title">
+                    Liste des taches de cette objet
+                </h3>
+            </div>
+        </div>
+        <div class="kt-portlet__body">
+            <div class="kt-widget4">
+                @if(\Illuminate\Support\Facades\Storage::disk('sftp')->exists('download/'.$asset->id.'/'.$asset->uuid.'.zip') == false)
+                    <div class="kt-widget4__item">
+                        <div class="kt-widget4__pic kt-widget4__pic--pic">
+                            <i class="la la-times-circle kt-font-danger la-2x"></i>
+                        </div>
+                        <div class="kt-widget4__info">
+                            <a href="#" class="kt-widget4__username">
+                                Fichier CDP
+                            </a>
+                            <p class="kt-widget4__text">
+                                Le fichier à télécharger n'est pas disponible sur le serveur.<br>Veuillez envoyer le
+                                fichier
+                            </p>
+                        </div>
+                        <a data-toggle="modal" data-target="#downloadFile" class="btn btn-sm btn-label-danger btn-bold">Envoyer</a>
+                    </div>
+                @endif
+                @if($asset->mesh == 1)
+                    @if(\Illuminate\Support\Facades\Storage::disk('sftp')->exists('download/'.$asset->id.'/fbx/lod0n.FBX') == false)
+                        <div class="kt-widget4__item">
+                            <div class="kt-widget4__pic kt-widget4__pic--pic">
+                                <i class="la la-times-circle kt-font-danger la-2x"></i>
+                            </div>
+                            <div class="kt-widget4__info">
+                                <a href="#" class="kt-widget4__username">
+                                    Fichier FBX
+                                </a>
+                                <p class="kt-widget4__text">
+                                    La prise en charge de fichier FBX est instruite sur <strong>on</strong> pour cette
+                                    objet mais aucun fichier n'est disponible sur le serveur.
+                                </p>
+                            </div>
+                            <a data-toggle="modal" data-target="#uploadFbx"
+                               class="btn btn-sm btn-label-danger btn-bold">Envoyer</a>
+                        </div>
+                    @endif
+                @endif
+                @if($asset->config == 1)
+                    @if(\Illuminate\Support\Facades\Storage::disk('sftp')->exists('download/'.$asset->id.'/config/config.txt') == false)
+                        <div class="kt-widget4__item">
+                            <div class="kt-widget4__pic kt-widget4__pic--pic">
+                                <i class="la la-times-circle kt-font-danger la-2x"></i>
+                            </div>
+                            <div class="kt-widget4__info">
+                                <a href="#" class="kt-widget4__username">
+                                    Fichier Config
+                                </a>
+                                <p class="kt-widget4__text">
+                                    La prise en charge de fichier Config est instruite sur <strong>on</strong> pour
+                                    cette objet mais aucun fichier n'est disponible sur le serveur.
+                                </p>
+                            </div>
+                            <a data-toggle="modal" data-target="#uploadConfigFile"
+                               class="btn btn-sm btn-label-danger btn-bold">Envoyer</a>
+                        </div>
+                    @endif
+                @endif
+                @if(\Illuminate\Support\Facades\Storage::disk('public')->exists('download/'.$asset->id.'/png') == false)
+                    <div class="kt-widget4__item">
+                        <div class="kt-widget4__pic kt-widget4__pic--pic">
+                            <i class="la la-times-circle kt-font-danger la-2x"></i>
+                        </div>
+                        <div class="kt-widget4__info">
+                            <a href="#" class="kt-widget4__username">
+                                Image de l'objet
+                            </a>
+                            <p class="kt-widget4__text">
+                                L'image de présentation de l'objets n'est pas présente.<br>Veuillez la définir
+                            </p>
+                        </div>
+                        <a href="{{ route('Back.Objet.Objet.edit', $asset->id) }}"
+                           class="btn btn-sm btn-label-danger btn-bold">Editer</a>
+                    </div>
+                @endif
+                @if($asset->short_description == $asset->description || $asset->short_description == null || $asset->description == null)
+
+                @endif
+                @if($asset->description == null)
+                    <div class="kt-widget4__item">
+                        <div class="kt-widget4__pic kt-widget4__pic--pic">
+                            <i class="la la-warning kt-font-warning la-2x"></i>
+                        </div>
+                        <div class="kt-widget4__info">
+                            <a href="#" class="kt-widget4__username">
+                                Description de l'objet
+                            </a>
+                            <p class="kt-widget4__text">
+                                La description n'est pas définie.<br>Veuillez changer la description
+                            </p>
+                        </div>
+                        <a href="{{ route('Back.Objet.Objet.edit', $asset->id) }}"
+                           class="btn btn-sm btn-label-warning btn-bold">Editer</a>
+                    </div>
+                @endif
+                @if($asset->short_description == null)
+                    <div class="kt-widget4__item">
+                        <div class="kt-widget4__pic kt-widget4__pic--pic">
+                            <i class="la la-warning kt-font-warning la-2x"></i>
+                        </div>
+                        <div class="kt-widget4__info">
+                            <a href="#" class="kt-widget4__username">
+                                Description de l'objet
+                            </a>
+                            <p class="kt-widget4__text">
+                                La description courte n'est pas définie.<br>Veuillez changer la description courte
+                            </p>
+                        </div>
+                        <a href="{{ route('Back.Objet.Objet.edit', $asset->id) }}"
+                           class="btn btn-sm btn-label-warning btn-bold">Editer</a>
+                    </div>
+                @endif
+                @if(count($asset->tags) == 0)
+                    <div class="kt-widget4__item">
+                        <div class="kt-widget4__pic kt-widget4__pic--pic">
+                            <i class="la la-warning kt-font-warning la-2x"></i>
+                        </div>
+                        <div class="kt-widget4__info">
+                            <a href="#" class="kt-widget4__username">
+                                Tag
+                            </a>
+                            <p class="kt-widget4__text">
+                                Aucun tag n'à été définie pour cette objet.<br>Cela peut nuire à l'indexaction de la
+                                zone de recherche
+                            </p>
+                        </div>
+                    </div>
+                @endif
+                @if(count($asset->compatibilities) == 0)
+                    <div class="kt-widget4__item">
+                        <div class="kt-widget4__pic kt-widget4__pic--pic">
+                            <i class="la la-warning kt-font-warning la-2x"></i>
+                        </div>
+                        <div class="kt-widget4__info">
+                            <a href="#" class="kt-widget4__username">
+                                Compatibilité
+                            </a>
+                            <p class="kt-widget4__text">
+                                Aucune information de compatibilité n'ont été définie pour cette objet.<br>Cela peut
+                                induire les utilisateur en erreur lors du téléchargement de l'objet
+                            </p>
+                        </div>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-4">
             <div
@@ -248,6 +407,87 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success"><i class="la la-check-circle"></i> Valider
                         </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="downloadFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajout du fichier de téléchargement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form action="" class="kt-form dropzone dropzone-default dropzone-brand" id="formDownloadFile">
+                    <div class="modal-body">
+                        <input type="hidden" id="asset_id" name="id" value="{{ $asset->id }}">
+                        <div class="dropzone-msg dz-message needsclick">
+                            <h3 class="dropzone-msg-title">Déposez des fichiers ici ou cliquez pour télécharger.</h3>
+                            <span class="dropzone-msg-desc">Aucune limitation de taille de fichier</span><br>
+                            <span class="dropzone-msg-desc">Fichier cdp uniquement (jpg,jpeg,png,bmp,etc...)</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="uploadFbx" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajout du fichier de modèle 3D</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form action="" class="kt-form dropzone dropzone-default dropzone-brand" id="formUploadFbx">
+                    <div class="alert alert-info fade show" role="alert">
+                        <div class="alert-icon"><i class="flaticon-questions-circular-button"></i></div>
+                        <div class="alert-text">
+                            Veillez à envoyer un zip contenant:
+                            <ul>
+                                <li>Le fichier FBX</li>
+                                <li>Tous les images au format TGA</li>
+                            </ul>
+                        </div>
+                        <div class="alert-close">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true"><i class="la la-close"></i></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="asset_id" name="id" value="{{ $asset->id }}">
+                        <div class="dropzone-msg dz-message needsclick">
+                            <h3 class="dropzone-msg-title">Déposez des fichiers ici ou cliquez pour télécharger.</h3>
+                            <span class="dropzone-msg-desc">Aucune limitation de taille de fichier</span><br>
+                            <span class="dropzone-msg-desc">Fichier zip uniquement (jpg,jpeg,png,bmp,etc...)</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="uploadConfigFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajout du fichier de configuration</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form action="" class="kt-form dropzone dropzone-default dropzone-brand" id="formUploadConfig">
+                    <div class="modal-body">
+                        <input type="hidden" id="asset_id" name="id" value="{{ $asset->id }}">
+                        <div class="dropzone-msg dz-message needsclick">
+                            <h3 class="dropzone-msg-title">Déposez des fichiers ici ou cliquez pour télécharger.</h3>
+                            <span class="dropzone-msg-desc">Aucune limitation de taille de fichier</span><br>
+                            <span class="dropzone-msg-desc">Fichier txt uniquement</span>
+                        </div>
                     </div>
                 </form>
             </div>
