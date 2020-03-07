@@ -30,10 +30,12 @@
                            class="btn btn-sm btn-outline-info"><i class="la la-edit"></i> Editer</a>
                         <a href="{{ route('Back.Objet.Objet.delete', $asset->id) }}"
                            class="btn btn-sm btn-outline-danger"><i class="la la-trash"></i> Supprimer</a>
-                        <button class="btn btn-sm btn-icon btn-outline-success" data-toggle="kt-tooltip"
+                        <button id="btnPublishAsset" class="btn btn-sm btn-icon btn-outline-success"
+                                data-toggle="kt-tooltip"
                                 title="Publier l'objet"><i class="la la-check"></i></button>
                     @else
-                        <button class="btn btn-sm btn-icon btn-outline-danger" data-toggle="kt-tooltip"
+                        <button id="btnUnpublishAsset" class="btn btn-sm btn-icon btn-outline-danger"
+                                data-toggle="kt-tooltip"
                                 title="Dépublier l'objet"><i class="la la-times"></i></button>
                     @endif
                 </div>
@@ -147,39 +149,15 @@
                                     </div>
                                     <div class="kt-portlet__head-toolbar">
                                         <div class="kt-portlet__head-actions">
-                                            <button class="btn btn-sm btn-outline-info"><i class="la la-plus"></i>
+                                            <button data-toggle="modal" data-target="#addCompatibility"
+                                                    class="btn btn-sm btn-outline-info"><i class="la la-plus"></i>
                                                 Nouvelle compatibilité
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="kt-portlet__body">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                        <tr>
-                                            <th style="width: 80%">Version</th>
-                                            <th style="width: 20%">Actions</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($asset->compatibilities as $compatibility)
-                                            <tr>
-                                                <td>
-                                                        <span
-                                                            class="kt-media kt-media--circle kt-media--{{ \App\HelpersClass\Asset\AssetHelper::stateClassCompatibility($compatibility->state) }} kt-margin-r-5 kt-margin-t-5">
-                                                            <span>{{ $compatibility->trainzBuild->build }}</span>
-                                                        </span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <button id="btnDeleteCompatibility"
-                                                            data-id="{{ $compatibility->id }}"
-                                                            class="btn btn-icon btn-danger"><i class="la la-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+                                    <div id="listeCompatibilities" class="kt-datatable"></div>
                                 </div>
                             </div>
                         </div>
@@ -193,40 +171,85 @@
                                     </div>
                                     <div class="kt-portlet__head-toolbar">
                                         <div class="kt-portlet__head-actions">
-                                            <button class="btn btn-sm btn-outline-info"><i class="la la-plus"></i>
+                                            <button data-toggle="modal" data-target="#addTag"
+                                                    class="btn btn-sm btn-outline-info"><i class="la la-plus"></i>
                                                 Nouveau tag
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="kt-portlet__body">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                        <tr>
-                                            <th style="width: 80%">Tag</th>
-                                            <th style="width: 20%">Actions</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($asset->tags as $tag)
-                                            <tr>
-                                                <td>
-                                                    <span>{{ $tag->name }}</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <button id="btnDeleteTag" data-id="{{ $tag->id }}"
-                                                            class="btn btn-icon btn-danger"><i class="la la-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
+                                    <div id="listeTag" class="kt-datatable"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addCompatibility" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="la la-plus-circle"></i> Nouvelle
+                        compatibilité</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form action="/api/admin/objet/objet/{{ $asset->id }}/compatibility" class="kt-form"
+                      id="formAddCompatibility" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="trainz_build_id">Trainz Build</label>
+                            <select class="form-control selectpicker" id="trainz_build_id" name="trainz_build_id">
+                                <option value=""></option>
+                                @foreach($builds as $build)
+                                    <option value="{{ $build->id }}">{{ $build->trainz_version_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">Etat de compatibilite</label>
+                            <select class="form-control selectpicker" id="state" name="state">
+                                <option value=""></option>
+                                <option value="0">Non compatible</option>
+                                <option value="1">Compatibilité restreinte</option>
+                                <option value="2">Compatible</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success"><i class="la la-check-circle"></i> Valider
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addTag" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="la la-plus-circle"></i> Nouveau tag</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <form action="/api/admin/objet/objet/{{ $asset->id }}/tag" class="kt-form" id="formAddTag"
+                      method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" id="tag" class="form-control" name="tags"
+                                   placeholder="Tapez les tags à ajouter">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success"><i class="la la-check-circle"></i> Valider
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

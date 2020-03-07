@@ -167,6 +167,19 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::post('', 'ObjetObjetController@store');
             Route::get('{objet_id}', 'ObjetObjetController@get');
             Route::put('{objet_id}', 'ObjetObjetController@update');
+            Route::get('{objet_id}/verifPublish', 'ObjetObjetController@verifPublish');
+            Route::get('{objet_id}/publish', 'ObjetObjetController@publish');
+            Route::get('{objet_id}/unpublish', 'ObjetObjetController@unpublish');
+            Route::post('{objet_id}/tag', 'ObjetObjetController@postTag');
+            Route::post('{objet_id}/compatibility', 'ObjetObjetController@postCompatibility');
+
+            Route::group(["prefix" => "{asset_id}/compatibility"], function () {
+                Route::post('/list', 'ObjetObjetController@compatibilitiesList');
+            });
+
+            Route::group(["prefix" => "{asset_id}/tag"], function () {
+                Route::post('/list', 'ObjetObjetController@tagList');
+            });
         });
     });
 

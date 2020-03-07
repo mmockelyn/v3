@@ -82,5 +82,18 @@ class AssetRepository
             ]);
     }
 
+    public function updateState($asset_id, int $int)
+    {
+        if ($int == 1) {
+            $published_at = now();
+        } else {
+            $published_at = null;
+        }
+        $this->get($asset_id)->update([
+            "published" => $int,
+            "published_at" => $published_at
+        ]);
+    }
+
 }
 

@@ -20,5 +20,11 @@ class TrainzBuildRepository
         $this->trainzBuild = $trainzBuild;
     }
 
+    public function all()
+    {
+        return $this->trainzBuild->newQuery()
+            ->get();
+    }
+
 }
 
