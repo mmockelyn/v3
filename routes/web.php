@@ -146,6 +146,8 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
             Route::get('{objet_id}/edit', ["as" => "Back.Objet.Objet.edit", "uses" => 'ObjetObjetController@edit']);
             Route::get('{objet_id}/delete', ["as" => "Back.Objet.Objet.delete", "uses" => 'ObjetObjetController@delete']);
 
+            Route::put('{objet_id}/editThumb', ["as" => "Back.Objet.Objet.editThumb", "uses" => "ObjetObjetController@editThumb"]);
+
             Route::group(["prefix" => "{objet_id}/compatibility"], function () {
                 Route::get('{compatibility_id}/delete', 'ObjetObjetController@deleteCompatibility');
             });

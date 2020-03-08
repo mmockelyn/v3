@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers\Api\Admin\Objet;
 
+use App\Events\Asset\AssetPublish;
 use App\HelpersClass\Asset\AssetHelper;
 use App\HelpersClass\Core\Datatable;
 use App\HelpersClass\Core\ZipFile;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
+use App\Jobs\Asset\AssetPublishJob;
+use App\Jobs\Asset\AssetPublishSocialJob;
 use App\Jobs\Objet\ExtractFbxFile;
+use App\Notifications\Asset\AssetPublishFacebook;
+use App\Notifications\Asset\AssetPublishTwitter;
 use App\Repository\Asset\AssetCompatibilityRepository;
 use App\Repository\Asset\AssetRepository;
 use App\Repository\Asset\AssetTagRepository;
+use App\User;
 use Exception;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Request;
@@ -140,7 +146,7 @@ class ObjetObjetController extends BaseController
         }
 
         if ($data->mesh == 1) {
-            if (Storage::disk('sftp')->exists('download/' . $data->id . '/fbx/*.fbx') == false) {
+            if (Storage::disk('sftp')->exists('download/' . $data->id . '/fbx/lod0n.FBX') == false) {
                 $errors->push([
                     "<li>Le système prend en charge un visuel 3D mais le fichier est inexistant sur le serveur de partage</li>"
                 ]);
@@ -170,6 +176,11 @@ class ObjetObjetController extends BaseController
     public function publish($asset_id)
     {
         $this->assetRepository->updateState($asset_id, 1);
+        $asset = $this->assetRepository->find($asset_id);
+        $users = User::all();
+        foreach ($users as $user) {
+            $user->notify(new \App\Notifications\Asset\AssetPublish($asset));
+        }
         return $this->sendResponse('ok', 'ok');
     }
 
@@ -428,6 +439,95 @@ class ObjetObjetController extends BaseController
                     "error" => "Transfère du fichier sur le serveur Echoué"
                 ]);
             }
+        }
+    }
+
+    public function editPrice(Request $request, $asset_id)
+    {
+        $asset = $this->assetRepository->get($asset_id);
+        if ($asset->pricing == 0) {
+            return $this->sendError("Erreur Structurelle", [
+                "error" => "Veuillez changer la prise en charge de prix en payant avant de modifier le montant !"
+            ], 202);
+        }
+
+        try {
+            $this->assetRepository->updatePrice($asset_id, $request->price);
+
+            return $this->sendResponse(null, null);
+        } catch (Exception $exception) {
+            return $this->sendError("Erreur Système", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function editInfo(Request $request, $asset_id)
+    {
+        if ($request->exists('published') == true) {
+            $published = 1;
+            $published_at = now();
+            $this->publish($asset_id);
+        } else {
+            $published = 0;
+            $published_at = null;
+        }
+        if ($request->exists('social') == true) {
+            $social = 1;
+        } else {
+            $social = 0;
+        }
+        if ($request->exists('mesh') == true) {
+            $mesh = 1;
+        } else {
+            $mesh = 0;
+        }
+        if ($request->exists('config') == true) {
+            $config = 1;
+        } else {
+            $config = 0;
+        }
+        if ($request->exists('pricing') == true) {
+            $pricing = 1;
+        } else {
+            $pricing = 0;
+        }
+
+        try {
+            $this->assetRepository->updateInfo(
+                $asset_id,
+                $request->designation,
+                $request->kuid,
+                $published,
+                $published_at,
+                $social,
+                $mesh,
+                $config,
+                $pricing,
+                $request->short_description
+            );
+
+            return $this->sendResponse(null, null);
+        } catch (Exception $exception) {
+            return $this->sendError("Erreur Système", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function editDescription(Request $request, $asset_id)
+    {
+        try {
+            $this->assetRepository->updateDescription(
+                $asset_id,
+                $request->description
+            );
+
+            return $this->sendResponse(null, null);
+        } catch (Exception $exception) {
+            return $this->sendError("Erreur système", [
+                "errors" => $exception->getMessage()
+            ]);
         }
     }
 

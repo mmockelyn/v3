@@ -5,12 +5,12 @@ import tooltip from 'bootstrap'
 export function reloadNotifBar() {
     let countNotifBar = document.querySelector('#countNotifBar');
     let value = parseInt(countNotifBar.textContent);
-    if(value === 0) {
+    if (value === 0) {
         let iconEl = $(".kt-header__topbar-icon");
         iconEl.classList.remove('kt-hidden');
         iconEl.textContent = 1
-    }else{
-        countNotifBar.textContent = parseInt(value+1);
+    } else {
+        countNotifBar.textContent = parseInt(value + 1);
     }
 }
 
@@ -48,6 +48,31 @@ export function formatDate(date, format = 'LL') {
     return moment(date).format(format)
 }
 
+export function NotifyMe(title, body) {
+    if (!("Notification" in window)) {
+        toastr.warning('Ce Navigateur ne supporte pas les notifications')
+    } else if (Notification.permission === 'granted') {
+        let notification = new Notification(title, {
+            body: body
+        })
+    } else if (Notification.permission !== 'denied') {
+        Notification.requestPermission((permission) => {
+            // Quelque soit la réponse de l'utilisateur, nous nous assurons de stocker cette information
+            if (!('permission' in Notification)) {
+                Notification.permission = permission;
+            }
+
+            // Si l'utilisateur est OK, on crée une notification
+            if (permission === "granted") {
+                let notification = new Notification(title, {
+                    body: body
+                });
+            }
+        })
+    }
+
+}
+
 function hidingAlerting() {
     let alerts = document.querySelectorAll('#showAlerting');
 
@@ -63,13 +88,13 @@ function hidingAlerting() {
  * @param type fadeIn or fadeOut
  * @param el element recuperer
  */
-function fadeEffect(type, el){
-    if(type === 'fadeIn'){
+function fadeEffect(type, el) {
+    if (type === 'fadeIn') {
         let fadeEffect = setInterval(function () {
-            if(!el.style.opacity) {
+            if (!el.style.opacity) {
                 el.style.opacity = 0;
             }
-            if(el.style.opacity < 1) {
+            if (el.style.opacity < 1) {
                 el.style.opacity += 0.1;
             } else {
                 clearInterval(fadeEffect)
@@ -77,12 +102,12 @@ function fadeEffect(type, el){
         }, 200);
         return fadeEffect;
     }
-    if(type === 'fadeOut'){
+    if (type === 'fadeOut') {
         let fadeEffect = setInterval(function () {
-            if(!el.style.opacity) {
+            if (!el.style.opacity) {
                 el.style.opacity = 1;
             }
-            if(el.style.opacity > 0) {
+            if (el.style.opacity > 0) {
                 el.style.opacity -= 0.1;
             } else {
                 clearInterval(fadeEffect)

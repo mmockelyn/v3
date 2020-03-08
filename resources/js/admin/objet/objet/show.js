@@ -89,7 +89,7 @@ function publishAsset() {
                         html: `<div class="text-left"><ul>${data.data.content}</ul></div>`
                     })
                 } else {
-                    $.get('/api/Admin/objet/objet/' + asset_id + '/publish')
+                    $.get('/api/admin/objet/objet/' + asset_id + '/publish')
                         .done((data) => {
                             KTApp.unprogress(btn);
                             toastr.success("L'objet à été publier", "Succès");

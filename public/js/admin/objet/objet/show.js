@@ -1506,15 +1506,15 @@ try {
             }(this, (function (exports, $, Popper) {
                 'use strict';
 
-  $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
-  Popper = Popper && Popper.hasOwnProperty('default') ? Popper['default'] : Popper;
+                $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
+                Popper = Popper && Popper.hasOwnProperty('default') ? Popper['default'] : Popper;
 
-  function _defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
+                function _defineProperties(target, props) {
+                    for (var i = 0; i < props.length; i++) {
+                        var descriptor = props[i];
+                        descriptor.enumerable = descriptor.enumerable || false;
+                        descriptor.configurable = true;
+                        if ("value" in descriptor) descriptor.writable = true;
       Object.defineProperty(target, descriptor.key, descriptor);
     }
   }
@@ -22224,11 +22224,11 @@ var Popper = function () {
 
             try {
                 // This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
+                g = g || new Function("return this")();
+            } catch (e) {
+                // This works if the window reference is available
+                if (typeof window === "object") g = window;
+            }
 
 // g can still be undefined, but nothing to do about it...
 // We return undefined, instead of nothing here, so it's
@@ -25670,16 +25670,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                                     case 0:
                                         asset_title = document.querySelector('#asset_title');
                                         asset_block = document.querySelector('#asset_block');
-            asset_category = document.querySelector('#asset_category');
-            asset_publish = document.querySelector('#asset_publish');
-            asset_kuid = document.querySelector('#asset_kuid');
-            asset_price = document.querySelector('#asset_price');
-            asset_social = document.querySelector('#asset_social');
-            asset_downloaded = document.querySelector('#asset_downloaded');
-            asset_mesh = document.querySelector('#asset_mesh');
-            asset_config = document.querySelector('#asset_config');
-            KTApp.block(asset_block);
-            _context.next = 13;
+                                        asset_category = document.querySelector('#asset_category');
+                                        asset_publish = document.querySelector('#asset_publish');
+                                        asset_kuid = document.querySelector('#asset_kuid');
+                                        asset_price = document.querySelector('#asset_price');
+                                        asset_social = document.querySelector('#asset_social');
+                                        asset_downloaded = document.querySelector('#asset_downloaded');
+                                        asset_mesh = document.querySelector('#asset_mesh');
+                                        asset_config = document.querySelector('#asset_config');
+                                        KTApp.block(asset_block);
+                                        _context.next = 13;
             return getAsset().then(function (response) {
               KTApp.unblock(asset_block);
               asset_title.innerHTML = response.designation;
@@ -25758,7 +25758,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                                 html: "<div class=\"text-left\"><ul>".concat(data.data.content, "</ul></div>")
                             });
                         } else {
-                            $.get('/api/Admin/objet/objet/' + asset_id + '/publish').done(function (data) {
+                            $.get('/api/admin/objet/objet/' + asset_id + '/publish').done(function (data) {
                                 KTApp.unprogress(btn);
                                 toastr.success("L'objet à été publier", "Succès");
                                 showInfo();
@@ -26105,25 +26105,48 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         /*!******************************!*\
   !*** ./resources/js/core.js ***!
   \******************************/
-        /*! exports provided: reloadNotifBar, blockElement, unblockElement, addPremium, formatDate */
+        /*! exports provided: reloadNotifBar, blockElement, unblockElement, addPremium, formatDate, NotifyMe */
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
 
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reloadNotifBar", function() { return reloadNotifBar; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "blockElement", function() { return blockElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unblockElement", function() { return unblockElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addPremium", function() { return addPremium; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatDate", function() { return formatDate; });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_1__);
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "reloadNotifBar", function () {
+                return reloadNotifBar;
+            });
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "blockElement", function () {
+                return blockElement;
+            });
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "unblockElement", function () {
+                return unblockElement;
+            });
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "addPremium", function () {
+                return addPremium;
+            });
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "formatDate", function () {
+                return formatDate;
+            });
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "NotifyMe", function () {
+                return NotifyMe;
+            });
+            /* harmony import */
+            var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+            /* harmony import */
+            var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+            /* harmony import */
+            var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+            /* harmony import */
+            var bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_1__);
 
 
-function reloadNotifBar() {
-  var countNotifBar = document.querySelector('#countNotifBar');
-  var value = parseInt(countNotifBar.textContent);
+            function reloadNotifBar() {
+                var countNotifBar = document.querySelector('#countNotifBar');
+                var value = parseInt(countNotifBar.textContent);
 
   if (value === 0) {
     var iconEl = jquery__WEBPACK_IMPORTED_MODULE_0__(".kt-header__topbar-icon");
@@ -26159,11 +26182,36 @@ function addPremium() {
     }
   });
 }
-function formatDate(date) {
-  var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'LL';
-  moment.locale('fr');
-  return moment(date).format(format);
-}
+
+            function formatDate(date) {
+                var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'LL';
+                moment.locale('fr');
+                return moment(date).format(format);
+            }
+
+            function NotifyMe(title, body) {
+                if (!("Notification" in window)) {
+                    toastr.warning('Ce Navigateur ne supporte pas les notifications');
+                } else if (Notification.permission === 'granted') {
+                    var notification = new Notification(title, {
+                        body: body
+                    });
+                } else if (Notification.permission !== 'denied') {
+                    Notification.requestPermission(function (permission) {
+                        // Quelque soit la réponse de l'utilisateur, nous nous assurons de stocker cette information
+                        if (!('permission' in Notification)) {
+                            Notification.permission = permission;
+                        } // Si l'utilisateur est OK, on crée une notification
+
+
+                        if (permission === "granted") {
+                            var _notification = new Notification(title, {
+                                body: body
+                            });
+                        }
+                    });
+                }
+            }
 
 function hidingAlerting() {
   var alerts = document.querySelectorAll('#showAlerting');

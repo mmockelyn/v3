@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin\Blog;
 
+use App\Events\Blog\PublishArticle;
 use App\Http\Controllers\Api\BaseController;
 use App\Jobs\Blog\ArticlePublishFacebookJob;
 use App\Jobs\Blog\ArticlePublishJob;
@@ -9,8 +10,10 @@ use App\Jobs\Blog\ArticlePublishTwitterJob;
 use App\Repository\Account\UserRepository;
 use App\Repository\Blog\BlogCommentRepository;
 use App\Repository\Blog\BlogRepository;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Validator;
 
 class BlogArticleController extends BaseController
 {
@@ -83,7 +86,7 @@ class BlogArticleController extends BaseController
 
     public function create(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             "category_id" => "required",
             "title" => "required|min:2",
             "short_content" => "required|min:5|max:255"
@@ -103,7 +106,7 @@ class BlogArticleController extends BaseController
             );
 
             return $this->sendResponse("OK", "L'article <strong>" . $article->title . "</strong> à été créer avec succès");
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur", [
                 "errors" => $exception->getMessage()
             ]);
@@ -126,7 +129,7 @@ class BlogArticleController extends BaseController
                 "category" => $data->category->name,
                 "countComment" => count($this->blogCommentRepository->allFrom($article_id))
             ], "Info");
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
@@ -183,12 +186,13 @@ class BlogArticleController extends BaseController
 
         // Publication utilisateur
         $this->notifyAllUser($article);
+        event(new PublishArticle($article));
 
         try {
             $this->blogRepository->publish($article_id);
 
             return $this->sendResponse("ok", "ok");
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur système", [
                 "errors" => $exception->getMessage()
             ]);
@@ -201,7 +205,7 @@ class BlogArticleController extends BaseController
             $this->blogRepository->unpublish($article_id);
 
             return $this->sendResponse("ok", "ok");
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
@@ -239,7 +243,7 @@ class BlogArticleController extends BaseController
             );
 
             return $this->sendResponse("ok", 'ok');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur", [
                 "errors" => $exception->getMessage()
             ]);
@@ -255,22 +259,22 @@ class BlogArticleController extends BaseController
 
                 $request->file('images')->storeAs('blog', $article_id . '.png', 'public');
 
-                Storage::disk('public')->setVisibility('blog/'.$article_id.'.png', 'public');
-            }else{
+                Storage::disk('public')->setVisibility('blog/' . $article_id . '.png', 'public');
+            } else {
                 $request->file('images')->storeAs('blog', $article_id . '.png', 'public');
 
-                Storage::disk('public')->setVisibility('blog/'.$article_id.'.png', 'public');
+                Storage::disk('public')->setVisibility('blog/' . $article_id . '.png', 'public');
             }
 
             return redirect()->back()->with('success', "L'image à été mise à jour avec succès");
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return redirect()->back()->with("error", "Erreur lors de la mise à jour de l'image");
         }
     }
 
     public function textTwitter(Request $request, $article_id)
     {
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             "twitterText" => "max:280"
         ]);
 
@@ -284,7 +288,7 @@ class BlogArticleController extends BaseController
             $this->blogRepository->updateTwitterText($article_id, $request->twitterText);
 
             return $this->sendResponse("ok", "ok");
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
@@ -297,7 +301,7 @@ class BlogArticleController extends BaseController
             $this->blogRepository->updateContent($article_id, $request->get('content'));
 
             return $this->sendResponse("ok", "ok");
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);

@@ -46,16 +46,23 @@
 
 @section("content")
     <div id="asset" data-id="{{ $asset->id }}"></div>
-    <div class="kt-portlet">
-        <div class="kt-portlet__head kt-bg-warning">
-            <div class="kt-portlet__head-label">
+    @if(\Illuminate\Support\Facades\Storage::disk('sftp')->exists('download/'.$asset->id.'/'.$asset->uuid.'.zip') == false ||
+\Illuminate\Support\Facades\Storage::disk('sftp')->exists('download/'.$asset->id.'/fbx/lod0n.FBX') == false ||
+\Illuminate\Support\Facades\Storage::disk('sftp')->exists('download/'.$asset->id.'/config/config.txt') == false ||
+\Illuminate\Support\Facades\Storage::disk('public')->exists('download/'.$asset->id.'.png') == false ||
+$asset->short_description == $asset->description || $asset->short_description == null || $asset->description == null ||
+count($asset->tags) == 0 ||
+count($asset->compatibilities) == 0)
+        <div class="kt-portlet">
+            <div class="kt-portlet__head kt-bg-warning">
+                <div class="kt-portlet__head-label">
 					<span class="kt-portlet__head-icon">
 						<i class="la la-tasks"></i>
 					</span>
-                <h3 class="kt-portlet__head-title">
-                    Liste des taches de cette objet
-                </h3>
-            </div>
+                    <h3 class="kt-portlet__head-title">
+                        Liste des taches de cette objet
+                    </h3>
+                </div>
         </div>
         <div class="kt-portlet__body">
             <div class="kt-widget4">
@@ -116,7 +123,7 @@
                         </div>
                     @endif
                 @endif
-                @if(\Illuminate\Support\Facades\Storage::disk('public')->exists('download/'.$asset->id.'/png') == false)
+                @if(\Illuminate\Support\Facades\Storage::disk('public')->exists('download/'.$asset->id.'.png') == false)
                     <div class="kt-widget4__item">
                         <div class="kt-widget4__pic kt-widget4__pic--pic">
                             <i class="la la-times-circle kt-font-danger la-2x"></i>
@@ -205,6 +212,7 @@
             </div>
         </div>
     </div>
+    @endif
     <div class="row">
         <div class="col-md-4">
             <div

@@ -10,6 +10,8 @@ use App\Repository\Asset\AssetTagRepository;
 use App\Repository\Core\TrainzBuildRepository;
 use Exception;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ObjetObjetController extends Controller
@@ -74,6 +76,13 @@ class ObjetObjetController extends Controller
         ]);
     }
 
+    public function edit($objet_id)
+    {
+        return view("admin.objet.objet.edit", [
+            "asset" => $this->assetRepository->get($objet_id)
+        ]);
+    }
+
     public function deleteTag($asset_id, $tag_id)
     {
         try {
@@ -93,6 +102,23 @@ class ObjetObjetController extends Controller
             return redirect()->back()->with('success', "La compatibilité à été supprimer avec succès");
         } catch (Exception $exception) {
             return redirect()->back()->with('error', "Erreur lors de la suppression de la compatibilité.<br><i>" . $exception->getMessage() . "</i>");
+        }
+    }
+
+    public function editThumb(Request $request, $asset_id)
+    {
+        try {
+            if (Storage::disk('public')->exists('download/' . $asset_id . '.png') == false) {
+                Storage::disk('public')->delete('download/' . $asset_id . '.png');
+                $request->file('images')->storeAs('download/', $asset_id . '.png', 'public');
+                Storage::disk('public')->setVisibility('download/' . $asset_id . '.png', 'public');
+            } else {
+                $request->file('images')->storeAs('download/', $asset_id . '.png', 'public');
+                Storage::disk('public')->setVisibility('download/' . $asset_id . '.png', 'public');
+            }
+            return redirect()->back()->with('success', "L'image de l'objet à été mise à jours");
+        } catch (Exception $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
         }
     }
 

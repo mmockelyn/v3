@@ -11,6 +11,7 @@
     "/js/admin/index.js": "/js/admin/index.js",
     "/js/admin/objet/category/index.js": "/js/admin/objet/category/index.js",
     "/js/admin/objet/index.js": "/js/admin/objet/index.js",
+    "/js/admin/objet/objet/edit.js": "/js/admin/objet/objet/edit.js",
     "/js/admin/objet/objet/index.js": "/js/admin/objet/objet/index.js",
     "/js/admin/objet/objet/show.js": "/js/admin/objet/objet/show.js",
     "/js/admin/route/config.js": "/js/admin/route/config.js",
