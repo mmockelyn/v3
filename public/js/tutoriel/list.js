@@ -2920,8 +2920,8 @@
     for (var i = 0, len = elements.length; i < len; i++) {
       var _ret = _loop(i);
 
-      if (_ret === "continue") continue;
-    }
+      if (_ret === "continue")
+          }
 
     return createdDocument.body.innerHTML;
   }
@@ -7453,7 +7453,7 @@ function nodeName( elem, name ) {
 
   return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 
-};
+}
 var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
 
 
@@ -17889,28 +17889,51 @@ module.exports = g;
 /***/ }),
 
 /***/ "./resources/js/core.js":
-/*!******************************!*\
-  !*** ./resources/js/core.js ***!
-  \******************************/
-/*! exports provided: reloadNotifBar, blockElement, unblockElement, addPremium, formatDate */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+        /*!******************************!*\
+          !*** ./resources/js/core.js ***!
+          \******************************/
+        /*! exports provided: reloadNotifBar, blockElement, unblockElement, addPremium, formatDate, NotifyMe */
+        /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reloadNotifBar", function() { return reloadNotifBar; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "blockElement", function() { return blockElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unblockElement", function() { return unblockElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addPremium", function() { return addPremium; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatDate", function() { return formatDate; });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_1__);
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "reloadNotifBar", function () {
+                return reloadNotifBar;
+            });
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "blockElement", function () {
+                return blockElement;
+            });
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "unblockElement", function () {
+                return unblockElement;
+            });
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "addPremium", function () {
+                return addPremium;
+            });
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "formatDate", function () {
+                return formatDate;
+            });
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "NotifyMe", function () {
+                return NotifyMe;
+            });
+            /* harmony import */
+            var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+            /* harmony import */
+            var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+            /* harmony import */
+            var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+            /* harmony import */
+            var bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_1__);
 
 
-function reloadNotifBar() {
-  var countNotifBar = document.querySelector('#countNotifBar');
-  var value = parseInt(countNotifBar.textContent);
+            function reloadNotifBar() {
+                var countNotifBar = document.querySelector('#countNotifBar');
+                var value = parseInt(countNotifBar.textContent);
 
   if (value === 0) {
     var iconEl = jquery__WEBPACK_IMPORTED_MODULE_0__(".kt-header__topbar-icon");
@@ -17946,11 +17969,36 @@ function addPremium() {
     }
   });
 }
-function formatDate(date) {
-  var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'LL';
-  moment.locale('fr');
-  return moment(date).format(format);
-}
+
+            function formatDate(date) {
+                var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'LL';
+                moment.locale('fr');
+                return moment(date).format(format);
+            }
+
+            function NotifyMe(title, body) {
+                if (!("Notification" in window)) {
+                    toastr.warning('Ce Navigateur ne supporte pas les notifications');
+                } else if (Notification.permission === 'granted') {
+                    var notification = new Notification(title, {
+                        body: body
+                    });
+                } else if (Notification.permission !== 'denied') {
+                    Notification.requestPermission(function (permission) {
+                        // Quelque soit la réponse de l'utilisateur, nous nous assurons de stocker cette information
+                        if (!('permission' in Notification)) {
+                            Notification.permission = permission;
+                        } // Si l'utilisateur est OK, on crée une notification
+
+
+                        if (permission === "granted") {
+                            var _notification = new Notification(title, {
+                                body: body
+                            });
+                        }
+                    });
+                }
+            }
 
 function hidingAlerting() {
   var alerts = document.querySelectorAll('#showAlerting');

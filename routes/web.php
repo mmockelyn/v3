@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -140,11 +140,21 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
             Route::get('{subcategory_id}/delete', 'ObjetSubCategoryController@delete');
         });
 
-        Route::group(["prefix" => "objet"], function (){
+        Route::group(["prefix" => "objet"], function () {
             Route::get('/', ["as" => "Back.Objet.Objet.index", "uses" => "ObjetObjetController@index"]);
             Route::get('{objet_id}', ["as" => "Back.Objet.Objet.show", "uses" => 'ObjetObjetController@show']);
             Route::get('{objet_id}/edit', ["as" => "Back.Objet.Objet.edit", "uses" => 'ObjetObjetController@edit']);
             Route::get('{objet_id}/delete', ["as" => "Back.Objet.Objet.delete", "uses" => 'ObjetObjetController@delete']);
+
+            Route::put('{objet_id}/editThumb', ["as" => "Back.Objet.Objet.editThumb", "uses" => "ObjetObjetController@editThumb"]);
+
+            Route::group(["prefix" => "{objet_id}/compatibility"], function () {
+                Route::get('{compatibility_id}/delete', 'ObjetObjetController@deleteCompatibility');
+            });
+
+            Route::group(["prefix" => "{objet_id}/tag"], function () {
+                Route::get('{tag_id}/delete', 'ObjetObjetController@deleteTag');
+            });
         });
     });
 

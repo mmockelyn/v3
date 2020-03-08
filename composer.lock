@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a64cdfe6d0127dd9a3c2aed8d4f10ca0",
+    "content-hash": "3f2dec1ad633d602fab0dd84b662b4ad",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -2260,6 +2260,66 @@
                 "psr-3"
             ],
             "time": "2019-12-20T14:22:59+00:00"
+        },
+        {
+            "name": "mtolhuys/laravel-schematics",
+            "version": "0.9.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mtolhuys/laravel-schematics.git",
+                "reference": "f233f819c8d3e738a0fb0f09ad59c2f4c1c24143"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mtolhuys/laravel-schematics/zipball/f233f819c8d3e738a0fb0f09ad59c2f4c1c24143",
+                "reference": "f233f819c8d3e738a0fb0f09ad59c2f4c1c24143",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^2.0",
+                "orchestra/testbench": "^4.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mtolhuys\\LaravelSchematics\\LaravelSchematicsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mtolhuys\\LaravelSchematics\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maarten Tolhuijs",
+                    "email": "mtolhuys@hotmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A interface to help you build your models",
+            "homepage": "https://github.com/mtolhuys/laravel-schematics",
+            "keywords": [
+                "diagram",
+                "eloquent",
+                "laravel",
+                "laravel-schematics",
+                "models",
+                "mtolhuys",
+                "schema",
+                "schematics"
+            ],
+            "time": "2020-03-06T21:27:41+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -5209,6 +5269,65 @@
                 "UUID RFC4122"
             ],
             "time": "2017-10-04T07:47:40+00:00"
+        },
+        {
+            "name": "zanysoft/laravel-zip",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zanysoft/laravel-zip.git",
+                "reference": "466663746c92154c48a2d490efc6724f9f6e9652"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zanysoft/laravel-zip/zipball/466663746c92154c48a2d490efc6724f9f6e9652",
+                "reference": "466663746c92154c48a2d490efc6724f9f6e9652",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0|^5.0",
+                "scrutinizer/ocular": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ZanySoft\\Zip\\ZipServiceProvider"
+                    ],
+                    "aliases": {
+                        "Zip": "ZanySoft\\Zip\\ZipFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ZanySoft\\Zip\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zany Soft",
+                    "email": "info@zanysoft.co",
+                    "homepage": "http://www.zanysoft.co"
+                }
+            ],
+            "description": "ZipArchive toolbox",
+            "homepage": "http://www.zanysoft.co",
+            "keywords": [
+                "merge",
+                "multiple",
+                "unzip",
+                "zip",
+                "ziparchive"
+            ],
+            "time": "2017-10-10T03:22:41+00:00"
         }
     ],
     "packages-dev": [
