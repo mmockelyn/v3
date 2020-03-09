@@ -53,6 +53,7 @@ Route::group(["prefix" => "wiki", "namespace" => "Api\Wiki"], function () {
 
 Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
     Route::post('loadSignalement', 'AdminController@loadSignalement');
+    Route::get('cache', "AdminController@cache");
 
     Route::group(["prefix" => "blog", "namespace" => "Blog"], function () {
         Route::get('latest', 'BlogController@loadLatest');
@@ -189,8 +190,12 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
         });
     });
 
-    Route::group(["prefix" => "tutoriel"], function () {
+    Route::group(["prefix" => "tutoriel", "namespace" => "Tutoriel"], function () {
         Route::get('/latest', 'TutorielController@loadLatest');
+
+        Route::group(["prefix" => "comment"], function () {
+            Route::get('/latest', 'TutorielCommentController@latest');
+        });
     });
 });
 

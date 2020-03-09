@@ -34,25 +34,39 @@
                             <form method="get" class="kt-quick-search__form">
                                 <div class="input-group">
                                     <div class="input-group-prepend"><span class="input-group-text"><i class="flaticon2-search-1"></i></span></div>
-                                    <input type="text" class="form-control kt-quick-search__input" placeholder="Recherche..">
-                                    <div class="input-group-append"><span class="input-group-text"><i class="la la-close kt-quick-search__close"></i></span></div>
+                                    <input type="text" class="form-control kt-quick-search__input"
+                                           placeholder="Recherche..">
+                                    <div class="input-group-append"><span class="input-group-text"><i
+                                                class="la la-close kt-quick-search__close"></i></span></div>
                                 </div>
                             </form>
-                            <div class="kt-quick-search__wrapper kt-scroll" data-scroll="true" data-height="325" data-mobile-height="200">
+                            <div class="kt-quick-search__wrapper kt-scroll" data-scroll="true" data-height="325"
+                                 data-mobile-height="200">
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <div class="kt-header__topbar-item">
+                    <a class="kt-header__topbar-wrapper" href="/schematics" target="_blank">
+						<span class="kt-header__topbar-icon kt-header__topbar-icon--success">
+							<i class="la la-database"></i>
+						</span>
+                    </a>
+                </div>
+
                 <!--end: Search -->
 
-                    <!--begin: Notifications -->
-                        <div class="kt-header__topbar-item dropdown">
-                            <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,10px">
+                <!--begin: Notifications -->
+                <div class="kt-header__topbar-item dropdown">
+                    <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,10px">
 											<span class="kt-header__topbar-icon kt-header__topbar-icon--success">
-												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+												<svg xmlns="http://www.w3.org/2000/svg"
+                                                     xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                                     height="24px" viewBox="0 0 24 24" version="1.1"
+                                                     class="kt-svg-icon">
 													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-														<rect x="0" y="0" width="24" height="24" />
+														<rect x="0" y="0" width="24" height="24"/>
 														<path d="M13.2070325,4 C13.0721672,4.47683179 13,4.97998812 13,5.5 C13,8.53756612 15.4624339,11 18.5,11 C19.0200119,11 19.5231682,10.9278328 20,10.7929675 L20,17 C20,18.6568542 18.6568542,20 17,20 L7,20 C5.34314575,20 4,18.6568542 4,17 L4,7 C4,5.34314575 5.34314575,4 7,4 L13.2070325,4 Z" fill="#000000" />
 														<circle fill="#000000" opacity="0.3" cx="18.5" cy="5.5" r="2.5" />
 													</g>

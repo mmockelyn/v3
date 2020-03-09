@@ -1515,15 +1515,15 @@ try {
                         descriptor.enumerable = descriptor.enumerable || false;
                         descriptor.configurable = true;
                         if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
+                        Object.defineProperty(target, descriptor.key, descriptor);
+                    }
+                }
 
-  function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    return Constructor;
-  }
+                function _createClass(Constructor, protoProps, staticProps) {
+                    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+                    if (staticProps) _defineProperties(Constructor, staticProps);
+                    return Constructor;
+                }
 
   function _defineProperty(obj, key, value) {
     if (key in obj) {
@@ -25680,16 +25680,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                                         asset_config = document.querySelector('#asset_config');
                                         KTApp.block(asset_block);
                                         _context.next = 13;
-            return getAsset().then(function (response) {
-              KTApp.unblock(asset_block);
-              asset_title.innerHTML = response.designation;
-              asset_category.innerHTML = response.category.name + ' - ' + response.subcategory.name;
-              asset_kuid.innerHTML = response.kuid;
-              asset_downloaded.innerHTML = response.countDownload;
+                                        return getAsset().then(function (response) {
+                                            KTApp.unblock(asset_block);
+                                            asset_title.innerHTML = response.designation;
+                                            asset_category.innerHTML = response.category.name + ' - ' + response.subcategory.name;
+                                            asset_kuid.innerHTML = response.kuid;
+                                            asset_downloaded.innerHTML = response.countDownload;
 
-              if (response.published === 0) {
-                asset_publish.innerHTML = "<span class=\"kt-badge kt-badge--danger kt-badge--inline kt-badge--pill\"><i class=\"la la-times\"></i> Non Publier</span>";
-              } else {
+                                            if (response.published === 0) {
+                                                asset_publish.innerHTML = "<span class=\"kt-badge kt-badge--danger kt-badge--inline kt-badge--pill\"><i class=\"la la-times\"></i> Non Publier</span>";
+                                            } else {
                 if (response.published_at !== null) {
                   asset_publish.innerHTML = "<span class=\"kt-badge kt-badge--success kt-badge--inline kt-badge--pill\"><i class=\"la la-check\"></i> Publier</span><br>Publi\xE9 le ".concat(Object(_core__WEBPACK_IMPORTED_MODULE_2__["formatDate"])(response.published_at, 'LLLL'));
                 }
@@ -25732,7 +25732,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                   asset_config.setAttribute('data-toggle', 'kt-tooltip');
                   asset_config.setAttribute('title', 'Activé');
               }
-            });
+                                        });
 
                                     case 13:
                                     case "end":
@@ -26148,15 +26148,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 var countNotifBar = document.querySelector('#countNotifBar');
                 var value = parseInt(countNotifBar.textContent);
 
-  if (value === 0) {
-    var iconEl = jquery__WEBPACK_IMPORTED_MODULE_0__(".kt-header__topbar-icon");
-    iconEl.classList.remove('kt-hidden');
-    iconEl.textContent = 1;
-  } else {
-    countNotifBar.textContent = parseInt(value + 1);
-  }
-}
-function blockElement(el, message) {
+                if (value === 0) {
+                    var iconEl = jquery__WEBPACK_IMPORTED_MODULE_0__(".kt-header__topbar-icon");
+                    iconEl.classList.remove('kt-hidden');
+                    iconEl.textContent = 1;
+                } else {
+                    countNotifBar.textContent = parseInt(value + 1);
+                }
+            }
+
+            function blockElement(el, message) {
   var state = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
   return KTApp.block(el, {
     overlayColor: '#000000',
@@ -26172,13 +26173,13 @@ function unblockElement(el) {
 function addPremium() {
   jquery__WEBPACK_IMPORTED_MODULE_0__["get"]('/account/api/isPremium').done(function (data) {
     if (data.data === 'true') {
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'on');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'on');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'on');
+        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'on');
+        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'on');
+        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'on');
     } else {
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'off');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'off');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
+        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'off');
+        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'off');
+        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
     }
   });
 }

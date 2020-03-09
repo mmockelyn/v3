@@ -10,6 +10,7 @@ use App\Repository\Blog\BlogRepository;
 use App\Repository\Tutoriel\TutorielCommentRepository;
 use App\Repository\Tutoriel\TutorielRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends BaseController
@@ -214,5 +215,11 @@ class AdminController extends BaseController
         }
 
         return $this->sendResponse($arrs, "Contenue");
+    }
+
+    public function cache()
+    {
+        Artisan::call('trainz:clear');
+        return $this->sendResponse(null, null);
     }
 }

@@ -26,3 +26,19 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+let cache = document.querySelector("#btnRefreshCache");
+cache.addEventListener('click', function (e) {
+    e.preventDefault();
+    KTApp.progress(cache);
+    $.get('/api/admin/cache')
+        .done(() => {
+            KTApp.unprogress(cache);
+            toastr.success("Le cache à été nettoyer");
+        })
+        .fail(() => {
+            KTApp.unprogress(cache);
+            toastr.error("Erreur lors du nettoyage du cache")
+        })
+});
+

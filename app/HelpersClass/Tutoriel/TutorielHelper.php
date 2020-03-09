@@ -44,6 +44,13 @@ class TutorielHelper
             ->count();
     }
 
+    public static function countAllTutoriel()
+    {
+        $tutoriel = new Tutoriel;
+        return $tutoriel->newQuery()
+            ->count();
+    }
+
     public static function countTimeAllTutoriel()
     {
         $tutoriel = new Tutoriel;
@@ -141,6 +148,14 @@ class TutorielHelper
         } else {
             return 'kt-font-success';
         }
+    }
+
+    public static function countComment()
+    {
+        $comments = new TutorielComment;
+
+        return $comments->newQuery()
+            ->count();
     }
 }
 
