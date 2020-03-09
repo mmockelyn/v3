@@ -36,20 +36,20 @@
             <div class="card">
                 <div class="card-body">
                     <ul class="kt-nav">
-                        <li class="kt-nav__item {{ \App\HelpersClass\Generator::currentRouteBack(route('Back.Blog.index')) }}">
-                            <a href="{{ route('Back.Blog.index') }}" class="kt-nav__link">
+                        <li class="kt-nav__item {{ \App\HelpersClass\Generator::currentRouteBack(route('Back.Tutoriel.index')) }}">
+                            <a href="{{ route('Back.Tutoriel.index') }}" class="kt-nav__link">
                                 <i class="kt-nav__link-icon flaticon2-dashboard"></i>
                                 <span class="kt-nav__link-text">Tableau de Bord</span>
                             </a>
                         </li>
-                        <li class="kt-nav__item {{ \App\HelpersClass\Generator::currentRouteBack(route('Back.Blog.Category.index')) }}">
-                            <a href="{{ route('Back.Blog.Category.index') }}" class="kt-nav__link">
+                        <li class="kt-nav__item {{ \App\HelpersClass\Generator::currentRouteBack(route('Back.Tutoriel.Category.index')) }}">
+                            <a href="{{ route('Back.Tutoriel.Category.index') }}" class="kt-nav__link">
                                 <i class="kt-nav__link-icon flaticon2-circle-vol-2"></i>
                                 <span class="kt-nav__link-text">Catégories</span>
                             </a>
                         </li>
-                        <li class="kt-nav__item {{ \App\HelpersClass\Generator::currentRouteBack(route('Back.Blog.Article.index')) }}">
-                            <a href="{{ route('Back.Blog.Article.index') }}" class="kt-nav__link">
+                        <li class="kt-nav__item {{ \App\HelpersClass\Generator::currentRouteBack(route('Back.Tutoriel.Video.index')) }}">
+                            <a href="{{ route('Back.Tutoriel.Video.index') }}" class="kt-nav__link">
                                 <i class="kt-nav__link-icon la la-youtube-play"></i>
                                 <span class="kt-nav__link-text">Tutoriel</span>
                             </a>

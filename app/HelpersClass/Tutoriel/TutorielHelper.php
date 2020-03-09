@@ -157,5 +157,23 @@ class TutorielHelper
         return $comments->newQuery()
             ->count();
     }
+
+    public static function countAllTutorielFromCategory($id)
+    {
+        $tutoriel = new Tutoriel();
+
+        return $tutoriel->newQuery()
+            ->where('tutoriel_category_id', $id)
+            ->count();
+    }
+
+    public static function countAllTutorielFromSubCategory($id)
+    {
+        $tutoriel = new Tutoriel();
+
+        return $tutoriel->newQuery()
+            ->where('tutoriel_sub_category_id', $id)
+            ->count();
+    }
 }
 

@@ -17864,18 +17864,18 @@ Popper.Defaults = Defaults;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-            /*!
-             *
-             * Super simple wysiwyg editor v0.8.16
-             * https://summernote.org
-             *
-             *
-             * Copyright 2013- Alan Hong. and other contributors
-             * summernote may be freely distributed under the MIT license.
-             *
-             * Date: 2020-02-19T09:12Z
-             *
-             */
+/*!
+ *
+ * Super simple wysiwyg editor v0.8.16
+ * https://summernote.org
+ *
+ *
+ * Copyright 2013- Alan Hong. and other contributors
+ * summernote may be freely distributed under the MIT license.
+ *
+ * Date: 2020-02-19T09:12Z
+ *
+ */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
 		module.exports = factory(__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"));
@@ -28132,16 +28132,17 @@ loadFormElement();
             }
 
             function blockElement(el, message) {
-  var state = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
-  return KTApp.block(el, {
-    overlayColor: '#000000',
-    type: 'v2',
-    state: state,
-    size: 'lg',
-    message: message
-  });
-}
-function unblockElement(el) {
+                var state = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
+                return KTApp.block(el, {
+                    overlayColor: '#000000',
+                    type: 'v2',
+                    state: state,
+                    size: 'lg',
+                    message: message
+                });
+            }
+
+            function unblockElement(el) {
   return KTApp.unblock(el);
 }
 function addPremium() {

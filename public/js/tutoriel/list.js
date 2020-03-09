@@ -17945,16 +17945,17 @@ module.exports = g;
             }
 
             function blockElement(el, message) {
-  var state = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
-  return KTApp.block(el, {
-    overlayColor: '#000000',
-    type: 'v2',
-    state: state,
-    size: 'lg',
-    message: message
-  });
-}
-function unblockElement(el) {
+                var state = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
+                return KTApp.block(el, {
+                    overlayColor: '#000000',
+                    type: 'v2',
+                    state: state,
+                    size: 'lg',
+                    message: message
+                });
+            }
+
+            function unblockElement(el) {
   return KTApp.unblock(el);
 }
 function addPremium() {

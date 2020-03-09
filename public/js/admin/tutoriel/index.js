@@ -8614,6 +8614,8 @@
             }
 
 
+
+
 // Multifunctional method to get and set values of a collection
 // The value/s can optionally be executed if it's a function
             var access = function (elems, fn, key, value, chainable, emptyGet, raw) {
@@ -13035,6 +13037,8 @@
             });
 
 
+
+
 // Return jQuery for attributes-only inclusion
 
 
@@ -14520,6 +14524,8 @@
             });
 
 
+
+
 // Prevent auto-execution of scripts when no explicit dataType was provided (See gh-2432)
             jQuery.ajaxPrefilter(function (s) {
                 if (s.crossDomain) {
@@ -14679,6 +14685,8 @@
             });
 
 
+
+
 // Support: Safari 8 only
 // In Safari 8 documents created via document.implementation.createHTMLDocument
 // collapse sibling forms: the second one becomes a child of the first one.
@@ -14804,6 +14812,8 @@
 
                 return this;
             };
+
+
 
 
 // Attach a bunch of functions for handling common AJAX events
@@ -15190,6 +15200,8 @@
                     // subtraction forces infinities to NaN
                     !isNaN(obj - parseFloat(obj));
             };
+
+
 
 
 // Register as a named AMD module, since jQuery can be concatenated with other

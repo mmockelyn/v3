@@ -14,6 +14,7 @@ use App\Model\Tutoriel\Tutoriel;
 use App\Model\Tutoriel\TutorielComment;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\Notification;
 
 class User extends Authenticatable
 {
@@ -107,5 +108,16 @@ class User extends Authenticatable
         $this->account()->create([
             "user_id" => $this->getId()
         ]);
+    }
+
+    /**
+     * Route notifications for the Slack channel.
+     *
+     * @param Notification $notification
+     * @return string
+     */
+    public function routeNotificationForSlack($notification)
+    {
+        return 'https://hooks.slack.com/services/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';
     }
 }

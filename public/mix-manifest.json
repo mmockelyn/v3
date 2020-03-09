@@ -22,6 +22,7 @@
     "/js/admin/route/lab_edit.js": "/js/admin/route/lab_edit.js",
     "/js/admin/route/show.js": "/js/admin/route/show.js",
     "/js/admin/route/version.js": "/js/admin/route/version.js",
+    "/js/admin/tutoriel/category/index.js": "/js/admin/tutoriel/category/index.js",
     "/js/admin/tutoriel/index.js": "/js/admin/tutoriel/index.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",

@@ -161,6 +161,23 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
 
     Route::group(["prefix" => "tutoriel", "namespace" => "Tutoriel"], function (){
         Route::get('/', ["as" => "Back.Tutoriel.index", "uses" => "TutorielController@index"]);
+
+        Route::group(["prefix" => "category"], function () {
+            Route::get('/', 'TutorielCategoryController@index')->name('Back.Tutoriel.Category.index');
+            Route::get('{category_id}/delete', 'TutorielCategoryController@delete');
+        });
+
+        Route::group(["prefix" => "subcategory"], function () {
+            Route::get('{subcategory_id}/delete', 'TutorielSubCategoryController@delete');
+        });
+
+        Route::group(["prefix" => "video"], function () {
+            Route::get('/', 'TutorielVideoController@index')->name('Back.Tutoriel.Video.index');
+        });
+
+        Route::group(["prefix" => "comment"], function () {
+
+        });
     });
 
     Route::group(["prefix" => "wiki", "namespace" => "Wiki"], function (){

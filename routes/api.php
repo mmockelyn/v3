@@ -193,6 +193,16 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
     Route::group(["prefix" => "tutoriel", "namespace" => "Tutoriel"], function () {
         Route::get('/latest', 'TutorielController@loadLatest');
 
+        Route::group(["prefix" => "category"], function () {
+            Route::post('/', 'TutorielCategoryController@store');
+            Route::post('list', 'TutorielCategoryController@list');
+        });
+
+        Route::group(["prefix" => "subcategory"], function () {
+            Route::post('/', 'TutorielSubCategoryController@store');
+            Route::post('list', 'TutorielSubCategoryController@list');
+        });
+
         Route::group(["prefix" => "comment"], function () {
             Route::get('/latest', 'TutorielCommentController@latest');
         });
