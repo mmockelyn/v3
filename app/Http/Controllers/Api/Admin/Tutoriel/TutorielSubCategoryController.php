@@ -67,4 +67,23 @@ class TutorielSubCategoryController extends BaseController
             ]);
         }
     }
+
+    public function listSub($category_id)
+    {
+        $datas = $this->tutorielSubCategoryRepository->allFromCategory($category_id);
+        ob_start();
+        ?>
+        <div class="form-group">
+            <label for="subcategory_id">Sous Catégorie</label>
+            <select name="subcategory_id" id="subcategory_id" class="form-control selectpicker" data-live-search="true">
+                <?php foreach ($datas as $data): ?>
+                    <option value="<?= $data->id; ?>"><?= $data->name; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <?php
+        $content = ob_get_clean();
+
+        return $this->sendResponse($content, "Liste des sous catégorie");
+    }
 }

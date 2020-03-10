@@ -173,6 +173,9 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
 
         Route::group(["prefix" => "video"], function () {
             Route::get('/', 'TutorielVideoController@index')->name('Back.Tutoriel.Video.index');
+            Route::get('{video_id}', 'TutorielVideoController@show')->name('Back.Tutoriel.Video.show');
+            Route::get('{video_id}/edit', 'TutorielVideoController@edit')->name('Back.Tutoriel.Video.edit');
+            Route::get('{video_id}/delete', 'TutorielVideoController@delete')->name('Back.Tutoriel.Video.delete');
         });
 
         Route::group(["prefix" => "comment"], function () {

@@ -78,6 +78,10 @@ class ObjetObjetController extends Controller
 
     public function edit($objet_id)
     {
+        $objet = $this->assetRepository->get($objet_id);
+        if ($objet->published == 1) {
+            return redirect()->back()->with('warning', "Cette objet à été publier, l'édition est impossible");
+        }
         return view("admin.objet.objet.edit", [
             "asset" => $this->assetRepository->get($objet_id)
         ]);

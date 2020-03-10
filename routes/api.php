@@ -201,6 +201,16 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
         Route::group(["prefix" => "subcategory"], function () {
             Route::post('/', 'TutorielSubCategoryController@store');
             Route::post('list', 'TutorielSubCategoryController@list');
+            Route::get('{category_id}/list', 'TutorielSubCategoryController@listSub');
+        });
+
+        Route::group(["prefix" => "video"], function () {
+            Route::post('/', 'TutorielVideoController@store');
+            Route::post('/list', 'TutorielVideoController@list');
+            Route::put('{tutoriel_id}/editInfo', 'TutorielVideoController@editInfo');
+            Route::post('{tutoriel_id}/editBackground', 'TutorielVideoController@editBackground');
+            Route::post('{tutoriel_id}/editBanner', 'TutorielVideoController@editBanner');
+            Route::put('{tutoriel_id}/editDescription', 'TutorielVideoController@editDescription');
         });
 
         Route::group(["prefix" => "comment"], function () {

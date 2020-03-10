@@ -50,5 +50,12 @@ class TutorielSubCategoryRepository
             ->delete();
     }
 
+    public function allFromCategory($category_id)
+    {
+        return $this->tutorielSubCategory->newQuery()
+            ->where('tutoriel_category_id', $category_id)
+            ->get();
+    }
+
 }
 

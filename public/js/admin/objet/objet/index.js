@@ -4203,7 +4203,11 @@ function loadTable() {
       autoHide: false,
       textAlign: 'right',
       template: function template(row) {
-        return "\n                    <a href=\"/administrator/objet/objet/".concat(row.id, "\" class=\"btn btn-icon btn-sm btn-default\"><i class=\"la la-eye\"></i> </a>\n                    <a href=\"/administrator/objet/objet/").concat(row.id, "/edit\" class=\"btn btn-icon btn-sm btn-info\"><i class=\"la la-edit\"></i> </a>\n                    <a href=\"/administrator/objet/objet/").concat(row.id, "/delete\" class=\"btn btn-icon btn-sm btn-danger\"><i class=\"la la-trash-o\"></i> </a>\n                    ");
+          if (row.published === 0) {
+              return "\n                        <a href=\"/administrator/objet/objet/".concat(row.id, "\" class=\"btn btn-icon btn-sm btn-default\"><i class=\"la la-eye\"></i> </a>\n                        <a href=\"/administrator/objet/objet/").concat(row.id, "/edit\" class=\"btn btn-icon btn-sm btn-info\"><i class=\"la la-edit\"></i> </a>\n                        <a href=\"/administrator/objet/objet/").concat(row.id, "/delete\" class=\"btn btn-icon btn-sm btn-danger\"><i class=\"la la-trash-o\"></i> </a>\n                    ");
+          } else {
+              return "\n                        <a href=\"/administrator/objet/objet/".concat(row.id, "\" class=\"btn btn-icon btn-sm btn-default\"><i class=\"la la-eye\"></i> </a>\n                    ");
+          }
       }
     }],
     translate: {

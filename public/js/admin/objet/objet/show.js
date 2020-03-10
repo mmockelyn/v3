@@ -1534,24 +1534,24 @@ try {
                             writable: true
                         });
                     } else {
-      obj[key] = value;
-    }
+                        obj[key] = value;
+                    }
 
-    return obj;
-  }
+                    return obj;
+                }
 
-  function ownKeys(object, enumerableOnly) {
-    var keys = Object.keys(object);
+                function ownKeys(object, enumerableOnly) {
+                    var keys = Object.keys(object);
 
-    if (Object.getOwnPropertySymbols) {
-      var symbols = Object.getOwnPropertySymbols(object);
-      if (enumerableOnly) symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-      keys.push.apply(keys, symbols);
-    }
+                    if (Object.getOwnPropertySymbols) {
+                        var symbols = Object.getOwnPropertySymbols(object);
+                        if (enumerableOnly) symbols = symbols.filter(function (sym) {
+                            return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+                        });
+                        keys.push.apply(keys, symbols);
+                    }
 
-    return keys;
+                    return keys;
   }
 
   function _objectSpread2(target) {
@@ -25700,28 +25700,28 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                                             } else {
                                                 asset_social.setAttribute('data-toggle', 'kt-tooltip');
                                                 asset_social.setAttribute('title', 'Désactivé');
-                asset_price.innerHTML = "<span class=\"kt-badge kt-badge--danger kt-badge--inline kt-badge--pill\">".concat(response.price, "</span>");
-              }
+                                                asset_price.innerHTML = "<span class=\"kt-badge kt-badge--danger kt-badge--inline kt-badge--pill\">".concat(response.price, "</span>");
+                                            }
 
-              if (response.social === 0) {
-                asset_social.style.color = '#6b6b6b';
-                asset_social.setAttribute('data-toggle', 'kt-tooltip');
-                asset_social.setAttribute('title', 'Désactivé');
-              } else {
-                asset_social.setAttribute('data-toggle', 'kt-tooltip');
-                asset_social.setAttribute('title', 'Activé');
-                asset_social.style.color = '#235ebf';
-              }
+                                            if (response.social === 0) {
+                                                asset_social.style.color = '#6b6b6b';
+                                                asset_social.setAttribute('data-toggle', 'kt-tooltip');
+                                                asset_social.setAttribute('title', 'Désactivé');
+                                            } else {
+                                                asset_social.setAttribute('data-toggle', 'kt-tooltip');
+                                                asset_social.setAttribute('title', 'Activé');
+                                                asset_social.style.color = '#235ebf';
+                                            }
 
-              if (response.mesh === 0) {
-                asset_social.style.color = '#6b6b6b';
-                asset_mesh.setAttribute('data-toggle', 'kt-tooltip');
-                asset_mesh.setAttribute('title', 'Désactivé');
-              } else {
-                asset_social.style.color = '#235ebf';
-                asset_mesh.setAttribute('data-toggle', 'kt-tooltip');
-                asset_mesh.setAttribute('title', 'Activé');
-              }
+                                            if (response.mesh === 0) {
+                                                asset_social.style.color = '#6b6b6b';
+                                                asset_mesh.setAttribute('data-toggle', 'kt-tooltip');
+                                                asset_mesh.setAttribute('title', 'Désactivé');
+                                            } else {
+                                                asset_social.style.color = '#235ebf';
+                                                asset_mesh.setAttribute('data-toggle', 'kt-tooltip');
+                                                asset_mesh.setAttribute('title', 'Activé');
+                                            }
 
                                             if (response.config === 0) {
                                                 asset_social.style.color = '#6b6b6b';
@@ -26169,21 +26169,22 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             }
 
             function unblockElement(el) {
-  return KTApp.unblock(el);
-}
-function addPremium() {
-  jquery__WEBPACK_IMPORTED_MODULE_0__["get"]('/account/api/isPremium').done(function (data) {
-    if (data.data === 'true') {
-        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'on');
-        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'on');
-        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'on');
-    } else {
-        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'off');
-        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'off');
-        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
-    }
-  });
-}
+                return KTApp.unblock(el);
+            }
+
+            function addPremium() {
+                jquery__WEBPACK_IMPORTED_MODULE_0__["get"]('/account/api/isPremium').done(function (data) {
+                    if (data.data === 'true') {
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'on');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'on');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'on');
+                    } else {
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'off');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'off');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
+                    }
+                });
+            }
 
             function formatDate(date) {
                 var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'LL';

@@ -19,17 +19,16 @@ laravel-echo-server.lock
 horizon.log
 composer.lock
 package-lock.json
-<<<<<<< HEAD
+
 /snippet
 
 storage/app/public/phpcs/phpcs.json
 
 storage/app/public/phpcs/phpcs.xml
-=======
 /snippet/*.*
 /snippet/Metronic/
 /snippet/Metronic/datatable.md
 /snippet/Metronic/modal.md
 /snippet/Metronic/portlet.md
 /snippet/Modèle Email Beautymail.md
->>>>>>> develop
+

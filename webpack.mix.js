@@ -67,6 +67,8 @@ mix.js('resources/js/app.js', 'public/js')
 
     .js('resources/js/admin/tutoriel/index.js', 'public/js/admin/tutoriel')
     .js('resources/js/admin/tutoriel/category/index.js', 'public/js/admin/tutoriel/category')
+    .js('resources/js/admin/tutoriel/video/index.js', 'public/js/admin/tutoriel/video')
+    .js('resources/js/admin/tutoriel/video/edit.js', 'public/js/admin/tutoriel/video')
 
 
     .sass('resources/sass/app.scss', 'public/css')

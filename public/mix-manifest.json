@@ -24,6 +24,8 @@
     "/js/admin/route/version.js": "/js/admin/route/version.js",
     "/js/admin/tutoriel/category/index.js": "/js/admin/tutoriel/category/index.js",
     "/js/admin/tutoriel/index.js": "/js/admin/tutoriel/index.js",
+    "/js/admin/tutoriel/video/edit.js": "/js/admin/tutoriel/video/edit.js",
+    "/js/admin/tutoriel/video/index.js": "/js/admin/tutoriel/video/index.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/route.css": "/css/route.css",
