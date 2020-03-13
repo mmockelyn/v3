@@ -1,6 +1,7 @@
 import KTDatatable from '../../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js'
 import {formatDate} from '../../../core'
 import Tagify from '@yaireo/tagify'
+require('../../config');
 
 const swal = require('sweetalert2');
 

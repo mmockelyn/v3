@@ -2,6 +2,7 @@
 namespace App\Repository\Tutoriel;
 
 use App\Model\Tutoriel\TutorielSubCategory;
+use Illuminate\Support\Str;
 
 class TutorielSubCategoryRepository
 {
@@ -24,6 +25,36 @@ class TutorielSubCategoryRepository
     {
         return $this->tutorielSubCategory->newQuery()
             ->find($subcategory_id)->load('tutoriels');
+    }
+
+    public function all()
+    {
+        return $this->tutorielSubCategory->newQuery()
+            ->get();
+    }
+
+    public function create($category_id, $name, $short)
+    {
+        return $this->tutorielSubCategory->newQuery()
+            ->create([
+                "tutoriel_category_id" => $category_id,
+                "name" => $name,
+                "short" => $short
+            ]);
+    }
+
+    public function delete($subcategory_id)
+    {
+        return $this->tutorielSubCategory->newQuery()
+            ->find($subcategory_id)
+            ->delete();
+    }
+
+    public function allFromCategory($category_id)
+    {
+        return $this->tutorielSubCategory->newQuery()
+            ->where('tutoriel_category_id', $category_id)
+            ->get();
     }
 
 }

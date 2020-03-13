@@ -1,3 +1,5 @@
+require('../../config');
+
 let asset = $("#asset");
 let asset_id = asset.attr('data-id');
 

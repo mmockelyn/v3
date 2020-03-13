@@ -1,7 +1,8 @@
 import KTDatatable from '../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js'
+require('../config');
 
 let route = $("#route");
-let route_id = route.attr('data-id')
+let route_id = route.attr('data-id');
 let tableauTypeDownload = '';
 let tableauTypeRelease = '';
 
@@ -186,65 +187,65 @@ function loadTableTypeRelease() {
     tableauTypeRelease = tableTypeRelease
 }
 function formAddTypeDownload() {
-    let form = $("#formAddTypeDownload")
+    let form = $("#formAddTypeDownload");
 
     form.on('submit', function (e) {
-        e.preventDefault()
-        let btn = form.find('button')
-        let url = form.attr('action')
-        let data = form.serializeArray()
+        e.preventDefault();
+        let btn = form.find('button');
+        let url = form.attr('action');
+        let data = form.serializeArray();
 
-        KTApp.progress(btn)
+        KTApp.progress(btn);
 
         $.ajax({
             url: url,
             method: 'post',
             data: data,
             success: function (data) {
-                KTApp.unprogress(btn)
+                KTApp.unprogress(btn);
                 toastr.success("Le type de téléchargement à été ajouté avec succès", "Succès");
-                $(".modal").modal('hide')
+                $(".modal").modal('hide');
                 tableauTypeDownload.reload()
             },
             error: function (err) {
-                KTApp.unprogress(btn)
-                toastr.error("Erreur lors de l'ajout du type de téléchargement", "Erreur système 500")
+                KTApp.unprogress(btn);
+                toastr.error("Erreur lors de l'ajout du type de téléchargement", "Erreur système 500");
                 console.error(err)
             }
         })
     })
 }
 function formAddTypeRelease() {
-    let form = $("#formAddTypeRelease")
+    let form = $("#formAddTypeRelease");
 
     form.on('submit', function (e) {
-        e.preventDefault()
-        let btn = form.find('button')
-        let url = form.attr('action')
-        let data = form.serializeArray()
+        e.preventDefault();
+        let btn = form.find('button');
+        let url = form.attr('action');
+        let data = form.serializeArray();
 
-        KTApp.progress(btn)
+        KTApp.progress(btn);
 
         $.ajax({
             url: url,
             method: 'post',
             data: data,
             success: function (data) {
-                KTApp.unprogress(btn)
+                KTApp.unprogress(btn);
                 toastr.success("Le type de release à été ajouté avec succès", "Succès");
-                $(".modal").modal('hide')
+                $(".modal").modal('hide');
                 tableauTypeRelease.reload()
             },
             error: function (err) {
-                KTApp.unprogress(btn)
-                toastr.error("Erreur lors de l'ajout du type de release", "Erreur système 500")
+                KTApp.unprogress(btn);
+                toastr.error("Erreur lors de l'ajout du type de release", "Erreur système 500");
                 console.error(err)
             }
         })
     })
 }
 
-loadTableTypeDownload()
-loadTableTypeRelease()
-formAddTypeDownload()
-formAddTypeRelease()
+loadTableTypeDownload();
+loadTableTypeRelease();
+formAddTypeDownload();
+formAddTypeRelease();

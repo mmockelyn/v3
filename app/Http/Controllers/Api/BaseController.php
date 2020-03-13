@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 
 class BaseController extends Controller
 {
@@ -12,7 +13,7 @@ class BaseController extends Controller
      * @param array|string $result
      * @param string $message
      * @param string $type
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function sendResponse($result, $message, $type = 'success')
     {
@@ -33,9 +34,9 @@ class BaseController extends Controller
      * @param string $error
      * @param array|string $errorMessages
      * @param int $code
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function sendError($error, $errorMessages = [], $code = 404)
+    public function sendError($error, $errorMessages = [], $code = 500)
     {
         $response = [
             'success' => false,
@@ -43,7 +44,7 @@ class BaseController extends Controller
         ];
 
 
-        if(!empty($errorMessages)){
+        if (!empty($errorMessages)) {
             $response['data'] = $errorMessages;
         }
 

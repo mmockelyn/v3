@@ -139,12 +139,37 @@
     /************************************************************************/
     /******/ ({
 
+    /***/ "./resources/js/admin/config.js":
+    /*!**************************************!*\
+      !*** ./resources/js/admin/config.js ***!
+      \**************************************/
+    /*! no static exports found */
+    /***/ (function (module, exports) {
+
+        var cache = document.querySelector("#btnRefreshCache");
+        cache.addEventListener('click', function (e) {
+            e.preventDefault();
+            KTApp.progress(cache);
+            $.get('/api/admin/cache').done(function () {
+                KTApp.unprogress(cache);
+                toastr.success("Le cache à été nettoyer");
+            }).fail(function () {
+                KTApp.unprogress(cache);
+                toastr.error("Erreur lors du nettoyage du cache");
+            });
+        });
+
+        /***/
+    }),
+
     /***/ "./resources/js/admin/objet/objet/edit.js":
     /*!************************************************!*\
       !*** ./resources/js/admin/objet/objet/edit.js ***!
       \************************************************/
     /*! no static exports found */
-    /***/ (function (module, exports) {
+    /***/ (function (module, exports, __webpack_require__) {
+
+        __webpack_require__(/*! ../../config */ "./resources/js/admin/config.js");
 
         var asset = $("#asset");
         var asset_id = asset.attr('data-id');

@@ -1,3 +1,5 @@
+require('../../config');
+
 let table;
 let sub;
 
@@ -89,29 +91,29 @@ function loadListeCategories() {
     })
 }
 function formAddCategory() {
-    let form = $("#formAddCategory")
+    let form = $("#formAddCategory");
 
     form.on('submit', function (e) {
-        e.preventDefault()
-        let btn = form.find('button')
-        let url = form.attr('action')
-        let data = form.serializeArray()
+        e.preventDefault();
+        let btn = form.find('button');
+        let url = form.attr('action');
+        let data = form.serializeArray();
 
-        KTApp.progress(btn)
+        KTApp.progress(btn);
 
         $.ajax({
             url: url,
             method: 'post',
             data: data,
             success: function (data) {
-                KTApp.unprogress(btn)
+                KTApp.unprogress(btn);
                 toastr.success("La catégorie à été ajouté avec succès", "Succès");
-                $(".modal").modal('hide')
+                $(".modal").modal('hide');
                 table.reload()
             },
             error: function (err) {
-                KTApp.unprogress(btn)
-                toastr.error("Erreur lors de l'ajout de la catégorie", "Erreur Système 500")
+                KTApp.unprogress(btn);
+                toastr.error("Erreur lors de l'ajout de la catégorie", "Erreur Système 500");
                 console.error(err)
             }
         })
@@ -211,36 +213,36 @@ function loadListeSubCategories() {
     })
 }
 function formAddSubCategory() {
-    let form = $("#formAddSubCategory")
+    let form = $("#formAddSubCategory");
 
     form.on('submit', function (e) {
-        e.preventDefault()
-        let btn = form.find('button')
-        let url = form.attr('action')
-        let data = form.serializeArray()
+        e.preventDefault();
+        let btn = form.find('button');
+        let url = form.attr('action');
+        let data = form.serializeArray();
 
-        KTApp.progress(btn)
+        KTApp.progress(btn);
 
         $.ajax({
             url: url,
             method: 'post',
             data: data,
             success: function (data) {
-                KTApp.unprogress(btn)
+                KTApp.unprogress(btn);
                 toastr.success("La sous catégorie à été ajouté avec succès", "Succès");
-                $(".modal").modal('hide')
+                $(".modal").modal('hide');
                 sub.reload()
             },
             error: function (err) {
-                KTApp.unprogress(btn)
-                toastr.error("Erreur lors de l'ajout de la sous catégorie", "Erreur Système 500")
+                KTApp.unprogress(btn);
+                toastr.error("Erreur lors de l'ajout de la sous catégorie", "Erreur Système 500");
                 console.error(err)
             }
         })
     })
 }
 
-loadListeCategories()
-formAddCategory()
-loadListeSubCategories()
-formAddSubCategory()
+loadListeCategories();
+formAddCategory();
+loadListeSubCategories();
+formAddSubCategory();

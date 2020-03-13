@@ -2921,7 +2921,7 @@
       var _ret = _loop(i);
 
       if (_ret === "continue")
-          }
+    }
 
     return createdDocument.body.innerHTML;
   }
@@ -17893,7 +17893,7 @@ module.exports = g;
           !*** ./resources/js/core.js ***!
           \******************************/
         /*! exports provided: reloadNotifBar, blockElement, unblockElement, addPremium, formatDate, NotifyMe */
-        /***/ (function(module, __webpack_exports__, __webpack_require__) {
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
 
             "use strict";
             __webpack_require__.r(__webpack_exports__);
@@ -17935,40 +17935,43 @@ module.exports = g;
                 var countNotifBar = document.querySelector('#countNotifBar');
                 var value = parseInt(countNotifBar.textContent);
 
-  if (value === 0) {
-    var iconEl = jquery__WEBPACK_IMPORTED_MODULE_0__(".kt-header__topbar-icon");
-    iconEl.classList.remove('kt-hidden');
-    iconEl.textContent = 1;
-  } else {
-    countNotifBar.textContent = parseInt(value + 1);
-  }
-}
-function blockElement(el, message) {
-  var state = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
-  return KTApp.block(el, {
-    overlayColor: '#000000',
-    type: 'v2',
-    state: state,
-    size: 'lg',
-    message: message
-  });
-}
-function unblockElement(el) {
-  return KTApp.unblock(el);
-}
-function addPremium() {
-  jquery__WEBPACK_IMPORTED_MODULE_0__["get"]('/account/api/isPremium').done(function (data) {
-    if (data.data === 'true') {
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'on');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'on');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'on');
-    } else {
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'off');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'off');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
-    }
-  });
-}
+                if (value === 0) {
+                    var iconEl = jquery__WEBPACK_IMPORTED_MODULE_0__(".kt-header__topbar-icon");
+                    iconEl.classList.remove('kt-hidden');
+                    iconEl.textContent = 1;
+                } else {
+                    countNotifBar.textContent = parseInt(value + 1);
+                }
+            }
+
+            function blockElement(el, message) {
+                var state = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
+                return KTApp.block(el, {
+                    overlayColor: '#000000',
+                    type: 'v2',
+                    state: state,
+                    size: 'lg',
+                    message: message
+                });
+            }
+
+            function unblockElement(el) {
+                return KTApp.unblock(el);
+            }
+
+            function addPremium() {
+                jquery__WEBPACK_IMPORTED_MODULE_0__["get"]('/account/api/isPremium').done(function (data) {
+                    if (data.data === 'true') {
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'on');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'on');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'on');
+                    } else {
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'off');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'off');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
+                    }
+                });
+            }
 
             function formatDate(date) {
                 var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'LL';

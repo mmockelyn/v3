@@ -1515,44 +1515,44 @@ try {
                         descriptor.enumerable = descriptor.enumerable || false;
                         descriptor.configurable = true;
                         if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
+                        Object.defineProperty(target, descriptor.key, descriptor);
+                    }
+                }
 
-  function _createClass(Constructor, protoProps, staticProps) {
-    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) _defineProperties(Constructor, staticProps);
-    return Constructor;
-  }
+                function _createClass(Constructor, protoProps, staticProps) {
+                    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+                    if (staticProps) _defineProperties(Constructor, staticProps);
+                    return Constructor;
+                }
 
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
+                function _defineProperty(obj, key, value) {
+                    if (key in obj) {
+                        Object.defineProperty(obj, key, {
+                            value: value,
+                            enumerable: true,
+                            configurable: true,
+                            writable: true
+                        });
+                    } else {
+                        obj[key] = value;
+                    }
 
-    return obj;
-  }
+                    return obj;
+                }
 
-  function ownKeys(object, enumerableOnly) {
-    var keys = Object.keys(object);
+                function ownKeys(object, enumerableOnly) {
+                    var keys = Object.keys(object);
 
-    if (Object.getOwnPropertySymbols) {
-      var symbols = Object.getOwnPropertySymbols(object);
-      if (enumerableOnly) symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-      keys.push.apply(keys, symbols);
-    }
+                    if (Object.getOwnPropertySymbols) {
+                        var symbols = Object.getOwnPropertySymbols(object);
+                        if (enumerableOnly) symbols = symbols.filter(function (sym) {
+                            return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+                        });
+                        keys.push.apply(keys, symbols);
+                    }
 
-    return keys;
-  }
+                    return keys;
+                }
 
   function _objectSpread2(target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -25577,23 +25577,47 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               select: 'Select page size',
               all: 'all'
             },
-            info: 'Showing {{start}} - {{end}} of {{total}}'
+              info: 'Showing {{start}} - {{end}} of {{total}}'
           }
         }
       }
     },
-    extensions: {}
+      extensions: {}
   };
 })(jQuery);
 
-/***/ }),
+            /***/
+        }),
 
-/***/ "./resources/js/admin/objet/objet/show.js":
-/*!************************************************!*\
+        /***/ "./resources/js/admin/config.js":
+        /*!**************************************!*\
+  !*** ./resources/js/admin/config.js ***!
+  \**************************************/
+        /*! no static exports found */
+        /***/ (function (module, exports) {
+
+            var cache = document.querySelector("#btnRefreshCache");
+            cache.addEventListener('click', function (e) {
+                e.preventDefault();
+                KTApp.progress(cache);
+                $.get('/api/admin/cache').done(function () {
+                    KTApp.unprogress(cache);
+                    toastr.success("Le cache à été nettoyer");
+                }).fail(function () {
+                    KTApp.unprogress(cache);
+                    toastr.error("Erreur lors du nettoyage du cache");
+                });
+            });
+
+            /***/
+        }),
+
+        /***/ "./resources/js/admin/objet/objet/show.js":
+        /*!************************************************!*\
   !*** ./resources/js/admin/objet/objet/show.js ***!
   \************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+        /*! no exports provided */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
 
             "use strict";
             __webpack_require__.r(__webpack_exports__);
@@ -25648,6 +25672,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             }
 
 
+            __webpack_require__(/*! ../../config */ "./resources/js/admin/config.js");
+
             var swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 
             var asset = $("#asset");
@@ -25680,59 +25706,59 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                                         asset_config = document.querySelector('#asset_config');
                                         KTApp.block(asset_block);
                                         _context.next = 13;
-            return getAsset().then(function (response) {
-              KTApp.unblock(asset_block);
-              asset_title.innerHTML = response.designation;
-              asset_category.innerHTML = response.category.name + ' - ' + response.subcategory.name;
-              asset_kuid.innerHTML = response.kuid;
-              asset_downloaded.innerHTML = response.countDownload;
+                                        return getAsset().then(function (response) {
+                                            KTApp.unblock(asset_block);
+                                            asset_title.innerHTML = response.designation;
+                                            asset_category.innerHTML = response.category.name + ' - ' + response.subcategory.name;
+                                            asset_kuid.innerHTML = response.kuid;
+                                            asset_downloaded.innerHTML = response.countDownload;
 
-              if (response.published === 0) {
-                asset_publish.innerHTML = "<span class=\"kt-badge kt-badge--danger kt-badge--inline kt-badge--pill\"><i class=\"la la-times\"></i> Non Publier</span>";
-              } else {
-                if (response.published_at !== null) {
-                  asset_publish.innerHTML = "<span class=\"kt-badge kt-badge--success kt-badge--inline kt-badge--pill\"><i class=\"la la-check\"></i> Publier</span><br>Publi\xE9 le ".concat(Object(_core__WEBPACK_IMPORTED_MODULE_2__["formatDate"])(response.published_at, 'LLLL'));
-                }
-              }
+                                            if (response.published === 0) {
+                                                asset_publish.innerHTML = "<span class=\"kt-badge kt-badge--danger kt-badge--inline kt-badge--pill\"><i class=\"la la-times\"></i> Non Publier</span>";
+                                            } else {
+                                                if (response.published_at !== null) {
+                                                    asset_publish.innerHTML = "<span class=\"kt-badge kt-badge--success kt-badge--inline kt-badge--pill\"><i class=\"la la-check\"></i> Publier</span><br>Publi\xE9 le ".concat(Object(_core__WEBPACK_IMPORTED_MODULE_2__["formatDate"])(response.published_at, 'LLLL'));
+                                                }
+                                            }
 
-              if (response.pricing === 0) {
-                asset_price.innerHTML = "<span class=\"kt-badge kt-badge--success kt-badge--inline kt-badge--pill\">Gratuit</span>";
-              } else {
-                asset_social.setAttribute('data-toggle', 'kt-tooltip');
-                asset_social.setAttribute('title', 'Désactivé');
-                asset_price.innerHTML = "<span class=\"kt-badge kt-badge--danger kt-badge--inline kt-badge--pill\">".concat(response.price, "</span>");
-              }
+                                            if (response.pricing === 0) {
+                                                asset_price.innerHTML = "<span class=\"kt-badge kt-badge--success kt-badge--inline kt-badge--pill\">Gratuit</span>";
+                                            } else {
+                                                asset_social.setAttribute('data-toggle', 'kt-tooltip');
+                                                asset_social.setAttribute('title', 'Désactivé');
+                                                asset_price.innerHTML = "<span class=\"kt-badge kt-badge--danger kt-badge--inline kt-badge--pill\">".concat(response.price, "</span>");
+                                            }
 
-              if (response.social === 0) {
-                asset_social.style.color = '#6b6b6b';
-                asset_social.setAttribute('data-toggle', 'kt-tooltip');
-                asset_social.setAttribute('title', 'Désactivé');
-              } else {
-                asset_social.setAttribute('data-toggle', 'kt-tooltip');
-                asset_social.setAttribute('title', 'Activé');
-                asset_social.style.color = '#235ebf';
-              }
+                                            if (response.social === 0) {
+                                                asset_social.style.color = '#6b6b6b';
+                                                asset_social.setAttribute('data-toggle', 'kt-tooltip');
+                                                asset_social.setAttribute('title', 'Désactivé');
+                                            } else {
+                                                asset_social.setAttribute('data-toggle', 'kt-tooltip');
+                                                asset_social.setAttribute('title', 'Activé');
+                                                asset_social.style.color = '#235ebf';
+                                            }
 
-              if (response.mesh === 0) {
-                asset_social.style.color = '#6b6b6b';
-                asset_mesh.setAttribute('data-toggle', 'kt-tooltip');
-                asset_mesh.setAttribute('title', 'Désactivé');
-              } else {
-                asset_social.style.color = '#235ebf';
-                asset_mesh.setAttribute('data-toggle', 'kt-tooltip');
-                asset_mesh.setAttribute('title', 'Activé');
-              }
+                                            if (response.mesh === 0) {
+                                                asset_social.style.color = '#6b6b6b';
+                                                asset_mesh.setAttribute('data-toggle', 'kt-tooltip');
+                                                asset_mesh.setAttribute('title', 'Désactivé');
+                                            } else {
+                                                asset_social.style.color = '#235ebf';
+                                                asset_mesh.setAttribute('data-toggle', 'kt-tooltip');
+                                                asset_mesh.setAttribute('title', 'Activé');
+                                            }
 
-              if (response.config === 0) {
-                  asset_social.style.color = '#6b6b6b';
-                  asset_config.setAttribute('data-toggle', 'kt-tooltip');
-                  asset_config.setAttribute('title', 'Désactivé');
-              } else {
-                  asset_social.style.color = '#235ebf';
-                  asset_config.setAttribute('data-toggle', 'kt-tooltip');
-                  asset_config.setAttribute('title', 'Activé');
-              }
-            });
+                                            if (response.config === 0) {
+                                                asset_social.style.color = '#6b6b6b';
+                                                asset_config.setAttribute('data-toggle', 'kt-tooltip');
+                                                asset_config.setAttribute('title', 'Désactivé');
+                                            } else {
+                                                asset_social.style.color = '#235ebf';
+                                                asset_config.setAttribute('data-toggle', 'kt-tooltip');
+                                                asset_config.setAttribute('title', 'Activé');
+                                            }
+                                        });
 
                                     case 13:
                                     case "end":
@@ -26148,40 +26174,43 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 var countNotifBar = document.querySelector('#countNotifBar');
                 var value = parseInt(countNotifBar.textContent);
 
-  if (value === 0) {
-    var iconEl = jquery__WEBPACK_IMPORTED_MODULE_0__(".kt-header__topbar-icon");
-    iconEl.classList.remove('kt-hidden');
-    iconEl.textContent = 1;
-  } else {
-    countNotifBar.textContent = parseInt(value + 1);
-  }
-}
-function blockElement(el, message) {
-  var state = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
-  return KTApp.block(el, {
-    overlayColor: '#000000',
-    type: 'v2',
-    state: state,
-    size: 'lg',
-    message: message
-  });
-}
-function unblockElement(el) {
-  return KTApp.unblock(el);
-}
-function addPremium() {
-  jquery__WEBPACK_IMPORTED_MODULE_0__["get"]('/account/api/isPremium').done(function (data) {
-    if (data.data === 'true') {
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'on');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'on');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'on');
-    } else {
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'off');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'off');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
-    }
-  });
-}
+                if (value === 0) {
+                    var iconEl = jquery__WEBPACK_IMPORTED_MODULE_0__(".kt-header__topbar-icon");
+                    iconEl.classList.remove('kt-hidden');
+                    iconEl.textContent = 1;
+                } else {
+                    countNotifBar.textContent = parseInt(value + 1);
+                }
+            }
+
+            function blockElement(el, message) {
+                var state = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
+                return KTApp.block(el, {
+                    overlayColor: '#000000',
+                    type: 'v2',
+                    state: state,
+                    size: 'lg',
+                    message: message
+                });
+            }
+
+            function unblockElement(el) {
+                return KTApp.unblock(el);
+            }
+
+            function addPremium() {
+                jquery__WEBPACK_IMPORTED_MODULE_0__["get"]('/account/api/isPremium').done(function (data) {
+                    if (data.data === 'true') {
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'on');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'on');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'on');
+                    } else {
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'off');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'off');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
+                    }
+                });
+            }
 
             function formatDate(date) {
                 var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'LL';

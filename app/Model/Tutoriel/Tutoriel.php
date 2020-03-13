@@ -3,17 +3,21 @@
 namespace App\Model\Tutoriel;
 
 use App\Model\Account\UserView;
+use App\Model\State\StateVideo;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 
 class Tutoriel extends Model
 {
+    use Notifiable;
     protected $guarded = [];
     protected $dates = ["created_at", "updated_at", "published_at"];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function tags()
     {
@@ -58,6 +62,11 @@ class Tutoriel extends Model
     public function views()
     {
         return $this->hasMany(UserView::class);
+    }
+
+    public function stateVideos()
+    {
+        return $this->hasMany(StateVideo::class);
     }
 
     public function scopeLoader($query)

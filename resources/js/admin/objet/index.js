@@ -1,4 +1,5 @@
 import KTDatatable from '../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js'
+require('../config');
 
 let tableauLatestCategories;
 let tableauLatestObjets;
@@ -200,5 +201,5 @@ function loadLatestObjets() {
     tableauLatestObjets = tableLatestObjets
 }
 
-loadLatestCategories()
-loadLatestObjets()
+loadLatestCategories();
+loadLatestObjets();

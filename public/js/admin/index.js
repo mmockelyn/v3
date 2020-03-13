@@ -2921,7 +2921,7 @@
       var _ret = _loop(i);
 
       if (_ret === "continue")
-          }
+    }
 
     return createdDocument.body.innerHTML;
   }
@@ -21231,37 +21231,65 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
       }
     },
-    extensions: {}
+      extensions: {}
   };
 })(jQuery);
 
-/***/ }),
+            /***/
+        }),
 
-/***/ "./resources/js/admin/index.js":
-/*!*************************************!*\
-  !*** ./resources/js/admin/index.js ***!
-  \*************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+        /***/ "./resources/js/admin/config.js":
+        /*!**************************************!*\
+          !*** ./resources/js/admin/config.js ***!
+          \**************************************/
+        /*! no static exports found */
+        /***/ (function (module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js */ "./resources/demo5/src/assets/js/global/components/base/datatable/core.datatable.js");
-/* harmony import */ var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core */ "./resources/js/core.js");
+            var cache = document.querySelector("#btnRefreshCache");
+            cache.addEventListener('click', function (e) {
+                e.preventDefault();
+                KTApp.progress(cache);
+                $.get('/api/admin/cache').done(function () {
+                    KTApp.unprogress(cache);
+                    toastr.success("Le cache à été nettoyer");
+                }).fail(function () {
+                    KTApp.unprogress(cache);
+                    toastr.error("Erreur lors du nettoyage du cache");
+                });
+            });
+
+            /***/
+        }),
+
+        /***/ "./resources/js/admin/index.js":
+        /*!*************************************!*\
+          !*** ./resources/js/admin/index.js ***!
+          \*************************************/
+        /*! no exports provided */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony import */
+            var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js */ "./resources/demo5/src/assets/js/global/components/base/datatable/core.datatable.js");
+            /* harmony import */
+            var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__);
+            /* harmony import */
+            var _core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core */ "./resources/js/core.js");
 //import * as $ from "jquery";
 
 
+            __webpack_require__(/*! ./config */ "./resources/js/admin/config.js");
 
-function loadSignalement() {
-  var table = $("#signalement").KTDatatable({
-    data: {
-      type: 'remote',
-      source: {
-        read: {
-          url: '/api/admin/loadSignalement',
-          // sample custom headers
-          // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
+            function loadSignalement() {
+                var table = $("#signalement").KTDatatable({
+                    data: {
+                        type: 'remote',
+                        source: {
+                            read: {
+                                url: '/api/admin/loadSignalement',
+                                // sample custom headers
+                                // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
           map: function map(raw) {
             // sample data mapping
             var dataSet = raw;
@@ -21401,7 +21429,7 @@ loadLatestTutoriel();
           !*** ./resources/js/core.js ***!
           \******************************/
         /*! exports provided: reloadNotifBar, blockElement, unblockElement, addPremium, formatDate, NotifyMe */
-        /***/ (function(module, __webpack_exports__, __webpack_require__) {
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
 
             "use strict";
             __webpack_require__.r(__webpack_exports__);
@@ -21443,40 +21471,43 @@ loadLatestTutoriel();
                 var countNotifBar = document.querySelector('#countNotifBar');
                 var value = parseInt(countNotifBar.textContent);
 
-  if (value === 0) {
-    var iconEl = jquery__WEBPACK_IMPORTED_MODULE_0__(".kt-header__topbar-icon");
-    iconEl.classList.remove('kt-hidden');
-    iconEl.textContent = 1;
-  } else {
-    countNotifBar.textContent = parseInt(value + 1);
-  }
-}
-function blockElement(el, message) {
-  var state = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
-  return KTApp.block(el, {
-    overlayColor: '#000000',
-    type: 'v2',
-    state: state,
-    size: 'lg',
-    message: message
-  });
-}
-function unblockElement(el) {
-  return KTApp.unblock(el);
-}
-function addPremium() {
-  jquery__WEBPACK_IMPORTED_MODULE_0__["get"]('/account/api/isPremium').done(function (data) {
-    if (data.data === 'true') {
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'on');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'on');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'on');
-    } else {
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'off');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'off');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
-    }
-  });
-}
+                if (value === 0) {
+                    var iconEl = jquery__WEBPACK_IMPORTED_MODULE_0__(".kt-header__topbar-icon");
+                    iconEl.classList.remove('kt-hidden');
+                    iconEl.textContent = 1;
+                } else {
+                    countNotifBar.textContent = parseInt(value + 1);
+                }
+            }
+
+            function blockElement(el, message) {
+                var state = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
+                return KTApp.block(el, {
+                    overlayColor: '#000000',
+                    type: 'v2',
+                    state: state,
+                    size: 'lg',
+                    message: message
+                });
+            }
+
+            function unblockElement(el) {
+                return KTApp.unblock(el);
+            }
+
+            function addPremium() {
+                jquery__WEBPACK_IMPORTED_MODULE_0__["get"]('/account/api/isPremium').done(function (data) {
+                    if (data.data === 'true') {
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'on');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'on');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'on');
+                    } else {
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'off');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'off');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
+                    }
+                });
+            }
 
             function formatDate(date) {
                 var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'LL';

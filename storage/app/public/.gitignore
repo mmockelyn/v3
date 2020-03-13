@@ -2,6 +2,8 @@
 !/blog/news.png
 /slideshow/*.*
 /tutoriel/*.*
+/tutoriel/*/*.*
+!/tutoriel/categorie/*.*
 /route/*
 !/route/dependance.png
 !/route/map.png

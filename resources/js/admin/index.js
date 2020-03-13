@@ -1,6 +1,7 @@
 //import * as $ from "jquery";
 import KTDatatable from '../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js'
 import {blockElement, unblockElement} from '../core'
+require('./config');
 
 function loadSignalement() {
     let table = $("#signalement").KTDatatable({
@@ -48,7 +49,7 @@ function loadSignalement() {
                         'warning':{'title': 'Attention', 'icon': 'flaticon2-warning', 'class': 'kt-font-warning'},
                         'danger':{'title': 'Erreur', 'icon': 'flaticon2-cross', 'class': 'kt-font-danger'},
                     };
-                    $('[data-toggle="kt-tooltip"]').tooltip()
+                    $('[data-toggle="kt-tooltip"]').tooltip();
                     return `<i class="${status[row.state].icon} ${status[row.state].class}" style="font-size: 25px;" data-toggle="kt-tooltip" title="${status[row.state].title}"></i>`
                 }
             },
@@ -114,29 +115,29 @@ function loadSignalement() {
 }
 
 function loadLatestArticle() {
-    let el = document.querySelector('#loadLatestBlog')
+    let el = document.querySelector('#loadLatestBlog');
 
-    blockElement(el, "Chargement des derniers articles...")
+    blockElement(el, "Chargement des derniers articles...");
 
     $.get('/api/admin/blog/latest')
         .done((data) => {
-            unblockElement(el)
+            unblockElement(el);
             el.innerHTML = data.data
         })
 }
 
 function loadLatestTutoriel() {
-    let el = document.querySelector('#loadLatestTutoriel')
+    let el = document.querySelector('#loadLatestTutoriel');
 
-    blockElement(el, "Chargement des derniers tutoriels...")
+    blockElement(el, "Chargement des derniers tutoriels...");
 
     $.get('/api/admin/tutoriel/latest')
         .done((data) => {
-            unblockElement(el)
+            unblockElement(el);
             el.innerHTML = data.data
         })
 }
 
-loadSignalement()
-loadLatestArticle()
-loadLatestTutoriel()
+loadSignalement();
+loadLatestArticle();
+loadLatestTutoriel();
