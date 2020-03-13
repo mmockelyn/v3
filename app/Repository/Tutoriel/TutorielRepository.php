@@ -2,6 +2,7 @@
 namespace App\Repository\Tutoriel;
 
 use App\Model\Tutoriel\Tutoriel;
+use Illuminate\Support\Str;
 
 class TutorielRepository
 {
@@ -67,8 +68,10 @@ class TutorielRepository
     public function filterBy($sub_id, $filter)
     {
         switch ($filter) {
+            case 'desc':
             case 'all':
-                return $this->listForCategory($sub_id); break;
+                return $this->listForCategory($sub_id);
+                break;
             case 'asc':
                 return $this->tutoriel->newQuery()
                     ->where('tutoriel_sub_category_id', $sub_id)
@@ -77,8 +80,6 @@ class TutorielRepository
                     ->orderBy('published_at', 'desc')
                     ->get()
                     ->load('category', 'subcategory', 'tags', 'comments', 'requis', 'sources', 'technologies');
-            case 'desc':
-                return $this->listForCategory($sub_id); break;
 
             default: return $this->listForCategory($sub_id);
         }
@@ -92,6 +93,81 @@ class TutorielRepository
     public function allWL($limit = null)
     {
         return $this->tutoriel->newQuery()->limit($limit)->get();
+    }
+
+    public function create($request)
+    {
+        return $this->tutoriel->newQuery()
+            ->create([
+                "tutoriel_category_id" => $request->category_id,
+                "tutoriel_sub_category_id" => $request->subcategory_id,
+                "user_id" => 1,
+                "title" => $request->title,
+                "slug" => Str::slug($request->title),
+                "short_content" => $request->short_content
+            ]);
+    }
+
+    public function delete($tutoriel_id)
+    {
+        return $this->tutoriel->newQuery()
+            ->find($tutoriel_id)
+            ->delete();
+    }
+
+    public function updateDescription($tutoriel_id, $contents)
+    {
+        return $this->tutoriel->newQuery()
+            ->find($tutoriel_id)
+            ->update([
+                "content" => $contents
+            ]);
+    }
+
+    public function updateInfo($tutoriel_id, $title, $short_content, int $published, int $source, int $premium, $published_at, int $demo, $linkDemo)
+    {
+        return $this->tutoriel->newQuery()
+            ->find($tutoriel_id)
+            ->update([
+                "title" => $title,
+                "short_content" => $short_content,
+                "published" => $published,
+                "source" => $source,
+                "premium" => $premium,
+                "published_at" => $published_at,
+                "demo" => $demo,
+                "linkDemo" => $linkDemo
+            ]);
+    }
+
+    public function publishLater($tutoriel_id, $published_at)
+    {
+        return $this->tutoriel->newQuery()
+            ->find($tutoriel_id)
+            ->update([
+                "published" => 2,
+                "published_at" => $published_at
+            ]);
+    }
+
+    public function publish($tutoriel_id)
+    {
+        return $this->tutoriel->newQuery()
+            ->find($tutoriel_id)
+            ->update([
+                "published" => 1,
+                "published_at" => now()
+            ]);
+    }
+
+    public function unpublish($tutoriel_id)
+    {
+        return $this->tutoriel->newQuery()
+            ->find($tutoriel_id)
+            ->update([
+                "published" => 0,
+                "published_at" => null
+            ]);
     }
 
 }

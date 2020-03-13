@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Blog;
 use App\Http\Controllers\Controller;
 use App\Repository\Blog\BlogCategoryRepository;
 use App\Repository\Blog\BlogRepository;
+use Exception;
 use Illuminate\Http\Request;
 
 class BlogArticleController extends Controller
@@ -45,6 +46,10 @@ class BlogArticleController extends Controller
 
     public function edit($article_id)
     {
+        $article = $this->blogRepository->get($article_id);
+        if ($article->published == 1) {
+            return redirect()->back()->with('warning', "Cette article est publier, l'édition est impossible");
+        }
         return view("admin.blog.article.edit", [
             "article" => $this->blogRepository->get($article_id),
             "categories" => $this->blogCategoryRepository->all()
@@ -58,11 +63,15 @@ class BlogArticleController extends Controller
 
     public function delete($article_id)
     {
+        $article = $this->blogRepository->get($article_id);
+        if ($article->published == 1) {
+            return redirect()->back()->with('warning', "Cette article est publier, la suppression est impossible");
+        }
         try {
             $this->blogRepository->delete($article_id);
 
-            return redirect()->back()->with('succes', "L'article à bien été supprimer");
-        }catch (\Exception $exception) {
+            return redirect()->back()->with('success', "L'article à bien été supprimer");
+        } catch (Exception $exception) {
             return redirect()->back()->with('error', "Erreur lors de la suppression de l'article");
         }
     }

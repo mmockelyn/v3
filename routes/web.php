@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,8 +13,6 @@
 
 Route::group(["namespace" => "Front"], function () {
     Route::get('/', ["as" => "Front.index", "uses" => "HomeController@index"]);
-    Route::get('search', ["as" => "Front.search", "uses" => "SearchController@search"]);
-    Route::post('search', ["as" => "Front.postSearch", "uses" => "SearchController@postSearch"]);
 
     Route::group(["prefix" => "blog", "namespace" => "Blog"], function () {
         Route::get('/', ["as" => "Front.Blog.index", "uses" => "BlogController@index"]);
@@ -140,17 +138,60 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
             Route::get('{subcategory_id}/delete', 'ObjetSubCategoryController@delete');
         });
 
-        Route::group(["prefix" => "objet"], function (){
+        Route::group(["prefix" => "objet"], function () {
             Route::get('/', ["as" => "Back.Objet.Objet.index", "uses" => "ObjetObjetController@index"]);
             Route::get('{objet_id}', ["as" => "Back.Objet.Objet.show", "uses" => 'ObjetObjetController@show']);
             Route::get('{objet_id}/edit', ["as" => "Back.Objet.Objet.edit", "uses" => 'ObjetObjetController@edit']);
             Route::get('{objet_id}/delete', ["as" => "Back.Objet.Objet.delete", "uses" => 'ObjetObjetController@delete']);
+
+            Route::put('{objet_id}/editThumb', ["as" => "Back.Objet.Objet.editThumb", "uses" => "ObjetObjetController@editThumb"]);
+
+            Route::group(["prefix" => "{objet_id}/compatibility"], function () {
+                Route::get('{compatibility_id}/delete', 'ObjetObjetController@deleteCompatibility');
+            });
+
+            Route::group(["prefix" => "{objet_id}/tag"], function () {
+                Route::get('{tag_id}/delete', 'ObjetObjetController@deleteTag');
+            });
         });
     });
 
 
     Route::group(["prefix" => "tutoriel", "namespace" => "Tutoriel"], function (){
         Route::get('/', ["as" => "Back.Tutoriel.index", "uses" => "TutorielController@index"]);
+
+        Route::group(["prefix" => "category"], function () {
+            Route::get('/', 'TutorielCategoryController@index')->name('Back.Tutoriel.Category.index');
+            Route::get('{category_id}/delete', 'TutorielCategoryController@delete');
+        });
+
+        Route::group(["prefix" => "subcategory"], function () {
+            Route::get('{subcategory_id}/delete', 'TutorielSubCategoryController@delete');
+        });
+
+        Route::group(["prefix" => "video"], function () {
+            Route::get('/', 'TutorielVideoController@index')->name('Back.Tutoriel.Video.index');
+            Route::get('{video_id}', 'TutorielVideoController@show')->name('Back.Tutoriel.Video.show');
+            Route::get('{video_id}/edit', 'TutorielVideoController@edit')->name('Back.Tutoriel.Video.edit');
+            Route::get('{video_id}/delete', 'TutorielVideoController@delete')->name('Back.Tutoriel.Video.delete');
+        });
+
+        Route::group(["prefix" => "{video_id}/comment"], function () {
+            Route::get('{comment_id}/publish', 'TutorielCommentController@publish');
+            Route::get('{comment_id}/unpublish', 'TutorielCommentController@unpublish');
+        });
+
+        Route::group(["prefix" => "{video_id}/tags"], function () {
+            Route::get('{tag_id}/delete', 'TutorielVideoController@deleteTag');
+        });
+
+        Route::group(["prefix" => "{video_id}/techno"], function () {
+
+        });
+
+        Route::group(["prefix" => "{video_id}/requis"], function () {
+
+        });
     });
 
     Route::group(["prefix" => "wiki", "namespace" => "Wiki"], function (){

@@ -2940,7 +2940,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     for (var i = 0, len = elements.length; i < len; i++) {
       var _ret = _loop(i);
 
-      if (_ret === "continue") continue;
+      if (_ret === "continue")
     }
 
     return createdDocument.body.innerHTML;
@@ -7473,7 +7473,7 @@ function nodeName( elem, name ) {
 
   return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 
-};
+}
 var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
 
 
@@ -24192,25 +24192,29 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js */ "./resources/demo5/src/assets/js/global/components/base/datatable/core.datatable.js");
-/* harmony import */ var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../core */ "./resources/js/core.js");
-/* harmony import */ var _yaireo_tagify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @yaireo/tagify */ "./node_modules/@yaireo/tagify/dist/tagify.min.js");
-/* harmony import */ var _yaireo_tagify__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_yaireo_tagify__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */
+            var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__);
+            /* harmony import */
+            var _core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../core */ "./resources/js/core.js");
+            /* harmony import */
+            var _yaireo_tagify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @yaireo/tagify */ "./node_modules/@yaireo/tagify/dist/tagify.min.js");
+            /* harmony import */
+            var _yaireo_tagify__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_yaireo_tagify__WEBPACK_IMPORTED_MODULE_2__);
 
 
+            var swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 
+            __webpack_require__(/*! ../../config */ "./resources/js/admin/config.js");
 
-var swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+            var article = $("#article");
+            var article_id = article.attr('data-id');
+            var article_publish = article.attr('data-publish');
 
-var article = $("#article");
-var article_id = article.attr('data-id');
-var article_publish = article.attr('data-publish');
-
-function loadPic() {
-  var div = document.querySelector('.kt-widget19__pic');
-  Object(_core__WEBPACK_IMPORTED_MODULE_1__["blockElement"])(div, "Chargement...");
-  $.get('/api/admin/blog/article/' + article_id).done(function (data) {
-    Object(_core__WEBPACK_IMPORTED_MODULE_1__["unblockElement"])(div);
+            function loadPic() {
+                var div = document.querySelector('.kt-widget19__pic');
+                Object(_core__WEBPACK_IMPORTED_MODULE_1__["blockElement"])(div, "Chargement...");
+                $.get('/api/admin/blog/article/' + article_id).done(function (data) {
+                    Object(_core__WEBPACK_IMPORTED_MODULE_1__["unblockElement"])(div);
     div.style.minHeight = "300px";
     div.style.background = "url(".concat(data.data.img, ")");
     var element = $('.kt-widget19__pic');
@@ -24525,80 +24529,156 @@ loadComment();
 loadTag();
 postTags();
 
-if (article_publish === '1') {
-  unpublish();
-} else if (article_publish === '0') {
-  publish();
-} else {}
+            if (article_publish === '1') {
+                unpublish();
+            } else if (article_publish === '0') {
+                publish();
+            } else {
+            }
 
-var input = document.querySelector('#tag');
-new _yaireo_tagify__WEBPACK_IMPORTED_MODULE_2___default.a(input);
+            var input = document.querySelector('#tag');
+            new _yaireo_tagify__WEBPACK_IMPORTED_MODULE_2___default.a(input);
 
-/***/ }),
+            /***/
+        }),
 
-/***/ "./resources/js/core.js":
-/*!******************************!*\
-  !*** ./resources/js/core.js ***!
-  \******************************/
-/*! exports provided: reloadNotifBar, blockElement, unblockElement, addPremium, formatDate */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+        /***/ "./resources/js/admin/config.js":
+        /*!**************************************!*\
+          !*** ./resources/js/admin/config.js ***!
+          \**************************************/
+        /*! no static exports found */
+        /***/ (function (module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reloadNotifBar", function() { return reloadNotifBar; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "blockElement", function() { return blockElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unblockElement", function() { return unblockElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addPremium", function() { return addPremium; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatDate", function() { return formatDate; });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_1__);
+            var cache = document.querySelector("#btnRefreshCache");
+            cache.addEventListener('click', function (e) {
+                e.preventDefault();
+                KTApp.progress(cache);
+                $.get('/api/admin/cache').done(function () {
+                    KTApp.unprogress(cache);
+                    toastr.success("Le cache à été nettoyer");
+                }).fail(function () {
+                    KTApp.unprogress(cache);
+                    toastr.error("Erreur lors du nettoyage du cache");
+                });
+            });
+
+            /***/
+        }),
+
+        /***/ "./resources/js/core.js":
+        /*!******************************!*\
+          !*** ./resources/js/core.js ***!
+          \******************************/
+        /*! exports provided: reloadNotifBar, blockElement, unblockElement, addPremium, formatDate, NotifyMe */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "reloadNotifBar", function () {
+                return reloadNotifBar;
+            });
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "blockElement", function () {
+                return blockElement;
+            });
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "unblockElement", function () {
+                return unblockElement;
+            });
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "addPremium", function () {
+                return addPremium;
+            });
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "formatDate", function () {
+                return formatDate;
+            });
+            /* harmony export (binding) */
+            __webpack_require__.d(__webpack_exports__, "NotifyMe", function () {
+                return NotifyMe;
+            });
+            /* harmony import */
+            var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+            /* harmony import */
+            var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+            /* harmony import */
+            var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+            /* harmony import */
+            var bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_1__);
 
 
-function reloadNotifBar() {
-  var countNotifBar = document.querySelector('#countNotifBar');
-  var value = parseInt(countNotifBar.textContent);
+            function reloadNotifBar() {
+                var countNotifBar = document.querySelector('#countNotifBar');
+                var value = parseInt(countNotifBar.textContent);
 
-  if (value === 0) {
-    var iconEl = jquery__WEBPACK_IMPORTED_MODULE_0__(".kt-header__topbar-icon");
-    iconEl.classList.remove('kt-hidden');
-    iconEl.textContent = 1;
-  } else {
-    countNotifBar.textContent = parseInt(value + 1);
-  }
-}
-function blockElement(el, message) {
-  var state = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
-  return KTApp.block(el, {
-    overlayColor: '#000000',
-    type: 'v2',
-    state: state,
-    size: 'lg',
-    message: message
-  });
-}
-function unblockElement(el) {
-  return KTApp.unblock(el);
-}
-function addPremium() {
-  jquery__WEBPACK_IMPORTED_MODULE_0__["get"]('/account/api/isPremium').done(function (data) {
-    if (data.data === 'true') {
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'on');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'on');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'on');
-    } else {
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'off');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'off');
-      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
-    }
-  });
-}
-function formatDate(date) {
-  var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'LL';
-  moment.locale('fr');
-  return moment(date).format(format);
-}
+                if (value === 0) {
+                    var iconEl = jquery__WEBPACK_IMPORTED_MODULE_0__(".kt-header__topbar-icon");
+                    iconEl.classList.remove('kt-hidden');
+                    iconEl.textContent = 1;
+                } else {
+                    countNotifBar.textContent = parseInt(value + 1);
+                }
+            }
+
+            function blockElement(el, message) {
+                var state = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
+                return KTApp.block(el, {
+                    overlayColor: '#000000',
+                    type: 'v2',
+                    state: state,
+                    size: 'lg',
+                    message: message
+                });
+            }
+
+            function unblockElement(el) {
+                return KTApp.unblock(el);
+            }
+
+            function addPremium() {
+                jquery__WEBPACK_IMPORTED_MODULE_0__["get"]('/account/api/isPremium').done(function (data) {
+                    if (data.data === 'true') {
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'on');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'on');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'on');
+                    } else {
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'off');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'off');
+                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
+                    }
+                });
+            }
+
+            function formatDate(date) {
+                var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'LL';
+                moment.locale('fr');
+                return moment(date).format(format);
+            }
+
+            function NotifyMe(title, body) {
+                if (!("Notification" in window)) {
+                    toastr.warning('Ce Navigateur ne supporte pas les notifications');
+                } else if (Notification.permission === 'granted') {
+                    var notification = new Notification(title, {
+                        body: body
+                    });
+                } else if (Notification.permission !== 'denied') {
+                    Notification.requestPermission(function (permission) {
+                        // Quelque soit la réponse de l'utilisateur, nous nous assurons de stocker cette information
+                        if (!('permission' in Notification)) {
+                            Notification.permission = permission;
+                        } // Si l'utilisateur est OK, on crée une notification
+
+
+                        if (permission === "granted") {
+                            var _notification = new Notification(title, {
+                                body: body
+                            });
+                        }
+                    });
+                }
+            }
 
 function hidingAlerting() {
   var alerts = document.querySelectorAll('#showAlerting');

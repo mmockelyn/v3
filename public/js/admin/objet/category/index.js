@@ -86,22 +86,47 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/admin/objet/category/index.js":
-/*!****************************************************!*\
-  !*** ./resources/js/admin/objet/category/index.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+        /***/ "./resources/js/admin/config.js":
+        /*!**************************************!*\
+          !*** ./resources/js/admin/config.js ***!
+          \**************************************/
+        /*! no static exports found */
+        /***/ (function (module, exports) {
 
-var table;
-var sub;
+            var cache = document.querySelector("#btnRefreshCache");
+            cache.addEventListener('click', function (e) {
+                e.preventDefault();
+                KTApp.progress(cache);
+                $.get('/api/admin/cache').done(function () {
+                    KTApp.unprogress(cache);
+                    toastr.success("Le cache à été nettoyer");
+                }).fail(function () {
+                    KTApp.unprogress(cache);
+                    toastr.error("Erreur lors du nettoyage du cache");
+                });
+            });
 
-function loadListeCategories() {
-  table = $("#listeObjectCategories").KTDatatable({
-    data: {
-      type: 'remote',
-      source: {
-        read: {
+            /***/
+        }),
+
+        /***/ "./resources/js/admin/objet/category/index.js":
+        /*!****************************************************!*\
+          !*** ./resources/js/admin/objet/category/index.js ***!
+          \****************************************************/
+        /*! no static exports found */
+        /***/ (function (module, exports, __webpack_require__) {
+
+            __webpack_require__(/*! ../../config */ "./resources/js/admin/config.js");
+
+            var table;
+            var sub;
+
+            function loadListeCategories() {
+                table = $("#listeObjectCategories").KTDatatable({
+                    data: {
+                        type: 'remote',
+                        source: {
+                            read: {
           url: '/api/admin/objet/category/list',
           // sample custom headers
           // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},

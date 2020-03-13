@@ -1,8 +1,10 @@
 import KTDatatable from '../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js'
 import summernote from 'summernote'
 
-let route = $("#route")
-let route_id = route.attr('data-id')
+require('../config');
+
+let route = $("#route");
+let route_id = route.attr('data-id');
 let tableau = '';
 
 function loadTable() {
@@ -123,9 +125,9 @@ function loadTable() {
                 },
             },
         },
-    })
+    });
 
-    tableau = table
+    tableau = table;
 
 
     $('#kt_form_status').on('change', function () {
@@ -136,15 +138,15 @@ function loadTable() {
 }
 
 function formAddAnomalie() {
-    let form = $("#formAddAnomalie")
+    let form = $("#formAddAnomalie");
 
     form.on('submit', function (e) {
-        e.preventDefault()
-        let btn = form.find('button')
-        let url = form.attr('action')
-        let data = form.serializeArray()
+        e.preventDefault();
+        let btn = form.find('button');
+        let url = form.attr('action');
+        let data = form.serializeArray();
 
-        KTApp.progress(btn)
+        KTApp.progress(btn);
 
         $.ajax({
             url: url,
@@ -152,23 +154,23 @@ function formAddAnomalie() {
             data: data,
             statusCode: {
                 200: function (data) {
-                    KTApp.unprogress(btn)
+                    KTApp.unprogress(btn);
                     if (data.data.anomalie !== '') {
                         toastr.success("La Correction <strong>" + data.data.correction + "</strong> à été ajoutée", "Succès")
                     } else {
                         toastr.success("L'anomalie <strong>" + data.data.anomalie + "</strong> à été ajoutée", "Succès")
                     }
-                    $(".modal").modal('hide')
+                    $(".modal").modal('hide');
                     tableau.reload();
                 },
                 203: function (data) {
-                    KTApp.unprogress(btn)
+                    KTApp.unprogress(btn);
                     Array.from(data.data.errors).forEach((error) => {
                         toastr.warning(error, "Erreur de validation")
                     })
                 },
                 500: function (jqxhr) {
-                    KTApp.unprogress(btn)
+                    KTApp.unprogress(btn);
                     toastr.error("Erreur lors de la soumission du formulaire", "Erreur Système 500")
                 }
             }
@@ -177,30 +179,30 @@ function formAddAnomalie() {
 }
 
 function formNextVersion() {
-    let form = $("#formNextVersion")
+    let form = $("#formNextVersion");
 
     form.on('submit', function (e) {
-        e.preventDefault()
-        let btn = form.find('button')
-        let url = form.attr('action')
-        let data = form.serializeArray()
+        e.preventDefault();
+        let btn = form.find('button');
+        let url = form.attr('action');
+        let data = form.serializeArray();
 
-        KTApp.progress(btn)
+        KTApp.progress(btn);
 
         $.ajax({
             url: url,
             method: 'post',
             data: data,
             success: function (data) {
-                KTApp.unprogress(btn)
-                toastr.success("Passage à la <strong>" + parseInt(data.data.version) + "</strong> réussi", "Succès")
+                KTApp.unprogress(btn);
+                toastr.success("Passage à la <strong>" + parseInt(data.data.version) + "</strong> réussi", "Succès");
                 setTimeout(() => {
                     window.location.reload()
                 })
             },
             error: function (err) {
-                KTApp.unprogress(btn)
-                toastr.error("Erreur lors du passage à la version suivante", "Erreur Système 500")
+                KTApp.unprogress(btn);
+                toastr.error("Erreur lors du passage à la version suivante", "Erreur Système 500");
                 console.error(err)
             }
         })
@@ -208,31 +210,31 @@ function formNextVersion() {
 }
 
 function formNextState() {
-    let form = $("#formNextState")
+    let form = $("#formNextState");
 
     form.on('submit', function (e) {
-        e.preventDefault()
-        let btn = form.find('button')
-        let url = form.attr('action')
-        let data = form.serializeArray()
+        e.preventDefault();
+        let btn = form.find('button');
+        let url = form.attr('action');
+        let data = form.serializeArray();
 
-        KTApp.progress(btn)
+        KTApp.progress(btn);
 
         $.ajax({
             url: url,
             method: 'put',
             data: data,
             success: function (data) {
-                KTApp.unprogress(btn)
-                toastr.success("Les anomalies selectionner sont passée à <strong>Terminer</strong>", "Succès")
-                $(".modal").modal('hide')
-                tableau.reload()
-                portletStat()
+                KTApp.unprogress(btn);
+                toastr.success("Les anomalies selectionner sont passée à <strong>Terminer</strong>", "Succès");
+                $(".modal").modal('hide');
+                tableau.reload();
+                portletStat();
                 form[0].reset()
             },
             error: function (err) {
-                KTApp.unprogress(btn)
-                toastr.error("Erreur lors du passage à un état supérieur pour les anomalies", "Erreur Système 500")
+                KTApp.unprogress(btn);
+                toastr.error("Erreur lors du passage à un état supérieur pour les anomalies", "Erreur Système 500");
                 console.error(err)
             }
         })
@@ -240,7 +242,7 @@ function formNextState() {
 }
 
 function portletStat() {
-    let portlet = $("#portlet_stat_build")
+    let portlet = $("#portlet_stat_build");
 
     KTApp.block(portlet, {
         overlayColor: '#ffffff',
@@ -248,21 +250,21 @@ function portletStat() {
         state: 'success',
         opacity: 0.3,
         size: 'lg'
-    })
+    });
 
     $.get('/api/admin/route/'+route_id+'/anomalie/loadStat')
         .done((data) => {
-            KTApp.unblock(portlet)
+            KTApp.unblock(portlet);
             portlet.html(data.data)
         })
 }
 
 $('.summernote').summernote({
     height: '350px'
-})
+});
 
-portletStat()
-loadTable()
-formAddAnomalie()
-formNextVersion()
-formNextState()
+portletStat();
+loadTable();
+formAddAnomalie();
+formNextVersion();
+formNextState();

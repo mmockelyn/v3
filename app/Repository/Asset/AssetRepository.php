@@ -2,6 +2,7 @@
 namespace App\Repository\Asset;
 
 use App\Model\Asset\Asset;
+use Illuminate\Support\Carbon;
 use Webpatser\Uuid\Uuid;
 
 class AssetRepository
@@ -46,10 +47,16 @@ class AssetRepository
             ->find($asset_id)->load('category', 'subcategory');
     }
 
+    public function find($asset_id)
+    {
+        return $this->asset->newQuery()
+            ->find($asset_id);
+    }
+
     public function search($get)
     {
         return $this->asset->newQuery()
-            ->where('designation', 'like', '%'.$get.'%')
+            ->where('designation', 'like', '%' . $get . '%')
             ->limit(10)
             ->get();
     }
@@ -79,6 +86,58 @@ class AssetRepository
                 "designation" => $designation,
                 "short_description" => $short_description,
                 "uuid" => $uuid
+            ]);
+    }
+
+    public function updateState($asset_id, int $int)
+    {
+        if ($int == 1) {
+            $published_at = now();
+        } else {
+            $published_at = null;
+        }
+        $this->find($asset_id)->update([
+            "published" => $int,
+            "published_at" => $published_at
+        ]);
+    }
+
+    public function updateLinkDownload($asset_id, string $string)
+    {
+        return $this->find($asset_id)
+            ->update([
+                "downloadLink" => $string
+            ]);
+    }
+
+    public function updatePrice($asset_id, $price)
+    {
+        return $this->find($asset_id)->update([
+            "price" => $price
+        ]);
+    }
+
+    public function updateInfo($asset_id, $designation, $kuid, int $published, ?Carbon $published_at, int $social, int $mesh, int $config, int $pricing, $short_description)
+    {
+        return $this->find($asset_id)
+            ->update([
+                "designation" => $designation,
+                "kuid" => $kuid,
+                "published" => $published,
+                "published_at" => $published_at,
+                "social" => $social,
+                "mesh" => $mesh,
+                "config" => $config,
+                "pricing" => $pricing,
+                "short_description" => $short_description
+            ]);
+    }
+
+    public function updateDescription($asset_id, $description)
+    {
+        return $this->find($asset_id)
+            ->update([
+                "description" => $description
             ]);
     }
 

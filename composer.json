@@ -11,6 +11,7 @@
         "php": "^7.2",
         "ext-json": "*",
         "ext-simplexml": "*",
+        "ext-zip": "*",
         "annaghd/php-credit-card-validator-plus": "dev-master",
         "arielmejiadev/larapex-charts": "^1.0",
         "cartalyst/stripe-laravel": "^12.0",
@@ -21,11 +22,13 @@
         "laravel-notification-channels/twitter": "^4.0",
         "laravel/framework": "^7.0",
         "laravel/horizon": "^4.0",
+        "laravel/slack-notification-channel": "^2.0",
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "league/flysystem-sftp": "~1.0",
         "linkthrow/ffmpeg": "dev-master",
+        "mtolhuys/laravel-schematics": "^0.9.9",
         "predis/predis": "^1.1",
         "socialiteproviders/discord": "^2.0",
         "socialiteproviders/facebook": "^1.0",
@@ -33,7 +36,8 @@
         "stripe/stripe-php": "^7.25",
         "thomaswelton/laravel-gravatar": "~1.0",
         "thujohn/twitter": "^2.2",
-        "webpatser/laravel-uuid": "^3.0"
+        "webpatser/laravel-uuid": "^3.0",
+        "zanysoft/laravel-zip": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

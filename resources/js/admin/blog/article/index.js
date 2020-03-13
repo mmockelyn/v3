@@ -1,7 +1,8 @@
 //import * as $ from "jquery";
 import KTDatatable from '../../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js'
+require('../../config');
 
-const slugify = require('slugify')
+const slugify = require('slugify');
 
 function loadTable() {
     let table = $("#listeArticle").KTDatatable({
@@ -74,10 +75,10 @@ function loadTable() {
                     let published = {
                         0: {'title': 'Non Publier', 'class': 'kt-badge--danger'},
                         1: {'title': 'Publier', 'class': 'kt-badge--success'},
-                    }
-                    if(row.published === 0) {
+                    };
+                    if (row.published === 0) {
                         return `<span class="kt-badge ${published[row.published].class} kt-badge--inline kt-badge--pill">${published[row.published].title}</span>`
-                    }else {
+                    } else {
                         return `<span class="kt-badge ${published[row.published].class} kt-badge--inline kt-badge--pill">${published[row.published].title}</span><br><strong>Date de Publication</strong>: ${row.published_at}`
                     }
                 }
@@ -88,9 +89,9 @@ function loadTable() {
                 sortable: false,
                 textAlign: 'center',
                 template: function (row) {
-                    if(row.twitter === 0) {
+                    if (row.twitter === 0) {
                         return `<i class="la la-twitter-square" data-toggle="kt-tooltip" title="Non Publier sur twitter"></i>`
-                    }else{
+                    } else {
                         return `<i class="la la-twitter-square kt-font-twitter" data-toggle="kt-tooltip" title="Publier sur twitter"></i>`
                     }
                 }
@@ -103,11 +104,17 @@ function loadTable() {
                 autoHide: false,
                 textAlign: 'right',
                 template: function (row) {
-                    return `
-                    <a href="/administrator/blog/article/${row.id}" class="btn btn-icon btn-sm btn-default"><i class="la la-eye"></i> </a>
-                    <a href="/administrator/blog/article/${row.id}/edit" class="btn btn-icon btn-sm btn-info"><i class="la la-edit"></i> </a>
-                    <a href="/administrator/blog/article/${row.id}/delete" class="btn btn-icon btn-sm btn-danger"><i class="la la-trash-o"></i> </a>
-                    `;
+                    if (row.published === 0) {
+                        return `
+                            <a href="/administrator/blog/article/${row.id}" class="btn btn-icon btn-sm btn-default"><i class="la la-eye"></i> </a>
+                            <a href="/administrator/blog/article/${row.id}/edit" class="btn btn-icon btn-sm btn-info"><i class="la la-edit"></i> </a>
+                            <a href="/administrator/blog/article/${row.id}/delete" class="btn btn-icon btn-sm btn-danger"><i class="la la-trash-o"></i> </a>
+                        `;
+                    } else {
+                        return `
+                            <a href="/administrator/blog/article/${row.id}" class="btn btn-icon btn-sm btn-default"><i class="la la-eye"></i> </a>
+                        `;
+                    }
                 }
             }
         ],
@@ -138,14 +145,14 @@ function loadTable() {
 }
 
 function submitForm() {
-    let form = $('#formAddArticle')
+    let form = $('#formAddArticle');
 
     form.on('submit', function (e) {
-        e.preventDefault()
-        let btn = form.find('button')
-        let data = form.serializeArray()
+        e.preventDefault();
+        let btn = form.find('button');
+        let data = form.serializeArray();
 
-        KTApp.progress(btn)
+        KTApp.progress(btn);
 
         $.ajax({
             url: form.attr('action'),
@@ -153,22 +160,22 @@ function submitForm() {
             data: data,
             statusCode: {
                 200: function (data) {
-                    KTApp.unprogress(btn)
-                    console.log(data)
-                    toastr.success(data.message, "Succès")
+                    KTApp.unprogress(btn);
+                    console.log(data);
+                    toastr.success(data.message, "Succès");
                     setTimeout(function () {
                         window.location.reload()
                     }, 1000)
                 },
                 203: function (data) {
-                    KTApp.unprogress(btn)
-                    console.log(data)
+                    KTApp.unprogress(btn);
+                    console.log(data);
                     Array.from(data.data.errors).forEach((error) => {
                         toastr.warning(error, "Erreur de Validation");
                     })
                 },
                 500: function (jqxhr) {
-                    KTApp.unprogress(btn)
+                    KTApp.unprogress(btn);
                     console.error(jqxhr)
                 }
             }
@@ -178,21 +185,21 @@ function submitForm() {
 }
 
 function slugInput() {
-    let input_title = document.querySelector('#title')
-    let input_slug = document.querySelector('#slug')
+    let input_title = document.querySelector('#title');
+    let input_slug = document.querySelector('#slug');
 
     input_title.addEventListener('keyup', function (e) {
-        e.preventDefault()
+        e.preventDefault();
         input_slug.value = slugify(input_title.value, '-')
     })
 }
 
 
 loadTable();
-submitForm()
-slugInput()
+submitForm();
+slugInput();
 
-$(".selectpicker").selectpicker()
+$(".selectpicker").selectpicker();
 $(".summernote").summernote({
     height: 300
 });

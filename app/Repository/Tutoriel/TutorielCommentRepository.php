@@ -59,10 +59,35 @@ class TutorielCommentRepository
             ->delete();
     }
 
-    public function all()
+    public function all($tutoriel_id = null)
+    {
+        if ($tutoriel_id == null) {
+            return $this->tutorielComment->newQuery()
+                ->get();
+        } else {
+            return $this->tutorielComment->newQuery()
+                ->where('tutoriel_id', $tutoriel_id)
+                ->get();
+        }
+    }
+
+    public function publish($comment_id)
     {
         return $this->tutorielComment->newQuery()
-            ->get();
+            ->find($comment_id)
+            ->update([
+                "published" => 1,
+                "published_at" => now()
+            ]);
+    }
+
+    public function unpublish($comment_id)
+    {
+        return $this->tutorielComment->newQuery()
+            ->find($comment_id)
+            ->update([
+                "published" => 0
+            ]);
     }
 
 }

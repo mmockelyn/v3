@@ -63,7 +63,13 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/admin/objet/category/index.js', 'public/js/admin/objet/category')
     .js('resources/js/admin/objet/objet/index.js', 'public/js/admin/objet/objet')
     .js('resources/js/admin/objet/objet/show.js', 'public/js/admin/objet/objet')
+    .js('resources/js/admin/objet/objet/edit.js', 'public/js/admin/objet/objet')
 
+    .js('resources/js/admin/tutoriel/index.js', 'public/js/admin/tutoriel')
+    .js('resources/js/admin/tutoriel/category/index.js', 'public/js/admin/tutoriel/category')
+    .js('resources/js/admin/tutoriel/video/index.js', 'public/js/admin/tutoriel/video')
+    .js('resources/js/admin/tutoriel/video/edit.js', 'public/js/admin/tutoriel/video')
+    .js('resources/js/admin/tutoriel/video/show.js', 'public/js/admin/tutoriel/video')
 
 
     .sass('resources/sass/app.scss', 'public/css')

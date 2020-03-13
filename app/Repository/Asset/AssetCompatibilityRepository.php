@@ -20,5 +20,30 @@ class AssetCompatibilityRepository
         $this->assetCompatibility = $assetCompatibility;
     }
 
+    public function create($asset_id, $trainz_build_id, $state)
+    {
+        return $this->assetCompatibility->newQuery()
+            ->create([
+                "asset_id" => $asset_id,
+                "trainz_build_id" => $trainz_build_id,
+                "state" => $state
+            ]);
+    }
+
+    public function allFormAsset($asset_id, $limit = null)
+    {
+        return $this->assetCompatibility->newQuery()
+            ->where('asset_id', $asset_id)
+            ->limit($limit)
+            ->get();
+    }
+
+    public function delete($compatibility_id)
+    {
+        return $this->assetCompatibility->newQuery()
+            ->find($compatibility_id)
+            ->delete();
+    }
+
 }
 

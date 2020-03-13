@@ -1,43 +1,45 @@
 import KTDatatable from '../../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js'
 import {blockElement, unblockElement} from '../../../core'
 import Tagify from '@yaireo/tagify'
-const swal = require('sweetalert2')
 
-let article = $("#article")
-let article_id = article.attr('data-id')
-let article_publish = article.attr('data-publish')
+const swal = require('sweetalert2');
+require('../../config');
+
+let article = $("#article");
+let article_id = article.attr('data-id');
+let article_publish = article.attr('data-publish');
 
 function loadPic() {
-    let div = document.querySelector('.kt-widget19__pic')
+    let div = document.querySelector('.kt-widget19__pic');
 
-    blockElement(div, "Chargement...")
+    blockElement(div, "Chargement...");
 
-    $.get('/api/admin/blog/article/'+article_id)
+    $.get('/api/admin/blog/article/' + article_id)
         .done((data) => {
-            unblockElement(div)
-            div.style.minHeight = "300px"
-            div.style.background = `url(${data.data.img})`
-            let element = $('.kt-widget19__pic')
-            element.find('.kt-widget19__title').html(data.data.data.title)
-            let label = element.find('.kt-widget19__labels')
-            label.find('.btn').removeClass('btn-label-light-o2')
+            unblockElement(div);
+            div.style.minHeight = "300px";
+            div.style.background = `url(${data.data.img})`;
+            let element = $('.kt-widget19__pic');
+            element.find('.kt-widget19__title').html(data.data.data.title);
+            let label = element.find('.kt-widget19__labels');
+            label.find('.btn').removeClass('btn-label-light-o2');
 
-            if(data.data.data.published === 1) {
-                label.find('.btn').addClass('btn-label-success')
+            if (data.data.data.published === 1) {
+                label.find('.btn').addClass('btn-label-success');
                 label.find('.btn').html('Publier')
             } else {
-                label.find('.btn').addClass('btn-label-danger')
+                label.find('.btn').addClass('btn-label-danger');
                 label.find('.btn').html('Non publier')
             }
 
-            $(".kt-widget19__username").html(data.data.category)
-            $(".kt-widget19__number").html(data.data.countComment)
-            $(".kt-widget19__text").html(data.data.data.short_content)
+            $(".kt-widget19__username").html(data.data.category);
+            $(".kt-widget19__number").html(data.data.countComment);
+            $(".kt-widget19__text").html(data.data.data.short_content);
 
-            let action = $(".kt-widget19__action")
-            if(data.data.data.published === 1) {
-                action.find('a').attr('href', '/blog/'+data.data.data.slug).attr('target', '_blank').html('Voir sur le site').addClass('btn btn-outline-info btn-sm btn-block')
-            }else{
+            let action = $(".kt-widget19__action");
+            if (data.data.data.published === 1) {
+                action.find('a').attr('href', '/blog/' + data.data.data.slug).attr('target', '_blank').html('Voir sur le site').addClass('btn btn-outline-info btn-sm btn-block')
+            } else {
                 action.find('a').remove()
             }
         })
@@ -45,12 +47,12 @@ function loadPic() {
 }
 
 function publish() {
-    let btn = document.querySelector('#btnArticlePublish')
+    let btn = document.querySelector('#btnArticlePublish');
 
     btn.addEventListener('click', function (e) {
-        e.preventDefault()
+        e.preventDefault();
 
-        KTApp.progress(btn)
+        KTApp.progress(btn);
 
         $.get('/api/admin/blog/article/'+article_id+'/verifPublish')
             .done((data) => {
@@ -63,14 +65,14 @@ function publish() {
                 } else {
                     $.get('/api/admin/blog/article/'+article_id+'/publish')
                         .done((data) => {
-                            KTApp.unprogress(btn)
-                            toastr.success("L'article à été publier", "Succès")
+                            KTApp.unprogress(btn);
+                            toastr.success("L'article à été publier", "Succès");
                             setTimeout(function (e) {
                                 window.location.reload()
                             }, 1200)
                         })
                         .fail((jqxhr) => {
-                            KTApp.unprogress(btn)
+                            KTApp.unprogress(btn);
                             toastr.error("Erreur lors de la publication de l'article", "Erreur Système")
                         })
                 }
@@ -79,23 +81,23 @@ function publish() {
 }
 
 function unpublish() {
-    let btn = document.querySelector('#btnArticleUnpublish')
+    let btn = document.querySelector('#btnArticleUnpublish');
 
     btn.addEventListener('click', function (e) {
-        e.preventDefault()
+        e.preventDefault();
 
-        KTApp.progress(btn)
+        KTApp.progress(btn);
 
         $.get('/api/admin/blog/article/'+article_id+'/unpublish')
             .done((data) => {
-                KTApp.unprogress(btn)
-                toastr.success("L'article à été dépublier", "Succès")
+                KTApp.unprogress(btn);
+                toastr.success("L'article à été dépublier", "Succès");
                 setTimeout(function (e) {
                     window.location.reload()
                 }, 1200)
             })
             .fail((jqxhr) => {
-                KTApp.unprogress(btn)
+                KTApp.unprogress(btn);
                 toastr.error("Erreur lors de la dépublication de l'article", "Erreur Système")
             })
     })
@@ -321,15 +323,15 @@ function loadTag() {
 }
 
 function postTags() {
-    let form = $("#formAddTags")
+    let form = $("#formAddTags");
 
     form.on('submit', function (e) {
-        e.preventDefault()
-        let btn = form.find('button')
-        let url = form.attr('action')
-        let data = form.serializeArray()
+        e.preventDefault();
+        let btn = form.find('button');
+        let url = form.attr('action');
+        let data = form.serializeArray();
 
-        KTApp.progress(btn)
+        KTApp.progress(btn);
 
         $.ajax({
             url: url,
@@ -337,21 +339,21 @@ function postTags() {
             data: data,
             statusCode: {
                 200: function (data) {
-                    KTApp.unprogress(btn)
+                    KTApp.unprogress(btn);
                     toastr.success("Le ou les tags ont été ajoutés avec succès", "Succès")
                     /*setTimeout(function () {
                         window.location.reload()
                     }, 1200)*/
                 },
                 203: function (data) {
-                    KTApp.unprogress(btn)
+                    KTApp.unprogress(btn);
                     Array.from(data.data.errors).forEach((error) => {
                         toastr.warning(error, "Erreur de validation")
                     })
                 },
                 500: function (jqxhr) {
-                    KTApp.unprogress(btn)
-                    toastr.error("Erreur lors de l'ajout de tag à l'article", "Erreur Système")
+                    KTApp.unprogress(btn);
+                    toastr.error("Erreur lors de l'ajout de tag à l'article", "Erreur Système");
                     console.error(jqxhr)
                 }
             }
@@ -359,18 +361,18 @@ function postTags() {
     })
 }
 
-loadPic()
-loadComment()
-loadTag()
-postTags()
-if(article_publish === '1') {
+loadPic();
+loadComment();
+loadTag();
+postTags();
+if (article_publish === '1') {
     unpublish()
-} else if(article_publish === '0') {
+} else if (article_publish === '0') {
     publish()
-}else{
+} else {
 
 }
 
 let input = document.querySelector('#tag');
-new Tagify(input)
+new Tagify(input);
 

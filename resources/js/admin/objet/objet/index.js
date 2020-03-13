@@ -1,5 +1,6 @@
 import KTDatatable from '../../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js'
 import mediumZoom from 'medium-zoom'
+require('../../config');
 
 let table;
 
@@ -121,11 +122,17 @@ function loadTable() {
                 autoHide: false,
                 textAlign: 'right',
                 template: function (row) {
-                    return `
-                    <a href="/administrator/objet/objet/${row.id}" class="btn btn-icon btn-sm btn-default"><i class="la la-eye"></i> </a>
-                    <a href="/administrator/objet/objet/${row.id}/edit" class="btn btn-icon btn-sm btn-info"><i class="la la-edit"></i> </a>
-                    <a href="/administrator/objet/objet/${row.id}/delete" class="btn btn-icon btn-sm btn-danger"><i class="la la-trash-o"></i> </a>
+                    if (row.published === 0) {
+                        return `
+                        <a href="/administrator/objet/objet/${row.id}" class="btn btn-icon btn-sm btn-default"><i class="la la-eye"></i> </a>
+                        <a href="/administrator/objet/objet/${row.id}/edit" class="btn btn-icon btn-sm btn-info"><i class="la la-edit"></i> </a>
+                        <a href="/administrator/objet/objet/${row.id}/delete" class="btn btn-icon btn-sm btn-danger"><i class="la la-trash-o"></i> </a>
                     `;
+                    } else {
+                        return `
+                        <a href="/administrator/objet/objet/${row.id}" class="btn btn-icon btn-sm btn-default"><i class="la la-eye"></i> </a>
+                    `;
+                    }
                 }
             }
         ],

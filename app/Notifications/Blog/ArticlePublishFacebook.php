@@ -41,19 +41,19 @@ class ArticlePublishFacebook extends Notification
     /**
      * Get the Facebook post representation of the notification.
      *
-     * @param  mixed  $notifiable.
-     * @return \NotificationChannels\FacebookPoster\FacebookPosterPost
+     * @param mixed $notifiable .
+     * @return FacebookPosterPost
      */
     public function toFacebookPoster($notifiable) {
         return (new FacebookPosterPost($this->blog->title))
-            ->withLink(route('Front.Blog.show', $this->blog->slug));
+            ->withLink(route('Front.Download.show', [$this->asset->category->id, $this->asset->subcategory->id, $this->asset->id]));
     }
 
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @param mixed $notifiable
+     * @return MailMessage
      */
     public function toMail($notifiable)
     {
