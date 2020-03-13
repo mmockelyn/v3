@@ -22816,7 +22816,7 @@ function () {
               }
             }
 
-
+            continue;
 
           case TableResultAction.resultAction.RemoveCell:
             // Do not need remove cell because row will be deleted.
@@ -28012,45 +28012,75 @@ try {
 	g = g || new Function("return this")();
 } catch (e) {
 	// This works if the window reference is available
-	if (typeof window === "object") g = window;
+    if (typeof window === "object") g = window;
 }
 
 // g can still be undefined, but nothing to do about it...
 // We return undefined, instead of nothing here, so it's
 // easier to handle this case. if(!global) { ...}
 
-module.exports = g;
+            module.exports = g;
 
 
-/***/ }),
+            /***/
+        }),
 
-/***/ "./resources/js/admin/route/index.js":
-/*!*******************************************!*\
-  !*** ./resources/js/admin/route/index.js ***!
-  \*******************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+        /***/ "./resources/js/admin/config.js":
+        /*!**************************************!*\
+          !*** ./resources/js/admin/config.js ***!
+          \**************************************/
+        /*! no static exports found */
+        /***/ (function (module, exports) {
+
+            var cache = document.querySelector("#btnRefreshCache");
+            cache.addEventListener('click', function (e) {
+                e.preventDefault();
+                KTApp.progress(cache);
+                $.get('/api/admin/cache').done(function () {
+                    KTApp.unprogress(cache);
+                    toastr.success("Le cache à été nettoyer");
+                }).fail(function () {
+                    KTApp.unprogress(cache);
+                    toastr.error("Erreur lors du nettoyage du cache");
+                });
+            });
+
+            /***/
+        }),
+
+        /***/ "./resources/js/admin/route/index.js":
+        /*!*******************************************!*\
+          !*** ./resources/js/admin/route/index.js ***!
+          \*******************************************/
+        /*! no exports provided */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core */ "./resources/js/core.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var summernote__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! summernote */ "./node_modules/summernote/dist/summernote.js");
-/* harmony import */ var summernote__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(summernote__WEBPACK_IMPORTED_MODULE_2__);
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony import */
+            var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core */ "./resources/js/core.js");
+            /* harmony import */
+            var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+            /* harmony import */
+            var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+            /* harmony import */
+            var summernote__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! summernote */ "./node_modules/summernote/dist/summernote.js");
+            /* harmony import */
+            var summernote__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(summernote__WEBPACK_IMPORTED_MODULE_2__);
 
 
+            __webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
 
+            function loadRoute() {
+                var div = document.querySelector('#listeRoute');
+                Object(_core__WEBPACK_IMPORTED_MODULE_0__["blockElement"])(div, "Chargement des routes");
+                jquery__WEBPACK_IMPORTED_MODULE_1__["get"]('/api/admin/route/list').done(function (data) {
+                    div.innerHTML = data.data;
+                }).fail(function (jqxhr) {
+                });
+            }
 
-function loadRoute() {
-  var div = document.querySelector('#listeRoute');
-  Object(_core__WEBPACK_IMPORTED_MODULE_0__["blockElement"])(div, "Chargement des routes");
-  jquery__WEBPACK_IMPORTED_MODULE_1__["get"]('/api/admin/route/list').done(function (data) {
-    div.innerHTML = data.data;
-  }).fail(function (jqxhr) {});
-}
-
-function searchRoute() {
+            function searchRoute() {
   var input = document.querySelector('#routeSearch');
   var div = document.querySelector('#listeRoute');
   input.addEventListener('keyup', function (e) {

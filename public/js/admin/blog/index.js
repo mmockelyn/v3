@@ -17895,38 +17895,66 @@ module.exports = g;
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core */ "./resources/js/core.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony import */
+            var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core */ "./resources/js/core.js");
+            /* harmony import */
+            var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+            /* harmony import */
+            var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
 
 
+            __webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
 
-function loadLastComment() {
-  var div = document.querySelector('#loadLatestComment');
-  Object(_core__WEBPACK_IMPORTED_MODULE_0__["blockElement"])(div, 'Chargement des commentaires...');
-  jquery__WEBPACK_IMPORTED_MODULE_1__["get"]('/api/admin/blog/comment/latest').done(function (data) {
-    Object(_core__WEBPACK_IMPORTED_MODULE_0__["unblockElement"])(div);
-    div.innerHTML = data.data;
-  });
-}
+            function loadLastComment() {
+                var div = document.querySelector('#loadLatestComment');
+                Object(_core__WEBPACK_IMPORTED_MODULE_0__["blockElement"])(div, 'Chargement des commentaires...');
+                jquery__WEBPACK_IMPORTED_MODULE_1__["get"]('/api/admin/blog/comment/latest').done(function (data) {
+                    Object(_core__WEBPACK_IMPORTED_MODULE_0__["unblockElement"])(div);
+                    div.innerHTML = data.data;
+                });
+            }
 
 function loadLastBlog() {
   var div = document.querySelector('#loadLatestBlog');
   Object(_core__WEBPACK_IMPORTED_MODULE_0__["blockElement"])(div, 'Chargement des Articles...');
   jquery__WEBPACK_IMPORTED_MODULE_1__["get"]('/api/admin/blog/latest').done(function (data) {
-    Object(_core__WEBPACK_IMPORTED_MODULE_0__["unblockElement"])(div);
-    div.innerHTML = data.data;
+      Object(_core__WEBPACK_IMPORTED_MODULE_0__["unblockElement"])(div);
+      div.innerHTML = data.data;
   });
 }
 
-loadLastComment();
-loadLastBlog();
+            loadLastComment();
+            loadLastBlog();
 
-/***/ }),
+            /***/
+        }),
 
-/***/ "./resources/js/core.js":
+        /***/ "./resources/js/admin/config.js":
+        /*!**************************************!*\
+          !*** ./resources/js/admin/config.js ***!
+          \**************************************/
+        /*! no static exports found */
+        /***/ (function (module, exports) {
+
+            var cache = document.querySelector("#btnRefreshCache");
+            cache.addEventListener('click', function (e) {
+                e.preventDefault();
+                KTApp.progress(cache);
+                $.get('/api/admin/cache').done(function () {
+                    KTApp.unprogress(cache);
+                    toastr.success("Le cache à été nettoyer");
+                }).fail(function () {
+                    KTApp.unprogress(cache);
+                    toastr.error("Erreur lors du nettoyage du cache");
+                });
+            });
+
+            /***/
+        }),
+
+        /***/ "./resources/js/core.js":
         /*!******************************!*\
           !*** ./resources/js/core.js ***!
           \******************************/

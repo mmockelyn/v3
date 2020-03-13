@@ -1,5 +1,6 @@
 import KTDatatable from '../../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js'
 import mediumZoom from 'medium-zoom'
+require('../../config');
 
 let table;
 

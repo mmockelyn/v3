@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(["namespace" => "Front"], function () {
     Route::get('/', ["as" => "Front.index", "uses" => "HomeController@index"]);
-    Route::get('search', ["as" => "Front.search", "uses" => "SearchController@search"]);
-    Route::post('search', ["as" => "Front.postSearch", "uses" => "SearchController@postSearch"]);
 
     Route::group(["prefix" => "blog", "namespace" => "Blog"], function () {
         Route::get('/', ["as" => "Front.Blog.index", "uses" => "BlogController@index"]);
@@ -178,7 +176,20 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
             Route::get('{video_id}/delete', 'TutorielVideoController@delete')->name('Back.Tutoriel.Video.delete');
         });
 
-        Route::group(["prefix" => "comment"], function () {
+        Route::group(["prefix" => "{video_id}/comment"], function () {
+            Route::get('{comment_id}/publish', 'TutorielCommentController@publish');
+            Route::get('{comment_id}/unpublish', 'TutorielCommentController@unpublish');
+        });
+
+        Route::group(["prefix" => "{video_id}/tags"], function () {
+            Route::get('{tag_id}/delete', 'TutorielVideoController@deleteTag');
+        });
+
+        Route::group(["prefix" => "{video_id}/techno"], function () {
+
+        });
+
+        Route::group(["prefix" => "{video_id}/requis"], function () {
 
         });
     });

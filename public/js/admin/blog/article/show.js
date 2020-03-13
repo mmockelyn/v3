@@ -24192,25 +24192,29 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js */ "./resources/demo5/src/assets/js/global/components/base/datatable/core.datatable.js");
-/* harmony import */ var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../core */ "./resources/js/core.js");
-/* harmony import */ var _yaireo_tagify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @yaireo/tagify */ "./node_modules/@yaireo/tagify/dist/tagify.min.js");
-/* harmony import */ var _yaireo_tagify__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_yaireo_tagify__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */
+            var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__);
+            /* harmony import */
+            var _core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../core */ "./resources/js/core.js");
+            /* harmony import */
+            var _yaireo_tagify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @yaireo/tagify */ "./node_modules/@yaireo/tagify/dist/tagify.min.js");
+            /* harmony import */
+            var _yaireo_tagify__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_yaireo_tagify__WEBPACK_IMPORTED_MODULE_2__);
 
 
+            var swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 
+            __webpack_require__(/*! ../../config */ "./resources/js/admin/config.js");
 
-var swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+            var article = $("#article");
+            var article_id = article.attr('data-id');
+            var article_publish = article.attr('data-publish');
 
-var article = $("#article");
-var article_id = article.attr('data-id');
-var article_publish = article.attr('data-publish');
-
-function loadPic() {
-  var div = document.querySelector('.kt-widget19__pic');
-  Object(_core__WEBPACK_IMPORTED_MODULE_1__["blockElement"])(div, "Chargement...");
-  $.get('/api/admin/blog/article/' + article_id).done(function (data) {
-    Object(_core__WEBPACK_IMPORTED_MODULE_1__["unblockElement"])(div);
+            function loadPic() {
+                var div = document.querySelector('.kt-widget19__pic');
+                Object(_core__WEBPACK_IMPORTED_MODULE_1__["blockElement"])(div, "Chargement...");
+                $.get('/api/admin/blog/article/' + article_id).done(function (data) {
+                    Object(_core__WEBPACK_IMPORTED_MODULE_1__["unblockElement"])(div);
     div.style.minHeight = "300px";
     div.style.background = "url(".concat(data.data.img, ")");
     var element = $('.kt-widget19__pic');
@@ -24525,18 +24529,43 @@ loadComment();
 loadTag();
 postTags();
 
-if (article_publish === '1') {
-  unpublish();
-} else if (article_publish === '0') {
-  publish();
-} else {}
+            if (article_publish === '1') {
+                unpublish();
+            } else if (article_publish === '0') {
+                publish();
+            } else {
+            }
 
-var input = document.querySelector('#tag');
-new _yaireo_tagify__WEBPACK_IMPORTED_MODULE_2___default.a(input);
+            var input = document.querySelector('#tag');
+            new _yaireo_tagify__WEBPACK_IMPORTED_MODULE_2___default.a(input);
 
-/***/ }),
+            /***/
+        }),
 
-/***/ "./resources/js/core.js":
+        /***/ "./resources/js/admin/config.js":
+        /*!**************************************!*\
+          !*** ./resources/js/admin/config.js ***!
+          \**************************************/
+        /*! no static exports found */
+        /***/ (function (module, exports) {
+
+            var cache = document.querySelector("#btnRefreshCache");
+            cache.addEventListener('click', function (e) {
+                e.preventDefault();
+                KTApp.progress(cache);
+                $.get('/api/admin/cache').done(function () {
+                    KTApp.unprogress(cache);
+                    toastr.success("Le cache à été nettoyer");
+                }).fail(function () {
+                    KTApp.unprogress(cache);
+                    toastr.error("Erreur lors du nettoyage du cache");
+                });
+            });
+
+            /***/
+        }),
+
+        /***/ "./resources/js/core.js":
         /*!******************************!*\
           !*** ./resources/js/core.js ***!
           \******************************/

@@ -17927,6 +17927,29 @@
         /***/
     }),
 
+    /***/ "./resources/js/admin/config.js":
+    /*!**************************************!*\
+  !*** ./resources/js/admin/config.js ***!
+  \**************************************/
+    /*! no static exports found */
+    /***/ (function (module, exports) {
+
+        var cache = document.querySelector("#btnRefreshCache");
+        cache.addEventListener('click', function (e) {
+            e.preventDefault();
+            KTApp.progress(cache);
+            $.get('/api/admin/cache').done(function () {
+                KTApp.unprogress(cache);
+                toastr.success("Le cache à été nettoyer");
+            }).fail(function () {
+                KTApp.unprogress(cache);
+                toastr.error("Erreur lors du nettoyage du cache");
+            });
+        });
+
+        /***/
+    }),
+
     /***/ "./resources/js/admin/tutoriel/index.js":
     /*!**********************************************!*\
   !*** ./resources/js/admin/tutoriel/index.js ***!
@@ -17939,6 +17962,8 @@
         /* harmony import */
         var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core */ "./resources/js/core.js");
 
+
+        __webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
 
         function loadLatestTutoriel() {
             var div = $("#listLatestTutoriel");

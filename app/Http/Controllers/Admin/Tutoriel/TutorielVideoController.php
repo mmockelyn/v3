@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Tutoriel;
 use App\Http\Controllers\Controller;
 use App\Repository\Tutoriel\TutorielCategoryRepository;
 use App\Repository\Tutoriel\TutorielRepository;
+use App\Repository\Tutoriel\TutorielTagRepository;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -18,16 +19,22 @@ class TutorielVideoController extends Controller
      * @var TutorielCategoryRepository
      */
     private $tutorielCategoryRepository;
+    /**
+     * @var TutorielTagRepository
+     */
+    private $tutorielTagRepository;
 
     /**
      * TutorielVideoController constructor.
      * @param TutorielRepository $tutorielRepository
      * @param TutorielCategoryRepository $tutorielCategoryRepository
+     * @param TutorielTagRepository $tutorielTagRepository
      */
-    public function __construct(TutorielRepository $tutorielRepository, TutorielCategoryRepository $tutorielCategoryRepository)
+    public function __construct(TutorielRepository $tutorielRepository, TutorielCategoryRepository $tutorielCategoryRepository, TutorielTagRepository $tutorielTagRepository)
     {
         $this->tutorielRepository = $tutorielRepository;
         $this->tutorielCategoryRepository = $tutorielCategoryRepository;
+        $this->tutorielTagRepository = $tutorielTagRepository;
     }
 
     public function index()
@@ -62,4 +69,5 @@ class TutorielVideoController extends Controller
             return redirect()->back()->with('error', "Erreur lors de la suppression du tutoriel");
         }
     }
+
 }

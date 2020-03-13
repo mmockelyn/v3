@@ -1552,7 +1552,7 @@ try {
                     }
 
                     return keys;
-  }
+                }
 
   function _objectSpread2(target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -25577,23 +25577,47 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               select: 'Select page size',
               all: 'all'
             },
-            info: 'Showing {{start}} - {{end}} of {{total}}'
+              info: 'Showing {{start}} - {{end}} of {{total}}'
           }
         }
       }
     },
-    extensions: {}
+      extensions: {}
   };
 })(jQuery);
 
-/***/ }),
+            /***/
+        }),
 
-/***/ "./resources/js/admin/objet/objet/show.js":
-/*!************************************************!*\
+        /***/ "./resources/js/admin/config.js":
+        /*!**************************************!*\
+  !*** ./resources/js/admin/config.js ***!
+  \**************************************/
+        /*! no static exports found */
+        /***/ (function (module, exports) {
+
+            var cache = document.querySelector("#btnRefreshCache");
+            cache.addEventListener('click', function (e) {
+                e.preventDefault();
+                KTApp.progress(cache);
+                $.get('/api/admin/cache').done(function () {
+                    KTApp.unprogress(cache);
+                    toastr.success("Le cache à été nettoyer");
+                }).fail(function () {
+                    KTApp.unprogress(cache);
+                    toastr.error("Erreur lors du nettoyage du cache");
+                });
+            });
+
+            /***/
+        }),
+
+        /***/ "./resources/js/admin/objet/objet/show.js":
+        /*!************************************************!*\
   !*** ./resources/js/admin/objet/objet/show.js ***!
   \************************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+        /*! no exports provided */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
 
             "use strict";
             __webpack_require__.r(__webpack_exports__);
@@ -25647,6 +25671,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 };
             }
 
+
+            __webpack_require__(/*! ../../config */ "./resources/js/admin/config.js");
 
             var swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 

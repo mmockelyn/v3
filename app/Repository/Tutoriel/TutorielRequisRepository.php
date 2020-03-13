@@ -20,5 +20,28 @@ class TutorielRequisRepository
         $this->tutorielRequis = $tutorielRequis;
     }
 
+    public function allFromTutoriel($tutoriel_id)
+    {
+        return $this->tutorielRequis->newQuery()
+            ->where('tutoriel_id', $tutoriel_id)
+            ->get();
+    }
+
+    public function create($tutoriel_id, $value)
+    {
+        return $this->tutorielRequis->newQuery()
+            ->create([
+                "tutoriel_id" => $tutoriel_id,
+                "requis" => $value
+            ]);
+    }
+
+    public function delete($tag_id)
+    {
+        return $this->tutorielRequis->newQuery()
+            ->find($tag_id)
+            ->delete();
+    }
+
 }
 

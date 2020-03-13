@@ -7,10 +7,12 @@ use App\Model\State\StateVideo;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 
 class Tutoriel extends Model
 {
+    use Notifiable;
     protected $guarded = [];
     protected $dates = ["created_at", "updated_at", "published_at"];
 

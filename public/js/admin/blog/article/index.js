@@ -131,9 +131,9 @@
                         // also remove duplicates of the replacement character
                         .replace(new RegExp('[\\s' + replacement + ']+', 'g'), replacement);
 
-    if (options.lower) {
-      slug = slug.toLowerCase()
-    }
+                    if (options.lower) {
+                        slug = slug.toLowerCase()
+                    }
 
                     if (options.strict) {
                         // remove anything besides letters, numbers, and the replacement char
@@ -3512,22 +3512,26 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js */ "./resources/demo5/src/assets/js/global/components/base/datatable/core.datatable.js");
-/* harmony import */ var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__);
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony import */
+            var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js */ "./resources/demo5/src/assets/js/global/components/base/datatable/core.datatable.js");
+            /* harmony import */
+            var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__);
 //import * as $ from "jquery";
 
 
-var slugify = __webpack_require__(/*! slugify */ "./node_modules/slugify/slugify.js");
+            __webpack_require__(/*! ../../config */ "./resources/js/admin/config.js");
 
-function loadTable() {
-  var table = $("#listeArticle").KTDatatable({
-    data: {
-      type: 'remote',
-      source: {
-        read: {
-          url: '/api/admin/blog/article/liste',
+            var slugify = __webpack_require__(/*! slugify */ "./node_modules/slugify/slugify.js");
+
+            function loadTable() {
+                var table = $("#listeArticle").KTDatatable({
+                    data: {
+                        type: 'remote',
+                        source: {
+                            read: {
+                                url: '/api/admin/blog/article/liste',
           // sample custom headers
           // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
           map: function map(raw) {
@@ -3699,22 +3703,46 @@ function slugInput() {
   });
 }
 
-loadTable();
-submitForm();
-slugInput();
-$(".selectpicker").selectpicker();
-$(".summernote").summernote({
-  height: 300
-});
+            loadTable();
+            submitForm();
+            slugInput();
+            $(".selectpicker").selectpicker();
+            $(".summernote").summernote({
+                height: 300
+            });
 
-/***/ }),
+            /***/
+        }),
 
-/***/ 22:
-/*!********************************************************!*\
-  !*** multi ./resources/js/admin/blog/article/index.js ***!
-  \********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+        /***/ "./resources/js/admin/config.js":
+        /*!**************************************!*\
+          !*** ./resources/js/admin/config.js ***!
+          \**************************************/
+        /*! no static exports found */
+        /***/ (function (module, exports) {
+
+            var cache = document.querySelector("#btnRefreshCache");
+            cache.addEventListener('click', function (e) {
+                e.preventDefault();
+                KTApp.progress(cache);
+                $.get('/api/admin/cache').done(function () {
+                    KTApp.unprogress(cache);
+                    toastr.success("Le cache à été nettoyer");
+                }).fail(function () {
+                    KTApp.unprogress(cache);
+                    toastr.error("Erreur lors du nettoyage du cache");
+                });
+            });
+
+            /***/
+        }),
+
+        /***/ 22:
+        /*!********************************************************!*\
+          !*** multi ./resources/js/admin/blog/article/index.js ***!
+          \********************************************************/
+        /*! no static exports found */
+        /***/ (function (module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\blog\article\index.js */"./resources/js/admin/blog/article/index.js");
 

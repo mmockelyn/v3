@@ -140,5 +140,35 @@ class TutorielRepository
             ]);
     }
 
+    public function publishLater($tutoriel_id, $published_at)
+    {
+        return $this->tutoriel->newQuery()
+            ->find($tutoriel_id)
+            ->update([
+                "published" => 2,
+                "published_at" => $published_at
+            ]);
+    }
+
+    public function publish($tutoriel_id)
+    {
+        return $this->tutoriel->newQuery()
+            ->find($tutoriel_id)
+            ->update([
+                "published" => 1,
+                "published_at" => now()
+            ]);
+    }
+
+    public function unpublish($tutoriel_id)
+    {
+        return $this->tutoriel->newQuery()
+            ->find($tutoriel_id)
+            ->update([
+                "published" => 0,
+                "published_at" => null
+            ]);
+    }
+
 }
 

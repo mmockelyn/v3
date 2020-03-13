@@ -18150,6 +18150,29 @@
         /***/
     }),
 
+    /***/ "./resources/js/admin/config.js":
+    /*!**************************************!*\
+  !*** ./resources/js/admin/config.js ***!
+  \**************************************/
+    /*! no static exports found */
+    /***/ (function (module, exports) {
+
+        var cache = document.querySelector("#btnRefreshCache");
+        cache.addEventListener('click', function (e) {
+            e.preventDefault();
+            KTApp.progress(cache);
+            $.get('/api/admin/cache').done(function () {
+                KTApp.unprogress(cache);
+                toastr.success("Le cache à été nettoyer");
+            }).fail(function () {
+                KTApp.unprogress(cache);
+                toastr.error("Erreur lors du nettoyage du cache");
+            });
+        });
+
+        /***/
+    }),
+
     /***/ "./resources/js/admin/tutoriel/video/edit.js":
     /*!***************************************************!*\
   !*** ./resources/js/admin/tutoriel/video/edit.js ***!
@@ -18158,6 +18181,8 @@
     /***/ (function (module, exports, __webpack_require__) {
 
         var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+
+        __webpack_require__(/*! ../../config */ "./resources/js/admin/config.js");
 
         var tutoriel = $("#tutoriel");
         var tutoriel_id = tutoriel.attr('data-id');

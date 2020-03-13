@@ -1,8 +1,10 @@
 import KTDatatable from '../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js'
 import summernote from 'summernote'
 
-let route = $("#route")
-let route_id = route.attr('data-id')
+require('../config');
+
+let route = $("#route");
+let route_id = route.attr('data-id');
 let tableauDownload = '';
 let tableauUpdater = '';
 
@@ -143,9 +145,9 @@ function loadTableDownload() {
                 },
             },
         },
-    })
+    });
 
-    tableauDownload = tableDownload
+    tableauDownload = tableDownload;
 
 
     $('#kt_form_type').on('change', function () {
@@ -267,20 +269,20 @@ function loadTableUpdater() {
                 },
             },
         },
-    })
+    });
 
     tableauUpdater = tableUpdater
 }
 function addFormDownload() {
-    let form = $("#formAddDownload")
+    let form = $("#formAddDownload");
 
     form.on('submit', function (e) {
-        e.preventDefault()
-        let btn = form.find('button')
-        let url = form.attr('action')
-        let data = form.serializeArray()
+        e.preventDefault();
+        let btn = form.find('button');
+        let url = form.attr('action');
+        let data = form.serializeArray();
 
-        KTApp.progress(btn)
+        KTApp.progress(btn);
 
         $.ajax({
             url: url,
@@ -288,21 +290,21 @@ function addFormDownload() {
             data: data,
             statusCode: {
                 200: function (data) {
-                    KTApp.unprogress(btn)
+                    KTApp.unprogress(btn);
                     toastr.success("Le téléchargement à été ajouté avec succès", "Succès");
-                    form[0].reset()
-                    $(".modal").modal('hide')
+                    form[0].reset();
+                    $(".modal").modal('hide');
                     tableauDownload.reload()
                 },
                 203: function (data) {
-                    KTApp.unprogress(btn)
+                    KTApp.unprogress(btn);
                     Array.from(data.data.errors).forEach((err) => {
                         toastr.warning(err, "Erreur de validation")
                     })
                 },
                 500: function (data) {
-                    KTApp.unprogress(btn)
-                    toastr.error("Erreur lors de l'ajout du téléchargement", "Erreur Système 500")
+                    KTApp.unprogress(btn);
+                    toastr.error("Erreur lors de l'ajout du téléchargement", "Erreur Système 500");
                     console.error(data)
                 }
             }
@@ -310,15 +312,15 @@ function addFormDownload() {
     })
 }
 function addFormUpdater() {
-    let form = $("#formAddUpdater")
+    let form = $("#formAddUpdater");
 
     form.on('submit', function (e) {
-        e.preventDefault()
-        let btn = form.find('button')
-        let url = form.attr('action')
-        let data = form.serializeArray()
+        e.preventDefault();
+        let btn = form.find('button');
+        let url = form.attr('action');
+        let data = form.serializeArray();
 
-        KTApp.progress(btn)
+        KTApp.progress(btn);
 
         $.ajax({
             url: url,
@@ -326,21 +328,21 @@ function addFormUpdater() {
             data: data,
             statusCode: {
                 200: function (data) {
-                    KTApp.unprogress(btn)
+                    KTApp.unprogress(btn);
                     toastr.success("La mise à jour à été ajouté avec succès", "Succès");
-                    form[0].reset()
-                    $(".modal").modal('hide')
+                    form[0].reset();
+                    $(".modal").modal('hide');
                     tableauUpdater.reload()
                 },
                 203: function (data) {
-                    KTApp.unprogress(btn)
+                    KTApp.unprogress(btn);
                     Array.from(data.data.errors).forEach((err) => {
                         toastr.warning(err, "Erreur de validation")
                     })
                 },
                 500: function (data) {
-                    KTApp.unprogress(btn)
-                    toastr.error("Erreur lors de l'ajout de la mise à jour", "Erreur Système 500")
+                    KTApp.unprogress(btn);
+                    toastr.error("Erreur lors de l'ajout de la mise à jour", "Erreur Système 500");
                     console.error(data)
                 }
             }
@@ -350,12 +352,12 @@ function addFormUpdater() {
 
 $('.summernote').summernote({
     height: '350px'
-})
+});
 
-$("#type_download, #type_release").selectpicker()
+$("#type_download, #type_release").selectpicker();
 
-loadTableDownload()
-loadTableUpdater()
-addFormDownload()
-addFormUpdater()
+loadTableDownload();
+loadTableUpdater();
+addFormDownload();
+addFormUpdater();
 

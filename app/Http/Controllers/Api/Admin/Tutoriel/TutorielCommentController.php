@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin\Tutoriel;
 
+use App\HelpersClass\Core\Datatable;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
 use App\Repository\Tutoriel\TutorielCommentRepository;
@@ -13,14 +14,20 @@ class TutorielCommentController extends BaseController
      * @var TutorielCommentRepository
      */
     private $tutorielCommentRepository;
+    /**
+     * @var Datatable
+     */
+    private $datatable;
 
     /**
      * TutorielCommentController constructor.
      * @param TutorielCommentRepository $tutorielCommentRepository
+     * @param Datatable $datatable
      */
-    public function __construct(TutorielCommentRepository $tutorielCommentRepository)
+    public function __construct(TutorielCommentRepository $tutorielCommentRepository, Datatable $datatable)
     {
         $this->tutorielCommentRepository = $tutorielCommentRepository;
+        $this->datatable = $datatable;
     }
 
     public function latest()
@@ -59,5 +66,26 @@ class TutorielCommentController extends BaseController
         $content = ob_get_clean();
 
         return $this->sendResponse($content, "Liste des commentaires");
+    }
+
+    public function listeComments(Request $request, $tutoriel_id)
+    {
+        $comments = $this->tutorielCommentRepository->all($tutoriel_id);
+        $ars = collect();
+        foreach ($comments as $comment) {
+            $ars->push([
+                "id" => $comment->id,
+                "user" => $comment->user->name,
+                "content" => $comment->content,
+                "published" => $comment->published,
+                "published_at" => $comment->published_at
+            ]);
+        }
+
+        if ($request->get('type') == 'plain') {
+            return $this->sendResponse($ars, "Liste des Tutoriels");
+        } else {
+            return $this->datatable->loadDatatable($request, $ars->toArray());
+        }
     }
 }

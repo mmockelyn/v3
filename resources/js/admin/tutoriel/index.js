@@ -1,4 +1,5 @@
 import {blockElement, unblockElement} from '../../core'
+require('../config');
 
 function loadLatestTutoriel() {
     let div = $("#listLatestTutoriel");

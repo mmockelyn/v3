@@ -1,4 +1,5 @@
 const moment = require('moment');
+require('../../config');
 
 let tutoriel = $("#tutoriel");
 let tutoriel_id = tutoriel.attr('data-id');

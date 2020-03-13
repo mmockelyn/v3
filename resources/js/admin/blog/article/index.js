@@ -1,5 +1,6 @@
 //import * as $ from "jquery";
 import KTDatatable from '../../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js'
+require('../../config');
 
 const slugify = require('slugify');
 

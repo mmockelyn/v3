@@ -1,5 +1,6 @@
 //import * as $ from "jquery";
 import KTDatatable from '../../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js'
+require('../../config');
 
 function loadTable() {
     let table = $("#listeCategories").KTDatatable({
@@ -95,15 +96,15 @@ function loadTable() {
 }
 
 function submitForm() {
-    let form = $('#formAddCategory')
-    let modal = $('#addCategory')
+    let form = $('#formAddCategory');
+    let modal = $('#addCategory');
 
     form.on('submit', function (e) {
-        e.preventDefault()
-        let btn = form.find('button')
-        let data = form.serializeArray()
+        e.preventDefault();
+        let btn = form.find('button');
+        let data = form.serializeArray();
 
-        KTApp.progress(btn)
+        KTApp.progress(btn);
 
         $.ajax({
             url: form.attr('action'),
@@ -111,22 +112,22 @@ function submitForm() {
             data: data,
             statusCode: {
                 200: function (data) {
-                    KTApp.unprogress(btn)
-                    console.log(data)
-                    toastr.success(data.message, "Succès")
+                    KTApp.unprogress(btn);
+                    console.log(data);
+                    toastr.success(data.message, "Succès");
                     setTimeout(function () {
                         window.location.reload()
                     }, 1000)
                 },
                 203: function (data) {
-                    KTApp.unprogress(btn)
-                    console.log(data)
+                    KTApp.unprogress(btn);
+                    console.log(data);
                     Array.from(data.data.errors).forEach((error) => {
                         toastr.warning(error, "Erreur de Validation");
                     })
                 },
                 500: function (jqxhr) {
-                    KTApp.unprogress(btn)
+                    KTApp.unprogress(btn);
                     console.error(jqxhr)
                 }
             }
@@ -137,5 +138,5 @@ function submitForm() {
 
 
 loadTable();
-submitForm()
+submitForm();
 
