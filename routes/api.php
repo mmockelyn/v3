@@ -64,7 +64,7 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::post('create', 'BlogCategoryController@create');
         });
 
-        Route::group(["prefix" => "article"], function (){
+        Route::group(["prefix" => "article"], function () {
             Route::post('liste', 'BlogArticleController@list');
             Route::post('create', 'BlogArticleController@create');
             Route::get('{article_id}', 'BlogArticleController@get');
@@ -86,7 +86,7 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
         });
     });
 
-    Route::group(["prefix" => "route", "namespace" => "Route"], function (){
+    Route::group(["prefix" => "route", "namespace" => "Route"], function () {
         Route::get('list', 'RouteController@list');
         Route::post('create', 'RouteController@store');
         Route::put('{route_id}/editDescription', 'RouteController@editDescription');
@@ -96,7 +96,7 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
         Route::get('{route_id}/publish', 'RouteController@publish');
         Route::get('{route_id}/unpublish', 'RouteController@unpublish');
 
-        Route::group(["prefix" => "{route_id}/version"], function (){
+        Route::group(["prefix" => "{route_id}/version"], function () {
             Route::post('loadGares', 'RouteVersionController@loadGares');
             Route::post('/', 'RouteVersionController@store');
             Route::put('{version_id}/editDescription', 'RouteVersionController@editDescription');
@@ -110,14 +110,14 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             });
         });
 
-        Route::group(["prefix" => "{route_id}/gallery"], function (){
+        Route::group(["prefix" => "{route_id}/gallery"], function () {
             Route::post('addCategory', 'RouteGalleryController@addCategory');
             Route::post('uploadFile', 'RouteGalleryController@uploadFile');
             Route::delete('deleteCategory', 'RouteGalleryController@deleteCategory');
             Route::get('{gallery_id}/delete', 'RouteGalleryController@deleteGallery');
         });
 
-        Route::group(["prefix" => "{route_id}/anomalie"], function(){
+        Route::group(["prefix" => "{route_id}/anomalie"], function () {
             Route::get('loadStat', 'RouteLabController@loadState');
             Route::post('/', 'RouteLabController@store');
             Route::post('loadAnomalies', "RouteLabController@loadAnomalies");
@@ -126,7 +126,7 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::get('{anomalie_id}/delete', 'RouteLabController@deleteAnomalie');
         });
 
-        Route::group(["prefix" => '{route_id}/download'], function (){
+        Route::group(["prefix" => '{route_id}/download'], function () {
             Route::post('loadDownload', 'RouteDownloadController@loadDownload');
             Route::post('loadUpdater', 'RouteDownloadController@loadUpdater');
             Route::post('storeDownload', 'RouteDownloadController@storeDownload');
@@ -138,7 +138,7 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::get('/updater/{updater_id}/delete', 'RouteDownloadController@deleteUpdater');
         });
 
-        Route::group(["prefix" => "config"], function (){
+        Route::group(["prefix" => "config"], function () {
             Route::post('loadTypeDownload', 'RouteConfigController@loadTypeDownload');
             Route::post('loadTypeRelease', 'RouteConfigController@loadTypeRelease');
             Route::get('type/{type_id}', 'RouteConfigController@deleteType');
@@ -148,11 +148,11 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
         });
     });
 
-    Route::group(["prefix" => "objet", "namespace" => "Objet"], function (){
+    Route::group(["prefix" => "objet", "namespace" => "Objet"], function () {
         Route::post('loadLatestCategories', 'ObjetController@loadLatestCategories');
         Route::post('loadLatestObjets', 'ObjetController@loadLatestObjets');
 
-        Route::group(["prefix" => "category"], function (){
+        Route::group(["prefix" => "category"], function () {
             Route::post('list', 'ObjetCategoryController@list');
             Route::post('/', 'ObjetCategoryController@store');
         });
@@ -211,10 +211,36 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::post('{tutoriel_id}/editBackground', 'TutorielVideoController@editBackground');
             Route::post('{tutoriel_id}/editBanner', 'TutorielVideoController@editBanner');
             Route::put('{tutoriel_id}/editDescription', 'TutorielVideoController@editDescription');
+
+            Route::put('{tutoriel_id}/publishLater', 'TutorielVideoController@publishLater');
+            Route::get('{tutoriel_id}/publish', 'TutorielVideoController@publish');
+            Route::get('{tutoriel_id}/unpublish', 'TutorielVideoController@unpublish');
+            Route::post('{tutoriel_id}/publishVideo', 'TutorielVideoController@publishVideo');
+            Route::post('{tutoriel_id}/publishSource', 'TutorielVideoController@publishSource');
+            Route::post('{tutoriel_id}/listeComments', 'TutorielCommentController@listeComments');
+            Route::post('{tutoriel_id}/listeTags', 'TutorielVideoController@listeTags');
+            Route::post('{tutoriel_id}/listeTechno', 'TutorielVideoController@listeTechno');
+            Route::post('{tutoriel_id}/listeRequis', 'TutorielVideoController@listeRequis');
+
         });
 
         Route::group(["prefix" => "comment"], function () {
             Route::get('/latest', 'TutorielCommentController@latest');
+        });
+
+        Route::group(["prefix" => "{tutoriel_id}/tag"], function () {
+            Route::post('/', 'TutorielVideoController@storeTag');
+            Route::get('{tag_id}/delete', 'TutorielVideoController@deleteTag');
+        });
+
+        Route::group(["prefix" => "{tutoriel_id}/techno"], function () {
+            Route::post('/', 'TutorielVideoController@storeTechno');
+            Route::get('{techno_id}/delete', 'TutorielVideoController@deleteTechno');
+        });
+
+        Route::group(["prefix" => "{tutoriel_id}/requis"], function () {
+            Route::post('/', 'TutorielVideoController@storeRequis');
+            Route::get('{requis_id}/delete', 'TutorielVideoController@deleteRequis');
         });
     });
 });
