@@ -8,7 +8,9 @@ use App\Notifications\Blog\PostNewComment;
 use App\Notifications\Blog\PostNewCommentOther;
 use App\Repository\Blog\BlogCommentRepository;
 use App\Repository\Blog\BlogRepository;
+use Exception;
 use Illuminate\Http\Request;
+use Validator;
 
 class BlogApiController extends BaseController
 {
@@ -105,7 +107,7 @@ class BlogApiController extends BaseController
 
     public function postComment($blog_id, Request $request)
     {
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             "comment" => "required|min:5"
         ]);
 
@@ -122,7 +124,7 @@ class BlogApiController extends BaseController
                 $comment->user->notify(new PostNewCommentOther($blog));
             }
             return $this->sendResponse($data, "Post d'un commentaire");
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
@@ -135,7 +137,7 @@ class BlogApiController extends BaseController
             $this->blogCommentRepository->delete($comment_id);
 
             return $this->sendResponse("Done", "Suppression du commentaire");
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur de suppression d'un commentaire", [
                 "errors" => $exception->getMessage()
             ]);

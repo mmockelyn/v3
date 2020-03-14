@@ -5,10 +5,7 @@ namespace App\HelpersClass\Core;
 
 
 use Exception;
-use Illuminate\Http\File;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use ZanySoft\Zip\Zip;
 
 class ZipFile

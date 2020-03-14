@@ -32,3 +32,5 @@ storage/app/public/phpcs/phpcs.xml
 /snippet/Metronic/portlet.md
 /snippet/Modèle Email Beautymail.md
 
+/resources/demo5/*
+

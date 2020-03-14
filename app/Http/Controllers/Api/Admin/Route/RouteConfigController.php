@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin\Route;
 use App\Http\Controllers\Api\BaseController;
 use App\Repository\Route\RouteTypeDownloadRepository;
 use App\Repository\Route\RouteTypeReleaseRepository;
+use Exception;
 use Illuminate\Http\Request;
 
 class RouteConfigController extends BaseController
@@ -176,7 +177,7 @@ class RouteConfigController extends BaseController
             $this->routeTypeDownloadRepository->delete($type_id);
 
             return redirect()->back()->with('success', "Le type de téléchargement à été supprimer");
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return redirect()->back()->with('error', "Erreur lors de la suppression du type de téléchargement");
         }
     }
@@ -186,7 +187,7 @@ class RouteConfigController extends BaseController
             $this->routeTypeReleaseRepository->delete($release_id);
 
             return redirect()->back()->with('success', "Le type de release à été supprimer");
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return redirect()->back()->with('error', "Erreur lors de la suppression du type de release");
         }
     }
@@ -197,7 +198,7 @@ class RouteConfigController extends BaseController
             $this->routeTypeDownloadRepository->create($request->name);
 
             return $this->sendResponse('ok', 'ok');
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
@@ -209,7 +210,7 @@ class RouteConfigController extends BaseController
             $this->routeTypeReleaseRepository->create($request->name);
 
             return $this->sendResponse('ok', 'ok');
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);

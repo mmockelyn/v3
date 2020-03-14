@@ -23,6 +23,7 @@ use App\Repository\Blog\BlogCommentRepository;
 use App\Repository\Tutoriel\TutorielCommentRepository;
 use Carbon\Carbon;
 use Cartalyst\Stripe\Exception\StripeException;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inacho\CreditCard;
@@ -173,7 +174,7 @@ class AccountApiController extends BaseController
 
     public function update(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             "email" => "required",
             "name" => "required"
         ]);
@@ -198,7 +199,7 @@ class AccountApiController extends BaseController
             dispatch(new UpdateInfoJob(auth()->user()))->delay(now()->addMinute())->onQueue('account');
 
             return $this->sendResponse("Done !", "Done");
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur de traitement", [
                 "errors" => $exception->getMessage()
             ]);
@@ -214,7 +215,7 @@ class AccountApiController extends BaseController
             );
             dispatch(new UpdatePassJob(auth()->user()))->delay(now()->addMinute())->onQueue('account');
             return $this->sendResponse("Done !", "Done");
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
@@ -227,7 +228,7 @@ class AccountApiController extends BaseController
             $this->userRepository->delete(auth()->user()->id);
 
             $this->sendResponse("Done", "Done");
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $this->sendError("Erreur Système", [
                 "error" => $exception->getMessage()
             ]);
@@ -567,7 +568,7 @@ class AccountApiController extends BaseController
                 $content = ob_get_clean();
 
                 return $this->sendResponse($content, "Nouveau Moyen de paiement");
-            } catch (\Exception $exception) {
+            } catch (Exception $exception) {
                 return $this->sendError("Erreur Système createMethodPayment Database", [
                     "errors" => $exception->getMessage()
                 ]);
@@ -592,7 +593,7 @@ class AccountApiController extends BaseController
                 $this->paymentRepository->delete($pm_id);
 
                 return $this->sendResponse($pm, "Suppression du mode de paiement");
-            } catch (\Exception $exception) {
+            } catch (Exception $exception) {
                 return $this->sendError("Erreur Delete PaymentMethod", [
                     "errors" => $exception->getMessage()
                 ]);
@@ -640,7 +641,7 @@ class AccountApiController extends BaseController
             }
 
             return $this->sendResponse($inc, "Création de facture");
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur création facture", [
                 "errors" => $exception->getMessage()
             ]);

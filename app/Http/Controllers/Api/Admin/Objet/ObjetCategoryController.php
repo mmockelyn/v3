@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin\Objet;
 use App\HelpersClass\Core\Datatable;
 use App\Http\Controllers\Api\BaseController;
 use App\Repository\Asset\AssetCategoryRepository;
+use Exception;
 use Illuminate\Http\Request;
 
 class ObjetCategoryController extends BaseController
@@ -46,7 +47,7 @@ class ObjetCategoryController extends BaseController
             $this->assetCategoryRepository->create($request->name);
 
             return $this->sendResponse('ok', 'ok');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);

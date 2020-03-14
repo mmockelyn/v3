@@ -3,7 +3,6 @@ namespace App\Repository\Asset;
 
 use App\Model\Asset\Asset;
 use Illuminate\Support\Carbon;
-use Webpatser\Uuid\Uuid;
 
 class AssetRepository
 {

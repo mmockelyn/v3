@@ -8,9 +8,11 @@ use App\Repository\Route\RouteAnomalieRepository;
 use App\Repository\Route\RouteBuildRepository;
 use App\Repository\Route\RouteRepository;
 use App\Repository\Route\RouteTimelineRepository;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Validator;
 
 class RouteController extends BaseController
 {
@@ -120,7 +122,7 @@ class RouteController extends BaseController
 
     public function store(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             "name" => "required",
             "description" => "required",
             "images" => "required|file|image"
@@ -134,19 +136,19 @@ class RouteController extends BaseController
             $route = $this->routeRepository->create($request->name, $request->description);
 
             try {
-                $request->file('images')->storeAs('route/'.$route->id, 'route.png', 'public');
-                return redirect()->back()->with('success', "La Route ".$route->name." à été créer");
-            }catch (FileException $exception) {
-                return redirect()->back()->with('error', "Erreur lors du transfère de fichier: ".$exception->getMessage());
+                $request->file('images')->storeAs('route/' . $route->id, 'route.png', 'public');
+                return redirect()->back()->with('success', "La Route " . $route->name . " à été créer");
+            } catch (FileException $exception) {
+                return redirect()->back()->with('error', "Erreur lors du transfère de fichier: " . $exception->getMessage());
             }
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
     }
 
     public function editDescription(Request $request, $route_id)
     {
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             "description" => "required|min:5"
         ]);
 
@@ -160,7 +162,7 @@ class RouteController extends BaseController
             $this->routeRepository->updateDescription($route_id, $request->description);
 
             return $this->sendResponse("ok", 'ok');
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
@@ -173,7 +175,7 @@ class RouteController extends BaseController
             $this->routeRepository->publish($route_id);
 
             return $this->sendResponse("OK", "ok");
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
@@ -186,7 +188,7 @@ class RouteController extends BaseController
             $this->routeRepository->unpublish($route_id);
 
             return $this->sendResponse("OK", "ok");
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);

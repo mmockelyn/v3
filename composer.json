@@ -14,6 +14,7 @@
         "ext-zip": "*",
         "annaghd/php-credit-card-validator-plus": "dev-master",
         "arielmejiadev/larapex-charts": "^1.0",
+        "artesaos/seotools": "^0.17.1",
         "cartalyst/stripe-laravel": "^12.0",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",

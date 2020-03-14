@@ -1,19 +1,32 @@
-includes:
-    - ./vendor/nunomaduro/larastan/extension.neon
-
 parameters:
-
     paths:
         - app
 
     # The level 8 is the highest level
-    level: 5
+    level: 0
 
     ignoreErrors:
-        - '#Unsafe usage of new static#'
-        - '#Class "Dotenv\Environment\Adapter\EnvConstAdapter" not found#'
+        - '#Result of function abort \(void\) is used#'
+        - '#Call to an undefined method Illuminate\\Support\\HigherOrder#'
+        - '#Method App\\Exceptions\\Handler::render\(\) should return Illuminate\\Http\\Response but returns Symfony\\Component\\HttpFoundation\\Response#'
+        - '#Property App\\Http\\Middleware\\TrustProxies::\$headers \(string\) does not accept default value of type int#'
+        # Ignore error from issue #244
+        - '#Cannot call method viaRequest\(\) on Illuminate\\Auth\\AuthManager\|null\.#'
 
     excludes_analyse:
-        - ./*/*/FileToBeExcluded.php
+        - *.blade.php
 
     checkMissingIterableValueType: false
+    stubFiles:
+        - /vendor/nunomaduro/larastan/stubs/Enumerable.stub
+        - /vendor/nunomaduro/larastan/stubs/EloquentBuilder.stub
+        - /vendor/nunomaduro/larastan/stubs/Collection.stub
+        - /vendor/nunomaduro/larastan/stubs/EloquentCollection.stub
+        - /vendor/nunomaduro/larastan/stubs/Model.stub
+    scopeClass: NunoMaduro\Larastan\Analyser\Scope
+    universalObjectCratesClasses:
+        - Illuminate\Http\Resources\Json\JsonResource
+        - Illuminate\Http\Request
+
+    reportUnmatchedIgnoredErrors: false
+    checkGenericClassInNonGenericObjectType: false
