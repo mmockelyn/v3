@@ -1,3 +1,6 @@
+Branch Dev: [![Build Status](https://travis-ci.com/mmockelyn/v3.svg?branch=develop)](https://travis-ci.com/mmockelyn/v3)<br>
+Branch Master: [![Build Status](https://travis-ci.com/mmockelyn/v3.svg?branch=master)](https://travis-ci.com/mmockelyn/v3)<br>
+Branch Production: [![Build Status](https://travis-ci.com/mmockelyn/v3.svg?branch=production)](https://travis-ci.com/mmockelyn/v3)
 # TRAINZNATION V3
 
 ## Liste des Taches
