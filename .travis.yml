@@ -17,4 +17,3 @@ before_script:
   - php artisan migrate
 script:
   - phpunit
-  - phpstan analyse
