@@ -2,6 +2,7 @@
 
 use App\Model;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 $factory->define(Model\Tutoriel\Tutoriel::class, function (Faker $faker) {
     $titre = "Titre du tutoriel";
@@ -15,14 +16,14 @@ $factory->define(Model\Tutoriel\Tutoriel::class, function (Faker $faker) {
         "tutoriel_sub_category_id" => 1,
         "user_id" => 1,
         "title" => $titre,
-        "slug" => \Illuminate\Support\Str::slug($titre),
+        "slug" => Str::slug($titre),
         "short_content" => $faker->text(),
         "content" => $faker->text(),
         "published" => $published,
         "pathVideo" => "https://download.trainznation.eu/tutoriel/1/1.mp4", // Dossier Subcategory
-        "source" => rand(0,1),
-        "premium" => rand(0,1),
-        "time" => "00:".rand(0,59).":".rand(0,59),
+        "source" => rand(0, 1),
+        "premium" => rand(0, 1),
+        "time" => "00:" . rand(0, 59) . ":" . rand(0, 59),
         "published_at" => $published_at,
         "demo" => $demo,
         "linkDemo" => $linkDemo

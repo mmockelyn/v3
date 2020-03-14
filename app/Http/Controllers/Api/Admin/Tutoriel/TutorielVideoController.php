@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Api\Admin\Tutoriel;
 
-use App\HelpersClass\Account\AccountHelper;
 use App\HelpersClass\Core\Datatable;
 use App\HelpersClass\Tutoriel\TutorielHelper;
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Controller;
 use App\Jobs\Tutoriel\PublishLaterJob;
 use App\Notifications\Tutoriel\TutorielPublish;
 use App\Repository\Tutoriel\TutorielRepository;
@@ -18,7 +16,6 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class TutorielVideoController extends BaseController

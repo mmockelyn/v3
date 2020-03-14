@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Repository\Asset\AssetCategoryRepository;
 use App\Repository\Asset\AssetRepository;
 use App\Repository\Asset\AssetSubCategoryRepository;
+use Exception;
+use function redirect;
 
 class DownloadController extends Controller
 {
@@ -84,8 +86,8 @@ class DownloadController extends Controller
 
         try {
             $this->assetRepository->updateCountDownload($asset_id, $newCount);
-            return \redirect()->away($asset->downloadLink);
-        }catch (\Exception $exception) {
+            return redirect()->away($asset->downloadLink);
+        } catch (Exception $exception) {
             dd($exception->getMessage());
         }
     }

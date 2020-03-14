@@ -7,9 +7,11 @@ use App\Repository\Route\RouteBuildRepository;
 use App\Repository\Route\RouteRepository;
 use App\Repository\Route\RouteVersionGareRepository;
 use App\Repository\Route\RouteVersionRepository;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Validator;
 
 class RouteVersionController extends BaseController
 {
@@ -86,7 +88,7 @@ class RouteVersionController extends BaseController
     public function store(Request $request, $route_id)
     {
         $route = $this->routeRepository->get($route_id);
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             "version" => "required|numeric",
             "name" => "required",
         ]);
@@ -107,12 +109,12 @@ class RouteVersionController extends BaseController
                 $request->arrive
             );
 
-            if($route->build == null){
+            if ($route->build == null) {
                 $this->routeBuildRepository->create($route_id, $request->version, 0);
             }
 
             return $this->sendResponse($version, "ok");
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
@@ -121,7 +123,7 @@ class RouteVersionController extends BaseController
 
     public function editDescription(Request $request, $route_id, $version_id)
     {
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             "description" => "required|min:5"
         ]);
 
@@ -135,7 +137,7 @@ class RouteVersionController extends BaseController
             $this->versionRepository->updateDescription($version_id, $request->description);
 
             return $this->sendResponse("ok", "ok");
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
@@ -145,16 +147,16 @@ class RouteVersionController extends BaseController
     public function editThumbnail(Request $request, $route_id, $version_id)
     {
         try {
-            if(Storage::disk('public')->exists('route/'.$route_id.'/'.$version_id.'.png') == true) {
-                Storage::disk('public')->delete('route/'.$route_id.'/'.$version_id.'.png');
-                $request->file('images')->storeAs('route/'.$route_id, $version_id.'.png', 'public');
-                Storage::disk('public')->setVisibility('route/'.$route_id.'/'.$version_id.'.png', 'public');
-            }else{
-                $request->file('images')->storeAs('route/'.$route_id, $version_id.'.png', 'public');
-                Storage::disk('public')->setVisibility('route/'.$route_id.'/'.$version_id.'.png', 'public');
+            if (Storage::disk('public')->exists('route/' . $route_id . '/' . $version_id . '.png') == true) {
+                Storage::disk('public')->delete('route/' . $route_id . '/' . $version_id . '.png');
+                $request->file('images')->storeAs('route/' . $route_id, $version_id . '.png', 'public');
+                Storage::disk('public')->setVisibility('route/' . $route_id . '/' . $version_id . '.png', 'public');
+            } else {
+                $request->file('images')->storeAs('route/' . $route_id, $version_id . '.png', 'public');
+                Storage::disk('public')->setVisibility('route/' . $route_id . '/' . $version_id . '.png', 'public');
             }
             return redirect()->back()->with('success', "L'image de la version à été mise à jours !");
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
     }
@@ -165,7 +167,7 @@ class RouteVersionController extends BaseController
             $this->versionRepository->delete($version_id);
 
             return redirect()->back()->with('type', 'success')->with('message', 'La version à été supprimer avec succès');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return redirect()->back()->with('type', 'error')->with('message', $exception->getMessage());
         }
     }
@@ -212,7 +214,7 @@ class RouteVersionController extends BaseController
             );
 
             return $this->sendResponse($gare, "ok");
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
@@ -226,7 +228,7 @@ class RouteVersionController extends BaseController
             $this->routeVersionGareRepository->delete($gare_id);
 
             return redirect()->back()->with('type', 'success')->with('message', 'La gare <strong>' . $gare->name_gare . '</strong> à été supprimer avec succès');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return redirect()->back()->with('type', 'error')->with('message', $exception->getMessage());
         }
     }
@@ -243,10 +245,10 @@ class RouteVersionController extends BaseController
                     Storage::disk('sftp')->setVisibility($path.$file->getClientOriginalName(), 'public');
 
                     try {
-                        $this->versionRepository->updateVideo($request->get('version_id'), env('APP_DSN_URL').$path.$file->getClientOriginalName());
+                        $this->versionRepository->updateVideo($request->get('version_id'), env('APP_DSN_URL') . $path . $file->getClientOriginalName());
 
                         return $this->sendResponse('ok', 'ok');
-                    }catch (\Exception $exception) {
+                    } catch (Exception $exception) {
                         return $exception->getMessage();
                     }
                 }catch (FileException $exception) {
@@ -258,17 +260,17 @@ class RouteVersionController extends BaseController
                     Storage::disk('sftp')->setVisibility($path.$file->getClientOriginalName(), 'public');
 
                     try {
-                        $this->versionRepository->updateVideo($request->get('version_id'), env('APP_DSN_URL').$path.$file->getClientOriginalName());
+                        $this->versionRepository->updateVideo($request->get('version_id'), env('APP_DSN_URL') . $path . $file->getClientOriginalName());
 
                         return $this->sendResponse('ok', 'ok');
-                    }catch (\Exception $exception) {
+                    } catch (Exception $exception) {
                         return $exception->getMessage();
                     }
-                }catch (FileException $exception) {
+                } catch (FileException $exception) {
                     return $exception->getMessage();
                 }
             }
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $exception->getMessage();
         }
     }

@@ -6,8 +6,6 @@ use App\HelpersClass\Account\AdminHelper;
 use App\HelpersClass\Core\Datatable;
 use App\HelpersClass\Tutoriel\TutorielHelper;
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Controller;
-use App\Model\Tutoriel\TutorielSubCategory;
 use App\Notifications\Admin\AdminNotification;
 use App\Repository\Tutoriel\TutorielSubCategoryRepository;
 use Exception;

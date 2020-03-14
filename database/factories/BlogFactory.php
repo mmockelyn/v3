@@ -2,6 +2,7 @@
 
 use App\Model;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 $factory->define(Model\Blog\Blog::class, function (Faker $faker) {
     $titre = "Titre de la news";
@@ -14,7 +15,7 @@ $factory->define(Model\Blog\Blog::class, function (Faker $faker) {
     return [
         "categorie_id" => 1,
         "title" => $titre,
-        "slug" => \Illuminate\Support\Str::slug($titre),
+        "slug" => Str::slug($titre),
         "short_content" => $faker->text(200),
         "content" => $faker->realText(1500),
         "published" => $published,

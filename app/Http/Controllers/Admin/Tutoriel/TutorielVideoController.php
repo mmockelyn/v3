@@ -7,7 +7,6 @@ use App\Repository\Tutoriel\TutorielCategoryRepository;
 use App\Repository\Tutoriel\TutorielRepository;
 use App\Repository\Tutoriel\TutorielTagRepository;
 use Exception;
-use Illuminate\Http\Request;
 
 class TutorielVideoController extends Controller
 {

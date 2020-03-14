@@ -4,7 +4,6 @@ namespace App\Notifications\Asset;
 
 use App\Model\Asset\Asset;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 

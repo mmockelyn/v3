@@ -3,8 +3,6 @@
 namespace App\Jobs\Asset;
 
 use App\Model\Asset\Asset;
-use App\Notifications\Asset\AssetPublish;
-use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

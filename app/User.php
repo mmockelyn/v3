@@ -14,7 +14,6 @@ use App\Model\Tutoriel\Tutoriel;
 use App\Model\Tutoriel\TutorielComment;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Notifications\Notification;
 
 class User extends Authenticatable
 {
