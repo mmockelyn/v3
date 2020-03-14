@@ -17,5 +17,5 @@ before_script:
   - php artisan key:generate
   - php artisan migrate
 script:
-  - phpunit
+  - phpunit --coverage-clover=coverage.xml
   - bash <(curl -s https://codecov.io/bash)
