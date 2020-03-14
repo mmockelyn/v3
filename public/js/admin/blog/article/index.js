@@ -3532,15 +3532,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                         source: {
                             read: {
                                 url: '/api/admin/blog/article/liste',
-          // sample custom headers
-          // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
-          map: function map(raw) {
-            // sample data mapping
-            var dataSet = raw;
+                                // sample custom headers
+                                // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
+                                map: function map(raw) {
+                                    // sample data mapping
+                                    var dataSet = raw;
 
-            if (typeof raw.data !== 'undefined') {
-              dataSet = raw.data;
-            }
+                                    if (typeof raw.data !== 'undefined') {
+                                        dataSet = raw.data;
+                                    }
 
             return dataSet;
           }
@@ -3694,14 +3694,14 @@ function submitForm() {
   });
 }
 
-function slugInput() {
-  var input_title = document.querySelector('#title');
-  var input_slug = document.querySelector('#slug');
-  input_title.addEventListener('keyup', function (e) {
-    e.preventDefault();
-    input_slug.value = slugify(input_title.value, '-');
-  });
-}
+            function slugInput() {
+                var input_title = document.querySelector('#title');
+                var input_slug = document.querySelector('#slug');
+                input_title.addEventListener('keyup', function (e) {
+                    e.preventDefault();
+                    input_slug.value = slugify(input_title.value, '-');
+                });
+            }
 
             loadTable();
             submitForm();
@@ -3744,9 +3744,11 @@ function slugInput() {
         /*! no static exports found */
         /***/ (function (module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\blog\article\index.js */"./resources/js/admin/blog/article/index.js");
+            module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\blog\article\index.js */"./resources/js/admin/blog/article/index.js");
 
 
-/***/ })
+            /***/
+        })
 
-/******/ });
+        /******/
+    });

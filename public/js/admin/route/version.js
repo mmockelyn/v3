@@ -10703,18 +10703,18 @@ return jQuery;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-            /*!
-             *
-             * Super simple wysiwyg editor v0.8.16
-             * https://summernote.org
-             *
-             *
-             * Copyright 2013- Alan Hong. and other contributors
-             * summernote may be freely distributed under the MIT license.
-             *
-             * Date: 2020-02-19T09:12Z
-             *
-             */
+/*!
+ *
+ * Super simple wysiwyg editor v0.8.16
+ * https://summernote.org
+ *
+ *
+ * Copyright 2013- Alan Hong. and other contributors
+ * summernote may be freely distributed under the MIT license.
+ *
+ * Date: 2020-02-19T09:12Z
+ *
+ */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
 		module.exports = factory(__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"));
@@ -20817,12 +20817,10 @@ var summernote_bs3 = __webpack_require__(4);
 // CONCATENATED MODULE: ./src/js/bs3/settings.js
 
 
-
-
-external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.summernote = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.extend(external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.summernote, {
-  ui_template: bs3_ui,
-  "interface": 'bs3'
-});
+            external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.summernote = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.extend(external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.summernote, {
+                ui_template: bs3_ui,
+                "interface": 'bs3'
+            });
 
             /***/
         })
@@ -20884,16 +20882,16 @@ external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.summe
                     e.preventDefault();
                     var btn = form.find('button');
                     var url = form.attr('action');
-    var data = form.serializeArray();
-    KTApp.progress(btn);
-    $.ajax({
-      url: url,
-      method: 'put',
-      data: data,
-      statusCode: {
-        200: function _(data) {
-          KTApp.unprogress(btn);
-          toastr.success("La description de la version à été mise à jour", "succès");
+                    var data = form.serializeArray();
+                    KTApp.progress(btn);
+                    $.ajax({
+                        url: url,
+                        method: 'put',
+                        data: data,
+                        statusCode: {
+                            200: function _(data) {
+                                KTApp.unprogress(btn);
+                                toastr.success("La description de la version à été mise à jour", "succès");
           setTimeout(function () {
             window.location.reload();
           }, 1200);

@@ -17916,14 +17916,14 @@ module.exports = g;
                 });
             }
 
-function loadLastBlog() {
-  var div = document.querySelector('#loadLatestBlog');
-  Object(_core__WEBPACK_IMPORTED_MODULE_0__["blockElement"])(div, 'Chargement des Articles...');
-  jquery__WEBPACK_IMPORTED_MODULE_1__["get"]('/api/admin/blog/latest').done(function (data) {
-      Object(_core__WEBPACK_IMPORTED_MODULE_0__["unblockElement"])(div);
-      div.innerHTML = data.data;
-  });
-}
+            function loadLastBlog() {
+                var div = document.querySelector('#loadLatestBlog');
+                Object(_core__WEBPACK_IMPORTED_MODULE_0__["blockElement"])(div, 'Chargement des Articles...');
+                jquery__WEBPACK_IMPORTED_MODULE_1__["get"]('/api/admin/blog/latest').done(function (data) {
+                    Object(_core__WEBPACK_IMPORTED_MODULE_0__["unblockElement"])(div);
+                    div.innerHTML = data.data;
+                });
+            }
 
             loadLastComment();
             loadLastBlog();

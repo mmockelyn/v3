@@ -24189,10 +24189,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js */ "./resources/demo5/src/assets/js/global/components/base/datatable/core.datatable.js");
-/* harmony import */
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony import */
+            var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js */ "./resources/demo5/src/assets/js/global/components/base/datatable/core.datatable.js");
+            /* harmony import */
             var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__);
             /* harmony import */
             var _core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../core */ "./resources/js/core.js");
@@ -24215,16 +24216,16 @@ __webpack_require__.r(__webpack_exports__);
                 Object(_core__WEBPACK_IMPORTED_MODULE_1__["blockElement"])(div, "Chargement...");
                 $.get('/api/admin/blog/article/' + article_id).done(function (data) {
                     Object(_core__WEBPACK_IMPORTED_MODULE_1__["unblockElement"])(div);
-    div.style.minHeight = "300px";
-    div.style.background = "url(".concat(data.data.img, ")");
-    var element = $('.kt-widget19__pic');
-    element.find('.kt-widget19__title').html(data.data.data.title);
-    var label = element.find('.kt-widget19__labels');
-    label.find('.btn').removeClass('btn-label-light-o2');
+                    div.style.minHeight = "300px";
+                    div.style.background = "url(".concat(data.data.img, ")");
+                    var element = $('.kt-widget19__pic');
+                    element.find('.kt-widget19__title').html(data.data.data.title);
+                    var label = element.find('.kt-widget19__labels');
+                    label.find('.btn').removeClass('btn-label-light-o2');
 
-    if (data.data.data.published === 1) {
-      label.find('.btn').addClass('btn-label-success');
-      label.find('.btn').html('Publier');
+                    if (data.data.data.published === 1) {
+                        label.find('.btn').addClass('btn-label-success');
+                        label.find('.btn').html('Publier');
     } else {
       label.find('.btn').addClass('btn-label-danger');
       label.find('.btn').html('Non publier');
@@ -24525,9 +24526,9 @@ function postTags() {
 }
 
 loadPic();
-loadComment();
-loadTag();
-postTags();
+            loadComment();
+            loadTag();
+            postTags();
 
             if (article_publish === '1') {
                 unpublish();

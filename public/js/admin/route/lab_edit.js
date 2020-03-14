@@ -127,16 +127,16 @@
                     var data = form.serializeArray();
                     KTApp.progress(btn);
                     $.ajax({
-      url: url,
-      method: 'PUT',
-      data: data,
-      success: function success(data) {
-        KTApp.unprogress(btn);
-        toastr.success("L'anomalie à été mise à jours", "Succès");
-        $(".modal").modal('hide');
-      },
-      error: function error(err) {
-        KTApp.unprogress(btn);
+                        url: url,
+                        method: 'PUT',
+                        data: data,
+                        success: function success(data) {
+                            KTApp.unprogress(btn);
+                            toastr.success("L'anomalie à été mise à jours", "Succès");
+                            $(".modal").modal('hide');
+                        },
+                        error: function error(err) {
+                            KTApp.unprogress(btn);
         toastr.error("Erreur lors de la mise à jour de l'anomalie", "Erreur Système 500");
         console.error(err);
       }

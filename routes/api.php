@@ -243,6 +243,12 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::get('{requis_id}/delete', 'TutorielVideoController@deleteRequis');
         });
     });
+
+    Route::group(["prefix" => "wiki", "namespace" => "Wiki"], function () {
+        Route::group(["prefix" => "article"], function () {
+            Route::post('latest', 'WikiArticleController@latest');
+        });
+    });
 });
 
 Route::get('search', 'SearchController@search');

@@ -70,5 +70,12 @@ class WikiRepository
             ->get();
     }
 
+    public function allWL($limit = null)
+    {
+        return $this->wiki->newQuery()
+            ->limit($limit)
+            ->get();
+    }
+
 }
 

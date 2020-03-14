@@ -3424,7 +3424,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               select: 'Select page size',
               all: 'all'
             },
-            info: 'Showing {{start}} - {{end}} of {{total}}'
+              info: 'Showing {{start}} - {{end}} of {{total}}'
           }
         }
       }
@@ -3485,16 +3485,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                         type: 'remote',
                         source: {
                             read: {
-          url: '/api/admin/objet/loadLatestCategories',
-          // sample custom headers
-          // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
-          map: function map(raw) {
-            // sample data mapping
-            var dataSet = raw;
+                                url: '/api/admin/objet/loadLatestCategories',
+                                // sample custom headers
+                                // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
+                                map: function map(raw) {
+                                    // sample data mapping
+                                    var dataSet = raw;
 
-            if (typeof raw.data !== 'undefined') {
-              dataSet = raw.data;
-            }
+                                    if (typeof raw.data !== 'undefined') {
+                                        dataSet = raw.data;
+                                    }
 
             return dataSet;
           }

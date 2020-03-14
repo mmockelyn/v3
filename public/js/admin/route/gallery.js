@@ -2095,15 +2095,15 @@
 		$.extend(F.defaults, {
 			scrollbarWidth : $.scrollbarWidth(),
 			fixed  : $.support.fixedPosition,
-			parent : $('body')
-		});
+            parent: $('body')
+        });
 
-		//Get real width of page scroll-bar
-		w1 = $(window).width();
+        //Get real width of page scroll-bar
+        w1 = $(window).width();
 
-		H.addClass('fancybox-lock-test');
+        H.addClass('fancybox-lock-test');
 
-		w2 = $(window).width();
+        w2 = $(window).width();
 
         H.removeClass('fancybox-lock-test');
 
@@ -2162,8 +2162,8 @@
                     success: function success(data) {
                         toastr.success("Le fichier <strong>" + data.name + "</strong> à été uploader");
                     }
-  });
-}
+                });
+            }
 
 function formAddCategory() {
   var form = $("#formAddCategory");

@@ -28333,18 +28333,18 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-            /*!
-             *
-             * Super simple wysiwyg editor v0.8.16
-             * https://summernote.org
-             *
-             *
-             * Copyright 2013- Alan Hong. and other contributors
-             * summernote may be freely distributed under the MIT license.
-             *
-             * Date: 2020-02-19T09:12Z
-             *
-             */
+/*!
+ *
+ * Super simple wysiwyg editor v0.8.16
+ * https://summernote.org
+ *
+ *
+ * Copyright 2013- Alan Hong. and other contributors
+ * summernote may be freely distributed under the MIT license.
+ *
+ * Date: 2020-02-19T09:12Z
+ *
+ */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
 		module.exports = factory(__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"));
@@ -38502,8 +38502,8 @@ module.exports = function(module) {
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
             /* harmony import */
             var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
             /* harmony import */
@@ -38529,10 +38529,10 @@ __webpack_require__.r(__webpack_exports__);
                         div.style.display = 'block';
                     } else {
                         console.log('None');
-      div.style.display = 'none';
-    }
-  });
-}
+                        div.style.display = 'none';
+                    }
+                });
+            }
 
 function formatField() {
   $("#published_at").datetimepicker({
@@ -38621,11 +38621,11 @@ function postEditContent() {
         KTApp.unprogress(btn);
         toastr.success("Les information de contenue ont été mis à jour", "Succès");
       },
-      error: function error(jqxhr) {
-        KTApp.unprogress(btn);
-        toastr.error("Erreur lors de la mise à jours des informations de contenue", "Erreur système");
-        console.error(jqxhr);
-      }
+        error: function error(jqxhr) {
+            KTApp.unprogress(btn);
+            toastr.error("Erreur lors de la mise à jours des informations de contenue", "Erreur système");
+            console.error(jqxhr);
+        }
     });
   });
 }
@@ -38669,9 +38669,11 @@ function postEditContent() {
         /*! no static exports found */
         /***/ (function (module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\blog\article\edit.js */"./resources/js/admin/blog/article/edit.js");
+            module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\blog\article\edit.js */"./resources/js/admin/blog/article/edit.js");
 
 
-/***/ })
+            /***/
+        })
 
-/******/ });
+        /******/
+    });

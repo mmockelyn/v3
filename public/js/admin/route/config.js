@@ -3424,7 +3424,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               select: 'Select page size',
               all: 'all'
             },
-            info: 'Showing {{start}} - {{end}} of {{total}}'
+              info: 'Showing {{start}} - {{end}} of {{total}}'
           }
         }
       }
@@ -3485,16 +3485,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                 var tableTypeDownload = $("#listeTypeDownload").KTDatatable({
                     data: {
                         type: 'remote',
-      source: {
-        read: {
-          url: '/api/admin/route/config/loadTypeDownload',
-          // sample custom headers
-          // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
-          map: function map(raw) {
-            // sample data mapping
-            var dataSet = raw;
+                        source: {
+                            read: {
+                                url: '/api/admin/route/config/loadTypeDownload',
+                                // sample custom headers
+                                // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
+                                map: function map(raw) {
+                                    // sample data mapping
+                                    var dataSet = raw;
 
-            if (typeof raw.data !== 'undefined') {
+                                    if (typeof raw.data !== 'undefined') {
               dataSet = raw.data;
             }
 

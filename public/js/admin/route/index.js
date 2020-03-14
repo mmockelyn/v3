@@ -28011,7 +28011,7 @@ try {
 	// This works if eval is allowed (see CSP)
 	g = g || new Function("return this")();
 } catch (e) {
-	// This works if the window reference is available
+    // This works if the window reference is available
     if (typeof window === "object") g = window;
 }
 
@@ -28055,7 +28055,7 @@ try {
         /*! no exports provided */
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
+            "use strict";
             __webpack_require__.r(__webpack_exports__);
             /* harmony import */
             var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core */ "./resources/js/core.js");
@@ -28081,16 +28081,16 @@ try {
             }
 
             function searchRoute() {
-  var input = document.querySelector('#routeSearch');
-  var div = document.querySelector('#listeRoute');
-  input.addEventListener('keyup', function (e) {
-    e.preventDefault();
-    Object(_core__WEBPACK_IMPORTED_MODULE_0__["blockElement"])(div, "Chargement des routes...");
-    jquery__WEBPACK_IMPORTED_MODULE_1__["get"]('/api/admin/route/list', {
-      q: input.value
-    }).done(function (data) {
-      div.innerHTML = data.data;
-    });
+                var input = document.querySelector('#routeSearch');
+                var div = document.querySelector('#listeRoute');
+                input.addEventListener('keyup', function (e) {
+                    e.preventDefault();
+                    Object(_core__WEBPACK_IMPORTED_MODULE_0__["blockElement"])(div, "Chargement des routes...");
+                    jquery__WEBPACK_IMPORTED_MODULE_1__["get"]('/api/admin/route/list', {
+                        q: input.value
+                    }).done(function (data) {
+                        div.innerHTML = data.data;
+                    });
   });
 }
 

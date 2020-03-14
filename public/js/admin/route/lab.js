@@ -10703,18 +10703,18 @@ return jQuery;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-            /*!
-             *
-             * Super simple wysiwyg editor v0.8.16
-             * https://summernote.org
-             *
-             *
-             * Copyright 2013- Alan Hong. and other contributors
-             * summernote may be freely distributed under the MIT license.
-             *
-             * Date: 2020-02-19T09:12Z
-             *
-             */
+/*!
+ *
+ * Super simple wysiwyg editor v0.8.16
+ * https://summernote.org
+ *
+ *
+ * Copyright 2013- Alan Hong. and other contributors
+ * summernote may be freely distributed under the MIT license.
+ *
+ * Date: 2020-02-19T09:12Z
+ *
+ */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
 		module.exports = factory(__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"));
@@ -24235,16 +24235,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                     data: {
                         type: 'remote',
                         source: {
-        read: {
-          url: '/api/admin/route/' + route_id + '/anomalie/loadAnomalies',
-          // sample custom headers
-          // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
-          map: function map(raw) {
-            // sample data mapping
-            var dataSet = raw;
+                            read: {
+                                url: '/api/admin/route/' + route_id + '/anomalie/loadAnomalies',
+                                // sample custom headers
+                                // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
+                                map: function map(raw) {
+                                    // sample data mapping
+                                    var dataSet = raw;
 
-            if (typeof raw.data !== 'undefined') {
-              dataSet = raw.data;
+                                    if (typeof raw.data !== 'undefined') {
+                                        dataSet = raw.data;
             }
 
             return dataSet;

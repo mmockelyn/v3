@@ -3462,16 +3462,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                                 url: '/api/admin/blog/category/liste',
                                 // sample custom headers
                                 // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
-          map: function map(raw) {
-            // sample data mapping
-            var dataSet = raw;
+                                map: function map(raw) {
+                                    // sample data mapping
+                                    var dataSet = raw;
 
-            if (typeof raw.data !== 'undefined') {
-              dataSet = raw.data;
-            }
+                                    if (typeof raw.data !== 'undefined') {
+                                        dataSet = raw.data;
+                                    }
 
-            return dataSet;
-          }
+                                    return dataSet;
+                                }
         }
       },
       pageSize: 10,
@@ -3566,10 +3566,10 @@ function submitForm() {
             toastr.warning(error, "Erreur de Validation");
           });
         },
-        500: function _(jqxhr) {
-          KTApp.unprogress(btn);
-            console.error(jqxhr);
-        }
+          500: function _(jqxhr) {
+              KTApp.unprogress(btn);
+              console.error(jqxhr);
+          }
       }
     });
   });
@@ -3611,9 +3611,11 @@ function submitForm() {
         /*! no static exports found */
         /***/ (function (module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\blog\category\index.js */"./resources/js/admin/blog/category/index.js");
+            module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\blog\category\index.js */"./resources/js/admin/blog/category/index.js");
 
 
-/***/ })
+            /***/
+        })
 
-/******/ });
+        /******/
+    });
