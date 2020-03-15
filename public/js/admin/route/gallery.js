@@ -2088,13 +2088,13 @@
 
 				elem.remove();
 
-				return fixed;
-			}());
-		}
+                return fixed;
+            }());
+        }
 
-		$.extend(F.defaults, {
-			scrollbarWidth : $.scrollbarWidth(),
-			fixed  : $.support.fixedPosition,
+        $.extend(F.defaults, {
+            scrollbarWidth: $.scrollbarWidth(),
+            fixed: $.support.fixedPosition,
             parent: $('body')
         });
 

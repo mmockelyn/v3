@@ -245,6 +245,17 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
     });
 
     Route::group(["prefix" => "wiki", "namespace" => "Wiki"], function () {
+
+        Route::group(["prefix" => "category"], function () {
+            Route::post('list', 'WikiCategoryController@list');
+            Route::post('', 'WikiCategoryController@store');
+        });
+
+        Route::group(["prefix" => "subcategory"], function () {
+            Route::post('list', 'WikiCategoryController@listSub');
+            Route::post('', 'WikiCategoryController@storeSub');
+        });
+
         Route::group(["prefix" => "article"], function () {
             Route::post('latest', 'WikiArticleController@latest');
         });

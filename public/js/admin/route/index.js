@@ -28091,8 +28091,8 @@ try {
                     }).done(function (data) {
                         div.innerHTML = data.data;
                     });
-  });
-}
+                });
+            }
 
 function loadFormElement() {
   jquery__WEBPACK_IMPORTED_MODULE_1__(".summernote").summernote();

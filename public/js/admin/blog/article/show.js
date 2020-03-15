@@ -24226,15 +24226,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                     if (data.data.data.published === 1) {
                         label.find('.btn').addClass('btn-label-success');
                         label.find('.btn').html('Publier');
-    } else {
-      label.find('.btn').addClass('btn-label-danger');
-      label.find('.btn').html('Non publier');
-    }
+                    } else {
+                        label.find('.btn').addClass('btn-label-danger');
+                        label.find('.btn').html('Non publier');
+                    }
 
-    $(".kt-widget19__username").html(data.data.category);
-    $(".kt-widget19__number").html(data.data.countComment);
-    $(".kt-widget19__text").html(data.data.data.short_content);
-    var action = $(".kt-widget19__action");
+                    $(".kt-widget19__username").html(data.data.category);
+                    $(".kt-widget19__number").html(data.data.countComment);
+                    $(".kt-widget19__text").html(data.data.data.short_content);
+                    var action = $(".kt-widget19__action");
 
     if (data.data.data.published === 1) {
       action.find('a').attr('href', '/blog/' + data.data.data.slug).attr('target', '_blank').html('Voir sur le site').addClass('btn btn-outline-info btn-sm btn-block');
@@ -24516,16 +24516,16 @@ function postTags() {
           });
         },
         500: function _(jqxhr) {
-          KTApp.unprogress(btn);
-          toastr.error("Erreur lors de l'ajout de tag à l'article", "Erreur Système");
-          console.error(jqxhr);
+            KTApp.unprogress(btn);
+            toastr.error("Erreur lors de l'ajout de tag à l'article", "Erreur Système");
+            console.error(jqxhr);
         }
       }
     });
   });
 }
 
-loadPic();
+            loadPic();
             loadComment();
             loadTag();
             postTags();

@@ -24245,14 +24245,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                                     var dataSet = raw;
 
                                     if (typeof raw.data !== 'undefined') {
-              dataSet = raw.data;
-            }
+                                        dataSet = raw.data;
+                                    }
 
-            return dataSet;
-          }
-        }
-      },
-      pageSize: 10,
+                                    return dataSet;
+                                }
+                            }
+                        },
+                        pageSize: 10,
       serverPaging: true,
       serverFiltering: true,
       serverSorting: true

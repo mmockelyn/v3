@@ -3542,11 +3542,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                                         dataSet = raw.data;
                                     }
 
-            return dataSet;
-          }
-        }
-      },
-      pageSize: 10,
+                                    return dataSet;
+                                }
+                            }
+                        },
+                        pageSize: 10,
       serverPaging: true,
       serverFiltering: true,
       serverSorting: true

@@ -137,12 +137,12 @@
                         },
                         error: function error(err) {
                             KTApp.unprogress(btn);
-        toastr.error("Erreur lors de la mise à jour de l'anomalie", "Erreur Système 500");
-        console.error(err);
-      }
-    });
-  });
-}
+                            toastr.error("Erreur lors de la mise à jour de l'anomalie", "Erreur Système 500");
+                            console.error(err);
+                        }
+                    });
+                });
+            }
 
 formEditAnomalie();
 

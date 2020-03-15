@@ -3472,9 +3472,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
                                     return dataSet;
                                 }
-        }
-      },
-      pageSize: 10,
+                            }
+                        },
+                        pageSize: 10,
       serverPaging: true,
       serverFiltering: true,
       serverSorting: true
@@ -3556,16 +3556,16 @@ function submitForm() {
           console.log(data);
           toastr.success(data.message, "Succès");
           setTimeout(function () {
-            window.location.reload();
+              window.location.reload();
           }, 1000);
         },
-        203: function _(data) {
-          KTApp.unprogress(btn);
-          console.log(data);
-          Array.from(data.data.errors).forEach(function (error) {
-            toastr.warning(error, "Erreur de Validation");
-          });
-        },
+          203: function _(data) {
+              KTApp.unprogress(btn);
+              console.log(data);
+              Array.from(data.data.errors).forEach(function (error) {
+                  toastr.warning(error, "Erreur de Validation");
+              });
+          },
           500: function _(jqxhr) {
               KTApp.unprogress(btn);
               console.error(jqxhr);

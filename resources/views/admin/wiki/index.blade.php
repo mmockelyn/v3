@@ -37,19 +37,19 @@
                 <div class="card-body">
                     <ul class="kt-nav">
                         <li class="kt-nav__item {{ \App\HelpersClass\Generator::currentRouteBack(route('Back.Wiki.index')) }}">
-                            <a href="{{ route('Back.Tutoriel.index') }}" class="kt-nav__link">
+                            <a href="{{ route('Back.Wiki.index') }}" class="kt-nav__link">
                                 <i class="kt-nav__link-icon flaticon2-dashboard"></i>
                                 <span class="kt-nav__link-text">Tableau de Bord</span>
                             </a>
                         </li>
                         <li class="kt-nav__item {{ \App\HelpersClass\Generator::currentRouteBack(route('Back.Wiki.Category.index')) }}">
-                            <a href="{{ route('Back.Tutoriel.Category.index') }}" class="kt-nav__link">
+                            <a href="{{ route('Back.Wiki.Category.index') }}" class="kt-nav__link">
                                 <i class="kt-nav__link-icon flaticon2-circle-vol-2"></i>
                                 <span class="kt-nav__link-text">Catégories</span>
                             </a>
                         </li>
                         <li class="kt-nav__item {{ \App\HelpersClass\Generator::currentRouteBack(route('Back.Wiki.Article.index')) }}">
-                            <a href="{{ route('Back.Tutoriel.Video.index') }}" class="kt-nav__link">
+                            <a href="{{ route('Back.Wiki.Article.index') }}" class="kt-nav__link">
                                 <i class="kt-nav__link-icon la la-wikipedia-w"></i>
                                 <span class="kt-nav__link-text">Articles</span>
                             </a>

@@ -20807,12 +20807,13 @@ var ui_ui = function ui(editorOptions) {
   };
 };
 
-/* harmony default export */ var bs3_ui = (ui_ui);
+/* harmony default export */
+            var bs3_ui = (ui_ui);
 // EXTERNAL MODULE: ./src/js/base/settings.js + 37 modules
-var settings = __webpack_require__(3);
+            var settings = __webpack_require__(3);
 
 // EXTERNAL MODULE: ./src/styles/summernote-bs3.scss
-var summernote_bs3 = __webpack_require__(4);
+            var summernote_bs3 = __webpack_require__(4);
 
 // CONCATENATED MODULE: ./src/js/bs3/settings.js
 
@@ -20892,16 +20893,16 @@ var summernote_bs3 = __webpack_require__(4);
                         statusCode: {
                             200: function _(data) {
                                 KTApp.unprogress(btn);
-          toastr.success("La description à été mis à jour avec succès", "Succès");
-          setTimeout(function () {
-            window.location.reload();
-          }, 1200);
-        },
-        203: function _(data) {
-          KTApp.unprogress(btn);
-          Array.from(data.data.errors).forEach(function (error) {
-            toastr.warning(error, "Erreur de validation");
-          });
+                                toastr.success("La description à été mis à jour avec succès", "Succès");
+                                setTimeout(function () {
+                                    window.location.reload();
+                                }, 1200);
+                            },
+                            203: function _(data) {
+                                KTApp.unprogress(btn);
+                                Array.from(data.data.errors).forEach(function (error) {
+                                    toastr.warning(error, "Erreur de validation");
+                                });
         },
         500: function _(jqxhr) {
           KTApp.unprogress(btn);

@@ -21300,9 +21300,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
                                     return dataSet;
                                 }
-        }
-      },
-      pageSize: 10,
+                            }
+                        },
+                        pageSize: 10,
       serverPaging: true,
       serverFiltering: true,
       serverSorting: true

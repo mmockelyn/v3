@@ -38614,13 +38614,13 @@ function postEditContent() {
     var data = form.serializeArray();
     KTApp.progress(btn);
     $.ajax({
-      url: url,
-      method: 'PUT',
-      data: data,
-      success: function success(data) {
-        KTApp.unprogress(btn);
-        toastr.success("Les information de contenue ont été mis à jour", "Succès");
-      },
+        url: url,
+        method: 'PUT',
+        data: data,
+        success: function success(data) {
+            KTApp.unprogress(btn);
+            toastr.success("Les information de contenue ont été mis à jour", "Succès");
+        },
         error: function error(jqxhr) {
             KTApp.unprogress(btn);
             toastr.error("Erreur lors de la mise à jours des informations de contenue", "Erreur système");
