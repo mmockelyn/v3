@@ -196,6 +196,23 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
 
     Route::group(["prefix" => "wiki", "namespace" => "Wiki"], function (){
         Route::get('/', ["as" => "Back.Wiki.index", "uses" => "WikiController@index"]);
+
+        Route::group(["prefix" => "category"], function () {
+            Route::get('/', ["as" => "Back.Wiki.Category.index", "uses" => "WikiCategoryController@index"]);
+            Route::get('{category_id}/delete', ["as" => "Back.Wiki.Category.delete", "uses" => "WikiCategoryController@deleteCategory"]);
+        });
+
+        Route::group(["prefix" => "subcategory"], function () {
+            Route::get('{sub_id}/delete', ["as" => "Back.Wiki.Sub.index", "uses" => "WikiCategoryController@deleteSubCategory"]);
+        });
+
+        Route::group(["prefix" => "article"], function () {
+            Route::get('/', ["as" => "Back.Wiki.Article.index", "uses" => "WikiArticleController@index"]);
+            Route::get('{article_id}', ["as" => "Back.Wiki.Article.show", "uses" => "WikiArticleController@show"]);
+            Route::get('{article_id}/edit', ["as" => "Back.Wiki.Article.edit", "uses" => "WikiArticleController@edit"]);
+            Route::put('{article_id}/editThumb', ["as" => "Back.Wiki.Article.editThumb", "uses" => "WikiArticleController@editThumb"]);
+            Route::get('{article_id}/delete', ["as" => "Back.Wiki.Article.delete", "uses" => "WikiArticleController@delete"]);
+        });
     });
 
     Route::group(["prefix" => "user", "namespace" => "User"], function (){

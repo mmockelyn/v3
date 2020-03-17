@@ -3429,62 +3429,58 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         }
       }
     },
-      extensions: {}
+    extensions: {}
   };
 })(jQuery);
 
-            /***/
-        }),
+/***/ }),
 
-        /***/ "./resources/js/admin/config.js":
-        /*!**************************************!*\
-          !*** ./resources/js/admin/config.js ***!
-          \**************************************/
-        /*! no static exports found */
-        /***/ (function (module, exports) {
+/***/ "./resources/js/admin/config.js":
+/*!**************************************!*\
+  !*** ./resources/js/admin/config.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-            var cache = document.querySelector("#btnRefreshCache");
-            cache.addEventListener('click', function (e) {
-                e.preventDefault();
-                KTApp.progress(cache);
-                $.get('/api/admin/cache').done(function () {
-                    KTApp.unprogress(cache);
-                    toastr.success("Le cache à été nettoyer");
-                }).fail(function () {
-                    KTApp.unprogress(cache);
-                    toastr.error("Erreur lors du nettoyage du cache");
-                });
-            });
+var cache = document.querySelector("#btnRefreshCache");
+cache.addEventListener('click', function (e) {
+  e.preventDefault();
+  KTApp.progress(cache);
+  $.get('/api/admin/cache').done(function () {
+    KTApp.unprogress(cache);
+    toastr.success("Le cache à été nettoyer");
+  }).fail(function () {
+    KTApp.unprogress(cache);
+    toastr.error("Erreur lors du nettoyage du cache");
+  });
+});
 
-            /***/
-        }),
+/***/ }),
 
-        /***/ "./resources/js/admin/route/config.js":
-        /*!********************************************!*\
-          !*** ./resources/js/admin/route/config.js ***!
-          \********************************************/
-        /*! no exports provided */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+/***/ "./resources/js/admin/route/config.js":
+/*!********************************************!*\
+  !*** ./resources/js/admin/route/config.js ***!
+  \********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony import */
-            var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js */ "./resources/demo5/src/assets/js/global/components/base/datatable/core.datatable.js");
-            /* harmony import */
-            var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__);
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js */ "./resources/demo5/src/assets/js/global/components/base/datatable/core.datatable.js");
+/* harmony import */ var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__);
 
 
-            __webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
+__webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
 
-            var route = $("#route");
-            var route_id = route.attr('data-id');
-            var tableauTypeDownload = '';
-            var tableauTypeRelease = '';
+var route = $("#route");
+var route_id = route.attr('data-id');
+var tableauTypeDownload = '';
+var tableauTypeRelease = '';
 
-            function loadTableTypeDownload() {
-                var tableTypeDownload = $("#listeTypeDownload").KTDatatable({
-                    data: {
-                        type: 'remote',
+function loadTableTypeDownload() {
+  var tableTypeDownload = $("#listeTypeDownload").KTDatatable({
+    data: {
+      type: 'remote',
       source: {
         read: {
           url: '/api/admin/route/config/loadTypeDownload',

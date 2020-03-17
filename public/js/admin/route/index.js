@@ -2920,7 +2920,7 @@
     for (var i = 0, len = elements.length; i < len; i++) {
       var _ret = _loop(i);
 
-      if (_ret === "continue")
+      if (_ret === "continue") continue;
     }
 
     return createdDocument.body.innerHTML;
@@ -7453,7 +7453,7 @@ function nodeName( elem, name ) {
 
   return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 
-}
+};
 var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
 
 
@@ -17865,16 +17865,16 @@ Popper.Defaults = Defaults;
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
- *
+ * 
  * Super simple wysiwyg editor v0.8.16
  * https://summernote.org
- *
- *
+ * 
+ * 
  * Copyright 2013- Alan Hong. and other contributors
  * summernote may be freely distributed under the MIT license.
- *
+ * 
  * Date: 2020-02-19T09:12Z
- *
+ * 
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
@@ -22820,7 +22820,7 @@ function () {
 
           case TableResultAction.resultAction.RemoveCell:
             // Do not need remove cell because row will be deleted.
-
+            continue;
         }
       }
 
@@ -22879,7 +22879,7 @@ function () {
 
           case TableResultAction.resultAction.RemoveCell:
             dom.remove(actions[actionIndex].baseCell, true);
-
+            continue;
         }
       }
     }
@@ -28012,75 +28012,69 @@ try {
 	g = g || new Function("return this")();
 } catch (e) {
 	// This works if the window reference is available
-    if (typeof window === "object") g = window;
+	if (typeof window === "object") g = window;
 }
 
 // g can still be undefined, but nothing to do about it...
 // We return undefined, instead of nothing here, so it's
 // easier to handle this case. if(!global) { ...}
 
-            module.exports = g;
+module.exports = g;
 
 
-            /***/
-        }),
+/***/ }),
 
-        /***/ "./resources/js/admin/config.js":
-        /*!**************************************!*\
-          !*** ./resources/js/admin/config.js ***!
-          \**************************************/
-        /*! no static exports found */
-        /***/ (function (module, exports) {
+/***/ "./resources/js/admin/config.js":
+/*!**************************************!*\
+  !*** ./resources/js/admin/config.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-            var cache = document.querySelector("#btnRefreshCache");
-            cache.addEventListener('click', function (e) {
-                e.preventDefault();
-                KTApp.progress(cache);
-                $.get('/api/admin/cache').done(function () {
-                    KTApp.unprogress(cache);
-                    toastr.success("Le cache à été nettoyer");
-                }).fail(function () {
-                    KTApp.unprogress(cache);
-                    toastr.error("Erreur lors du nettoyage du cache");
-                });
-            });
+var cache = document.querySelector("#btnRefreshCache");
+cache.addEventListener('click', function (e) {
+  e.preventDefault();
+  KTApp.progress(cache);
+  $.get('/api/admin/cache').done(function () {
+    KTApp.unprogress(cache);
+    toastr.success("Le cache à été nettoyer");
+  }).fail(function () {
+    KTApp.unprogress(cache);
+    toastr.error("Erreur lors du nettoyage du cache");
+  });
+});
 
-            /***/
-        }),
+/***/ }),
 
-        /***/ "./resources/js/admin/route/index.js":
-        /*!*******************************************!*\
-          !*** ./resources/js/admin/route/index.js ***!
-          \*******************************************/
-        /*! no exports provided */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+/***/ "./resources/js/admin/route/index.js":
+/*!*******************************************!*\
+  !*** ./resources/js/admin/route/index.js ***!
+  \*******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony import */
-            var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core */ "./resources/js/core.js");
-            /* harmony import */
-            var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-            /* harmony import */
-            var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
-            /* harmony import */
-            var summernote__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! summernote */ "./node_modules/summernote/dist/summernote.js");
-            /* harmony import */
-            var summernote__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(summernote__WEBPACK_IMPORTED_MODULE_2__);
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core */ "./resources/js/core.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var summernote__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! summernote */ "./node_modules/summernote/dist/summernote.js");
+/* harmony import */ var summernote__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(summernote__WEBPACK_IMPORTED_MODULE_2__);
 
 
-            __webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
 
-            function loadRoute() {
-                var div = document.querySelector('#listeRoute');
-                Object(_core__WEBPACK_IMPORTED_MODULE_0__["blockElement"])(div, "Chargement des routes");
-                jquery__WEBPACK_IMPORTED_MODULE_1__["get"]('/api/admin/route/list').done(function (data) {
-                    div.innerHTML = data.data;
-                }).fail(function (jqxhr) {
-                });
-            }
 
-            function searchRoute() {
+__webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
+
+function loadRoute() {
+  var div = document.querySelector('#listeRoute');
+  Object(_core__WEBPACK_IMPORTED_MODULE_0__["blockElement"])(div, "Chargement des routes");
+  jquery__WEBPACK_IMPORTED_MODULE_1__["get"]('/api/admin/route/list').done(function (data) {
+    div.innerHTML = data.data;
+  }).fail(function (jqxhr) {});
+}
+
+function searchRoute() {
   var input = document.querySelector('#routeSearch');
   var div = document.querySelector('#listeRoute');
   input.addEventListener('keyup', function (e) {
@@ -28106,119 +28100,92 @@ loadFormElement();
 /***/ }),
 
 /***/ "./resources/js/core.js":
-        /*!******************************!*\
-          !*** ./resources/js/core.js ***!
-          \******************************/
-        /*! exports provided: reloadNotifBar, blockElement, unblockElement, addPremium, formatDate, NotifyMe */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+/*!******************************!*\
+  !*** ./resources/js/core.js ***!
+  \******************************/
+/*! exports provided: reloadNotifBar, blockElement, unblockElement, addPremium, formatDate, NotifyMe */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony export (binding) */
-            __webpack_require__.d(__webpack_exports__, "reloadNotifBar", function () {
-                return reloadNotifBar;
-            });
-            /* harmony export (binding) */
-            __webpack_require__.d(__webpack_exports__, "blockElement", function () {
-                return blockElement;
-            });
-            /* harmony export (binding) */
-            __webpack_require__.d(__webpack_exports__, "unblockElement", function () {
-                return unblockElement;
-            });
-            /* harmony export (binding) */
-            __webpack_require__.d(__webpack_exports__, "addPremium", function () {
-                return addPremium;
-            });
-            /* harmony export (binding) */
-            __webpack_require__.d(__webpack_exports__, "formatDate", function () {
-                return formatDate;
-            });
-            /* harmony export (binding) */
-            __webpack_require__.d(__webpack_exports__, "NotifyMe", function () {
-                return NotifyMe;
-            });
-            /* harmony import */
-            var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-            /* harmony import */
-            var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-            /* harmony import */
-            var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
-            /* harmony import */
-            var bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_1__);
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reloadNotifBar", function() { return reloadNotifBar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "blockElement", function() { return blockElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unblockElement", function() { return unblockElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addPremium", function() { return addPremium; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatDate", function() { return formatDate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NotifyMe", function() { return NotifyMe; });
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_1__);
 
 
-            function reloadNotifBar() {
-                var countNotifBar = document.querySelector('#countNotifBar');
-                var value = parseInt(countNotifBar.textContent);
+function reloadNotifBar() {
+  var countNotifBar = document.querySelector('#countNotifBar');
+  var value = parseInt(countNotifBar.textContent);
 
-                if (value === 0) {
-                    var iconEl = jquery__WEBPACK_IMPORTED_MODULE_0__(".kt-header__topbar-icon");
-                    iconEl.classList.remove('kt-hidden');
-                    iconEl.textContent = 1;
-                } else {
-                    countNotifBar.textContent = parseInt(value + 1);
-                }
-            }
-
-            function blockElement(el, message) {
-                var state = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
-                return KTApp.block(el, {
-                    overlayColor: '#000000',
-                    type: 'v2',
-                    state: state,
-                    size: 'lg',
-                    message: message
-                });
-            }
-
-            function unblockElement(el) {
-                return KTApp.unblock(el);
-            }
-
-            function addPremium() {
-                jquery__WEBPACK_IMPORTED_MODULE_0__["get"]('/account/api/isPremium').done(function (data) {
-                    if (data.data === 'true') {
-                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'on');
-                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'on');
-                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'on');
-                    } else {
-                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'off');
-                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'off');
-                        jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
-                    }
-                });
-            }
-
-            function formatDate(date) {
-                var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'LL';
-                moment.locale('fr');
-                return moment(date).format(format);
-            }
-
-            function NotifyMe(title, body) {
-                if (!("Notification" in window)) {
-                    toastr.warning('Ce Navigateur ne supporte pas les notifications');
-                } else if (Notification.permission === 'granted') {
-                    var notification = new Notification(title, {
-                        body: body
-                    });
-                } else if (Notification.permission !== 'denied') {
-                    Notification.requestPermission(function (permission) {
-                        // Quelque soit la réponse de l'utilisateur, nous nous assurons de stocker cette information
-                        if (!('permission' in Notification)) {
-                            Notification.permission = permission;
-                        } // Si l'utilisateur est OK, on crée une notification
+  if (value === 0) {
+    var iconEl = jquery__WEBPACK_IMPORTED_MODULE_0__(".kt-header__topbar-icon");
+    iconEl.classList.remove('kt-hidden');
+    iconEl.textContent = 1;
+  } else {
+    countNotifBar.textContent = parseInt(value + 1);
+  }
+}
+function blockElement(el, message) {
+  var state = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'success';
+  return KTApp.block(el, {
+    overlayColor: '#000000',
+    type: 'v2',
+    state: state,
+    size: 'lg',
+    message: message
+  });
+}
+function unblockElement(el) {
+  return KTApp.unblock(el);
+}
+function addPremium() {
+  jquery__WEBPACK_IMPORTED_MODULE_0__["get"]('/account/api/isPremium').done(function (data) {
+    if (data.data === 'true') {
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'on');
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'on');
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'on');
+    } else {
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielIndex").attr('data-premium', 'off');
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielList").attr('data-premium', 'off');
+      jquery__WEBPACK_IMPORTED_MODULE_0__("#TutorielShow").attr('data-premium', 'off');
+    }
+  });
+}
+function formatDate(date) {
+  var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'LL';
+  moment.locale('fr');
+  return moment(date).format(format);
+}
+function NotifyMe(title, body) {
+  if (!("Notification" in window)) {
+    toastr.warning('Ce Navigateur ne supporte pas les notifications');
+  } else if (Notification.permission === 'granted') {
+    var notification = new Notification(title, {
+      body: body
+    });
+  } else if (Notification.permission !== 'denied') {
+    Notification.requestPermission(function (permission) {
+      // Quelque soit la réponse de l'utilisateur, nous nous assurons de stocker cette information
+      if (!('permission' in Notification)) {
+        Notification.permission = permission;
+      } // Si l'utilisateur est OK, on crée une notification
 
 
-                        if (permission === "granted") {
-                            var _notification = new Notification(title, {
-                                body: body
-                            });
-                        }
-                    });
-                }
-            }
+      if (permission === "granted") {
+        var _notification = new Notification(title, {
+          body: body
+        });
+      }
+    });
+  }
+}
 
 function hidingAlerting() {
   var alerts = document.querySelectorAll('#showAlerting');

@@ -11,3 +11,5 @@
 /download/category/*
 /download/subcategory/*
 /phpcs/*.*
+/wiki/*.*
+!/wiki/wiki.png

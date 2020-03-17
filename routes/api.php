@@ -243,6 +243,27 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::get('{requis_id}/delete', 'TutorielVideoController@deleteRequis');
         });
     });
+
+    Route::group(["prefix" => "wiki", "namespace" => "Wiki"], function () {
+
+        Route::group(["prefix" => "category"], function () {
+            Route::post('list', 'WikiCategoryController@list');
+            Route::post('', 'WikiCategoryController@store');
+        });
+
+        Route::group(["prefix" => "subcategory"], function () {
+            Route::post('list', 'WikiCategoryController@listSub');
+            Route::post('list', 'WikiCategoryController@listSubByCategory');
+            Route::post('', 'WikiCategoryController@storeSub');
+        });
+
+        Route::group(["prefix" => "article"], function () {
+            Route::post('latest', 'WikiArticleController@latest');
+            Route::post('list', 'WikiArticleController@list');
+            Route::post('/', 'WikiArticleController@store');
+            Route::put('{article_id}/editInfo', 'WikiArticleController@editInfo');
+        });
+    });
 });
 
 Route::get('search', 'SearchController@search');

@@ -70,5 +70,41 @@ class WikiRepository
             ->get();
     }
 
+    public function allWL($limit = null)
+    {
+        return $this->wiki->newQuery()
+            ->limit($limit)
+            ->get();
+    }
+
+    public function store($category_id, $subcategory_id, $title)
+    {
+        return $this->wiki->newQuery()
+            ->create([
+                "wiki_category_id" => $category_id,
+                "wiki_sub_category_id" => $subcategory_id,
+                "title" => $title,
+                "content" => "No Content"
+            ]);
+    }
+
+    public function delete($article_id)
+    {
+        return $this->wiki->newQuery()
+            ->find($article_id)
+            ->delete();
+    }
+
+    public function updateInfo($article_id, $title, int $published, $published_at)
+    {
+        return $this->wiki->newQuery()
+            ->find($article_id)
+            ->update([
+                "title" => $title,
+                "published" => $published,
+                "published_at" => $published_at
+            ]);
+    }
+
 }
 

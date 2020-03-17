@@ -3442,26 +3442,24 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony import */
-            var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js */ "./resources/demo5/src/assets/js/global/components/base/datatable/core.datatable.js");
-            /* harmony import */
-            var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__);
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js */ "./resources/demo5/src/assets/js/global/components/base/datatable/core.datatable.js");
+/* harmony import */ var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__);
 //import * as $ from "jquery";
 
 
-            __webpack_require__(/*! ../../config */ "./resources/js/admin/config.js");
+__webpack_require__(/*! ../../config */ "./resources/js/admin/config.js");
 
-            function loadTable() {
-                var table = $("#listeCategories").KTDatatable({
-                    data: {
-                        type: 'remote',
-                        source: {
-                            read: {
-                                url: '/api/admin/blog/category/liste',
-                                // sample custom headers
-                                // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
+function loadTable() {
+  var table = $("#listeCategories").KTDatatable({
+    data: {
+      type: 'remote',
+      source: {
+        read: {
+          url: '/api/admin/blog/category/liste',
+          // sample custom headers
+          // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
           map: function map(raw) {
             // sample data mapping
             var dataSet = raw;
@@ -3568,48 +3566,46 @@ function submitForm() {
         },
         500: function _(jqxhr) {
           KTApp.unprogress(btn);
-            console.error(jqxhr);
+          console.error(jqxhr);
         }
       }
     });
   });
 }
 
-            loadTable();
-            submitForm();
+loadTable();
+submitForm();
 
-            /***/
-        }),
+/***/ }),
 
-        /***/ "./resources/js/admin/config.js":
-        /*!**************************************!*\
-          !*** ./resources/js/admin/config.js ***!
-          \**************************************/
-        /*! no static exports found */
-        /***/ (function (module, exports) {
+/***/ "./resources/js/admin/config.js":
+/*!**************************************!*\
+  !*** ./resources/js/admin/config.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-            var cache = document.querySelector("#btnRefreshCache");
-            cache.addEventListener('click', function (e) {
-                e.preventDefault();
-                KTApp.progress(cache);
-                $.get('/api/admin/cache').done(function () {
-                    KTApp.unprogress(cache);
-                    toastr.success("Le cache à été nettoyer");
-                }).fail(function () {
-                    KTApp.unprogress(cache);
-                    toastr.error("Erreur lors du nettoyage du cache");
-                });
-            });
+var cache = document.querySelector("#btnRefreshCache");
+cache.addEventListener('click', function (e) {
+  e.preventDefault();
+  KTApp.progress(cache);
+  $.get('/api/admin/cache').done(function () {
+    KTApp.unprogress(cache);
+    toastr.success("Le cache à été nettoyer");
+  }).fail(function () {
+    KTApp.unprogress(cache);
+    toastr.error("Erreur lors du nettoyage du cache");
+  });
+});
 
-            /***/
-        }),
+/***/ }),
 
-        /***/ 21:
-        /*!*********************************************************!*\
-          !*** multi ./resources/js/admin/blog/category/index.js ***!
-          \*********************************************************/
-        /*! no static exports found */
-        /***/ (function (module, exports, __webpack_require__) {
+/***/ 21:
+/*!*********************************************************!*\
+  !*** multi ./resources/js/admin/blog/category/index.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\blog\category\index.js */"./resources/js/admin/blog/category/index.js");
 

@@ -28,7 +28,7 @@ class CreateHelper extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = "Création d'un fichier Helpers";
 
     /**
      * Create a new command instance.
@@ -57,8 +57,7 @@ class CreateHelper extends Command
 
         $dossierOutput = app_path() . "/HelpersClass/" . $this->argument('dossier');
 
-        $content = "
-        <?php
+        $content = "<?php
 $namespace
 
 class $class
@@ -66,7 +65,7 @@ class $class
 
 }
 
-        ";
+";
 
         $this->isDir($dossierOutput);
         $stat = file_put_contents($dossierOutput . "/" . $class . ".php", $content);
