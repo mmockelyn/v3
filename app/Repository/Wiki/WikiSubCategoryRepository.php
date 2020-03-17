@@ -55,5 +55,12 @@ class WikiSubCategoryRepository
         return null;
     }
 
+    public function allByCategory($category_id)
+    {
+        return $this->wikiSubCategory->newQuery()
+            ->where('wiki_category_id', $category_id)
+            ->get();
+    }
+
 }
 

@@ -143,10 +143,10 @@
                             }
                         },
                         pageSize: 10,
-      serverPaging: true,
-      serverFiltering: true,
-      serverSorting: true
-    },
+                        serverPaging: true,
+                        serverFiltering: true,
+                        serverSorting: true
+                    },
     // layout definition
     layout: {
       scroll: false,

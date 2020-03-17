@@ -3503,10 +3503,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                             }
                         },
                         pageSize: 10,
-      serverPaging: true,
-      serverFiltering: true,
-      serverSorting: true
-    },
+                        serverPaging: true,
+                        serverFiltering: true,
+                        serverSorting: true
+                    },
     // layout definition
     layout: {
       scroll: false,

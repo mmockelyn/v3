@@ -208,6 +208,9 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
 
         Route::group(["prefix" => "article"], function () {
             Route::get('/', ["as" => "Back.Wiki.Article.index", "uses" => "WikiArticleController@index"]);
+            Route::get('{article_id}/edit', ["as" => "Back.Wiki.Article.edit", "uses" => "WikiArticleController@edit"]);
+            Route::put('{article_id}/editThumb', ["as" => "Back.Wiki.Article.editThumb", "uses" => "WikiArticleController@editThumb"]);
+            Route::get('{article_id}/delete', ["as" => "Back.Wiki.Article.delete", "uses" => "WikiArticleController@delete"]);
         });
     });
 

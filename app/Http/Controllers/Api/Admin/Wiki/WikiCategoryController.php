@@ -81,6 +81,25 @@ class WikiCategoryController extends BaseController
         }
     }
 
+    public function listSubByCategory(Request $request)
+    {
+        $datas = $this->wikiSubCategoryRepository->allByCategory($request->category_id);
+        ob_start();
+        ?>
+        <div class="form-group">
+            <label for="subcategory_id">Sous Catégorie</label>
+            <select id="subcategory_id" class="form-control" name="subcategory_id" data-live-search="true">
+                <?php foreach ($datas as $data): ?>
+                    <option value="<?= $data->id; ?>"><?= $data->name; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <?php
+        $content = ob_get_clean();
+
+        return $this->sendResponse($content, "Liste des subs");
+    }
+
     public function store(Request $request)
     {
         try {

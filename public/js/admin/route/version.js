@@ -20799,15 +20799,15 @@ var ui_ui = function ui(editorOptions) {
         statusbar: $editor.find('.note-statusbar')
       };
     },
-    removeLayout: function removeLayout($note, layoutInfo) {
-      $note.html(layoutInfo.editable.html());
-      layoutInfo.editor.remove();
-      $note.show();
-    }
+      removeLayout: function removeLayout($note, layoutInfo) {
+          $note.html(layoutInfo.editable.html());
+          layoutInfo.editor.remove();
+          $note.show();
+      }
   };
 };
 
-/* harmony default export */
+            /* harmony default export */
             var bs3_ui = (ui_ui);
 // EXTERNAL MODULE: ./src/js/base/settings.js + 37 modules
             var settings = __webpack_require__(3);
@@ -20903,15 +20903,15 @@ var ui_ui = function ui(editorOptions) {
                                     toastr.warning(error, "Erreur de validation");
                                 });
                             },
-        500: function _(jqxhr) {
-          KTApp.unprogress(btn);
-          toastr.error("Erreur lors de la modification de la description", "Erreur Système 500");
-          console.error(jqxhr);
-        }
-      }
-    });
-  });
-}
+                            500: function _(jqxhr) {
+                                KTApp.unprogress(btn);
+                                toastr.error("Erreur lors de la modification de la description", "Erreur Système 500");
+                                console.error(jqxhr);
+                            }
+                        }
+                    });
+                });
+            }
 
 function formWidget() {
   $(".summernote").summernote();

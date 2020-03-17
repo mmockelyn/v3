@@ -24236,12 +24236,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                     $(".kt-widget19__text").html(data.data.data.short_content);
                     var action = $(".kt-widget19__action");
 
-    if (data.data.data.published === 1) {
-      action.find('a').attr('href', '/blog/' + data.data.data.slug).attr('target', '_blank').html('Voir sur le site').addClass('btn btn-outline-info btn-sm btn-block');
-    } else {
-      action.find('a').remove();
-    }
-  });
+                    if (data.data.data.published === 1) {
+                        action.find('a').attr('href', '/blog/' + data.data.data.slug).attr('target', '_blank').html('Voir sur le site').addClass('btn btn-outline-info btn-sm btn-block');
+                    } else {
+                        action.find('a').remove();
+                    }
+                });
 }
 
 function publish() {
@@ -24515,11 +24515,11 @@ function postTags() {
             toastr.warning(error, "Erreur de validation");
           });
         },
-        500: function _(jqxhr) {
-            KTApp.unprogress(btn);
-            toastr.error("Erreur lors de l'ajout de tag à l'article", "Erreur Système");
-            console.error(jqxhr);
-        }
+          500: function _(jqxhr) {
+              KTApp.unprogress(btn);
+              toastr.error("Erreur lors de l'ajout de tag à l'article", "Erreur Système");
+              console.error(jqxhr);
+          }
       }
     });
   });

@@ -2082,11 +2082,11 @@
 		}
 
 		if ( $.support.fixedPosition === undefined ) {
-			$.support.fixedPosition = (function() {
-				var elem  = $('<div style="position:fixed;top:20px;"></div>').appendTo('body'),
-					fixed = ( elem[0].offsetTop === 20 || elem[0].offsetTop === 15 );
+            $.support.fixedPosition = (function () {
+                var elem = $('<div style="position:fixed;top:20px;"></div>').appendTo('body'),
+                    fixed = (elem[0].offsetTop === 20 || elem[0].offsetTop === 15);
 
-				elem.remove();
+                elem.remove();
 
                 return fixed;
             }());

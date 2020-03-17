@@ -3475,10 +3475,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
                             }
                         },
                         pageSize: 10,
-      serverPaging: true,
-      serverFiltering: true,
-      serverSorting: true
-    },
+                        serverPaging: true,
+                        serverFiltering: true,
+                        serverSorting: true
+                    },
     // layout definition
     layout: {
       scroll: false,
@@ -3551,14 +3551,14 @@ function submitForm() {
       method: 'post',
       data: data,
       statusCode: {
-        200: function _(data) {
-          KTApp.unprogress(btn);
-          console.log(data);
-          toastr.success(data.message, "Succès");
-          setTimeout(function () {
-              window.location.reload();
-          }, 1000);
-        },
+          200: function _(data) {
+              KTApp.unprogress(btn);
+              console.log(data);
+              toastr.success(data.message, "Succès");
+              setTimeout(function () {
+                  window.location.reload();
+              }, 1000);
+          },
           203: function _(data) {
               KTApp.unprogress(btn);
               console.log(data);
