@@ -86,63 +86,62 @@
 /************************************************************************/
 /******/ ({
 
-        /***/ "./resources/js/admin/config.js":
-        /*!**************************************!*\
-          !*** ./resources/js/admin/config.js ***!
-          \**************************************/
-        /*! no static exports found */
-        /***/ (function (module, exports) {
+/***/ "./resources/js/admin/config.js":
+/*!**************************************!*\
+  !*** ./resources/js/admin/config.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-            var cache = document.querySelector("#btnRefreshCache");
-            cache.addEventListener('click', function (e) {
-                e.preventDefault();
-                KTApp.progress(cache);
-                $.get('/api/admin/cache').done(function () {
-                    KTApp.unprogress(cache);
-                    toastr.success("Le cache à été nettoyer");
-                }).fail(function () {
-                    KTApp.unprogress(cache);
-                    toastr.error("Erreur lors du nettoyage du cache");
-                });
-            });
+var cache = document.querySelector("#btnRefreshCache");
+cache.addEventListener('click', function (e) {
+  e.preventDefault();
+  KTApp.progress(cache);
+  $.get('/api/admin/cache').done(function () {
+    KTApp.unprogress(cache);
+    toastr.success("Le cache à été nettoyer");
+  }).fail(function () {
+    KTApp.unprogress(cache);
+    toastr.error("Erreur lors du nettoyage du cache");
+  });
+});
 
-            /***/
-        }),
+/***/ }),
 
-        /***/ "./resources/js/admin/route/lab_edit.js":
-        /*!**********************************************!*\
-          !*** ./resources/js/admin/route/lab_edit.js ***!
-          \**********************************************/
-        /*! no static exports found */
-        /***/ (function (module, exports, __webpack_require__) {
+/***/ "./resources/js/admin/route/lab_edit.js":
+/*!**********************************************!*\
+  !*** ./resources/js/admin/route/lab_edit.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-            __webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
+__webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
 
-            function formEditAnomalie() {
-                var form = $("#formEditAnomalie");
-                form.on('submit', function (e) {
-                    e.preventDefault();
-                    var btn = form.find('button');
-                    var url = form.attr('action');
-                    var data = form.serializeArray();
-                    KTApp.progress(btn);
-                    $.ajax({
-                        url: url,
-                        method: 'PUT',
-                        data: data,
-                        success: function success(data) {
-                            KTApp.unprogress(btn);
-                            toastr.success("L'anomalie à été mise à jours", "Succès");
-                            $(".modal").modal('hide');
-                        },
-                        error: function error(err) {
-                            KTApp.unprogress(btn);
-                            toastr.error("Erreur lors de la mise à jour de l'anomalie", "Erreur Système 500");
-                            console.error(err);
-                        }
-                    });
-                });
-            }
+function formEditAnomalie() {
+  var form = $("#formEditAnomalie");
+  form.on('submit', function (e) {
+    e.preventDefault();
+    var btn = form.find('button');
+    var url = form.attr('action');
+    var data = form.serializeArray();
+    KTApp.progress(btn);
+    $.ajax({
+      url: url,
+      method: 'PUT',
+      data: data,
+      success: function success(data) {
+        KTApp.unprogress(btn);
+        toastr.success("L'anomalie à été mise à jours", "Succès");
+        $(".modal").modal('hide');
+      },
+      error: function error(err) {
+        KTApp.unprogress(btn);
+        toastr.error("Erreur lors de la mise à jour de l'anomalie", "Erreur Système 500");
+        console.error(err);
+      }
+    });
+  });
+}
 
 formEditAnomalie();
 

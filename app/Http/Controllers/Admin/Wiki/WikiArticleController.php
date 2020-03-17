@@ -45,6 +45,13 @@ class WikiArticleController extends Controller
         ]);
     }
 
+    public function show($article_id)
+    {
+        return view("admin.wiki.article.show", [
+            "article" => $this->wikiRepository->get($article_id)
+        ]);
+    }
+
     public function edit($article_id)
     {
         return view("admin.wiki.article.edit", [

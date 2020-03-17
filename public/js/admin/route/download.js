@@ -2922,7 +2922,7 @@ function nodeName( elem, name ) {
 
   return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 
-}
+};
 var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
 
 
@@ -10704,16 +10704,16 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
- *
+ * 
  * Super simple wysiwyg editor v0.8.16
  * https://summernote.org
- *
- *
+ * 
+ * 
  * Copyright 2013- Alan Hong. and other contributors
  * summernote may be freely distributed under the MIT license.
- *
+ * 
  * Date: 2020-02-19T09:12Z
- *
+ * 
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
@@ -15659,7 +15659,7 @@ function () {
 
           case TableResultAction.resultAction.RemoveCell:
             // Do not need remove cell because row will be deleted.
-
+            continue;
         }
       }
 
@@ -15718,7 +15718,7 @@ function () {
 
           case TableResultAction.resultAction.RemoveCell:
             dom.remove(actions[actionIndex].baseCell, true);
-
+            continue;
         }
       }
     }
@@ -24170,93 +24170,88 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               select: 'Select page size',
               all: 'all'
             },
-              info: 'Showing {{start}} - {{end}} of {{total}}'
+            info: 'Showing {{start}} - {{end}} of {{total}}'
           }
         }
       }
     },
-      extensions: {}
+    extensions: {}
   };
 })(jQuery);
 
-            /***/
-        }),
+/***/ }),
 
-        /***/ "./resources/js/admin/config.js":
-        /*!**************************************!*\
-          !*** ./resources/js/admin/config.js ***!
-          \**************************************/
-        /*! no static exports found */
-        /***/ (function (module, exports) {
+/***/ "./resources/js/admin/config.js":
+/*!**************************************!*\
+  !*** ./resources/js/admin/config.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-            var cache = document.querySelector("#btnRefreshCache");
-            cache.addEventListener('click', function (e) {
-                e.preventDefault();
-                KTApp.progress(cache);
-                $.get('/api/admin/cache').done(function () {
-                    KTApp.unprogress(cache);
-                    toastr.success("Le cache à été nettoyer");
-                }).fail(function () {
-                    KTApp.unprogress(cache);
-                    toastr.error("Erreur lors du nettoyage du cache");
-                });
-            });
+var cache = document.querySelector("#btnRefreshCache");
+cache.addEventListener('click', function (e) {
+  e.preventDefault();
+  KTApp.progress(cache);
+  $.get('/api/admin/cache').done(function () {
+    KTApp.unprogress(cache);
+    toastr.success("Le cache à été nettoyer");
+  }).fail(function () {
+    KTApp.unprogress(cache);
+    toastr.error("Erreur lors du nettoyage du cache");
+  });
+});
 
-            /***/
-        }),
+/***/ }),
 
-        /***/ "./resources/js/admin/route/download.js":
-        /*!**********************************************!*\
-          !*** ./resources/js/admin/route/download.js ***!
-          \**********************************************/
-        /*! no exports provided */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+/***/ "./resources/js/admin/route/download.js":
+/*!**********************************************!*\
+  !*** ./resources/js/admin/route/download.js ***!
+  \**********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony import */
-            var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js */ "./resources/demo5/src/assets/js/global/components/base/datatable/core.datatable.js");
-            /* harmony import */
-            var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__);
-            /* harmony import */
-            var summernote__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! summernote */ "./node_modules/summernote/dist/summernote.js");
-            /* harmony import */
-            var summernote__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(summernote__WEBPACK_IMPORTED_MODULE_1__);
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../demo5/src/assets/js/global/components/base/datatable/core.datatable.js */ "./resources/demo5/src/assets/js/global/components/base/datatable/core.datatable.js");
+/* harmony import */ var _demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_demo5_src_assets_js_global_components_base_datatable_core_datatable_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var summernote__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! summernote */ "./node_modules/summernote/dist/summernote.js");
+/* harmony import */ var summernote__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(summernote__WEBPACK_IMPORTED_MODULE_1__);
 
 
-            __webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
 
-            var route = $("#route");
-            var route_id = route.attr('data-id');
-            var tableauDownload = '';
-            var tableauUpdater = '';
+__webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
 
-            function loadTableDownload() {
-                var tableDownload = $("#listeDownload").KTDatatable({
-                    data: {
-                        type: 'remote',
-                        source: {
-                            read: {
-                                url: '/api/admin/route/' + route_id + '/download/loadDownload',
-                                // sample custom headers
-                                // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
-                                map: function map(raw) {
-                                    // sample data mapping
-                                    var dataSet = raw;
+var route = $("#route");
+var route_id = route.attr('data-id');
+var tableauDownload = '';
+var tableauUpdater = '';
 
-                                    if (typeof raw.data !== 'undefined') {
-                                        dataSet = raw.data;
-                                    }
+function loadTableDownload() {
+  var tableDownload = $("#listeDownload").KTDatatable({
+    data: {
+      type: 'remote',
+      source: {
+        read: {
+          url: '/api/admin/route/' + route_id + '/download/loadDownload',
+          // sample custom headers
+          // headers: {'x-my-custom-header': 'some value', 'x-test-header': 'the value'},
+          map: function map(raw) {
+            // sample data mapping
+            var dataSet = raw;
 
-                                    return dataSet;
-                                }
-                            }
-                        },
-                        pageSize: 10,
-                        serverPaging: true,
-                        serverFiltering: true,
-                        serverSorting: true
-                    },
+            if (typeof raw.data !== 'undefined') {
+              dataSet = raw.data;
+            }
+
+            return dataSet;
+          }
+        }
+      },
+      pageSize: 10,
+      serverPaging: true,
+      serverFiltering: true,
+      serverSorting: true
+    },
     // layout definition
     layout: {
       scroll: false,

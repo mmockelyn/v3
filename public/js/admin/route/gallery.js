@@ -2082,88 +2082,86 @@
 		}
 
 		if ( $.support.fixedPosition === undefined ) {
-            $.support.fixedPosition = (function () {
-                var elem = $('<div style="position:fixed;top:20px;"></div>').appendTo('body'),
-                    fixed = (elem[0].offsetTop === 20 || elem[0].offsetTop === 15);
+			$.support.fixedPosition = (function() {
+				var elem  = $('<div style="position:fixed;top:20px;"></div>').appendTo('body'),
+					fixed = ( elem[0].offsetTop === 20 || elem[0].offsetTop === 15 );
 
-                elem.remove();
+				elem.remove();
 
-                return fixed;
-            }());
-        }
+				return fixed;
+			}());
+		}
 
-        $.extend(F.defaults, {
-            scrollbarWidth: $.scrollbarWidth(),
-            fixed: $.support.fixedPosition,
-            parent: $('body')
-        });
+		$.extend(F.defaults, {
+			scrollbarWidth : $.scrollbarWidth(),
+			fixed  : $.support.fixedPosition,
+			parent : $('body')
+		});
 
-        //Get real width of page scroll-bar
-        w1 = $(window).width();
+		//Get real width of page scroll-bar
+		w1 = $(window).width();
 
-        H.addClass('fancybox-lock-test');
+		H.addClass('fancybox-lock-test');
 
-        w2 = $(window).width();
+		w2 = $(window).width();
 
-        H.removeClass('fancybox-lock-test');
+		H.removeClass('fancybox-lock-test');
 
-        $("<style type='text/css'>.fancybox-margin{margin-right:" + (w2 - w1) + "px;}</style>").appendTo("head");
-    });
+		$("<style type='text/css'>.fancybox-margin{margin-right:" + (w2 - w1) + "px;}</style>").appendTo("head");
+	});
 
-            }(window, document, jQuery));
+}(window, document, jQuery));
 
 
-            /***/
-        }),
+/***/ }),
 
-        /***/ "./resources/js/admin/config.js":
-        /*!**************************************!*\
-          !*** ./resources/js/admin/config.js ***!
-          \**************************************/
-        /*! no static exports found */
-        /***/ (function (module, exports) {
+/***/ "./resources/js/admin/config.js":
+/*!**************************************!*\
+  !*** ./resources/js/admin/config.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-            var cache = document.querySelector("#btnRefreshCache");
-            cache.addEventListener('click', function (e) {
-                e.preventDefault();
-                KTApp.progress(cache);
-                $.get('/api/admin/cache').done(function () {
-                    KTApp.unprogress(cache);
-                    toastr.success("Le cache à été nettoyer");
-                }).fail(function () {
-                    KTApp.unprogress(cache);
-                    toastr.error("Erreur lors du nettoyage du cache");
-                });
-            });
+var cache = document.querySelector("#btnRefreshCache");
+cache.addEventListener('click', function (e) {
+  e.preventDefault();
+  KTApp.progress(cache);
+  $.get('/api/admin/cache').done(function () {
+    KTApp.unprogress(cache);
+    toastr.success("Le cache à été nettoyer");
+  }).fail(function () {
+    KTApp.unprogress(cache);
+    toastr.error("Erreur lors du nettoyage du cache");
+  });
+});
 
-            /***/
-        }),
+/***/ }),
 
-        /***/ "./resources/js/admin/route/gallery.js":
-        /*!*********************************************!*\
-          !*** ./resources/js/admin/route/gallery.js ***!
-          \*********************************************/
-        /*! no static exports found */
-        /***/ (function (module, exports, __webpack_require__) {
+/***/ "./resources/js/admin/route/gallery.js":
+/*!*********************************************!*\
+  !*** ./resources/js/admin/route/gallery.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-            var fancybox = __webpack_require__(/*! fancybox/dist/js/jquery.fancybox */ "./node_modules/fancybox/dist/js/jquery.fancybox.js");
+var fancybox = __webpack_require__(/*! fancybox/dist/js/jquery.fancybox */ "./node_modules/fancybox/dist/js/jquery.fancybox.js");
 
-            var route = $("#route");
-            var route_id = route.attr('data-id');
+var route = $("#route");
+var route_id = route.attr('data-id');
 
-            __webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
+__webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
 
-            function uploadFile() {
-                $(".dropzone").dropzone({
-                    url: '/api/admin/route/' + route_id + '/gallery/uploadFile',
-                    paramName: 'file',
-                    addRemoveLinks: true,
-                    acceptedFiles: "image/*",
-                    success: function success(data) {
-                        toastr.success("Le fichier <strong>" + data.name + "</strong> à été uploader");
-                    }
-                });
-            }
+function uploadFile() {
+  $(".dropzone").dropzone({
+    url: '/api/admin/route/' + route_id + '/gallery/uploadFile',
+    paramName: 'file',
+    addRemoveLinks: true,
+    acceptedFiles: "image/*",
+    success: function success(data) {
+      toastr.success("Le fichier <strong>" + data.name + "</strong> à été uploader");
+    }
+  });
+}
 
 function formAddCategory() {
   var form = $("#formAddCategory");

@@ -2922,7 +2922,7 @@ function nodeName( elem, name ) {
 
   return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 
-}
+};
 var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
 
 
@@ -10704,16 +10704,16 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
- *
+ * 
  * Super simple wysiwyg editor v0.8.16
  * https://summernote.org
- *
- *
+ * 
+ * 
  * Copyright 2013- Alan Hong. and other contributors
  * summernote may be freely distributed under the MIT license.
- *
+ * 
  * Date: 2020-02-19T09:12Z
- *
+ * 
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
@@ -15659,7 +15659,7 @@ function () {
 
           case TableResultAction.resultAction.RemoveCell:
             // Do not need remove cell because row will be deleted.
-
+            continue;
         }
       }
 
@@ -15718,7 +15718,7 @@ function () {
 
           case TableResultAction.resultAction.RemoveCell:
             dom.remove(actions[actionIndex].baseCell, true);
-
+            continue;
         }
       }
     }
@@ -20799,120 +20799,115 @@ var ui_ui = function ui(editorOptions) {
         statusbar: $editor.find('.note-statusbar')
       };
     },
-      removeLayout: function removeLayout($note, layoutInfo) {
-          $note.html(layoutInfo.editable.html());
-          layoutInfo.editor.remove();
-          $note.show();
-      }
+    removeLayout: function removeLayout($note, layoutInfo) {
+      $note.html(layoutInfo.editable.html());
+      layoutInfo.editor.remove();
+      $note.show();
+    }
   };
 };
 
-            /* harmony default export */
-            var bs3_ui = (ui_ui);
+/* harmony default export */ var bs3_ui = (ui_ui);
 // EXTERNAL MODULE: ./src/js/base/settings.js + 37 modules
-            var settings = __webpack_require__(3);
+var settings = __webpack_require__(3);
 
 // EXTERNAL MODULE: ./src/styles/summernote-bs3.scss
-            var summernote_bs3 = __webpack_require__(4);
+var summernote_bs3 = __webpack_require__(4);
 
 // CONCATENATED MODULE: ./src/js/bs3/settings.js
 
 
-            external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.summernote = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.extend(external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.summernote, {
-                ui_template: bs3_ui,
-                "interface": 'bs3'
-            });
 
-            /***/
-        })
 
-        /******/
-    });
+external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.summernote = external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.extend(external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.summernote, {
+  ui_template: bs3_ui,
+  "interface": 'bs3'
+});
+
+/***/ })
+
+/******/ });
 });
 //# sourceMappingURL=summernote.js.map
 
-            /***/
-        }),
+/***/ }),
 
-        /***/ "./resources/js/admin/config.js":
-        /*!**************************************!*\
-          !*** ./resources/js/admin/config.js ***!
-          \**************************************/
-        /*! no static exports found */
-        /***/ (function (module, exports) {
+/***/ "./resources/js/admin/config.js":
+/*!**************************************!*\
+  !*** ./resources/js/admin/config.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-            var cache = document.querySelector("#btnRefreshCache");
-            cache.addEventListener('click', function (e) {
-                e.preventDefault();
-                KTApp.progress(cache);
-                $.get('/api/admin/cache').done(function () {
-                    KTApp.unprogress(cache);
-                    toastr.success("Le cache à été nettoyer");
-                }).fail(function () {
-                    KTApp.unprogress(cache);
-                    toastr.error("Erreur lors du nettoyage du cache");
-                });
-            });
+var cache = document.querySelector("#btnRefreshCache");
+cache.addEventListener('click', function (e) {
+  e.preventDefault();
+  KTApp.progress(cache);
+  $.get('/api/admin/cache').done(function () {
+    KTApp.unprogress(cache);
+    toastr.success("Le cache à été nettoyer");
+  }).fail(function () {
+    KTApp.unprogress(cache);
+    toastr.error("Erreur lors du nettoyage du cache");
+  });
+});
 
-            /***/
-        }),
+/***/ }),
 
-        /***/ "./resources/js/admin/route/show.js":
-        /*!******************************************!*\
-          !*** ./resources/js/admin/route/show.js ***!
-          \******************************************/
-        /*! no exports provided */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+/***/ "./resources/js/admin/route/show.js":
+/*!******************************************!*\
+  !*** ./resources/js/admin/route/show.js ***!
+  \******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony import */
-            var summernote__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! summernote */ "./node_modules/summernote/dist/summernote.js");
-            /* harmony import */
-            var summernote__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(summernote__WEBPACK_IMPORTED_MODULE_0__);
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var summernote__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! summernote */ "./node_modules/summernote/dist/summernote.js");
+/* harmony import */ var summernote__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(summernote__WEBPACK_IMPORTED_MODULE_0__);
 
 
-            __webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
+__webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
 
-            var route = $("#route");
-            var route_id = route.attr('data-id');
-            var route_published = route.attr('data-published');
+var route = $("#route");
+var route_id = route.attr('data-id');
+var route_published = route.attr('data-published');
 
-            function submitDescriptionForm() {
-                var form = $("#formEditDescription");
-                form.on('submit', function (e) {
-                    e.preventDefault();
-                    var btn = form.find('button');
-                    var data = form.serializeArray();
-                    var url = form.attr('action');
-                    KTApp.progress(btn);
-                    $.ajax({
-                        url: url,
-                        method: 'PUT',
-                        data: data,
-                        statusCode: {
-                            200: function _(data) {
-                                KTApp.unprogress(btn);
-                                toastr.success("La description à été mis à jour avec succès", "Succès");
-                                setTimeout(function () {
-                                    window.location.reload();
-                                }, 1200);
-                            },
-                            203: function _(data) {
-                                KTApp.unprogress(btn);
-                                Array.from(data.data.errors).forEach(function (error) {
-                                    toastr.warning(error, "Erreur de validation");
-                                });
-                            },
-                            500: function _(jqxhr) {
-                                KTApp.unprogress(btn);
-                                toastr.error("Erreur lors de la modification de la description", "Erreur Système");
-                                console.error(jqxhr);
-                            }
-                        }
-                    });
-                });
-            }
+function submitDescriptionForm() {
+  var form = $("#formEditDescription");
+  form.on('submit', function (e) {
+    e.preventDefault();
+    var btn = form.find('button');
+    var data = form.serializeArray();
+    var url = form.attr('action');
+    KTApp.progress(btn);
+    $.ajax({
+      url: url,
+      method: 'PUT',
+      data: data,
+      statusCode: {
+        200: function _(data) {
+          KTApp.unprogress(btn);
+          toastr.success("La description à été mis à jour avec succès", "Succès");
+          setTimeout(function () {
+            window.location.reload();
+          }, 1200);
+        },
+        203: function _(data) {
+          KTApp.unprogress(btn);
+          Array.from(data.data.errors).forEach(function (error) {
+            toastr.warning(error, "Erreur de validation");
+          });
+        },
+        500: function _(jqxhr) {
+          KTApp.unprogress(btn);
+          toastr.error("Erreur lors de la modification de la description", "Erreur Système");
+          console.error(jqxhr);
+        }
+      }
+    });
+  });
+}
 
 function formFormat() {
   $(".summernote").summernote({

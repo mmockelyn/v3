@@ -2947,7 +2947,7 @@ function nodeName( elem, name ) {
 
   return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 
-}
+};
 var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
 
 
@@ -28334,16 +28334,16 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
- *
+ * 
  * Super simple wysiwyg editor v0.8.16
  * https://summernote.org
- *
- *
+ * 
+ * 
  * Copyright 2013- Alan Hong. and other contributors
  * summernote may be freely distributed under the MIT license.
- *
+ * 
  * Date: 2020-02-19T09:12Z
- *
+ * 
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
@@ -33289,7 +33289,7 @@ function () {
 
           case TableResultAction.resultAction.RemoveCell:
             // Do not need remove cell because row will be deleted.
-
+            continue;
         }
       }
 
@@ -33348,7 +33348,7 @@ function () {
 
           case TableResultAction.resultAction.RemoveCell:
             dom.remove(actions[actionIndex].baseCell, true);
-
+            continue;
         }
       }
     }
@@ -38502,37 +38502,33 @@ module.exports = function(module) {
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony import */
-            var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-            /* harmony import */
-            var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
-            /* harmony import */
-            var summernote__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! summernote */ "./node_modules/summernote/dist/summernote.js");
-            /* harmony import */
-            var summernote__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(summernote__WEBPACK_IMPORTED_MODULE_1__);
-            /* harmony import */
-            var bootstrap_datetimepicker_src_js_locales_bootstrap_datetimepicker_fr_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap-datetimepicker/src/js/locales/bootstrap-datetimepicker.fr.js */ "./node_modules/bootstrap-datetimepicker/src/js/locales/bootstrap-datetimepicker.fr.js");
-            /* harmony import */
-            var bootstrap_datetimepicker_src_js_locales_bootstrap_datetimepicker_fr_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bootstrap_datetimepicker_src_js_locales_bootstrap_datetimepicker_fr_js__WEBPACK_IMPORTED_MODULE_2__);
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var summernote__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! summernote */ "./node_modules/summernote/dist/summernote.js");
+/* harmony import */ var summernote__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(summernote__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var bootstrap_datetimepicker_src_js_locales_bootstrap_datetimepicker_fr_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap-datetimepicker/src/js/locales/bootstrap-datetimepicker.fr.js */ "./node_modules/bootstrap-datetimepicker/src/js/locales/bootstrap-datetimepicker.fr.js");
+/* harmony import */ var bootstrap_datetimepicker_src_js_locales_bootstrap_datetimepicker_fr_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bootstrap_datetimepicker_src_js_locales_bootstrap_datetimepicker_fr_js__WEBPACK_IMPORTED_MODULE_2__);
 
 
-            __webpack_require__(/*! ../../config */ "./resources/js/admin/config.js");
 
-            function twitterCheck() {
-                var checkbox = document.getElementById('twitterCheck');
-                var div = document.getElementById('textTwitter');
-                checkbox.addEventListener('change', function (e) {
-                    if (checkbox.checked == true) {
-                        console.log('checked');
-                        div.style.display = 'block';
-                    } else {
-                        console.log('None');
-                        div.style.display = 'none';
-                    }
-                });
-            }
+
+__webpack_require__(/*! ../../config */ "./resources/js/admin/config.js");
+
+function twitterCheck() {
+  var checkbox = document.getElementById('twitterCheck');
+  var div = document.getElementById('textTwitter');
+  checkbox.addEventListener('change', function (e) {
+    if (checkbox.checked == true) {
+      console.log('checked');
+      div.style.display = 'block';
+    } else {
+      console.log('None');
+      div.style.display = 'none';
+    }
+  });
+}
 
 function formatField() {
   $("#published_at").datetimepicker({
@@ -38614,66 +38610,62 @@ function postEditContent() {
     var data = form.serializeArray();
     KTApp.progress(btn);
     $.ajax({
-        url: url,
-        method: 'PUT',
-        data: data,
-        success: function success(data) {
-            KTApp.unprogress(btn);
-            toastr.success("Les information de contenue ont été mis à jour", "Succès");
-        },
-        error: function error(jqxhr) {
-            KTApp.unprogress(btn);
-            toastr.error("Erreur lors de la mise à jours des informations de contenue", "Erreur système");
-            console.error(jqxhr);
-        }
+      url: url,
+      method: 'PUT',
+      data: data,
+      success: function success(data) {
+        KTApp.unprogress(btn);
+        toastr.success("Les information de contenue ont été mis à jour", "Succès");
+      },
+      error: function error(jqxhr) {
+        KTApp.unprogress(btn);
+        toastr.error("Erreur lors de la mise à jours des informations de contenue", "Erreur système");
+        console.error(jqxhr);
+      }
     });
   });
 }
 
-            formatField();
-            twitterCheck();
-            postEditInfo();
-            postTwitterText();
-            postEditContent();
+formatField();
+twitterCheck();
+postEditInfo();
+postTwitterText();
+postEditContent();
 
-            /***/
-        }),
+/***/ }),
 
-        /***/ "./resources/js/admin/config.js":
-        /*!**************************************!*\
-          !*** ./resources/js/admin/config.js ***!
-          \**************************************/
-        /*! no static exports found */
-        /***/ (function (module, exports) {
+/***/ "./resources/js/admin/config.js":
+/*!**************************************!*\
+  !*** ./resources/js/admin/config.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-            var cache = document.querySelector("#btnRefreshCache");
-            cache.addEventListener('click', function (e) {
-                e.preventDefault();
-                KTApp.progress(cache);
-                $.get('/api/admin/cache').done(function () {
-                    KTApp.unprogress(cache);
-                    toastr.success("Le cache à été nettoyer");
-                }).fail(function () {
-                    KTApp.unprogress(cache);
-                    toastr.error("Erreur lors du nettoyage du cache");
-                });
-            });
+var cache = document.querySelector("#btnRefreshCache");
+cache.addEventListener('click', function (e) {
+  e.preventDefault();
+  KTApp.progress(cache);
+  $.get('/api/admin/cache').done(function () {
+    KTApp.unprogress(cache);
+    toastr.success("Le cache à été nettoyer");
+  }).fail(function () {
+    KTApp.unprogress(cache);
+    toastr.error("Erreur lors du nettoyage du cache");
+  });
+});
 
-            /***/
-        }),
+/***/ }),
 
-        /***/ 24:
-        /*!*******************************************************!*\
-          !*** multi ./resources/js/admin/blog/article/edit.js ***!
-          \*******************************************************/
-        /*! no static exports found */
-        /***/ (function (module, exports, __webpack_require__) {
+/***/ 24:
+/*!*******************************************************!*\
+  !*** multi ./resources/js/admin/blog/article/edit.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-            module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\blog\article\edit.js */"./resources/js/admin/blog/article/edit.js");
+module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\blog\article\edit.js */"./resources/js/admin/blog/article/edit.js");
 
 
-            /***/
-        })
+/***/ })
 
-        /******/
-    });
+/******/ });
