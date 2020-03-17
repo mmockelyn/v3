@@ -19,3 +19,8 @@ before_script:
 script:
   - phpunit --coverage-clover=coverage.xml
   - bash <(curl -s https://codecov.io/bash)
+deploy:
+  - provider: script
+    script: bash deploy.sh
+    on:
+      branch: production
