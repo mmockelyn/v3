@@ -7,7 +7,9 @@ use App\Http\Controllers\Api\BaseController;
 use App\Repository\Route\RouteAnomalieRepository;
 use App\Repository\Route\RouteBuildRepository;
 use App\Repository\Route\RouteRepository;
+use Exception;
 use Illuminate\Http\Request;
+use Validator;
 use function App\HelpersClass\list_filter;
 
 class RouteLabController extends BaseController
@@ -120,7 +122,7 @@ class RouteLabController extends BaseController
 
     public function store(Request $request, $route_id)
     {
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             "correction" => "required",
             "lieu" => "required",
             "state" => "required"
@@ -147,7 +149,7 @@ class RouteLabController extends BaseController
             );
 
             return $this->sendResponse($anomalie, "OK");
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
@@ -266,13 +268,13 @@ class RouteLabController extends BaseController
                 $request->state
             );
 
-            if($request->state == 2) {
+            if ($request->state == 2) {
                 $newBuild = RouteLabHelper::calcNewBuild($route_id);
                 $this->routeBuildRepository->updateBuild($route_id, $newBuild);
             }
 
             return $this->sendResponse("ok", "ok");
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
@@ -285,7 +287,7 @@ class RouteLabController extends BaseController
             $this->routeAnomalieRepository->delete($anomalie_id);
 
             return redirect()->back()->with('success', "L'anomalie à été supprimer avec succès");
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
     }

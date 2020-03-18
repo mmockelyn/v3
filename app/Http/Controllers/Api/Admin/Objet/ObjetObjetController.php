@@ -2,17 +2,11 @@
 
 namespace App\Http\Controllers\Api\Admin\Objet;
 
-use App\Events\Asset\AssetPublish;
 use App\HelpersClass\Asset\AssetHelper;
 use App\HelpersClass\Core\Datatable;
 use App\HelpersClass\Core\ZipFile;
 use App\Http\Controllers\Api\BaseController;
-use App\Http\Controllers\Controller;
-use App\Jobs\Asset\AssetPublishJob;
-use App\Jobs\Asset\AssetPublishSocialJob;
-use App\Jobs\Objet\ExtractFbxFile;
-use App\Notifications\Asset\AssetPublishFacebook;
-use App\Notifications\Asset\AssetPublishTwitter;
+use App\Notifications\Asset\AssetPublish;
 use App\Repository\Asset\AssetCompatibilityRepository;
 use App\Repository\Asset\AssetRepository;
 use App\Repository\Asset\AssetTagRepository;
@@ -179,7 +173,7 @@ class ObjetObjetController extends BaseController
         $asset = $this->assetRepository->find($asset_id);
         $users = User::all();
         foreach ($users as $user) {
-            $user->notify(new \App\Notifications\Asset\AssetPublish($asset));
+            $user->notify(new AssetPublish($asset));
         }
         return $this->sendResponse('ok', 'ok');
     }

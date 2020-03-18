@@ -9,10 +9,8 @@ use App\Repository\Asset\AssetRepository;
 use App\Repository\Asset\AssetTagRepository;
 use App\Repository\Core\TrainzBuildRepository;
 use Exception;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\View\View;
 
 class ObjetObjetController extends Controller
 {

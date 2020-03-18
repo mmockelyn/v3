@@ -2,7 +2,6 @@
 namespace App\Repository\Tutoriel;
 
 use App\Model\Tutoriel\TutorielSubCategory;
-use Illuminate\Support\Str;
 
 class TutorielSubCategoryRepository
 {

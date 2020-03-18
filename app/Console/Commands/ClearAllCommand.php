@@ -47,11 +47,11 @@ class ClearAllCommand extends Command
      */
     public function handle()
     {
-        exec('composer dumpautoload');
         $this->call('clear');
         $this->call('view:clear');
         $this->call('cache:clear');
         $this->call('config:clear');
         $this->call('route:clear');
     }
+
 }

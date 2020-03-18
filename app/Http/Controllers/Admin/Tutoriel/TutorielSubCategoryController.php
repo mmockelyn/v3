@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Notifications\Core\ErrorSlackNotification;
 use App\Repository\Tutoriel\TutorielSubCategoryRepository;
 use Exception;
-use Illuminate\Http\Request;
 
 class TutorielSubCategoryController extends Controller
 {

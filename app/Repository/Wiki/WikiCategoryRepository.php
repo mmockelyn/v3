@@ -33,5 +33,22 @@ class WikiCategoryRepository
             ->load('subcategories');
     }
 
+    public function create($name)
+    {
+        return $this->wikiCategory->newQuery()
+            ->create([
+                "name" => $name
+            ]);
+    }
+
+    public function delete($category_id)
+    {
+        $this->wikiCategory->newQuery()
+            ->find($category_id)
+            ->delete();
+
+        return null;
+    }
+
 }
 

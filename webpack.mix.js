@@ -71,6 +71,12 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/admin/tutoriel/video/edit.js', 'public/js/admin/tutoriel/video')
     .js('resources/js/admin/tutoriel/video/show.js', 'public/js/admin/tutoriel/video')
 
+    .js('resources/js/admin/wiki/index.js', 'public/js/admin/wiki')
+    .js('resources/js/admin/wiki/category/index.js', 'public/js/admin/wiki/category')
+    .js('resources/js/admin/wiki/article/index.js', 'public/js/admin/wiki/article')
+    .js('resources/js/admin/wiki/article/edit.js', 'public/js/admin/wiki/article')
+    .js('resources/js/admin/wiki/article/show.js', 'public/js/admin/wiki/article')
+
 
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/route.scss', 'public/css')

@@ -57379,3 +57379,79 @@ svg.leaflet-image-layer.leaflet-interactive path {
   font-size: 0.9rem;
 }
 
+.notification {
+  width: 435px;
+  height: 161px;
+  background: #1E2023;
+  border-radius: 3px;
+}
+
+.notification-badge {
+  width: 46px;
+  background: #12151F;
+  border-radius: 3px 0px 0px 3px;
+}
+
+.notification-badge--circle {
+  width: 13px;
+  height: 13px;
+  top: calc(50% - 13px / 2 + 1px);
+}
+
+.notification-badge--circle .success {
+  background: #4caf50;
+}
+
+.notification-badge--circle .warning {
+  background: #FF5722;
+}
+
+.notification-badge--circle .error {
+  background: #f44336;
+}
+
+.notification-badge--circle .info {
+  background: #3F51B5;
+}
+
+.notification-text {
+  position: absolute;
+  width: 356px;
+  height: 129px;
+  left: 69px;
+  top: 8px;
+}
+
+.notification-text .title {
+  position: absolute;
+  height: 40px;
+  left: 69px;
+  right: 10px;
+  top: 8px;
+  font-family: Open Sans, serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+}
+
+.notification-text .content {
+  position: absolute;
+  height: 80px;
+  left: 69px;
+  right: 10px;
+  top: 57px;
+  font-family: Open Sans, serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 140%;
+  /* or 20px */
+  /* Gris clair */
+  color: #F7FAFB;
+  opacity: 0.6;
+}
+

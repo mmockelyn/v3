@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api\Admin\Route;
 use App\Http\Controllers\Api\BaseController;
 use App\Repository\Route\RouteDownloadRepository;
 use App\Repository\Route\RouteUpdaterRepository;
+use Exception;
 use Illuminate\Http\Request;
+use Validator;
 use function App\HelpersClass\list_filter;
 
 class RouteDownloadController extends BaseController
@@ -225,7 +227,7 @@ class RouteDownloadController extends BaseController
 
     public function storeDownload(Request $request, $route_id)
     {
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             "version" => "required",
             "build" => "required",
             "linkDownload" => "required|url"
@@ -251,7 +253,7 @@ class RouteDownloadController extends BaseController
             );
 
             return $this->sendResponse($download, "OK");
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
@@ -260,7 +262,7 @@ class RouteDownloadController extends BaseController
 
     public function storeUpdater(Request $request, $route_id)
     {
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             "version" => "required",
             "build" => "required",
             "linkRelease" => "required|url"
@@ -291,7 +293,7 @@ class RouteDownloadController extends BaseController
             );
 
             return $this->sendResponse($download, "OK");
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);

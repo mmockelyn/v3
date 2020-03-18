@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Objet;
 
 use App\Http\Controllers\Controller;
 use App\Repository\Asset\AssetCategoryRepository;
+use Exception;
 
 class ObjetCategoryController extends Controller
 {
@@ -33,7 +34,7 @@ class ObjetCategoryController extends Controller
             $this->assetCategoryRepository->delete($category_id);
 
             return redirect()->back()->with('success', "La catégorie à été supprimer");
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
         }
     }
