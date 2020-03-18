@@ -29,6 +29,7 @@
     "/js/admin/tutoriel/video/show.js": "/js/admin/tutoriel/video/show.js",
     "/js/admin/user/gestion/edit.js": "/js/admin/user/gestion/edit.js",
     "/js/admin/user/gestion/index.js": "/js/admin/user/gestion/index.js",
+    "/js/admin/user/gestion/show.js": "/js/admin/user/gestion/show.js",
     "/js/admin/user/index.js": "/js/admin/user/index.js",
     "/js/admin/wiki/article/edit.js": "/js/admin/wiki/article/edit.js",
     "/js/admin/wiki/article/index.js": "/js/admin/wiki/article/index.js",

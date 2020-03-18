@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front\Blog;
 
+use App\HelpersClass\Account\AccountActivityHelper;
 use App\HelpersClass\Blog\BlogHelper;
 use App\Http\Controllers\Api\BaseController;
 use App\Notifications\Blog\PostNewComment;
@@ -68,8 +69,8 @@ class BlogApiController extends BaseController
         ?>
         <?php if(count($datas) == 0): ?>
 
-        <?php else: ?>
-            <?php foreach ($datas as $data): ?>
+    <?php else: ?>
+        <?php foreach ($datas as $data): ?>
             <div class="tz-blog__lists">
                 <a class="card mb-3" href="<?= route('Front.Blog.show', $data->slug) ?>">
                     <div class="row no-gutters">
@@ -97,8 +98,8 @@ class BlogApiController extends BaseController
                     </div>
                 </a>
             </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
         <?php
         $content = ob_get_clean();
 
@@ -119,12 +120,14 @@ class BlogApiController extends BaseController
             $data = $this->blogCommentRepository->create($blog_id, auth()->user()->id, $request->comment);
             $blog = $this->blogRepository->get($blog_id);
 
+            AccountActivityHelper::storeActivity("Poste d'un commentaire sur l'article <strong>" . $blog->title . "</strong>", 'la la-comment', '2');
             auth()->user()->notify(new PostNewComment($blog));
             foreach ($blog->comments as $comment) {
                 $comment->user->notify(new PostNewCommentOther($blog));
             }
             return $this->sendResponse($data, "Post d'un commentaire");
         } catch (Exception $exception) {
+            AccountActivityHelper::storeActivity("Poste d'un commentaire sur l'article <strong>" . $blog->title . "</strong>", 'la la-comment', '0');
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
@@ -134,10 +137,13 @@ class BlogApiController extends BaseController
     public function deleteComment(Request $request, $blog_id, $comment_id)
     {
         try {
+            $blog = $this->blogRepository->get($blog_id);
             $this->blogCommentRepository->delete($comment_id);
 
+            AccountActivityHelper::storeActivity("Suppression d'un commentaire sur l'article <strong>" . $blog->title . "</strong>", 'la la-comment', '2');
             return $this->sendResponse("Done", "Suppression du commentaire");
         } catch (Exception $exception) {
+            AccountActivityHelper::storeActivity("Suppression d'un commentaire sur l'article <strong>" . $blog->title . "</strong>", 'la la-comment', '0');
             return $this->sendError("Erreur de suppression d'un commentaire", [
                 "errors" => $exception->getMessage()
             ]);

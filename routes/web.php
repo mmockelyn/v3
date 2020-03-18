@@ -221,6 +221,7 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
 
         Route::group(["prefix" => "gestion"], function () {
             Route::get('/', ["as" => "Back.User.Gestion.index", "uses" => "UserGestionController@index"]);
+            Route::get('{user_id}', ["as" => "Back.User.Gestion.show", "uses" => "UserGestionController@show"]);
             Route::get('{user_id}/ban', 'UserGestionController@ban');
             Route::get('{user_id}/unban', 'UserGestionController@unban');
             Route::get('{user_id}/edit', 'UserGestionController@edit');

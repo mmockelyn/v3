@@ -36,6 +36,13 @@ class UserGestionController extends Controller
         ]);
     }
 
+    public function show($user_id)
+    {
+        return view("admin.user.gestion.show", [
+            "user" => $this->userRepository->getUser($user_id)
+        ]);
+    }
+
     public function delete($user_id)
     {
         try {
