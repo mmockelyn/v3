@@ -218,6 +218,10 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
 
     Route::group(["prefix" => "user", "namespace" => "User"], function (){
         Route::get('/', ["as" => "Back.User.index", "uses" => "UserController@index"]);
+
+        Route::group(["prefix" => "gestion"], function () {
+            Route::get('/', ["as" => "Back.User.Gestion.index", "uses" => "UserGestionController@index"]);
+        });
     });
 
     Route::group(["prefix" => "slideshow", "namespace" => "Slideshow"], function (){

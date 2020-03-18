@@ -267,6 +267,11 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::get('{article_id}/unpublish', 'WikiArticleController@unpublish');
         });
     });
+
+    Route::group(["prefix" => "user", "namespace" => "User"], function () {
+        Route::post('latestSubscribe', 'UserController@latestSubscribe');
+        Route::post('latestLogin', 'UserController@latestLogin');
+    });
 });
 
 Route::get('search', 'SearchController@search');

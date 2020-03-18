@@ -62,5 +62,13 @@ class UserRepository
             ->get();
     }
 
+    public function latestSubscribe()
+    {
+        return $this->user->newQuery()
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
+    }
+
 }
 

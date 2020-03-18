@@ -167,14 +167,14 @@
             /***/
         }),
 
-/***/ 47:
-/*!*******************************************************!*\
-  !*** multi ./resources/js/admin/wiki/article/show.js ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+        /***/ 47:
+        /*!*******************************************************!*\
+          !*** multi ./resources/js/admin/wiki/article/show.js ***!
+          \*******************************************************/
+        /*! no static exports found */
+        /***/ (function (module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\wiki\article\show.js */"./resources/js/admin/wiki/article/show.js");
+            module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\wiki\article\show.js */"./resources/js/admin/wiki/article/show.js");
 
 
 /***/ })

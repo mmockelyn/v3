@@ -63,5 +63,14 @@ class UserAccountRepository
         return null;
     }
 
+    public function latestLogin()
+    {
+        return $this->userAccount->newQuery()
+            ->where('last_login', '!=', null)
+            ->orderBy('last_login', 'desc')
+            ->limit(5)
+            ->get();
+    }
+
 }
 
