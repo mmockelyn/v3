@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Wiki;
 
 use App\Http\Controllers\Controller;
+use App\Repository\Wiki\WikiArticleContentRepository;
+use App\Repository\Wiki\WikiArticleSommaireRepository;
 use App\Repository\Wiki\WikiCategoryRepository;
 use App\Repository\Wiki\WikiRepository;
 use App\Repository\Wiki\WikiSubCategoryRepository;
@@ -24,18 +26,34 @@ class WikiArticleController extends Controller
      * @var WikiSubCategoryRepository
      */
     private $subCategoryRepository;
+    /**
+     * @var WikiArticleSommaireRepository
+     */
+    private $articleSommaireRepository;
+    /**
+     * @var WikiArticleContentRepository
+     */
+    private $articleContentRepository;
 
     /**
      * WikiArticleController constructor.
      * @param WikiRepository $wikiRepository
      * @param WikiCategoryRepository $categoryRepository
      * @param WikiSubCategoryRepository $subCategoryRepository
+     * @param WikiArticleSommaireRepository $articleSommaireRepository
+     * @param WikiArticleContentRepository $articleContentRepository
      */
-    public function __construct(WikiRepository $wikiRepository, WikiCategoryRepository $categoryRepository, WikiSubCategoryRepository $subCategoryRepository)
+    public function __construct(
+        WikiRepository $wikiRepository,
+        WikiCategoryRepository $categoryRepository,
+        WikiSubCategoryRepository $subCategoryRepository,
+        WikiArticleSommaireRepository $articleSommaireRepository, WikiArticleContentRepository $articleContentRepository)
     {
         $this->wikiRepository = $wikiRepository;
         $this->categoryRepository = $categoryRepository;
         $this->subCategoryRepository = $subCategoryRepository;
+        $this->articleSommaireRepository = $articleSommaireRepository;
+        $this->articleContentRepository = $articleContentRepository;
     }
 
     public function index()
@@ -48,7 +66,8 @@ class WikiArticleController extends Controller
     public function show($article_id)
     {
         return view("admin.wiki.article.show", [
-            "article" => $this->wikiRepository->get($article_id)
+            "article" => $this->wikiRepository->get($article_id),
+            "sommaires" => $this->articleSommaireRepository->getForArticle($article_id)
         ]);
     }
 
@@ -104,6 +123,21 @@ class WikiArticleController extends Controller
             return redirect()->back()->with('success', "L'article à été supprimer");
         } catch (Exception $exception) {
             return redirect()->back()->with('error', "Erreur lors de la suppression de l'article");
+        }
+    }
+
+    public function deleteSommaire($article_id, $sommaire_id)
+    {
+        try {
+            $this->articleSommaireRepository->delete($sommaire_id);
+            try {
+                $this->articleContentRepository->deleteBySommaire($sommaire_id);
+                return redirect()->back()->with('success', "Le contenue de l'article à été supprimer");
+            } catch (Exception $exception) {
+                return redirect()->back()->with('error', "Erreur lors de la suppression du contenue");
+            }
+        } catch (Exception $exception) {
+            return redirect()->back()->with('error', "Erreur lors de la suppression du sommaire");
         }
     }
 }

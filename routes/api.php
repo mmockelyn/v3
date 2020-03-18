@@ -262,6 +262,9 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::post('list', 'WikiArticleController@list');
             Route::post('/', 'WikiArticleController@store');
             Route::put('{article_id}/editInfo', 'WikiArticleController@editInfo');
+            Route::post('{article_id}/addContent', 'WikiArticleController@addContent');
+            Route::get('{article_id}/publish', 'WikiArticleController@publish');
+            Route::get('{article_id}/unpublish', 'WikiArticleController@unpublish');
         });
     });
 });

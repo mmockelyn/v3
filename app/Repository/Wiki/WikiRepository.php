@@ -106,5 +106,24 @@ class WikiRepository
             ]);
     }
 
+    public function publish($article_id)
+    {
+        return $this->wiki->newQuery()
+            ->find($article_id)
+            ->update([
+                "published" => 1,
+                "published_at" => now()
+            ]);
+    }
+
+    public function unpublish($article_id)
+    {
+        return $this->wiki->newQuery()
+            ->find($article_id)
+            ->update([
+                "published" => 0
+            ]);
+    }
+
 }
 

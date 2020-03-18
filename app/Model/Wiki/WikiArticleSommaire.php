@@ -14,8 +14,8 @@ class WikiArticleSommaire extends Model
         return $this->belongsTo(Wiki::class, 'wiki_id');
     }
 
-    public function contents()
+    public function content()
     {
-        return $this->hasMany(WikiArticleContent::class);
+        return $this->hasOne(WikiArticleContent::class);
     }
 }
