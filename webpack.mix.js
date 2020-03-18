@@ -78,6 +78,8 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/admin/wiki/article/show.js', 'public/js/admin/wiki/article')
 
     .js('resources/js/admin/user/index.js', 'public/js/admin/user')
+    .js('resources/js/admin/user/gestion/index.js', 'public/js/admin/user/gestion')
+    .js('resources/js/admin/user/gestion/edit.js', 'public/js/admin/user/gestion')
 
 
     .sass('resources/sass/app.scss', 'public/css')

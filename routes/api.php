@@ -269,8 +269,11 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
     });
 
     Route::group(["prefix" => "user", "namespace" => "User"], function () {
+        Route::post('/', 'UserController@listeUser');
+        Route::post('create', 'UserController@store');
         Route::post('latestSubscribe', 'UserController@latestSubscribe');
         Route::post('latestLogin', 'UserController@latestLogin');
+        Route::put('{user_id}/update', 'UserController@update');
     });
 });
 

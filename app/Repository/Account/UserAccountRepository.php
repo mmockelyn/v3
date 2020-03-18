@@ -72,5 +72,14 @@ class UserAccountRepository
             ->get();
     }
 
+    public function create($id, $customer_id)
+    {
+        return $this->userAccount->newQuery()
+            ->create([
+                "user_id" => $id,
+                "customer_id" => $customer_id
+            ]);
+    }
+
 }
 

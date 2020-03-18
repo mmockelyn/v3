@@ -36,5 +36,13 @@ class UserPremiumRepository
             ->first();
     }
 
+    public function create($id)
+    {
+        return $this->userPremium->newQuery()
+            ->create([
+                "user_id" => $id
+            ]);
+    }
+
 }
 

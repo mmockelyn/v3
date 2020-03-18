@@ -1,45 +1,37 @@
 <?php
 
-namespace App\Notifications\Admin;
+namespace App\Notifications\Account;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UpdateVideoNotification extends Notification
+class UserBan extends Notification
 {
     use Queueable;
-    /**
-     * @var
-     */
-    public $arr;
-    /**
-     * @var
-     */
-    public $count;
+    private $user;
 
     /**
      * Create a new notification instance.
      *
-     * @param $arr
-     * @param $count
+     * @param $user
      */
-    public function __construct($arr, $count)
+    public function __construct($user)
     {
         //
-        $this->arr = $arr;
-        $this->count = $count;
+        $this->user = $user;
     }
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -51,20 +43,28 @@ class UpdateVideoNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject("Vidéo mise à jours")
-            ->markdown('email.admin.updateVideo', ["arr" => $this->arr, "count" => $this->count]);
+            ->subject("Votre compte à été bannie")
+            ->error()
+            ->markdown('email.account.userban', ["user" => $this->user]);
     }
 
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function toArray($notifiable)
     {
         return [
-            //
+            "icon" => "fa fa-lock",
+            "icon_color" => "error",
+            "type" => "event",
+            "state" => 0,
+            "title" => "Votre compte à été bannie",
+            "text" => "Votre compte à été bannie",
+            "date" => now(),
+            "link" => null
         ];
     }
 }
