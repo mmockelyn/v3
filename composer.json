@@ -13,6 +13,7 @@
         "ext-simplexml": "*",
         "ext-zip": "*",
         "annaghd/php-credit-card-validator-plus": "dev-master",
+        "arcanedev/log-viewer": "~7.0",
         "arielmejiadev/larapex-charts": "^1.0",
         "artesaos/seotools": "^0.17.1",
         "cartalyst/stripe-laravel": "^12.0",
