@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\Admin\Wiki;
 use App\HelpersClass\Core\Datatable;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
+use App\Repository\Wiki\WikiArticleContentRepository;
+use App\Repository\Wiki\WikiArticleSommaireRepository;
 use App\Repository\Wiki\WikiRepository;
 use Exception;
 use Illuminate\Http\Request;
@@ -21,16 +23,28 @@ class WikiArticleController extends BaseController
      * @var Datatable
      */
     private $datatable;
+    /**
+     * @var WikiArticleSommaireRepository
+     */
+    private $articleSommaireRepository;
+    /**
+     * @var WikiArticleContentRepository
+     */
+    private $articleContentRepository;
 
     /**
      * WikiArticleController constructor.
      * @param WikiRepository $wikiRepository
      * @param Datatable $datatable
+     * @param WikiArticleSommaireRepository $articleSommaireRepository
+     * @param WikiArticleContentRepository $articleContentRepository
      */
-    public function __construct(WikiRepository $wikiRepository, Datatable $datatable)
+    public function __construct(WikiRepository $wikiRepository, Datatable $datatable, WikiArticleSommaireRepository $articleSommaireRepository, WikiArticleContentRepository $articleContentRepository)
     {
         $this->wikiRepository = $wikiRepository;
         $this->datatable = $datatable;
+        $this->articleSommaireRepository = $articleSommaireRepository;
+        $this->articleContentRepository = $articleContentRepository;
     }
 
     public function latest(Request $request)
@@ -144,6 +158,45 @@ class WikiArticleController extends BaseController
             return $this->sendError("Erreur Système", [
                 "errors" => $exception->getMessage()
             ]);
+        }
+    }
+
+    public function addContent(Request $request, $article_id)
+    {
+        try {
+            $sommaire = $this->articleSommaireRepository->create($article_id, $request->title);
+            try {
+                $content = $this->articleContentRepository->create($article_id, $sommaire->id, $request->contents);
+                return $this->sendResponse(null, null);
+            } catch (Exception $exception) {
+                return $this->sendError("Erreur Système", [
+                    "errors" => $exception->getMessage()
+                ]);
+            }
+        } catch (Exception $exception) {
+            return $this->sendError("Erreur Système", [
+                "errors" => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function publish($article_id)
+    {
+        try {
+            $this->wikiRepository->publish($article_id);
+            return $this->sendResponse(null, null);
+        } catch (Exception $exception) {
+            return $this->sendError(null, null);
+        }
+    }
+
+    public function unpublish($article_id)
+    {
+        try {
+            $this->wikiRepository->unpublish($article_id);
+            return $this->sendResponse(null, null);
+        } catch (Exception $exception) {
+            return $this->sendError(null, null);
         }
     }
 }
