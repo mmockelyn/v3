@@ -6,6 +6,7 @@ use App\HelpersClass\Blog\BlogHelper;
 use App\HelpersClass\Generator;
 use App\Http\Controllers\Api\BaseController;
 use App\Repository\Blog\BlogRepository;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends BaseController
 {
@@ -30,19 +31,22 @@ class BlogController extends BaseController
         ?>
         <?php foreach ($datas as $data): ?>
         <div class="col-md-4">
-            <div class="kt-portlet kt-portlet--height-fluid kt-widget19" id="portletsBlog" data-slug="<?= $data->slug; ?>">
-                <div class="kt-portlet__body kt-portlet__body--fit kt-portlet__body--unfill">
-                    <?php if(file_exists('/storage/blog/'.$data->id.'.png')): ?>
-                    <div class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides" style="min-height: 300px; background-image: url(/storage/blog/<?= $data->id ?>.png)">
+        <div class="kt-portlet kt-portlet--height-fluid kt-widget19" id="portletsBlog" data-slug="<?= $data->slug; ?>">
+            <div class="kt-portlet__body kt-portlet__body--fit kt-portlet__body--unfill">
+                <?php if (Storage::disk('public')->exists('blog/' . $data->id . '.png') == true): ?>
+                <div class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides"
+                     style="min-height: 300px; background-image: url(/storage/blog/<?= $data->id ?>.png)">
                     <?php else: ?>
-                    <div class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides" style="min-height: 300px; background-image: url(/storage/blog/news.png)">
-                    <?php endif; ?>
+                    <div class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides"
+                         style="min-height: 300px; background-image: url(/storage/blog/news.png)">
+                        <?php endif; ?>
                         <h3 class="kt-widget19__title kt-font-light">
                             <?= $data->title; ?>
                         </h3>
                         <div class="kt-widget19__shadow"></div>
                         <div class="kt-widget19__labels">
-                            <a href="<?= route('Front.Blog.show', $data->slug) ?>" class="btn btn-label-light-o2 btn-bold "><?= $data->category->name; ?></a>
+                            <a href="<?= route('Front.Blog.show', $data->slug) ?>"
+                               class="btn btn-label-light-o2 btn-bold "><?= $data->category->name; ?></a>
                         </div>
                     </div>
                 </div>

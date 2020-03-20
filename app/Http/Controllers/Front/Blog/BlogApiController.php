@@ -11,6 +11,7 @@ use App\Repository\Blog\BlogCommentRepository;
 use App\Repository\Blog\BlogRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 
 class BlogApiController extends BaseController
@@ -44,7 +45,7 @@ class BlogApiController extends BaseController
         <div>
             <div class="card animate">
                 <a href="<?= route('Front.Blog.show', $data->slug) ?>">
-                    <?php if (file_exists('/storage/blog/' . $data->id . '.png')): ?>
+                    <?php if (Storage::disk('public')->exists('blog/' . $data->id . '.png') == true): ?>
                         <img src="/storage/blog/<?= $data->id ?>.png" class="card-img-top" alt="...">
                     <?php else: ?>
                         <img src="/storage/blog/news.png" class="card-img-top" alt="...">
@@ -75,7 +76,7 @@ class BlogApiController extends BaseController
                 <a class="card mb-3" href="<?= route('Front.Blog.show', $data->slug) ?>">
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <?php if(file_exists('/storage/blog/'.$data->id.'.png')): ?>
+                            <?php if (Storage::disk('public')->exists('blog/' . $data->id . '.png') == true): ?>
                                 <img src="/storage/blog/<?= $data->id; ?>.png" class="card-img" alt="...">
                             <?php else: ?>
                                 <img src="/storage/blog/news.png" class="card-img" alt="...">
