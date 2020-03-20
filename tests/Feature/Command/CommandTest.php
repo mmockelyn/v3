@@ -9,12 +9,6 @@ use Tests\TestCase;
 
 class CommandTest extends TestCase
 {
-    public function test_clear_system()
-    {
-        $this->artisan('trainz:clear')
-            ->assertExitCode(0);
-    }
-
     public function test_create_helper()
     {
         $this->artisan('make:helper Test TestHelper')

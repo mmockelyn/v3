@@ -51,7 +51,7 @@ class BlogTest extends TestCase
 
     function post_comment_to_blog_show()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->create(["state" => 1]);
         $blog = factory(Blog::class)->create([
             "published" => 1,
             "published_at" => now()
@@ -63,7 +63,7 @@ class BlogTest extends TestCase
 
     function test_post_comment_error_validation()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->create(["state" => 1]);
         $blog = factory(Blog::class)->create([
             "published" => 1,
             "published_at" => now()
@@ -75,7 +75,7 @@ class BlogTest extends TestCase
 
     function test_delete_comment_to_blog_show()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->create(["state" => 1]);
         $blog = factory(Blog::class)->create([
             "published" => 1,
             "published_at" => now()

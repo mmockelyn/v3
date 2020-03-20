@@ -65,22 +65,27 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                                 <div class="kt-login__form">
                                     <form class="kt-form" action="{{ route('login') }}">
+                                        @include("admin.layout.includes.alert")
                                         @csrf
                                         <div class="form-group">
-                                            <input class="form-control" type="text" placeholder="Email" name="email" autocomplete="off">
+                                            <input class="form-control" type="text" placeholder="Email" name="email"
+                                                   autocomplete="off">
                                         </div>
                                         <div class="form-group">
-                                            <input class="form-control form-control-last" type="password" placeholder="Password" name="password">
+                                            <input class="form-control form-control-last" type="password"
+                                                   placeholder="Password" name="password">
                                         </div>
                                         <div class="kt-login__extra">
                                             <label class="kt-checkbox">
                                                 <input type="checkbox" name="remember"> Se souvenir de moi
                                                 <span></span>
                                             </label>
-                                            <a href="javascript:;" id="kt_login_forgot">Mot de passe, perdu ?</a>
+                                            <a href="javascript:" id="kt_login_forgot">Mot de passe, perdu ?</a>
                                         </div>
                                         <div class="kt-login__actions">
-                                            <button id="kt_login_signin_submit" class="btn btn-brand btn-pill btn-elevate">Connexion</button>
+                                            <button id="kt_login_signin_submit"
+                                                    class="btn btn-brand btn-pill btn-elevate">Connexion
+                                            </button>
                                         </div>
                                     </form>
                                 </div>
@@ -142,7 +147,7 @@ License: You must have a valid license purchased only from themeforest(the above
 								<span class="kt-login__account-msg">
 									Vous n'avez pas de compte ?
 								</span>&nbsp;&nbsp;
-                        <a href="javascript:;" id="kt_login_signup" class="kt-login__account-link">M'inscrire!</a>
+                        <a href="javascript:" id="kt_login_signup" class="kt-login__account-link">M'inscrire!</a>
                     </div>
                 </div>
             </div>

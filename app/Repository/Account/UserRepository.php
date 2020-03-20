@@ -62,5 +62,38 @@ class UserRepository
             ->get();
     }
 
+    public function latestSubscribe()
+    {
+        return $this->user->newQuery()
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
+    }
+
+    public function create($name, $email, string $bcrypt, $group)
+    {
+        return $this->user->newQuery()
+            ->create([
+                "name" => $name,
+                "email" => $email,
+                "password" => $bcrypt,
+                "group" => $group
+            ]);
+    }
+
+    public function ban($user_id)
+    {
+        return $this->getUser($user_id)->update([
+            "state" => 0
+        ]);
+    }
+
+    public function unban($user_id)
+    {
+        return $this->getUser($user_id)->update([
+            "state" => 1
+        ]);
+    }
+
 }
 

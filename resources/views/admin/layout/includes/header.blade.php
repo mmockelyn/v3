@@ -48,6 +48,18 @@
                 </div>
 
                 <div class="kt-header__topbar-item">
+                    <a class="kt-header__topbar-wrapper" href="/administrator/log-viewer" target="_blank">
+						<span class="kt-header__topbar-icon kt-header__topbar-icon--info">
+							<i class="la la-lightbulb-o"></i>
+						</span>
+                        @if(\App\HelpersClass\Core\TelescopeDb::countException() != 0)
+                            <span
+                                class="kt-badge kt-badge--danger">{{ \App\HelpersClass\Core\TelescopeDb::countException() }}</span>
+                        @endif
+                    </a>
+                </div>
+
+                <div class="kt-header__topbar-item">
                     <a class="kt-header__topbar-wrapper" href="/schematics" target="_blank">
 						<span class="kt-header__topbar-icon kt-header__topbar-icon--success">
 							<i class="la la-database"></i>

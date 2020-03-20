@@ -60,5 +60,13 @@ class UserPaymentRepository
             ->delete();
     }
 
+    public function createEmpty($id)
+    {
+        return $this->userPayment->newQuery()
+            ->create([
+                "user_id" => $id
+            ]);
+    }
+
 }
 

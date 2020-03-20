@@ -76,6 +76,7 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::put('{article_id}/textTwitter', 'BlogArticleController@textTwitter');
             Route::put('{article_id}/editDescription', 'BlogArticleController@editDescription');
 
+            Route::post('comment/load', 'BlogCommentController@loadAllComments');
             Route::post('{article_id}/comment/load', 'BlogCommentController@loadComments');
             Route::get('{article_id}/comment/{comment_id}/publish', 'BlogCommentController@publish');
             Route::get('{article_id}/comment/{comment_id}/unpublish', 'BlogCommentController@unpublish');
@@ -226,6 +227,7 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
 
         Route::group(["prefix" => "comment"], function () {
             Route::get('/latest', 'TutorielCommentController@latest');
+            Route::post('/', 'TutorielCommentController@load');
         });
 
         Route::group(["prefix" => "{tutoriel_id}/tag"], function () {
@@ -266,6 +268,14 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
             Route::get('{article_id}/publish', 'WikiArticleController@publish');
             Route::get('{article_id}/unpublish', 'WikiArticleController@unpublish');
         });
+    });
+
+    Route::group(["prefix" => "user", "namespace" => "User"], function () {
+        Route::post('/', 'UserController@listeUser');
+        Route::post('create', 'UserController@store');
+        Route::post('latestSubscribe', 'UserController@latestSubscribe');
+        Route::post('latestLogin', 'UserController@latestLogin');
+        Route::put('{user_id}/update', 'UserController@update');
     });
 });
 
