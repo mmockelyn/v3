@@ -87,4 +87,25 @@ class TutorielCommentController extends BaseController
             return $this->datatable->loadDatatable($request, $ars->toArray());
         }
     }
+
+    public function load(Request $request)
+    {
+        $datas = $this->tutorielCommentRepository->all();
+        $ars = collect();
+        foreach ($datas as $data) {
+            if ($data->published == 1) {
+                $published_at = $data->published_at->format('d/m/Y à H:i');
+            } else {
+                $published_at = null;
+            }
+            $ars->push([
+                "id" => $data->id,
+                "state" => $data->published,
+                "content" => $data->content,
+                "published_at" => $published_at
+            ]);
+        }
+
+        return $this->datatable->loadDatatable($request, $ars->toArray());
+    }
 }

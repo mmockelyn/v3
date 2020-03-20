@@ -14,15 +14,21 @@ class AccountCreatedNotification extends Notification
      * @var User
      */
     private $user;
+    /**
+     * @var null
+     */
+    private $password;
 
     /**
      * Create a new notification instance.
      *
      * @param User $user
+     * @param null $password
      */
-    public function __construct(User $user)
+    public function __construct(User $user, $password = null)
     {
         $this->user = $user;
+        $this->password = $password;
     }
 
     /**
@@ -44,9 +50,15 @@ class AccountCreatedNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->subject("Bienvenue sur le site Trainznation !")
-                    ->view("email.account.createdAccount", ["user" => $this->user]);
+        if ($this->password == null) {
+            return (new MailMessage)
+                ->subject("Bienvenue sur le site Trainznation !")
+                ->view("email.account.createdAccount", ["user" => $this->user]);
+        } else {
+            return (new MailMessage)
+                ->subject("Bienvenue sur le site Trainznation !")
+                ->view("email.account.createdAccount", ["user" => $this->user, "password" => $this->password]);
+        }
     }
 
     /**

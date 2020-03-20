@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(["namespace" => "Front"], function () {
+Route::group(["namespace" => "Front", "middleware" => ["isAccess"]], function () {
     Route::get('/', ["as" => "Front.index", "uses" => "HomeController@index"]);
 
     Route::group(["prefix" => "blog", "namespace" => "Blog"], function () {
@@ -218,6 +218,15 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
 
     Route::group(["prefix" => "user", "namespace" => "User"], function (){
         Route::get('/', ["as" => "Back.User.index", "uses" => "UserController@index"]);
+
+        Route::group(["prefix" => "gestion"], function () {
+            Route::get('/', ["as" => "Back.User.Gestion.index", "uses" => "UserGestionController@index"]);
+            Route::get('{user_id}', ["as" => "Back.User.Gestion.show", "uses" => "UserGestionController@show"]);
+            Route::get('{user_id}/ban', 'UserGestionController@ban');
+            Route::get('{user_id}/unban', 'UserGestionController@unban');
+            Route::get('{user_id}/edit', 'UserGestionController@edit');
+            Route::get('{user_id}/delete', 'UserGestionController@delete');
+        });
     });
 
     Route::group(["prefix" => "slideshow", "namespace" => "Slideshow"], function (){

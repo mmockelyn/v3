@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Api\Admin\Blog;
 
+use App\HelpersClass\Core\Datatable;
 use App\HelpersClass\Generator;
 use App\Http\Controllers\Api\BaseController;
 use App\Repository\Blog\BlogCommentRepository;
+use Exception;
+use Illuminate\Http\Request;
 use Thomaswelton\LaravelGravatar\Facades\Gravatar;
 
 class BlogCommentController extends BaseController
@@ -13,14 +16,20 @@ class BlogCommentController extends BaseController
      * @var BlogCommentRepository
      */
     private $blogCommentRepository;
+    /**
+     * @var Datatable
+     */
+    private $datatable;
 
     /**
      * BlogCommentController constructor.
      * @param BlogCommentRepository $blogCommentRepository
+     * @param Datatable $datatable
      */
-    public function __construct(BlogCommentRepository $blogCommentRepository)
+    public function __construct(BlogCommentRepository $blogCommentRepository, Datatable $datatable)
     {
         $this->blogCommentRepository = $blogCommentRepository;
+        $this->datatable = $datatable;
     }
 
     public function loadComments($article_id)
@@ -58,7 +67,7 @@ class BlogCommentController extends BaseController
         try {
             $this->blogCommentRepository->publish($comment_id);
             return redirect()->back()->with('success', "Le commentaire à été publier");
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return redirect()->back()->with('error', "Erreur lors de la publication du commentaire");
         }
     }
@@ -68,9 +77,25 @@ class BlogCommentController extends BaseController
         try {
             $this->blogCommentRepository->unpublish($comment_id);
             return redirect()->back()->with('success', "Le commentaire à été dépublier");
-        }catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return redirect()->back()->with('error', "Erreur lors de la dépublication du commentaire");
         }
+    }
+
+    public function loadAllComments(Request $request)
+    {
+        $datas = $this->blogCommentRepository->all();
+        $ars = collect();
+        foreach ($datas as $data) {
+            $ars->push([
+                "id" => $data->id,
+                "state" => $data->state,
+                "comment" => $data->content,
+                "created_at" => $data->created_at->format('d/m/Y à H:i')
+            ]);
+        }
+
+        return $this->datatable->loadDatatable($request, $ars->toArray());
     }
 
 

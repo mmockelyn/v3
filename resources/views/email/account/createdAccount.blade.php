@@ -127,18 +127,30 @@
                                                         <!--[if mso]>
                                                         <td valign="top" width="600" style="width:600px;">
                                                         <![endif]-->
-                                                        <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width: 100%;min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;" width="100%" class="mcnTextContentContainer">
-                                                            <tbody><tr>
+                                                        <table align="left" border="0" cellpadding="0" cellspacing="0"
+                                                               style="max-width: 100%;min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"
+                                                               width="100%" class="mcnTextContentContainer">
+                                                            <tbody>
+                                                            <tr>
 
-                                                                <td valign="top" class="mcnTextContent" style="padding-top: 0;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #202020;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: left;">
+                                                                <td valign="top" class="mcnTextContent"
+                                                                    style="padding-top: 0;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #202020;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: left;">
 
-                                                                    <h1 style="display: block;margin: 0;padding: 0;color: #202020;font-family: Helvetica;font-size: 26px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: normal;text-align: left;">Bienvenue {{ $user->name }}</h1>
+                                                                    <h1 style="display: block;margin: 0;padding: 0;color: #202020;font-family: Helvetica;font-size: 26px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: normal;text-align: left;">
+                                                                        Bienvenue {{ $user->name }}</h1>
 
-                                                                    <p style="margin: 10px 0;padding: 0;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #202020;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: left;">Toutes l'équipe de trainznation vous souhaite la bienvenue sur le site.</p>
-
+                                                                    <p style="margin: 10px 0;padding: 0;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #202020;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: left;">
+                                                                        Toutes l'équipe de trainznation vous souhaite la
+                                                                        bienvenue sur le site.</p>
+                                                                    @if($password)
+                                                                        <p style="margin: 10px 0;padding: 0;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #202020;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: left;">
+                                                                            Votre mot de passe provisoire est
+                                                                            le {{ $password }}</p>
+                                                                    @endif
                                                                 </td>
                                                             </tr>
-                                                            </tbody></table>
+                                                            </tbody>
+                                                        </table>
                                                         <!--[if mso]>
                                                         </td>
                                                         <![endif]-->

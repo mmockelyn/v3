@@ -41,5 +41,13 @@ class UserSocialRepository
             ]);
     }
 
+    public function create($id)
+    {
+        return $this->userSocial->newQuery()
+            ->create([
+                "user_id" => $id
+            ]);
+    }
+
 }
 

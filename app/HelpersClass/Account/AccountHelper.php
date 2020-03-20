@@ -9,6 +9,8 @@
 namespace App\HelpersClass\Account;
 
 
+use App\Model\Account\UserAccount;
+use App\Model\Account\UserPremium;
 use App\User;
 use Carbon\Carbon;
 use Creativeorange\Gravatar\Facades\Gravatar;
@@ -85,5 +87,32 @@ class AccountHelper
             default:
                 return 'la la-cc';
         }
+    }
+
+    public static function countAllAccount()
+    {
+        $user = new User();
+
+        return $user->newQuery()->get()->count();
+    }
+
+    public static function countPremiumAccount()
+    {
+        $premium = new UserPremium();
+
+        return $premium->newQuery()
+            ->where('premium', 1)
+            ->get()
+            ->count();
+    }
+
+    public static function countActifUser()
+    {
+        $account = new UserAccount();
+
+        return $account->newQuery()
+            ->where('last_login', '!=', null)
+            ->get()
+            ->count();
     }
 }
