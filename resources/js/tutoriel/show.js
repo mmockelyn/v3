@@ -1,6 +1,5 @@
-import * as $ from "jquery";
+//import * as $ from "jquery";
 import summernote from 'summernote';
-import tooltip from 'bootstrap'
 import swal from 'sweetalert2'
 import {ago} from '../plugins/ago'
 

@@ -2920,7 +2920,7 @@
     for (var i = 0, len = elements.length; i < len; i++) {
       var _ret = _loop(i);
 
-      if (_ret === "continue")
+      if (_ret === "continue") continue;
     }
 
     return createdDocument.body.innerHTML;
@@ -7453,7 +7453,7 @@ function nodeName( elem, name ) {
 
   return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 
-}
+};
 var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
 
 
@@ -18015,42 +18015,39 @@ function fadeEffect(type, el) {
       }
 
       if (el.style.opacity > 0) {
-          el.style.opacity -= 0.1;
+        el.style.opacity -= 0.1;
       } else {
-          clearInterval(_fadeEffect2);
+        clearInterval(_fadeEffect2);
       }
     }, 200);
 
-      return _fadeEffect2;
+    return _fadeEffect2;
   }
 }
 
-            hidingAlerting(); //$('[data-toggle="kt-tooltip"]').tooltip();
+hidingAlerting(); //$('[data-toggle="kt-tooltip"]').tooltip();
 
-            /***/
-        }),
+/***/ }),
 
-        /***/ "./resources/js/tutoriel/index.js":
-        /*!****************************************!*\
-          !*** ./resources/js/tutoriel/index.js ***!
-          \****************************************/
-        /*! no exports provided */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+/***/ "./resources/js/tutoriel/index.js":
+/*!****************************************!*\
+  !*** ./resources/js/tutoriel/index.js ***!
+  \****************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony import */
-            var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./resources/js/core.js");
-            /* harmony import */
-            var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-            /* harmony import */
-            var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./resources/js/core.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
 
 
-            function loadLatestTutoriel() {
-                var div = document.querySelector('#loadLatestTutoriel');
-                Object(_core__WEBPACK_IMPORTED_MODULE_0__["blockElement"])(div, 'Chargement des tutoriels...');
-                jquery__WEBPACK_IMPORTED_MODULE_1__["ajax"]({
+
+function loadLatestTutoriel() {
+  var div = document.querySelector('#loadLatestTutoriel');
+  Object(_core__WEBPACK_IMPORTED_MODULE_0__["blockElement"])(div, 'Chargement des tutoriels...');
+  jquery__WEBPACK_IMPORTED_MODULE_1__["ajax"]({
     url: '/api/tutoriel/latest',
     success: function success(data) {
       Object(_core__WEBPACK_IMPORTED_MODULE_0__["unblockElement"])(div);
