@@ -17864,18 +17864,18 @@ Popper.Defaults = Defaults;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-            /*!
-             *
-             * Super simple wysiwyg editor v0.8.16
-             * https://summernote.org
-             *
-             *
-             * Copyright 2013- Alan Hong. and other contributors
-             * summernote may be freely distributed under the MIT license.
-             *
-             * Date: 2020-02-19T09:12Z
-             *
-             */
+/*!
+ *
+ * Super simple wysiwyg editor v0.8.16
+ * https://summernote.org
+ *
+ *
+ * Copyright 2013- Alan Hong. and other contributors
+ * summernote may be freely distributed under the MIT license.
+ *
+ * Date: 2020-02-19T09:12Z
+ *
+ */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
 		module.exports = factory(__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"));
@@ -31260,11 +31260,11 @@ function deleteComment() {
           btn.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove();
           toastr.success("Le commentaire à été supprimer avec succès", "Succès");
         },
-        error: function error(jqxhr) {
-            KTApp.unprogress(btn);
-            toastr.error("Erreur lors de la suppression du commentaire", "Erreur Système");
-            console.error(jqxhr);
-        }
+          error: function error(jqxhr) {
+              KTApp.unprogress(btn);
+              toastr.error("Erreur lors de la suppression du commentaire", "Erreur Système");
+              console.error(jqxhr);
+          }
       });
     });
   });
@@ -31275,21 +31275,21 @@ function deleteComment() {
 
             postComment();
             deleteComment();
-            clickBtn();
             loadVideos();
             loadCountDown();
+            clickBtn();
 
             /***/
         }),
 
-/***/ 11:
-/*!*********************************************!*\
-  !*** multi ./resources/js/tutoriel/show.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+        /***/ 11:
+        /*!*********************************************!*\
+          !*** multi ./resources/js/tutoriel/show.js ***!
+          \*********************************************/
+        /*! no static exports found */
+        /***/ (function (module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\tutoriel\show.js */"./resources/js/tutoriel/show.js");
+            module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\tutoriel\show.js */"./resources/js/tutoriel/show.js");
 
 
 /***/ })

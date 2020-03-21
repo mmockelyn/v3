@@ -2921,7 +2921,7 @@
       var _ret = _loop(i);
 
       if (_ret === "continue")
-          }
+    }
 
     return createdDocument.body.innerHTML;
   }
@@ -21563,14 +21563,14 @@ function fadeEffect(type, el) {
             /***/
         }),
 
-/***/ 19:
-/*!*******************************************!*\
-  !*** multi ./resources/js/admin/index.js ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+        /***/ 19:
+        /*!*******************************************!*\
+          !*** multi ./resources/js/admin/index.js ***!
+          \*******************************************/
+        /*! no static exports found */
+        /***/ (function (module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\index.js */"./resources/js/admin/index.js");
+            module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\index.js */"./resources/js/admin/index.js");
 
 
 /***/ })

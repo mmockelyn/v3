@@ -2921,7 +2921,7 @@
       var _ret = _loop(i);
 
       if (_ret === "continue")
-          }
+    }
 
     return createdDocument.body.innerHTML;
   }
@@ -18031,15 +18031,15 @@ function fadeEffect(type, el) {
             /***/
         }),
 
-/***/ "./resources/js/tutoriel/index.js":
-/*!****************************************!*\
-  !*** ./resources/js/tutoriel/index.js ***!
-  \****************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+        /***/ "./resources/js/tutoriel/index.js":
+        /*!****************************************!*\
+          !*** ./resources/js/tutoriel/index.js ***!
+          \****************************************/
+        /*! no exports provided */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./resources/js/core.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);

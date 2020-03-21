@@ -213,7 +213,7 @@ loadBackground();
 //checkNewComment();
 postComment();
 deleteComment();
-clickBtn();
 loadVideos();
 loadCountDown();
+clickBtn();
 

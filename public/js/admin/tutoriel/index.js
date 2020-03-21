@@ -2921,7 +2921,7 @@
       var _ret = _loop(i);
 
       if (_ret === "continue")
-          }
+    }
 
     return createdDocument.body.innerHTML;
   }
@@ -18098,14 +18098,14 @@ function fadeEffect(type, el) {
             /***/
         }),
 
-/***/ 38:
-/*!****************************************************!*\
-  !*** multi ./resources/js/admin/tutoriel/index.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+        /***/ 38:
+        /*!****************************************************!*\
+          !*** multi ./resources/js/admin/tutoriel/index.js ***!
+          \****************************************************/
+        /*! no static exports found */
+        /***/ (function (module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\tutoriel\index.js */"./resources/js/admin/tutoriel/index.js");
+            module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\tutoriel\index.js */"./resources/js/admin/tutoriel/index.js");
 
 
 /***/ })

@@ -21095,14 +21095,14 @@ function fadeEffect(type, el) {
   if (type === 'fadeOut') {
     var _fadeEffect2 = setInterval(function () {
       if (!el.style.opacity) {
-        el.style.opacity = 1;
+          el.style.opacity = 1;
       }
 
-      if (el.style.opacity > 0) {
-          el.style.opacity -= 0.1;
-      } else {
-          clearInterval(_fadeEffect2);
-      }
+        if (el.style.opacity > 0) {
+            el.style.opacity -= 0.1;
+        } else {
+            clearInterval(_fadeEffect2);
+        }
     }, 200);
 
       return _fadeEffect2;
