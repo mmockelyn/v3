@@ -17976,7 +17976,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_1__);
 
 
-
 function reloadNotifBar() {
   var countNotifBar = document.querySelector('#countNotifBar');
   var value = parseInt(countNotifBar.textContent);
@@ -18108,6 +18107,8 @@ function fadeEffect(type, el) {
             module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\tutoriel\index.js */"./resources/js/admin/tutoriel/index.js");
 
 
-/***/ })
+            /***/
+        })
 
-/******/ });
+        /******/
+    });

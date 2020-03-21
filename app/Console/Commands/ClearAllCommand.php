@@ -53,7 +53,9 @@ class ClearAllCommand extends Command
         $this->call('cache:clear');
         $this->call('config:clear');
         $this->call('route:clear');
-        $this->call('telescope:clear');
+        if (env('APP_ENV') == 'local') {
+            $this->call('telescope:clear');
+        }
         Storage::deleteDirectory('storage/logs/');
         return null;
     }

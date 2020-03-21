@@ -17909,7 +17909,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_1__);
 
 
-
 function reloadNotifBar() {
   var countNotifBar = document.querySelector('#countNotifBar');
   var value = parseInt(countNotifBar.textContent);
@@ -18040,16 +18039,19 @@ function fadeEffect(type, el) {
 
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./resources/js/core.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+            /* harmony import */
+            var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./resources/js/core.js");
+            /* harmony import */
+            var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+            /* harmony import */
+            var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
 
 
-var sub_id = jquery__WEBPACK_IMPORTED_MODULE_1__("#tutorielList").attr('data-id');
+            var sub_id = jquery__WEBPACK_IMPORTED_MODULE_1__("#tutorielList").attr('data-id');
 
-function showTutoriel() {
-  var div = document.querySelector('#js-show');
-  Object(_core__WEBPACK_IMPORTED_MODULE_0__["blockElement"])(div, "Chargement des tutoriels");
+            function showTutoriel() {
+                var div = document.querySelector('#js-show');
+                Object(_core__WEBPACK_IMPORTED_MODULE_0__["blockElement"])(div, "Chargement des tutoriels");
   jquery__WEBPACK_IMPORTED_MODULE_1__["ajax"]({
     url: '/api/tutoriel/' + sub_id + '/listTutoriel',
     success: function success(data) {

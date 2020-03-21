@@ -1,6 +1,6 @@
 import * as $ from "jquery";
-import 'bootstrap'
-import summernote from 'summernote'
+import summernote from 'summernote';
+import tooltip from 'bootstrap'
 import swal from 'sweetalert2'
 import {ago} from '../plugins/ago'
 
@@ -8,7 +8,7 @@ let tutoriel_id = $("#tutorielShow").attr('data-id');
 
 function loadBackground() {
     let header = $('#js-header');
-    header.attr('style', "background: url('/storage/tutoriel/"+tutoriel_id+"/background.png')")
+    header.attr('style', "background: url('/storage/tutoriel/" + tutoriel_id + "/background.png')")
 }
 
 function loadVideos() {
@@ -210,7 +210,7 @@ function deleteComment() {
 $("#comment").summernote();
 
 loadBackground();
-//checkNewComment();
+checkNewComment();
 postComment();
 deleteComment();
 loadVideos();

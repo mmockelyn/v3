@@ -17909,7 +17909,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_1__);
 
 
-
 function reloadNotifBar() {
   var countNotifBar = document.querySelector('#countNotifBar');
   var value = parseInt(countNotifBar.textContent);
@@ -18040,16 +18039,18 @@ function fadeEffect(type, el) {
 
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./resources/js/core.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+            /* harmony import */
+            var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./resources/js/core.js");
+            /* harmony import */
+            var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+            /* harmony import */
+            var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
 
 
-
-function loadLatestTutoriel() {
-  var div = document.querySelector('#loadLatestTutoriel');
-  Object(_core__WEBPACK_IMPORTED_MODULE_0__["blockElement"])(div, 'Chargement des tutoriels...');
-  jquery__WEBPACK_IMPORTED_MODULE_1__["ajax"]({
+            function loadLatestTutoriel() {
+                var div = document.querySelector('#loadLatestTutoriel');
+                Object(_core__WEBPACK_IMPORTED_MODULE_0__["blockElement"])(div, 'Chargement des tutoriels...');
+                jquery__WEBPACK_IMPORTED_MODULE_1__["ajax"]({
     url: '/api/tutoriel/latest',
     success: function success(data) {
       Object(_core__WEBPACK_IMPORTED_MODULE_0__["unblockElement"])(div);
