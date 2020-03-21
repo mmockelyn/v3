@@ -1,6 +1,5 @@
 import * as $ from "jquery";
 import tooltip from 'bootstrap'
-import 'bootstrap'
 
 
 export function reloadNotifBar() {
