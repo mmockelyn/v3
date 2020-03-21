@@ -31068,23 +31068,29 @@ function setText() {
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var summernote__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! summernote */ "./node_modules/summernote/dist/summernote.js");
-/* harmony import */ var summernote__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(summernote__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _plugins_ago__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../plugins/ago */ "./resources/js/plugins/ago.js");
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony import */
+            var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+            /* harmony import */
+            var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+            /* harmony import */
+            var summernote__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! summernote */ "./node_modules/summernote/dist/summernote.js");
+            /* harmony import */
+            var summernote__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(summernote__WEBPACK_IMPORTED_MODULE_1__);
+            /* harmony import */
+            var bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+            /* harmony import */
+            var bootstrap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_2__);
+            /* harmony import */
+            var sweetalert2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+            /* harmony import */
+            var sweetalert2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_3__);
+            /* harmony import */
+            var _plugins_ago__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../plugins/ago */ "./resources/js/plugins/ago.js");
 
 
-
-
-
-var tutoriel_id = jquery__WEBPACK_IMPORTED_MODULE_0__("#tutorielShow").attr('data-id');
+            var tutoriel_id = jquery__WEBPACK_IMPORTED_MODULE_0__("#tutorielShow").attr('data-id');
 
 function loadBackground() {
   var header = jquery__WEBPACK_IMPORTED_MODULE_0__('#js-header');
@@ -31253,13 +31259,13 @@ function deleteComment() {
       console.log(btn.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode);
       KTApp.progress(btn);
       jquery__WEBPACK_IMPORTED_MODULE_0__["ajax"]({
-        url: '/tutoriel/api/' + blog_id + '/comment/' + comment_id,
-        method: "GET",
-        success: function success(data) {
-          KTApp.unprogress(btn);
-          btn.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove();
-          toastr.success("Le commentaire à été supprimer avec succès", "Succès");
-        },
+          url: '/tutoriel/api/' + blog_id + '/comment/' + comment_id,
+          method: "GET",
+          success: function success(data) {
+              KTApp.unprogress(btn);
+              btn.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove();
+              toastr.success("Le commentaire à été supprimer avec succès", "Succès");
+          },
           error: function error(jqxhr) {
               KTApp.unprogress(btn);
               toastr.error("Erreur lors de la suppression du commentaire", "Erreur Système");
@@ -31271,8 +31277,8 @@ function deleteComment() {
 }
 
             jquery__WEBPACK_IMPORTED_MODULE_0__("#comment").summernote();
-            loadBackground(); //checkNewComment();
-
+            loadBackground();
+            checkNewComment();
             postComment();
             deleteComment();
             loadVideos();
@@ -31292,6 +31298,8 @@ function deleteComment() {
             module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\tutoriel\show.js */"./resources/js/tutoriel/show.js");
 
 
-/***/ })
+            /***/
+        })
 
-/******/ });
+        /******/
+    });

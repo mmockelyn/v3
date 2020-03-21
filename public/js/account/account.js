@@ -20992,7 +20992,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_1__);
 
 
-
 function reloadNotifBar() {
   var countNotifBar = document.querySelector('#countNotifBar');
   var value = parseInt(countNotifBar.textContent);
@@ -21094,9 +21093,9 @@ function fadeEffect(type, el) {
 
   if (type === 'fadeOut') {
     var _fadeEffect2 = setInterval(function () {
-      if (!el.style.opacity) {
-          el.style.opacity = 1;
-      }
+        if (!el.style.opacity) {
+            el.style.opacity = 1;
+        }
 
         if (el.style.opacity > 0) {
             el.style.opacity -= 0.1;
@@ -21114,14 +21113,14 @@ function fadeEffect(type, el) {
             /***/
         }),
 
-/***/ 16:
-/*!***********************************************!*\
-  !*** multi ./resources/js/account/account.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+        /***/ 16:
+        /*!***********************************************!*\
+          !*** multi ./resources/js/account/account.js ***!
+          \***********************************************/
+        /*! no static exports found */
+        /***/ (function (module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\account\account.js */"./resources/js/account/account.js");
+            module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\account\account.js */"./resources/js/account/account.js");
 
 
 /***/ })
