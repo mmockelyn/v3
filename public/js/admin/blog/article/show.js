@@ -2940,7 +2940,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     for (var i = 0, len = elements.length; i < len; i++) {
       var _ret = _loop(i);
 
-      if (_ret === "continue")
+      if (_ret === "continue") continue;
     }
 
     return createdDocument.body.innerHTML;
@@ -7473,7 +7473,7 @@ function nodeName( elem, name ) {
 
   return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 
-}
+};
 var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
 
 
@@ -24687,33 +24687,30 @@ function fadeEffect(type, el) {
       }
 
       if (el.style.opacity > 0) {
-          el.style.opacity -= 0.1;
+        el.style.opacity -= 0.1;
       } else {
-          clearInterval(_fadeEffect2);
+        clearInterval(_fadeEffect2);
       }
     }, 200);
 
-      return _fadeEffect2;
+    return _fadeEffect2;
   }
 }
 
-            hidingAlerting(); //$('[data-toggle="kt-tooltip"]').tooltip();
+hidingAlerting(); //$('[data-toggle="kt-tooltip"]').tooltip();
 
-            /***/
-        }),
+/***/ }),
 
-        /***/ 23:
-        /*!*******************************************************!*\
-          !*** multi ./resources/js/admin/blog/article/show.js ***!
-          \*******************************************************/
-        /*! no static exports found */
-        /***/ (function (module, exports, __webpack_require__) {
+/***/ 23:
+/*!*******************************************************!*\
+  !*** multi ./resources/js/admin/blog/article/show.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-            module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\blog\article\show.js */"./resources/js/admin/blog/article/show.js");
+module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\blog\article\show.js */"./resources/js/admin/blog/article/show.js");
 
 
-            /***/
-        })
+/***/ })
 
-        /******/
-    });
+/******/ });
