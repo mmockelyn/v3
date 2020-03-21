@@ -1,5 +1,6 @@
 import * as $ from "jquery";
 import tooltip from 'bootstrap'
+import 'bootstrap'
 
 
 export function reloadNotifBar() {
@@ -119,7 +120,7 @@ function fadeEffect(type, el) {
 
 hidingAlerting();
 
-$('[data-toggle="kt-tooltip"]').tooltip();
+//$('[data-toggle="kt-tooltip"]').tooltip();
 
 
 
