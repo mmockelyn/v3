@@ -515,7 +515,7 @@ count($tutoriel->tags) == 0)
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
-                <form action="/api/admin/tutoriel/video/{{ $tutoriel->id }}/tag" class="kt-form" id="formAddTag"
+                <form action="/api/admin/tutoriel/{{ $tutoriel->id }}/tag" class="kt-form" id="formAddTag"
                       method="post">
                     <div class="modal-body">
                         <div class="form-group">
