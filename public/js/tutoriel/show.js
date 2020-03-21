@@ -23911,7 +23911,7 @@ function loadVideos() {
           file: "https://download.trainznation.eu/v3/tutoriel/intro.mp4",
           mediaid: 0
         }, {
-          file: "https://download.trainznation.eu/v3/tutoriel/" + data.data.id + '.mp4',
+          file: "https://download.trainznation.eu/v3/tutoriel/" + data.data.id + '/video.mp4',
           mediaid: 1
         }]
       });
