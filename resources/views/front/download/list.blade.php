@@ -1,3 +1,6 @@
+<?php
+use App\HelpersClass\Asset\AssetHelper;
+?>
 @extends("layout.front")
 
 @section("style")
@@ -29,46 +32,49 @@
     <div class="kt-portlet">
         <div class="kt-portlet__body">
             @foreach($sub->assets as $download)
-            <a href="{{ route('Front.Download.show', [$download->asset_category_id, $download->asset_sub_category_id, $download->id]) }}" class="card mb-3 mt-3">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                        @if(file_exists('/storage/download/'.$download->id.'.png'))
-                        <img src="/storage/download/{{ $download->id }}.png" class="card-img" alt="{{ $download->designation }}">
-                        @else
-                            <img src="/storage/download/download.png" class="card-img" alt="{{ $download->designation }}">
-                        @endif
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <h3 class="card-title">{{ $download->designation }}</h3>
-                                    <p class="card-text">{{ $download->short_description }}</p>
-                                </div>
-                                <div class="col-md-2">
-                                    @if($download->pricing == 0)
-                                        <span class="kt-font-bolder">GRATUIT</span>
-                                    @else
-                                        <span class="kt-font-bolder">{{ $download->price }}</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="card-footer">
+                <a href="{{ route('Front.Download.show', [$download->asset_category_id, $download->asset_sub_category_id, $download->id]) }}" class="card mb-3 mt-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            @if(\Illuminate\Support\Facades\Storage::disk('public')->exists('download/'.$download->id.'.png') == true)
+                                <img src="/storage/download/{{ $download->id }}.png" class="card-img" alt="{{ $download->designation }}">
+                            @else
+                                <img src="/storage/download/download.png" class="card-img" alt="{{ $download->designation }}">
+                            @endif
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <span class="text-muted"><i class="la la-download"></i> {{ $download->countDownload }}</span>
+                                    <div class="col-md-10">
+                                        <h3 class="card-title">{{ $download->designation }}</h3>
+                                        <p class="card-text">{{ $download->short_description }}</p>
                                     </div>
-                                    <div class="col-md-6 text-right">
-                                        @foreach($download->compatibilities as $compatibility)
-                                            <span class="badge badge-pill badge-<?= \App\HelpersClass\Asset\AssetHelper::stateClassCompatibility($compatibility->state); ?>" data-toggle="kt-tooltip" title="<?= $compatibility->trainzbuild->trainz_version_name ?>"><?= $compatibility->trainzbuild->build; ?></span>
-                                        @endforeach
+                                    <div class="col-md-2">
+                                        @if($download->pricing == 0)
+                                            <span class="kt-font-bolder">GRATUIT</span>
+                                        @else
+                                            <span class="kt-font-bolder">{{ $download->price }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="text-muted"><i class="la la-download"></i> {{ $download->countDownload }}</span>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            @foreach($download->compatibilities as $compatibility)
+                                                <span
+                                                    class="badge badge-pill badge-<?= AssetHelper::stateClassCompatibility($compatibility->state); ?>"
+                                                    data-toggle="kt-tooltip"
+                                                    title="<?= $compatibility->trainzbuild->trainz_version_name ?>"><?= $compatibility->trainzbuild->build; ?></span>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </a>
+                </a>
             @endforeach
         </div>
     </div>

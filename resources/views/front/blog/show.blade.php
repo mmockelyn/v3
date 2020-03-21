@@ -11,7 +11,12 @@
     <div class="kt-portlet">
         <div class="kt-portlet__body">
             <div class="tz-blog">
-                <div class="tz-blog__head__img" style="background-image: url(/storage/blog/news.png)"></div>
+                @if(\Illuminate\Support\Facades\Storage::disk('public')->exists('blog/'.$blog->id.'.png') == true)
+                    <div class="tz-blog__head__img"
+                         style="background-image: url(/storage/blog/{{ $blog->id }}.png)"></div>
+                @else
+                    <div class="tz-blog__head__img" style="background-image: url(/storage/blog/news.png)"></div>
+                @endif
                 <div class="tz-blog__body">
                     <div class="title">{{ $blog->title }}</div>
                     <div class="subtitle">Posté le {{ $blog->published_at->format('d/m/Y à H:i') }}</div>
@@ -21,7 +26,8 @@
                 <div class="tz-blog__comments">
                     <div class="row" style="margin-bottom: 50px">
                         <div class="col-md-6">
-                            <span class="count_comments">{{ \App\HelpersClass\Blog\BlogHelper::countCommentWithArticle($blog->id) }} {{ \App\HelpersClass\Generator::formatPlural('commentaire', \App\HelpersClass\Blog\BlogHelper::countCommentWithArticle($blog->id)) }}</span>
+                            <span
+                                class="count_comments">{{ \App\HelpersClass\Blog\BlogHelper::countCommentWithArticle($blog->id) }} {{ \App\HelpersClass\Generator::formatPlural('commentaire', \App\HelpersClass\Blog\BlogHelper::countCommentWithArticle($blog->id)) }}</span>
                         </div>
                         <div class="col-md-6 text-right">
                             <button id="btnNewComment" class="btn btn-primary"><i class="la la-commenting"></i> Nouveau Commentaire</button>
