@@ -231,6 +231,9 @@
                     <textarea name="contents" id="contents" cols="30" rows="10"
                               class="form-control summernote">{{ $tutoriel->content }}</textarea>
                 </div>
+                <div class="kt-form__actions kt-form__actions--right">
+                    <button type="submit" class="btn btn-success"><i class="la la-check"></i> Valider</button>
+                </div>
             </form>
         </div>
     </div>
