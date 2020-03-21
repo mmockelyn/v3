@@ -2921,7 +2921,7 @@
       var _ret = _loop(i);
 
       if (_ret === "continue")
-          }
+    }
 
     return createdDocument.body.innerHTML;
   }
@@ -31261,25 +31261,26 @@ function deleteComment() {
           toastr.success("Le commentaire à été supprimer avec succès", "Succès");
         },
         error: function error(jqxhr) {
-          KTApp.unprogress(btn);
-          toastr.error("Erreur lors de la suppression du commentaire", "Erreur Système");
-          console.error(jqxhr);
+            KTApp.unprogress(btn);
+            toastr.error("Erreur lors de la suppression du commentaire", "Erreur Système");
+            console.error(jqxhr);
         }
       });
     });
   });
 }
 
-jquery__WEBPACK_IMPORTED_MODULE_0__("#comment").summernote();
-loadBackground();
-checkNewComment();
-postComment();
-deleteComment();
-clickBtn();
-loadVideos();
-loadCountDown();
+            jquery__WEBPACK_IMPORTED_MODULE_0__("#comment").summernote();
+            loadBackground(); //checkNewComment();
 
-/***/ }),
+            postComment();
+            deleteComment();
+            clickBtn();
+            loadVideos();
+            loadCountDown();
+
+            /***/
+        }),
 
 /***/ 11:
 /*!*********************************************!*\

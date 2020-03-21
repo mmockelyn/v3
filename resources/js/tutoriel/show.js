@@ -1,5 +1,5 @@
 import * as $ from "jquery";
-import modal from 'bootstrap'
+import 'bootstrap'
 import summernote from 'summernote'
 import swal from 'sweetalert2'
 import {ago} from '../plugins/ago'
@@ -210,7 +210,7 @@ function deleteComment() {
 $("#comment").summernote();
 
 loadBackground();
-checkNewComment();
+//checkNewComment();
 postComment();
 deleteComment();
 clickBtn();
