@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Repository\Account\UserViewRepository;
 use App\Repository\Tutoriel\TutorielRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TutorielController extends BaseController
 {
@@ -40,8 +41,8 @@ class TutorielController extends BaseController
         <div class="col-md-4">
             <div class="kt-portlet kt-portlet--height-fluid kt-widget19" id="tutoriel_item">
                 <div class="kt-portlet__body kt-portlet__body--fit kt-portlet__body--unfill">
-                    <?php if(file_exists('/storage/tutoriel/'.$data->subcategory->short."/".$data->id.".png")): ?>
-                    <div class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides" style="min-height: 300px; background-image: url(/storage/tutoriel/<?= $data->subcategory->short ?>/<?= $data->id ?>.png)">
+                    <?php if(Storage::disk('public')->exists('tutoriel/'.$data->id.'/banner.png') == true): ?>
+                    <div class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides" style="min-height: 300px; background-image: url(/storage/tutoriel/<?= $data->id ?>/banner.png)">
                     <?php else: ?>
                         <div class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides" style="min-height: 300px; background-image: url(/storage/tutoriel/tutoriel.png)">
                     <?php endif; ?>
@@ -103,8 +104,8 @@ class TutorielController extends BaseController
         <div class="col-md-4">
         <div class="kt-portlet kt-portlet--height-fluid kt-widget19" id="tutoriel_item">
             <div class="kt-portlet__body kt-portlet__body--fit kt-portlet__body--unfill">
-                <?php if(file_exists('/storage/tutoriel/'.$data->subcategory->short."/".$data->id.".png")): ?>
-                <div class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides <?php if($data->published == 2): ?> tz-tutoriel__countdown <?php endif; ?>" style="min-height: 300px; background-image: url(/storage/tutoriel/<?= $data->subcategory->short ?>/<?= $data->id ?>.png)">
+                <?php if(Storage::disk('public')->exists('tutoriel/'.$data->id.'/banner.png') == true): ?>
+                <div class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides <?php if($data->published == 2): ?> tz-tutoriel__countdown <?php endif; ?>" style="min-height: 300px; background-image: url(/storage/tutoriel/<?= $data->id ?>/banner.png)">
                     <?php else: ?>
                     <div class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides <?php if($data->published == 2): ?> tz-tutoriel__countdown <?php endif; ?>" style="min-height: 300px; background-image: url(/storage/tutoriel/tutoriel.png)">
                         <?php endif; ?>
