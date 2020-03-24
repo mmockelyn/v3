@@ -18,7 +18,7 @@ function formEditAnomalie() {
             success: function (data) {
                 KTApp.unprogress(btn);
                 toastr.success("L'anomalie à été mise à jours", "Succès");
-                $(".modal").modal('hide')
+                $("#listeAnomalie").reload()
             },
             error: function (err) {
                 KTApp.unprogress(btn);

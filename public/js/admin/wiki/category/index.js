@@ -298,7 +298,6 @@ function formAddCategory() {
         200: function _(data) {
           KTApp.unprogress(btn);
           toastr.success("La catégorie à été ajouté", "Succès");
-          $(".modal").modal('hide');
           category.reload();
         },
         203: function _(data) {
@@ -332,7 +331,6 @@ function formAddSubCategory() {
         200: function _(data) {
           KTApp.unprogress(btn);
           toastr.success("La sous catégorie à été ajouté", "Succès");
-          $(".modal").modal('hide');
           sub.reload();
         },
         203: function _(data) {

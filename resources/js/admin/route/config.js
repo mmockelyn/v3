@@ -3,11 +3,11 @@ require('../config');
 
 let route = $("#route");
 let route_id = route.attr('data-id');
-let tableauTypeDownload = '';
-let tableauTypeRelease = '';
+let tableauTypeDownload;
+let tableauTypeRelease;
 
 function loadTableTypeDownload() {
-    let tableTypeDownload = $("#listeTypeDownload").KTDatatable({
+    tableauTypeDownload = $("#listeTypeDownload").KTDatatable({
         data: {
             type: 'remote',
             source: {
@@ -93,11 +93,9 @@ function loadTableTypeDownload() {
             },
         },
     });
-
-    tableauTypeDownload = tableTypeDownload
 }
 function loadTableTypeRelease() {
-    let tableTypeRelease = $("#listeTypeRelease").KTDatatable({
+    tableauTypeRelease = $("#listeTypeRelease").KTDatatable({
         data: {
             type: 'remote',
             source: {
@@ -183,8 +181,6 @@ function loadTableTypeRelease() {
             },
         },
     });
-
-    tableauTypeRelease = tableTypeRelease
 }
 function formAddTypeDownload() {
     let form = $("#formAddTypeDownload");
@@ -204,7 +200,6 @@ function formAddTypeDownload() {
             success: function (data) {
                 KTApp.unprogress(btn);
                 toastr.success("Le type de téléchargement à été ajouté avec succès", "Succès");
-                $(".modal").modal('hide');
                 tableauTypeDownload.reload()
             },
             error: function (err) {
@@ -233,7 +228,6 @@ function formAddTypeRelease() {
             success: function (data) {
                 KTApp.unprogress(btn);
                 toastr.success("Le type de release à été ajouté avec succès", "Succès");
-                $(".modal").modal('hide');
                 tableauTypeRelease.reload()
             },
             error: function (err) {

@@ -468,7 +468,6 @@ function formAddTag() {
                 200: function (data) {
                     KTApp.unprogress(btn);
                     toastr.success("Le ou les tags ont été ajoutés avec succès", "Succès");
-                    $(".modal").modal('hide');
                     tags.reload()
                 },
                 203: function (data) {
@@ -505,7 +504,6 @@ function formAddTechno() {
                 200: function (data) {
                     KTApp.unprogress(btn);
                     toastr.success("La ou les technologies ont été ajoutés avec succès", "Succès");
-                    $(".modal").modal('hide');
                     technos.reload()
                 },
                 203: function (data) {
@@ -542,7 +540,6 @@ function formAddRequis() {
                 200: function (data) {
                     KTApp.unprogress(btn);
                     toastr.success("Le ou les requis ont été ajoutés avec succès", "Succès");
-                    $(".modal").modal('hide');
                     requis.reload()
                 },
                 203: function (data) {

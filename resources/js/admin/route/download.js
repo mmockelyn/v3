@@ -5,11 +5,11 @@ require('../config');
 
 let route = $("#route");
 let route_id = route.attr('data-id');
-let tableauDownload = '';
-let tableauUpdater = '';
+let tableauDownload;
+let tableauUpdater;
 
 function loadTableDownload() {
-    let tableDownload = $("#listeDownload").KTDatatable({
+    tableauDownload = $("#listeDownload").KTDatatable({
         data: {
             type: 'remote',
             source: {
@@ -147,9 +147,6 @@ function loadTableDownload() {
         },
     });
 
-    tableauDownload = tableDownload;
-
-
     $('#kt_form_type').on('change', function () {
         tableDownload.search($(this).val().toLowerCase(), 'typedownload');
     });
@@ -161,7 +158,7 @@ function loadTableDownload() {
     $('#kt_form_type, #kt_form_release').selectpicker();
 }
 function loadTableUpdater() {
-    let tableUpdater = $("#listeUpdater").KTDatatable({
+    tableauUpdater = $("#listeUpdater").KTDatatable({
         data: {
             type: 'remote',
             source: {
@@ -270,8 +267,6 @@ function loadTableUpdater() {
             },
         },
     });
-
-    tableauUpdater = tableUpdater
 }
 function addFormDownload() {
     let form = $("#formAddDownload");
@@ -293,7 +288,6 @@ function addFormDownload() {
                     KTApp.unprogress(btn);
                     toastr.success("Le téléchargement à été ajouté avec succès", "Succès");
                     form[0].reset();
-                    $(".modal").modal('hide');
                     tableauDownload.reload()
                 },
                 203: function (data) {
@@ -331,7 +325,6 @@ function addFormUpdater() {
                     KTApp.unprogress(btn);
                     toastr.success("La mise à jour à été ajouté avec succès", "Succès");
                     form[0].reset();
-                    $(".modal").modal('hide');
                     tableauUpdater.reload()
                 },
                 203: function (data) {

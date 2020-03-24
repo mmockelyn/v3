@@ -219,7 +219,6 @@ function formAddArticle() {
         200: function _(data) {
           KTApp.unprogress(btn);
           toastr.success("L'article à été ajoutée avec succès", "Succès");
-          $(".modal").modal('hide');
           article.reload();
         },
         203: function _(data) {
