@@ -24223,11 +24223,11 @@ __webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
 
 var route = $("#route");
 var route_id = route.attr('data-id');
-var tableauDownload = '';
-var tableauUpdater = '';
+var tableauDownload;
+var tableauUpdater;
 
 function loadTableDownload() {
-  var tableDownload = $("#listeDownload").KTDatatable({
+  tableauDownload = $("#listeDownload").KTDatatable({
     data: {
       type: 'remote',
       source: {
@@ -24356,7 +24356,6 @@ function loadTableDownload() {
       }
     }
   });
-  tableauDownload = tableDownload;
   $('#kt_form_type').on('change', function () {
     tableDownload.search($(this).val().toLowerCase(), 'typedownload');
   });
@@ -24367,7 +24366,7 @@ function loadTableDownload() {
 }
 
 function loadTableUpdater() {
-  var tableUpdater = $("#listeUpdater").KTDatatable({
+  tableauUpdater = $("#listeUpdater").KTDatatable({
     data: {
       type: 'remote',
       source: {
@@ -24474,7 +24473,6 @@ function loadTableUpdater() {
       }
     }
   });
-  tableauUpdater = tableUpdater;
 }
 
 function addFormDownload() {
@@ -24494,7 +24492,6 @@ function addFormDownload() {
           KTApp.unprogress(btn);
           toastr.success("Le téléchargement à été ajouté avec succès", "Succès");
           form[0].reset();
-          $(".modal").modal('hide');
           tableauDownload.reload();
         },
         203: function _(data) {
@@ -24530,7 +24527,6 @@ function addFormUpdater() {
           KTApp.unprogress(btn);
           toastr.success("La mise à jour à été ajouté avec succès", "Succès");
           form[0].reset();
-          $(".modal").modal('hide');
           tableauUpdater.reload();
         },
         203: function _(data) {

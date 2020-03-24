@@ -4298,7 +4298,6 @@ function formAddObjet() {
         200: function _(data) {
           KTApp.unprogress(btn);
           toastr.success("L'objet <strong>" + data.data.designation + "</strong> à été ajouter avec succès", "Succès");
-          $(".modal").modal('hide');
           table.reload();
         },
         203: function _(data) {

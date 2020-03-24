@@ -227,7 +227,6 @@ function formAddUser() {
           KTApp.unprogress(btn);
           toastr.success("L'utilisateur à été créer.", "Succès");
           toastr.success("Un email avec son mot de passe à été envoyé à l'utilisateur.", "Succès");
-          $(".modal").modal('hide');
           users.reload();
         },
         203: function _(data) {

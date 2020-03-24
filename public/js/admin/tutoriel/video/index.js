@@ -3628,7 +3628,6 @@ function formAddTutoriel() {
         200: function _(data) {
           KTApp.unprogress(btn);
           toastr.success("Le tutoriel ".concat(data.data.title, " \xE0 \xE9t\xE9 ajouter avec succ\xE8s"), "Succès");
-          $(".modal").modal('hide');
           table.reload();
         },
         203: function _(data) {

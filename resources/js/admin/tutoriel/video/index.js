@@ -177,7 +177,6 @@ function formAddTutoriel() {
                 200: function (data) {
                     KTApp.unprogress(btn);
                     toastr.success(`Le tutoriel ${data.data.title} à été ajouter avec succès`, "Succès");
-                    $(".modal").modal('hide');
                     table.reload()
                 },
                 203: function (data) {

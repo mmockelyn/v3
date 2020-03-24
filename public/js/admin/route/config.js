@@ -3474,11 +3474,11 @@ __webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
 
 var route = $("#route");
 var route_id = route.attr('data-id');
-var tableauTypeDownload = '';
-var tableauTypeRelease = '';
+var tableauTypeDownload;
+var tableauTypeRelease;
 
 function loadTableTypeDownload() {
-  var tableTypeDownload = $("#listeTypeDownload").KTDatatable({
+  tableauTypeDownload = $("#listeTypeDownload").KTDatatable({
     data: {
       type: 'remote',
       source: {
@@ -3557,11 +3557,10 @@ function loadTableTypeDownload() {
       }
     }
   });
-  tableauTypeDownload = tableTypeDownload;
 }
 
 function loadTableTypeRelease() {
-  var tableTypeRelease = $("#listeTypeRelease").KTDatatable({
+  tableauTypeRelease = $("#listeTypeRelease").KTDatatable({
     data: {
       type: 'remote',
       source: {
@@ -3640,7 +3639,6 @@ function loadTableTypeRelease() {
       }
     }
   });
-  tableauTypeRelease = tableTypeRelease;
 }
 
 function formAddTypeDownload() {
@@ -3658,7 +3656,6 @@ function formAddTypeDownload() {
       success: function success(data) {
         KTApp.unprogress(btn);
         toastr.success("Le type de téléchargement à été ajouté avec succès", "Succès");
-        $(".modal").modal('hide');
         tableauTypeDownload.reload();
       },
       error: function error(err) {
@@ -3685,7 +3682,6 @@ function formAddTypeRelease() {
       success: function success(data) {
         KTApp.unprogress(btn);
         toastr.success("Le type de release à été ajouté avec succès", "Succès");
-        $(".modal").modal('hide');
         tableauTypeRelease.reload();
       },
       error: function error(err) {
