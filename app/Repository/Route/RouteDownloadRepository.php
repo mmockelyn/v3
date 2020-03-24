@@ -2,6 +2,7 @@
 namespace App\Repository\Route;
 
 use App\Model\Route\RouteDownload;
+use Webpatser\Uuid\Uuid;
 
 class RouteDownloadRepository
 {
@@ -63,7 +64,8 @@ class RouteDownloadRepository
                 "route_type_release_id" => $type_release,
                 "linkDownload" => $linkDownload,
                 "note" => $note,
-                "published" => $published
+                "published" => $published,
+                "uuid" => Uuid::generate()
             ]);
     }
 
