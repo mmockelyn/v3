@@ -57,7 +57,6 @@ class RouteDownloadRepository
         return $this->routeDownload->newQuery()
             ->create([
                 "route_id" => $route_id,
-                "name" => "Name",
                 "version" => $version,
                 "build" => $build,
                 "route_type_download_id" => $type_download,
