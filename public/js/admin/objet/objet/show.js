@@ -24986,6 +24986,8 @@ var swal = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/di
 var asset = $("#asset");
 var asset_id = asset.attr('data-id');
 var assetBase;
+var compatibilities;
+var tags;
 
 function showInfo() {
   return _showInfo.apply(this, arguments);
@@ -25143,7 +25145,7 @@ function formAddCompatibility() {
         200: function _(data) {
           KTApp.unprogress(btn);
           toastr.success("La compatibilité à été ajouté", "Succès");
-          $('.modal').modal('hide');
+          compatibilities.reload();
         },
         203: function _(data) {
           KTApp.unprogress(btn);
@@ -25178,7 +25180,7 @@ function formAddTag() {
         200: function _(data) {
           KTApp.unprogress(btn);
           toastr.success("Le ou les tags ont été ajoutés avec succès", "Succès");
-          $(".modal").modal('hide');
+          tags.reload();
         },
         203: function _(data) {
           KTApp.unprogress(btn);
@@ -25198,7 +25200,7 @@ function formAddTag() {
 formAddTag();
 
 function listeCompatibilities() {
-  var table = $("#listeCompatibilities").KTDatatable({
+  compatibilities = $("#listeCompatibilities").KTDatatable({
     data: {
       type: 'remote',
       source: {
@@ -25285,7 +25287,7 @@ function listeCompatibilities() {
 listeCompatibilities();
 
 function listeTag() {
-  var table = $("#listeTag").KTDatatable({
+  tags = $("#listeTag").KTDatatable({
     data: {
       type: 'remote',
       source: {

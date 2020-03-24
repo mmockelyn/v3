@@ -8,6 +8,8 @@ const swal = require('sweetalert2');
 let asset = $("#asset");
 let asset_id = asset.attr('data-id');
 let assetBase;
+let compatibilities;
+let tags
 
 async function showInfo() {
     let asset_title = document.querySelector('#asset_title');
@@ -161,7 +163,7 @@ function formAddCompatibility() {
                 200: function (data) {
                     KTApp.unprogress(btn);
                     toastr.success("La compatibilité à été ajouté", "Succès");
-                    $('.modal').modal('hide')
+                    compatibilities.reload()
                 },
                 203: function (data) {
                     KTApp.unprogress(btn);
@@ -199,7 +201,7 @@ function formAddTag() {
                 200: function (data) {
                     KTApp.unprogress(btn);
                     toastr.success("Le ou les tags ont été ajoutés avec succès", "Succès");
-                    $(".modal").modal('hide')
+                    tags.reload()
                 },
                 203: function (data) {
                     KTApp.unprogress(btn);
@@ -219,7 +221,7 @@ function formAddTag() {
 formAddTag();
 
 function listeCompatibilities() {
-    let table = $("#listeCompatibilities").KTDatatable({
+    compatibilities = $("#listeCompatibilities").KTDatatable({
         data: {
             type: 'remote',
             source: {
@@ -314,7 +316,7 @@ function listeCompatibilities() {
 listeCompatibilities();
 
 function listeTag() {
-    let table = $("#listeTag").KTDatatable({
+    tags = $("#listeTag").KTDatatable({
         data: {
             type: 'remote',
             source: {

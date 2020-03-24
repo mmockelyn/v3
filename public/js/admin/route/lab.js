@@ -24223,10 +24223,10 @@ __webpack_require__(/*! ../config */ "./resources/js/admin/config.js");
 
 var route = $("#route");
 var route_id = route.attr('data-id');
-var tableau = '';
+var labs;
 
 function loadTable() {
-  var table = $("#listeAnomalie").KTDatatable({
+  labs = $("#listeAnomalie").KTDatatable({
     data: {
       type: 'remote',
       source: {
@@ -24341,9 +24341,8 @@ function loadTable() {
       }
     }
   });
-  tableau = table;
   $('#kt_form_status').on('change', function () {
-    table.search($(this).val().toLowerCase(), 'state');
+    labs.search($(this).val().toLowerCase(), 'state');
   });
   $('#kt_form_status').selectpicker();
 }
@@ -24370,8 +24369,7 @@ function formAddAnomalie() {
             toastr.success("L'anomalie <strong>" + data.data.anomalie + "</strong> à été ajoutée", "Succès");
           }
 
-          $(".modal").modal('hide');
-          tableau.reload();
+          labs.reload();
         },
         203: function _(data) {
           KTApp.unprogress(btn);
@@ -24431,8 +24429,7 @@ function formNextState() {
       success: function success(data) {
         KTApp.unprogress(btn);
         toastr.success("Les anomalies selectionner sont passée à <strong>Terminer</strong>", "Succès");
-        $(".modal").modal('hide');
-        tableau.reload();
+        labs.reload();
         portletStat();
         form[0].reset();
       },

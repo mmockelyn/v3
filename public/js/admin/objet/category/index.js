@@ -216,7 +216,6 @@ function formAddCategory() {
       success: function success(data) {
         KTApp.unprogress(btn);
         toastr.success("La catégorie à été ajouté avec succès", "Succès");
-        $(".modal").modal('hide');
         table.reload();
       },
       error: function error(err) {
@@ -329,7 +328,6 @@ function formAddSubCategory() {
       success: function success(data) {
         KTApp.unprogress(btn);
         toastr.success("La sous catégorie à été ajouté avec succès", "Succès");
-        $(".modal").modal('hide');
         sub.reload();
       },
       error: function error(err) {
