@@ -3,6 +3,7 @@
 namespace Tests\Feature\Front\Blog;
 
 use App\Model\Blog\Blog;
+use App\Model\Blog\BlogCategory;
 use App\Model\Blog\BlogComment;
 use App\Repository\Blog\BlogRepository;
 use App\User;
@@ -18,6 +19,11 @@ class BlogTest extends TestCase
     function it_shown_index_page()
     {
         $this->withoutExceptionHandling();
+        factory(BlogCategory::class)->create();
+        $blog = factory(Blog::class)->create([
+            "published" => 1,
+            "published_at" => now()
+        ]);
 
         $this->get('/blog')
             ->assertSuccessful()
@@ -31,10 +37,13 @@ class BlogTest extends TestCase
             ->assertSuccessful();
     }
 
+
     /** @test */
     function it_shown_show_page()
     {
         $this->withoutExceptionHandling();
+
+        factory(BlogCategory::class)->create();
 
         $blog = factory(Blog::class)->create([
             "published" => 1,
@@ -51,19 +60,25 @@ class BlogTest extends TestCase
 
     function post_comment_to_blog_show()
     {
+        $this->withoutExceptionHandling();
         $user = factory(User::class)->create(["state" => 1]);
+        factory(BlogCategory::class)->create();
         $blog = factory(Blog::class)->create([
             "published" => 1,
             "published_at" => now()
         ]);
 
-        $this->actingAs($user)->post("/blog/api/{$blog->id}/comments", ["comment" => "fjkdksjfklsdjfkldsjfkldsjflksdjfsdklfjsldf"])
-            ->assertSuccessful();
+        $response = $this->actingAs($user)->json("POST", '/blog/api/'.$blog->id.'/comments', ["comment" => "fjkdksjfklsdjfkldsjfkldsjflksdjfsdklfjsldf"])
+            ->assertStatus(200)
+            ->assertJson([
+                'success' => 'success'
+            ]);
     }
 
     function test_post_comment_error_validation()
     {
         $user = factory(User::class)->create(["state" => 1]);
+        factory(BlogCategory::class)->create();
         $blog = factory(Blog::class)->create([
             "published" => 1,
             "published_at" => now()
@@ -76,6 +91,7 @@ class BlogTest extends TestCase
     function test_delete_comment_to_blog_show()
     {
         $user = factory(User::class)->create(["state" => 1]);
+        factory(BlogCategory::class)->create();
         $blog = factory(Blog::class)->create([
             "published" => 1,
             "published_at" => now()
@@ -89,6 +105,5 @@ class BlogTest extends TestCase
             ]);
 
     }
-
 
 }

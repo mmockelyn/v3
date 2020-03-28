@@ -32,11 +32,14 @@ Route::group(["prefix" => "route", 'namespace' => "Api\Route"], function () {
     Route::get('{route_id}/loadTaskFinished', 'RouteController@loadTaskFinished');
 
     Route::get('{route_id}/download/{download_id}', 'RouteController@getDownload');
+
+    Route::get('{route_id}/updaters', 'RouteUpdaterController@listVersions');
 });
 
 Route::group(["prefix" => "download", "namespace" => "Api\Download"], function () {
     Route::get('latest', 'DownloadController@latest');
     Route::get('{asset_id}/loadMesh', 'DownloadController@loadMesh');
+    Route::get('{asset_id}/loadConfig', 'DownloadController@loadConfig');
 });
 
 Route::group(["prefix" => "tutoriel", "namespace" => "Api\Tutoriel"], function () {

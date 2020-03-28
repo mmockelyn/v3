@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 34);
+/******/ 	return __webpack_require__(__webpack_require__.s = 35);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -346,7 +346,7 @@ formAddSubCategory();
 
 /***/ }),
 
-/***/ 34:
+/***/ 35:
 /*!**********************************************************!*\
   !*** multi ./resources/js/admin/objet/category/index.js ***!
   \**********************************************************/
