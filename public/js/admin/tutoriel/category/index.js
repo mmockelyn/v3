@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 39);
+/******/ 	return __webpack_require__(__webpack_require__.s = 40);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -3718,7 +3718,7 @@ $("#category_id").selectpicker();
 
 /***/ }),
 
-/***/ 39:
+/***/ 40:
 /*!*************************************************************!*\
   !*** multi ./resources/js/admin/tutoriel/category/index.js ***!
   \*************************************************************/

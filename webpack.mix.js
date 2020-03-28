@@ -27,6 +27,7 @@ mix.js('resources/js/app.js', 'public/js')
 
     .js('resources/js/download/index.js', 'public/js/download')
     .js('resources/js/download/mesh.js', 'public/js/download')
+    .js('resources/js/download/config.js', 'public/js/download')
 
     .js('resources/js/tutoriel/index.js', 'public/js/tutoriel')
     .js('resources/js/tutoriel/list.js', 'public/js/tutoriel')

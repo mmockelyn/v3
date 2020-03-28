@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 26);
+/******/ 	return __webpack_require__(__webpack_require__.s = 27);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -20966,7 +20966,7 @@ submitDescriptionForm();
 
 /***/ }),
 
-/***/ 26:
+/***/ 27:
 /*!************************************************!*\
   !*** multi ./resources/js/admin/route/show.js ***!
   \************************************************/

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 24);
+/******/ 	return __webpack_require__(__webpack_require__.s = 25);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -38656,7 +38656,7 @@ cache.addEventListener('click', function (e) {
 
 /***/ }),
 
-/***/ 24:
+/***/ 25:
 /*!*******************************************************!*\
   !*** multi ./resources/js/admin/blog/article/edit.js ***!
   \*******************************************************/

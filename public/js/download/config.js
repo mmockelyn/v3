@@ -81,63 +81,42 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 47);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/admin/wiki/article/edit.js":
-/*!*************************************************!*\
-  !*** ./resources/js/admin/wiki/article/edit.js ***!
-  \*************************************************/
+/***/ "./resources/js/download/config.js":
+/*!*****************************************!*\
+  !*** ./resources/js/download/config.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function formEditInfo() {
-  var form = $("#formEditInfo");
-  form.on('submit', function (e) {
-    e.preventDefault();
-    var btn = form.find('button');
-    var url = form.attr('action');
-    var data = form.serializeArray();
-    KTApp.progress(btn);
-    $.ajax({
-      url: url,
-      method: 'put',
-      data: data,
-      statusCode: {
-        200: function _(data) {
-          KTApp.unprogress(btn);
-          toastr.success("Les information de l'article ont été mise à jours");
-        },
-        203: function _(data) {
-          KTApp.unprogress(btn);
-          Array.from(data.data.errors).forEach(function (err) {
-            toastr.warning(err, "Validation");
-          });
-        },
-        500: function _(data) {
-          KTApp.unprogress(btn);
-          toastr.error("Erreur lors de l'execution du script", "Erreur Système 500");
-        }
-      }
-    });
+var asset = $("#asset");
+var asset_id = asset.attr('data-id');
+
+function loadConfig() {
+  var div = $("#config");
+  KTApp.block(div);
+  $.get('/api/' + asset_id + '/loadConfig').done(function (data) {
+    KTApp.unprogress(data);
+    div.html(data.data);
   });
 }
 
-formEditInfo();
-var av = new KTAvatar('kt_user_avatar_1');
+loadConfig();
 
 /***/ }),
 
-/***/ 47:
-/*!*******************************************************!*\
-  !*** multi ./resources/js/admin/wiki/article/edit.js ***!
-  \*******************************************************/
+/***/ 9:
+/*!***********************************************!*\
+  !*** multi ./resources/js/download/config.js ***!
+  \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\wiki\article\edit.js */"./resources/js/admin/wiki/article/edit.js");
+module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\download\config.js */"./resources/js/download/config.js");
 
 
 /***/ })

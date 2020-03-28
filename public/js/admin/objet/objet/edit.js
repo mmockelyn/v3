@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 37);
+/******/ 	return __webpack_require__(__webpack_require__.s = 38);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -234,7 +234,7 @@ var av = new KTAvatar('kt_user_avatar_1');
 
 /***/ }),
 
-/***/ 37:
+/***/ 38:
 /*!******************************************************!*\
   !*** multi ./resources/js/admin/objet/objet/edit.js ***!
   \******************************************************/

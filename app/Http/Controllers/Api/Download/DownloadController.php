@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Download;
 use App\HelpersClass\Asset\AssetHelper;
 use App\Http\Controllers\Api\BaseController;
 use App\Repository\Asset\AssetRepository;
+use Illuminate\Support\Facades\Storage;
 
 class DownloadController extends BaseController
 {
@@ -79,5 +80,19 @@ class DownloadController extends BaseController
         $data = $this->assetRepository->get($asset_id);
 
         return $this->sendResponse($data->toArray(), "Load Mesh");
+    }
+
+    public function loadConfig($asset_id)
+    {
+        $file = Storage::disk('sftp')->get('download/'.$asset_id.'/config.txt');
+        ob_start();
+        ?>
+        <code>
+            <?= $file; ?>
+        </code>
+        <?php
+        $content = ob_get_clean();
+
+        return $this->sendResponse($content, "Fichier de configuration");
     }
 }
