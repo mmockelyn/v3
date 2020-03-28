@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 23);
+/******/ 	return __webpack_require__(__webpack_require__.s = 24);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -24701,7 +24701,7 @@ hidingAlerting(); //$('[data-toggle="kt-tooltip"]').tooltip();
 
 /***/ }),
 
-/***/ 23:
+/***/ 24:
 /*!*******************************************************!*\
   !*** multi ./resources/js/admin/blog/article/show.js ***!
   \*******************************************************/

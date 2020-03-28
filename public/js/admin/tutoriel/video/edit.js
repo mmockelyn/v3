@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 41);
+/******/ 	return __webpack_require__(__webpack_require__.s = 42);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -17956,7 +17956,7 @@ $('#published_at').datetimepicker({
 
 /***/ }),
 
-/***/ 41:
+/***/ 42:
 /*!*********************************************************!*\
   !*** multi ./resources/js/admin/tutoriel/video/edit.js ***!
   \*********************************************************/

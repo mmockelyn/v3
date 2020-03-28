@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 35);
+/******/ 	return __webpack_require__(__webpack_require__.s = 36);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -4331,7 +4331,7 @@ $("#short_description").summernote({
 
 /***/ }),
 
-/***/ 35:
+/***/ 36:
 /*!*******************************************************!*\
   !*** multi ./resources/js/admin/objet/objet/index.js ***!
   \*******************************************************/
