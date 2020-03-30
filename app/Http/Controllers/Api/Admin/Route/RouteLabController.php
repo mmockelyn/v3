@@ -248,10 +248,20 @@ class RouteLabController extends BaseController
     public function nextState(Request $request, $route_id)
     {
 
-        foreach ($request->anomalie as $anomaly) {
-            $newBuild = RouteLabHelper::calcNewBuild($route_id);
-            $this->routeBuildRepository->updateBuild($route_id, $newBuild);
-            $this->routeAnomalieRepository->updateState($anomaly, 2);
+        if($request->nextstate == 0) {
+            foreach ($request->anomalie as $anomaly) {
+                $this->routeAnomalieRepository->updateState($anomaly, 0);
+            }
+        }elseif($request->nextstate == 1) {
+            foreach ($request->anomalie as $anomaly) {
+                $this->routeAnomalieRepository->updateState($anomaly, 1);
+            }
+        }else{
+            foreach ($request->anomalie as $anomaly) {
+                $newBuild = RouteLabHelper::calcNewBuild($route_id);
+                $this->routeBuildRepository->updateBuild($route_id, $newBuild);
+                $this->routeAnomalieRepository->updateState($anomaly, 2);
+            }
         }
 
         return $this->sendResponse("ok", "ok");
