@@ -21,11 +21,14 @@ class RouteTest extends TestCase
 
     function test_index_show()
     {
+        $this->withoutExceptionHandling();
         factory(Route::class)->create();
+        factory(RouteVersion::class)->create();
+        factory(RouteBuild::class)->create();
 
         $this->get('/route')
             ->assertStatus(200)
             ->assertViewIs('front.route.index');
     }
-    
+
 }
