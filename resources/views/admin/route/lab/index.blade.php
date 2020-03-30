@@ -261,7 +261,18 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Changer l'état</button>
+                        <div class="row">
+                            <div class="col-md-9 text-left">
+                                <select class="form-control" name="nextstate">
+                                    <option value="0">Inscrit</option>
+                                    <option value="1">En cours</option>
+                                    <option value="2">Terminer</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 text-right">
+                                <button type="submit" class="btn btn-success">Changer l'état</button>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
