@@ -7,6 +7,7 @@ use App\Repository\Tutoriel\TutorielCategoryRepository;
 use App\Repository\Tutoriel\TutorielRepository;
 use App\Repository\Tutoriel\TutorielTagRepository;
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class TutorielVideoController extends Controller
 {
@@ -63,6 +64,7 @@ class TutorielVideoController extends Controller
         try {
             $this->tutorielRepository->delete($tutoriel_id);
 
+            Log::info("Suppression d'un tutoriel");
             return redirect()->back()->with('success', "Le tutoriel à été supprimer");
         } catch (Exception $exception) {
             return redirect()->back()->with('error', "Erreur lors de la suppression du tutoriel");

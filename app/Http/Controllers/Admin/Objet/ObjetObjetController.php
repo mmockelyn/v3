@@ -10,6 +10,7 @@ use App\Repository\Asset\AssetTagRepository;
 use App\Repository\Core\TrainzBuildRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ObjetObjetController extends Controller
@@ -56,9 +57,6 @@ class ObjetObjetController extends Controller
     }
 
 
-    /**
-     * @return Factory|View
-     */
     public function index()
     {
         return view("admin.objet.objet.index", [
@@ -78,6 +76,11 @@ class ObjetObjetController extends Controller
     {
         $objet = $this->assetRepository->get($objet_id);
         if ($objet->published == 1) {
+
+            Log::warning("Tentative de modification à un objet publier", [
+                "user" => auth()->user()->name,
+                "objet" => $objet
+            ]);
             return redirect()->back()->with('warning', "Cette objet à été publier, l'édition est impossible");
         }
         return view("admin.objet.objet.edit", [
@@ -90,6 +93,7 @@ class ObjetObjetController extends Controller
         try {
             $this->assetTagRepository->delete($tag_id);
 
+            Log::info("Suppression d'un tag d'un objet");
             return redirect()->back()->with('success', "Le tag à été supprimer avec succès");
         } catch (Exception $exception) {
             return redirect()->back()->with('error', "Erreur lors de la suppression du tag.<br><i>" . $exception->getMessage() . "</i>");
@@ -101,6 +105,7 @@ class ObjetObjetController extends Controller
         try {
             $this->assetCompatibilityRepository->delete($compatibility_id);
 
+            Log::info("Suppression d'une compatibilité d'un objet");
             return redirect()->back()->with('success', "La compatibilité à été supprimer avec succès");
         } catch (Exception $exception) {
             return redirect()->back()->with('error', "Erreur lors de la suppression de la compatibilité.<br><i>" . $exception->getMessage() . "</i>");
@@ -118,6 +123,7 @@ class ObjetObjetController extends Controller
                 $request->file('images')->storeAs('download/', $asset_id . '.png', 'public');
                 Storage::disk('public')->setVisibility('download/' . $asset_id . '.png', 'public');
             }
+            Log::info("L'image de présentation d'un objet à été mise à jours");
             return redirect()->back()->with('success', "L'image de l'objet à été mise à jours");
         } catch (Exception $exception) {
             return redirect()->back()->with('error', $exception->getMessage());
