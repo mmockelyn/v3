@@ -12,6 +12,7 @@ use App\Repository\Blog\BlogCommentRepository;
 use App\Repository\Blog\BlogRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 
@@ -93,6 +94,7 @@ class BlogArticleController extends BaseController
         ]);
 
         if ($validator->fails()) {
+            Log::warning("Erreur de validation lors de la création d'un article du blog");
             return $this->sendError("Erreur", [
                 "errors" => $validator->errors()->all()
             ], 203);
@@ -105,6 +107,7 @@ class BlogArticleController extends BaseController
                 $request->short_content
             );
 
+            Log::info("Création d'un article du blog");
             return $this->sendResponse("OK", "L'article <strong>" . $article->title . "</strong> à été créer avec succès");
         } catch (Exception $exception) {
             return $this->sendError("Erreur", [
@@ -191,6 +194,7 @@ class BlogArticleController extends BaseController
         try {
             $this->blogRepository->publish($article_id);
 
+            Log::info("Publication d'un article du blog");
             return $this->sendResponse("ok", "ok");
         } catch (Exception $exception) {
             return $this->sendError("Erreur système", [
@@ -204,6 +208,7 @@ class BlogArticleController extends BaseController
         try {
             $this->blogRepository->unpublish($article_id);
 
+            Log::info("Dépublication d'un article du blog");
             return $this->sendResponse("ok", "ok");
         } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [
@@ -242,6 +247,7 @@ class BlogArticleController extends BaseController
                 $facebook
             );
 
+            Log::info("Edition d'un article du blog");
             return $this->sendResponse("ok", 'ok');
         } catch (Exception $exception) {
             return $this->sendError("Erreur", [
@@ -266,6 +272,7 @@ class BlogArticleController extends BaseController
                 Storage::disk('public')->setVisibility('blog/' . $article_id . '.png', 'public');
             }
 
+            Log::info("Edition de l'image d'un article du blog");
             return redirect()->back()->with('success', "L'image à été mise à jour avec succès");
         } catch (Exception $exception) {
             return redirect()->back()->with("error", "Erreur lors de la mise à jour de l'image");
@@ -300,6 +307,7 @@ class BlogArticleController extends BaseController
         try {
             $this->blogRepository->updateContent($article_id, $request->get('content'));
 
+            Log::info("Edition de la description d'un article du blog");
             return $this->sendResponse("ok", "ok");
         } catch (Exception $exception) {
             return $this->sendError("Erreur Système", [

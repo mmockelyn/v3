@@ -26,6 +26,7 @@ use Carbon\Carbon;
 use Cartalyst\Stripe\Exception\StripeException;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Inacho\CreditCard;
 use Validator;
@@ -199,6 +200,9 @@ class AccountApiController extends BaseController
 
             dispatch(new UpdateInfoJob(auth()->user()))->delay(now()->addMinute())->onQueue('account');
             AccountActivityHelper::storeActivity("Mise à jour de votre profil", 'la la-user', '2');
+            Log::info("Mise à jour du profil !", [
+                "user" => auth()->user()->name
+            ]);
             return $this->sendResponse("Done !", "Done");
         } catch (Exception $exception) {
             AccountActivityHelper::storeActivity("Mise à jour de votre profil", 'la la-user', '0');
@@ -217,6 +221,9 @@ class AccountApiController extends BaseController
             );
             dispatch(new UpdatePassJob(auth()->user()))->delay(now()->addMinute())->onQueue('account');
             AccountActivityHelper::storeActivity("Mise à jour de votre mot de passe", 'la la-key', '2');
+            Log::info("Mise à jour du mot de passe !", [
+                "user" => auth()->user()->name
+            ]);
             return $this->sendResponse("Done !", "Done");
         } catch (Exception $exception) {
             AccountActivityHelper::storeActivity("Mise à jour de votre mot de passe", 'la la-key', '0');
@@ -231,6 +238,9 @@ class AccountApiController extends BaseController
         try {
             $this->userRepository->delete(auth()->user()->id);
 
+            Log::info("Suppression du profil !", [
+                "user" => auth()->user()->name
+            ]);
             $this->sendResponse("Done", "Done");
         } catch (Exception $exception) {
             $this->sendError("Erreur Système", [
@@ -287,6 +297,13 @@ class AccountApiController extends BaseController
 
                 dispatch(new NewSubscriptionJob(auth()->user(), $premium))->delay(now()->addMinute())->onQueue('account');
                 AccountActivityHelper::storeActivity("Ajout d'un mode de paiement", 'la la-credit-card', '2');
+                Log::info("Ajout d'un mode de paiement !", [
+                    "user" => auth()->user()->name,
+                    "card" => [
+                        "number" => Str::substr($request->number, 12, 4),
+                        "brand" => $card_brand
+                    ]
+                ]);
                 return $this->sendResponse($premium->premium_end->format('d/m/Y'), "Création de la souscription");
             } catch (StripeException $exception) {
                 AccountActivityHelper::storeActivity("Ajout d'un mode de paiement", 'la la-credit-card', '0');
@@ -574,6 +591,13 @@ class AccountApiController extends BaseController
                 <?php
                 $content = ob_get_clean();
                 AccountActivityHelper::storeActivity("Ajout d'un mode de paiement", 'la la-credit-card', '2');
+                Log::info("Ajout d'un mode de paiement !", [
+                    "user" => auth()->user()->name,
+                    "card" => [
+                        "number" => Str::substr($request->number, 12, 4),
+                        "brand" => $card['type']
+                    ]
+                ]);
                 return $this->sendResponse($content, "Nouveau Moyen de paiement");
             } catch (Exception $exception) {
                 AccountActivityHelper::storeActivity("Ajout d'un mode de paiement", 'la la-credit-card', '0');
@@ -602,6 +626,9 @@ class AccountApiController extends BaseController
                 $this->paymentRepository->delete($pm_id);
 
                 AccountActivityHelper::storeActivity("Suppression d'un mode de paiement", 'la la-credit-card', '2');
+                Log::info("Suppression d'un mode de paiement !", [
+                    "user" => auth()->user()->name,
+                ]);
                 return $this->sendResponse($pm, "Suppression du mode de paiement");
             } catch (Exception $exception) {
                 AccountActivityHelper::storeActivity("Suppression d'un mode de paiement", 'la la-credit-card', '0');
@@ -653,6 +680,13 @@ class AccountApiController extends BaseController
             }
 
             AccountActivityHelper::storeActivity("Nouvelle facture de disponible", 'la la-euro', '2');
+            Log::info("Création d'une facture !", [
+                "user" => auth()->user()->name,
+                "invoice" => [
+                    "number" => $in->number,
+                    "amount" => $in->total
+                ]
+            ]);
             return $this->sendResponse($inc, "Création de facture");
         } catch (Exception $exception) {
             AccountActivityHelper::storeActivity("Nouvelle facture de disponible", 'la la-euro', '0');

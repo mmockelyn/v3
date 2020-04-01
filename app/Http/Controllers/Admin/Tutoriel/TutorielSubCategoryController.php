@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Notifications\Core\ErrorSlackNotification;
 use App\Repository\Tutoriel\TutorielSubCategoryRepository;
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class TutorielSubCategoryController extends Controller
 {
@@ -29,6 +30,7 @@ class TutorielSubCategoryController extends Controller
         try {
             $this->tutorielSubCategoryRepository->delete($subcategory_id);
 
+            Log::info("Suppression d'une sous catégorie d'un tutoriel");
             return redirect()->back()->with('success', "La sous catégorie à été supprimer");
         } catch (Exception $exception) {
             AdminHelper::adminsNotification(new ErrorSlackNotification('Tutoriel-subcatégorie', "Suppression Impossible", $exception->getMessage()));

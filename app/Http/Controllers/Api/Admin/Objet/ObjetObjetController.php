@@ -344,6 +344,7 @@ class ObjetObjetController extends BaseController
                     try {
                         Storage::disk('sftp')->setVisibility($path . $data->uuid . '.zip', 'public');
                         ZipFile::fileFbx(Storage::disk('sftp')->get('download/' . $asset_id . '/fbx/' . $data->uuid . '.zip'), $asset_id);
+                        Storage::disk('sftp')->delete('download/'.$asset_id.'/fbx/'.$data->uuid.'.zip');
                         return $this->sendResponse(null, null);
                     } catch (FileException $exception) {
                         return $this->sendError("Erreur Fichier", [
@@ -370,6 +371,7 @@ class ObjetObjetController extends BaseController
                 try {
                     Storage::disk('sftp')->setVisibility($path . $data->uuid . '.zip', 'public');
                     ZipFile::fileFbx(Storage::disk('sftp')->get('download/' . $asset_id . '/fbx/' . $data->uuid . '.zip'), $asset_id);
+                    Storage::disk('sftp')->delete('download/'.$asset_id.'/fbx/'.$data->uuid.'.zip');
                 } catch (FileException $exception) {
                     return $this->sendError("Erreur Fichier", [
                         "error" => "Impossible de modifier la visibilité du fichier"

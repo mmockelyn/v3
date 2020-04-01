@@ -7,6 +7,7 @@ use App\Repository\Blog\BlogCategoryRepository;
 use App\Repository\Blog\BlogRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BlogArticleController extends Controller
 {
@@ -48,6 +49,10 @@ class BlogArticleController extends Controller
     {
         $article = $this->blogRepository->get($article_id);
         if ($article->published == 1) {
+            Log::warning("Tentative d'accès à l'édition d'un article publier", [
+                "user" => auth()->user()->name,
+                "sector" => "Admin/Blog"
+            ]);
             return redirect()->back()->with('warning', "Cette article est publier, l'édition est impossible");
         }
         return view("admin.blog.article.edit", [
@@ -65,11 +70,18 @@ class BlogArticleController extends Controller
     {
         $article = $this->blogRepository->get($article_id);
         if ($article->published == 1) {
+            Log::warning("Tentative d'accès à la suppression d'un article publier", [
+                "user" => auth()->user()->name,
+                "sector" => "Admin/Blog"
+            ]);
             return redirect()->back()->with('warning', "Cette article est publier, la suppression est impossible");
         }
         try {
             $this->blogRepository->delete($article_id);
 
+            Log::info("Suppression d'un article", [
+                "article" => $article
+            ]);
             return redirect()->back()->with('success', "L'article à bien été supprimer");
         } catch (Exception $exception) {
             return redirect()->back()->with('error', "Erreur lors de la suppression de l'article");
