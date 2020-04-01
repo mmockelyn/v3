@@ -43,6 +43,7 @@ class WikiCategoryController extends Controller
         try {
             $this->categoryRepository->delete($category_id);
 
+            Log::info("Suppression d'une catégorie d'un article du wiki");
             return redirect()->back()->with('success', "La catégorie à été supprimer");
         } catch (Exception $exception) {
             Log::error($exception->getMessage());
@@ -55,6 +56,7 @@ class WikiCategoryController extends Controller
         try {
             $this->subCategoryRepository->delete($subcategory_id);
 
+            Log::info("Suppression d'une sous catégorie d'un article du wiki");
             return redirect()->back()->with('success', "La sous catégorie à été supprimer");
         } catch (Exception $exception) {
             Log::error($exception->getMessage());

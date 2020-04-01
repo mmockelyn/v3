@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Blog;
 use App\Http\Controllers\Controller;
 use App\Repository\Blog\BlogCategoryRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BlogCategoryController extends Controller
 {
@@ -38,7 +39,11 @@ class BlogCategoryController extends Controller
     {
         try {
             $this->blogCategoryRepository->update($category_id, $request->name);
+            $category = $this->blogCategoryRepository->get($category_id);
 
+            Log::info("Edition d'une catégorie d'article", [
+                "categorie" => $category
+            ]);
             return redirect()->route('Back.Blog.Category.index')->with('success', "La catégorie à été mise à jours");
         }catch (\Exception $exception) {
             return redirect()->route('Back.Blog.Category.index')->with('error', "Erreur lors de la mise à jours du système");
@@ -50,6 +55,11 @@ class BlogCategoryController extends Controller
         try {
             $this->blogCategoryRepository->delete($category_id);
 
+            $category = $this->blogCategoryRepository->get($category_id);
+
+            Log::info("Suppression d'une catégorie d'article", [
+                "categorie" => $category
+            ]);
             return redirect()->back()->with('success', "La catégorie à bien été supprimer");
         }catch (\Exception $exception){
             return redirect()->back()->with('error', "Erreur lors de la suppression de la catégorie");

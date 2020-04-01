@@ -10,6 +10,7 @@ use App\Repository\Wiki\WikiRepository;
 use App\Repository\Wiki\WikiSubCategoryRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class WikiArticleController extends Controller
@@ -89,6 +90,7 @@ class WikiArticleController extends Controller
 
                     try {
                         Storage::disk('public')->setVisibility('wiki/' . $article_id . '.png', 'public');
+                        Log::info("L'image de présentation d'un article du wiki à été mis à jour");
                         return redirect()->back()->with('success', "L'image à été ajouté avec succès");
                     } catch (Exception $exception) {
                         return redirect()->back()->with('warning', "Erreur lors de la définition du fichier images");
@@ -105,6 +107,7 @@ class WikiArticleController extends Controller
 
                 try {
                     Storage::disk('public')->setVisibility('wiki/' . $article_id . '.png', 'public');
+                    Log::info("L'image de présentation d'un article du wiki à été mis à jour");
                     return redirect()->back()->with('success', "L'image à été ajouté avec succès");
                 } catch (Exception $exception) {
                     return redirect()->back()->with('warning', "Erreur lors de la définition du fichier images");
@@ -120,6 +123,7 @@ class WikiArticleController extends Controller
         try {
             $this->wikiRepository->delete($article_id);
 
+            Log::info("Suppression d'un article du wiki");
             return redirect()->back()->with('success', "L'article à été supprimer");
         } catch (Exception $exception) {
             return redirect()->back()->with('error', "Erreur lors de la suppression de l'article");
@@ -132,6 +136,7 @@ class WikiArticleController extends Controller
             $this->articleSommaireRepository->delete($sommaire_id);
             try {
                 $this->articleContentRepository->deleteBySommaire($sommaire_id);
+                Log::info("Suppression d'un sommaire d'un article du wiki");
                 return redirect()->back()->with('success', "Le contenue de l'article à été supprimer");
             } catch (Exception $exception) {
                 return redirect()->back()->with('error', "Erreur lors de la suppression du contenue");

@@ -7,6 +7,7 @@ use App\Notifications\Account\UserBan;
 use App\Repository\Account\UserRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UserGestionController extends Controller
 {
@@ -48,6 +49,7 @@ class UserGestionController extends Controller
         try {
             $this->userRepository->delete($user_id);
 
+            Log::info("L'utilisateur à été supprimer");
             return redirect()->back()->with('success', "Le compte utilisateur à été supprimer");
         } catch (Exception $exception) {
             return redirect()->back()->with("error", "Erreur lors de la suppressio de l'utilisateur");
@@ -60,6 +62,10 @@ class UserGestionController extends Controller
             $user = $this->userRepository->getUser($user_id);
             $this->userRepository->ban($user_id);
             $user->notify(new UserBan($user));
+
+            Log::info("Un utilisateur à été bannie", [
+                "user" => $user
+            ]);
             return redirect()->back()->with("success", "L'utilisateur à été ban");
         } catch (Exception $exception) {
             return redirect()->back()->with("error", "Erreur lors du ban de l'utilisateur");
@@ -69,8 +75,12 @@ class UserGestionController extends Controller
     public function unban($user_id)
     {
         try {
+            $user = $this->userRepository->getUser($user_id);
             $this->userRepository->unban($user_id);
 
+            Log::info("Un utilisateur à été débloquer", [
+                "user" => $user
+            ]);
             return redirect()->back()->with("success", "L'utilisateur à été débloqué");
         } catch (Exception $exception) {
             return redirect()->back()->with("error", "Erreur lors du déblocage de l'utilisateur");
