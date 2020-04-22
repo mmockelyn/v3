@@ -16,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(["prefix" => "blog", "namespace" => "Api\Blog"], function () {
     Route::get('latest', "BlogController@latest");
+    Route::get('/', 'BlogController@all');
 });
 
 Route::group(["prefix" => "route", 'namespace' => "Api\Route"], function () {
+    Route::get('/', 'RouteController@all');
     Route::get('{route_id}', 'RouteController@get');
     Route::get('{route_id}/versions', 'RouteController@listVersions');
     Route::get('{route_id}/version/{version_id}', 'RouteController@loadVersion');
@@ -37,12 +39,14 @@ Route::group(["prefix" => "route", 'namespace' => "Api\Route"], function () {
 });
 
 Route::group(["prefix" => "download", "namespace" => "Api\Download"], function () {
+    Route::get('/', 'DownloadController@all');
     Route::get('latest', 'DownloadController@latest');
     Route::get('{asset_id}/loadMesh', 'DownloadController@loadMesh');
     Route::get('{asset_id}/loadConfig', 'DownloadController@loadConfig');
 });
 
 Route::group(["prefix" => "tutoriel", "namespace" => "Api\Tutoriel"], function () {
+    Route::get('/', 'TutorielController@all');
     Route::get('latest', 'TutorielController@latest');
     Route::get('{sub_id}/listTutoriel', 'TutorielController@listTutoriel');
     Route::get('{tutoriel_id}', 'TutorielController@tutoriel');

@@ -95,4 +95,13 @@ class DownloadController extends BaseController
 
         return $this->sendResponse($content, "Fichier de configuration");
     }
+
+    public function all()
+    {
+        $downloads = $this->assetRepository->all();
+
+        return response()->json([
+            "assets" => $downloads->toArray()
+        ]);
+    }
 }
