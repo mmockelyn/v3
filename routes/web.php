@@ -289,3 +289,5 @@ Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout');
 Route::get('/test', 'TestController@test');
 Route::get('/linter', 'HomeController@linter');
+
+Route::feeds();
