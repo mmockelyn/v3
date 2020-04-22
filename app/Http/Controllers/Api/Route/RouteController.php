@@ -7,6 +7,7 @@ use App\Repository\Route\RouteAnomalieRepository;
 use App\Repository\Route\RouteDownloadRepository;
 use App\Repository\Route\RouteGalleryCategoryRepository;
 use App\Repository\Route\RouteGalleryRepository;
+use App\Repository\Route\RouteRepository;
 use App\Repository\Route\RouteUpdaterRepository;
 use App\Repository\Route\RouteVersionGareRepository;
 use App\Repository\Route\RouteVersionRepository;
@@ -41,6 +42,10 @@ class RouteController extends BaseController
      * @var RouteDownloadRepository
      */
     private $routeDownloadRepository;
+    /**
+     * @var RouteRepository
+     */
+    private $routeRepository;
 
     /**
      * RouteController constructor.
@@ -51,6 +56,7 @@ class RouteController extends BaseController
      * @param RouteGalleryRepository $routeGalleryRepository
      * @param RouteAnomalieRepository $routeAnomalieRepository
      * @param RouteDownloadRepository $routeDownloadRepository
+     * @param RouteRepository $routeRepository
      */
     public function __construct(
         RouteUpdaterRepository $routeUpdaterRepository,
@@ -58,7 +64,8 @@ class RouteController extends BaseController
         RouteVersionGareRepository $routeVersionGareRepository,
         RouteGalleryCategoryRepository $galleryCategoryRepository,
         RouteGalleryRepository $routeGalleryRepository,
-        RouteAnomalieRepository $routeAnomalieRepository, RouteDownloadRepository $routeDownloadRepository)
+        RouteAnomalieRepository $routeAnomalieRepository,
+        RouteDownloadRepository $routeDownloadRepository,RouteRepository $routeRepository)
     {
         $this->routeUpdaterRepository = $routeUpdaterRepository;
         $this->versionRepository = $versionRepository;
@@ -67,6 +74,7 @@ class RouteController extends BaseController
         $this->routeGalleryRepository = $routeGalleryRepository;
         $this->routeAnomalieRepository = $routeAnomalieRepository;
         $this->routeDownloadRepository = $routeDownloadRepository;
+        $this->routeRepository = $routeRepository;
     }
 
     public function updaters()
@@ -356,5 +364,14 @@ class RouteController extends BaseController
         $data = $this->routeDownloadRepository->getVersion($download_id);
 
         return $this->sendResponse($data->toArray(), "Get Download");
+    }
+
+    public function all()
+    {
+        $routes = $this->routeRepository->all();
+
+        return response()->json([
+            "routes" => $routes->toArray()
+        ]);
     }
 }

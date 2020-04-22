@@ -83,4 +83,13 @@ class BlogController extends BaseController
 
         return $this->sendResponse($content, "Dernières Nouvelle");
     }
+
+    public function all()
+    {
+        $articles = $this->blogRepository->all();
+
+        return response()->json([
+            "articles" => $articles->toArray()
+        ]);
+    }
 }
