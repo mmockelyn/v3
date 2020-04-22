@@ -5,8 +5,10 @@ namespace App\Model\Blog;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
 
-class Blog extends Model
+class Blog extends Model implements Feedable
 {
     use Notifiable;
     protected $guarded = [];
@@ -67,5 +69,31 @@ class Blog extends Model
                 "slug" => Str::slug($tag)
             ]);
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toFeedItem()
+    {
+        $blogs = Blog::all();
+        foreach ($blogs as $blog) {
+            if($blog->published == 1){
+                return FeedItem::create()
+                    ->id($this->id)
+                    ->title($this->title)
+                    ->summary($this->short_content)
+                    ->updated(now())
+                    ->category($this->category->name)
+                    ->link('//')
+                    ->author('Trainznation');
+            }
+        }
+    }
+
+    public static function getFeedItems()
+    {
+        $items = Blog::all();
+        return $items;
     }
 }

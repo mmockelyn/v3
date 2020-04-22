@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front\Blog;
 
 use App\Http\Controllers\Controller;
+use App\Model\Blog\Blog;
 use App\Repository\Blog\BlogCommentRepository;
 use App\Repository\Blog\BlogRepository;
 
@@ -40,5 +41,10 @@ class BlogController extends Controller
             "blog" => $this->blogRepository->getBySlug($slug),
             "comments" => $this->blogCommentRepository->allFrom($blog->id)
         ]);
+    }
+
+    public static function getFeedItems()
+    {
+        return Blog::all();
     }
 }

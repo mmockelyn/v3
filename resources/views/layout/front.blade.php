@@ -21,6 +21,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <title>{{ env("APP_NAME") }}</title>
     <meta name="description" content="Page with empty content">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="alternate" type="application/atom+xml" title="Articles" href="/feed/blog">
 
     <!--begin::Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
