@@ -168,7 +168,7 @@ class TutorielController extends BaseController
 
     public function all()
     {
-        $tutoriels = $this->tutorielRepository->all();
+        $tutoriels = $this->tutorielRepository->allForPublish();
 
         return response()->json($tutoriels->toArray());
     }

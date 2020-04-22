@@ -21,7 +21,7 @@ class AssetRepository
         $this->asset = $asset;
     }
 
-    public function allWithLimit($limit)
+    public function allWithLimit($limit = 100)
     {
         return $this->asset->newQuery()
             ->where('published', 1)

@@ -86,10 +86,10 @@ class BlogController extends BaseController
 
     public function all()
     {
-        $articles = $this->blogRepository->all();
+        $articles = $this->blogRepository->allWithPublish();
 
         return response()->json([
-            "articles" => $articles->toArray()
+            $articles->toArray()
         ]);
     }
 }

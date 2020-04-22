@@ -98,10 +98,10 @@ class DownloadController extends BaseController
 
     public function all()
     {
-        $downloads = $this->assetRepository->all();
+        $downloads = $this->assetRepository->allWithLimit();
 
         return response()->json([
-            "assets" => $downloads->toArray()
+            $downloads->toArray()
         ]);
     }
 }
