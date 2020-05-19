@@ -41,7 +41,7 @@ class RouteHelpers
         $totalAnomalie = $anomalies->newQuery()->where('route_id', $route_id)->count();
         $totalAnomalieCheck = $anomalies->newQuery()->where('route_id', $route_id)->where('state', 2)->count();
 
-        $percent = ($totalAnomalie/100)*$totalAnomalieCheck * 100;
+        $percent = round($totalAnomalieCheck*100/$totalAnomalie, 2);
 
         return $percent;
     }
