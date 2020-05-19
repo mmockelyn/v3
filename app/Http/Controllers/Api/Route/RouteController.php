@@ -306,7 +306,7 @@ class RouteController extends BaseController
                 <?php foreach ($datas as $data): ?>
                     <div class="kt-list-timeline__item">
                         <span class="kt-list-timeline__badge kt-list-timeline__badge--danger"></span>
-                        <span class="kt-list-timeline__text"><?= $data->anomalie; ?></span>
+                        <span class="kt-list-timeline__text"><?= $data->correction; ?></span>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -327,7 +327,7 @@ class RouteController extends BaseController
                 <?php foreach ($datas as $data): ?>
                     <div class="kt-list-timeline__item">
                         <span class="kt-list-timeline__badge kt-list-timeline__badge--warning"></span>
-                        <span class="kt-list-timeline__text"><?= $data->anomalie; ?></span>
+                        <span class="kt-list-timeline__text"><?= $data->correction; ?></span>
                     </div>
                 <?php endforeach; ?>
             </div>
