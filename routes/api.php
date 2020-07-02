@@ -286,4 +286,9 @@ Route::group(["prefix" => "admin", "namespace" => "Api\Admin"], function () {
     });
 });
 
+Route::group(["prefix" => "account", "namespace" => "Api\Account"], function () {
+    Route::post('login', "AccountController@login");
+    Route::post('register', "AccountController@register");
+});
+
 Route::get('search', 'SearchController@search');
