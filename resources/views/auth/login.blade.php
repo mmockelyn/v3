@@ -165,7 +165,7 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
     </div>
 </div>
-
+    <div id="xl_auth" style="width: 100%; height: 1000px"></div>
 <!-- end:: Page -->
 
 <!-- begin::Global Config(global config for global JS sciprts) -->
@@ -198,6 +198,36 @@ License: You must have a valid license purchased only from themeforest(the above
 @if(config('app.env') == 'local')
     <script src="http://localhost:35729/livereload.js"></script>
 @endif
+    <script type="application/javascript">
+        const s = document.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://login-sdk.xsolla.com/latest/";
+        const head = document.getElementsByTagName("head")[0];
+        head.appendChild(s);
+        let xl;
+
+        s.addEventListener("load", function() {
+            xl = new XsollaLogin.Widget({
+                projectId: "62553964-bca3-11ea-a85b-42010aa80004",
+                callbackUrl: "https://login.xsolla.com/api/blank",
+                preferredLocale: "fr_XX"
+            });
+
+            xl.mount("xl_auth");
+
+            xl.on(xl.events.Close, () => {
+                xl.close();
+            });
+        });
+
+        // function for opening a widget by button
+        /*
+          function openWidget() {
+            xl.open();
+          }
+        */
+    </script>
 
 <!--end::Global Theme Bundle -->
 
