@@ -156,7 +156,6 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
         });
     });
 
-
     Route::group(["prefix" => "tutoriel", "namespace" => "Tutoriel"], function (){
         Route::get('/', ["as" => "Back.Tutoriel.index", "uses" => "TutorielController@index"]);
 
@@ -231,6 +230,7 @@ Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" 
 
     Route::group(["prefix" => "slideshow", "namespace" => "Slideshow"], function (){
         Route::get('/', ["as" => "Back.Slideshow.index", "uses" => "SlideshowController@index"]);
+        Route::get('{id}/delete', ["as" => "Back.Slideshow.delete", "uses" => "SlideshowController@delete"]);
     });
 
     Route::group(["prefix" => "commerce", "namespace" => "Commerce"], function (){
