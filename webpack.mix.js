@@ -83,6 +83,8 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/admin/user/gestion/edit.js', 'public/js/admin/user/gestion')
     .js('resources/js/admin/user/gestion/show.js', 'public/js/admin/user/gestion')
 
+    .js('resources/js/admin/slideshow/index.js', 'public/js/admin/slideshow')
+
 
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/route.scss', 'public/css')
