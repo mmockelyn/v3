@@ -178,6 +178,12 @@
                     </div>
                 </div>
                 <div class="tab-pane" id="download" role="tabpanel">
+                    <div class="alert alert-custom alert-primary" role="alert">
+                        <div class="alert-icon">
+                            <i class="flaticon-information"></i>
+                        </div>
+                        <div class="alert-text">Un Launcher est à votre disposition afin de bénéficier des dernieres avancées des lignes.<br>Vous pouvez le télécharger <a href="https://download.trainznation.eu/v3/route/1/download/Xsolla_launcher_installer.exe">ICI</a> (Version 1.0.3)</div>
+                    </div>
                     <div class="card mb-3">
                         <div class="row no-gutters" style="border-radius: 15px">
                             <div class="col-md-4">

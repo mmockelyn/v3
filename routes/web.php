@@ -74,6 +74,8 @@ Route::group(["namespace" => "Front", "middleware" => ["isAccess"]], function ()
 
         Route::post('/', ["as" => "Front.Wiki.postSearch", "uses" => "WikiController@postSearch"]);
     });
+
+
 });
 
 Route::group(["prefix" => "administrator", "namespace" => "Admin", "middleware" => ["web"]], function (){
