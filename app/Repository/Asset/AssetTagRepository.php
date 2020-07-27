@@ -47,5 +47,12 @@ class AssetTagRepository
             ->delete();
     }
 
+    public function deleteForAsset($asset_id)
+    {
+        return $this->assetTag->newQuery()
+            ->where('asset_id', $asset_id)
+            ->delete();
+    }
+
 }
 
