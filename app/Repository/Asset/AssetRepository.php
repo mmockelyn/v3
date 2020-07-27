@@ -140,5 +140,11 @@ class AssetRepository
             ]);
     }
 
+    public function delete($asset_id)
+    {
+        return $this->find($asset_id)
+            ->delete();
+    }
+
 }
 
