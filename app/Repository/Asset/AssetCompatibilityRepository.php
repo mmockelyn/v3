@@ -45,5 +45,12 @@ class AssetCompatibilityRepository
             ->delete();
     }
 
+    public function deleteForAsset($asset_id)
+    {
+        return $this->assetCompatibility->newQuery()
+            ->where('asset_id', $asset_id)
+            ->delete();
+    }
+
 }
 
