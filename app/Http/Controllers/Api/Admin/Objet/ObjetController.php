@@ -101,7 +101,7 @@ class ObjetController extends BaseController
     }
     public function loadLatestObjets(Request $request)
     {
-        $datas = $alldatas = $this->assetRepository->all()->toArray();
+        $datas = $alldatas = $this->assetRepository->all(10)->sortDesc(SORT_ASC)->toArray();
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $request->all());
 
         $sort = !empty($datatable['sort']['sort']) ? $datatable['sort']['sort'] : 'asc';

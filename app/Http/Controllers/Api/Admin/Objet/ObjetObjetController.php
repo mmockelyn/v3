@@ -58,7 +58,7 @@ class ObjetObjetController extends BaseController
 
     public function list(Request $request)
     {
-        $datas = $this->assetRepository->all();
+        $datas = $this->assetRepository->all()->sortDesc(SORT_ASC);
         $ars = collect();
 
         foreach ($datas as $data) {
