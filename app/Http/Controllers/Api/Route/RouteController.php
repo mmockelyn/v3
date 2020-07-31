@@ -376,8 +376,8 @@ class RouteController extends BaseController
         ]);
     }
 
-    public function loadInfoVersion(Request $request, $route_id) {
-        $info = $this->routeDownloadRepository->getInfoVersion($route_id, $request->version, $request->build);
+    public function loadInfoVersion($route_id, $version, $build) {
+        $info = $this->routeDownloadRepository->getInfoVersion($route_id, $version, $build);
 
         return $this->sendResponse($info->toArray(), "Info");
     }
