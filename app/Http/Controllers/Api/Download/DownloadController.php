@@ -25,7 +25,7 @@ class DownloadController extends BaseController
 
     public function latest()
     {
-        $datas = $this->assetRepository->allWithLimit(5)->sortDesc(SORT_ASC);
+        $datas = $this->assetRepository->allWithLimit(5);
         ob_start();
         ?>
         <?php foreach ($datas as $data): ?>

@@ -11,6 +11,7 @@ use App\Repository\Route\RouteRepository;
 use App\Repository\Route\RouteUpdaterRepository;
 use App\Repository\Route\RouteVersionGareRepository;
 use App\Repository\Route\RouteVersionRepository;
+use Illuminate\Support\Facades\Request;
 
 class RouteController extends BaseController
 {
@@ -373,5 +374,9 @@ class RouteController extends BaseController
         return response()->json([
             "routes" => $routes->toArray()
         ]);
+    }
+
+    public function loadInfoVersion(Request $request, $route_id) {
+        $info = $this->routeDownloadRepository->getInfoVersion($route_id, $request->version, $request->build);
     }
 }

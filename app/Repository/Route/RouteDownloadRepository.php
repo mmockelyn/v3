@@ -69,5 +69,14 @@ class RouteDownloadRepository
             ]);
     }
 
+    public function getInfoVersion($route_id, $version, $build)
+    {
+        return $this->routeDownload->newQuery()
+            ->where('route_id', $route_id)
+            ->where('version', $version)
+            ->where('build', $build)
+            ->first();
+    }
+
 }
 

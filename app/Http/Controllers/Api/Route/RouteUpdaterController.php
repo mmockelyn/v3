@@ -29,4 +29,6 @@ class RouteUpdaterController extends BaseController
 
         return $this->sendResponse($datas, "Liste des versions de l'updater");
     }
+
+
 }
