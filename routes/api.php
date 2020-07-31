@@ -37,7 +37,7 @@ Route::group(["prefix" => "route", 'namespace' => "Api\Route"], function () {
 
     Route::get('{route_id}/updaters', 'RouteUpdaterController@listVersions');
 
-    Route::post('{route_id}/loadInfoVersion', 'RouteController@loadInfoVersion');
+    Route::post('{route_id}/loadInfoVersion/{version}/{build}', 'RouteController@loadInfoVersion');
 });
 
 Route::group(["prefix" => "download", "namespace" => "Api\Download"], function () {
