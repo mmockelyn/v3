@@ -321,7 +321,7 @@ jQuery(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\auth\login.js */"./resources/js/auth/login.js");
+module.exports = __webpack_require__(/*! E:\site\trainznation\resources\js\auth\login.js */"./resources/js/auth/login.js");
 
 
 /***/ })
