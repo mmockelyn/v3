@@ -17963,7 +17963,7 @@ $('#published_at').datetimepicker({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\tutoriel\video\edit.js */"./resources/js/admin/tutoriel/video/edit.js");
+module.exports = __webpack_require__(/*! E:\site\trainznation\resources\js\admin\tutoriel\video\edit.js */"./resources/js/admin/tutoriel/video/edit.js");
 
 
 /***/ })

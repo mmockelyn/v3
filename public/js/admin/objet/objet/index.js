@@ -4338,7 +4338,7 @@ $("#short_description").summernote({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\LOGICIEL\laragon\www\v3.trainznation\resources\js\admin\objet\objet\index.js */"./resources/js/admin/objet/objet/index.js");
+module.exports = __webpack_require__(/*! E:\site\trainznation\resources\js\admin\objet\objet\index.js */"./resources/js/admin/objet/objet/index.js");
 
 
 /***/ })
