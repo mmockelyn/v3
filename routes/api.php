@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(["prefix" => "blog", "namespace" => "Api\Blog"], function () {
     Route::get('latest', "BlogController@latest");
     Route::get('/', 'BlogController@all');
+    Route::post('/', 'BlogController@allWithLimit');
 });
 
 Route::group(["prefix" => "route", 'namespace' => "Api\Route"], function () {
