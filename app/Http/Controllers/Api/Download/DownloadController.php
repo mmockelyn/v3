@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Download;
 
 use App\HelpersClass\Asset\AssetHelper;
 use App\Http\Controllers\Api\BaseController;
+use App\Repository\Asset\AssetCategoryRepository;
 use App\Repository\Asset\AssetRepository;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,14 +14,20 @@ class DownloadController extends BaseController
      * @var AssetRepository
      */
     private $assetRepository;
+    /**
+     * @var AssetCategoryRepository
+     */
+    private $assetCategoryRepository;
 
     /**
      * DownloadController constructor.
      * @param AssetRepository $assetRepository
+     * @param AssetCategoryRepository $assetCategoryRepository
      */
-    public function __construct(AssetRepository $assetRepository)
+    public function __construct(AssetRepository $assetRepository, AssetCategoryRepository $assetCategoryRepository)
     {
         $this->assetRepository = $assetRepository;
+        $this->assetCategoryRepository = $assetCategoryRepository;
     }
 
     public function latest()
@@ -103,5 +110,12 @@ class DownloadController extends BaseController
         return response()->json([
             $downloads->toArray()
         ]);
+    }
+
+    public function allCategory()
+    {
+        $categories = $this->assetCategoryRepository->all();
+
+        return $this->sendResponse($categories->toArray(), "Liste des catégories");
     }
 }

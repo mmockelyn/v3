@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin\Blog;
 
+use App\Events\Blog\InterlockingBlogPublish;
 use App\Events\Blog\PublishArticle;
 use App\Http\Controllers\Api\BaseController;
 use App\Jobs\Blog\ArticlePublishFacebookJob;
@@ -190,6 +191,7 @@ class BlogArticleController extends BaseController
         // Publication utilisateur
         $this->notifyAllUser($article);
         event(new PublishArticle($article));
+        event(new InterlockingBlogPublish($article->title));
 
         try {
             $this->blogRepository->publish($article_id);
