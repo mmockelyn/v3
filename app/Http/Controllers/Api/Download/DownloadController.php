@@ -145,4 +145,10 @@ class DownloadController extends BaseController
 
         return $this->sendResponse($assets->toArray(), "Liste des objets par catégorie");
     }
+
+    public function latestMaj() {
+        $asset = $this->assetRepository->getLatestAsset();
+
+        return $this->sendResponse($asset->updated_at->toDayDateTimeString(), null);
+    }
 }
