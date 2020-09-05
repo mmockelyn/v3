@@ -51,6 +51,7 @@ Route::group(["prefix" => "download", "namespace" => "Api\Download"], function (
     Route::get('category/all', 'DownloadController@allCategory');
     Route::get('category/{category_id}', 'DownloadController@getByCategory');
     Route::get('{asset_id}', 'DownloadController@getAsset');
+    Route::get('/latestMaj', 'DownloadController@latestMaj');
 });
 
 Route::group(["prefix" => "tutoriel", "namespace" => "Api\Tutoriel"], function () {

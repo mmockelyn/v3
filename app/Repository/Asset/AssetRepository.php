@@ -155,5 +155,13 @@ class AssetRepository
             ->get();
     }
 
+    public function getLatestAsset()
+    {
+        return $this->asset->newQuery()
+            ->where('published', 1)
+            ->orderBy('updated_at', 'desc')
+            ->latest();
+    }
+
 }
 
