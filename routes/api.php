@@ -48,6 +48,8 @@ Route::group(["prefix" => "download", "namespace" => "Api\Download"], function (
 
     // launcher call
     Route::get('category/all', 'DownloadController@allCategory');
+    Route::get('category/{category_id}', 'DownloadController@getByCategory');
+    Route::get('{asset_id}', 'DownloadController@getAsset');
 });
 
 Route::group(["prefix" => "tutoriel", "namespace" => "Api\Tutoriel"], function () {

@@ -49,14 +49,18 @@ class DownloadController extends BaseController
                     <div class="kt-widget5__item">
                         <div class="kt-widget5__content">
                             <div class="kt-widget5__pic">
-                                <?php if(file_exists('/storage/download/'.$data->category->id."/".$data->subcategory->id."/".$data->id.".png")): ?>
-                                    <img class="kt-widget7__img" src="/storage/download/<?= $data->category->id; ?>/<?= $data->subcategory->id; ?>/<?= $data->id; ?>.png" alt="<?= $data->designation; ?>">
+                                <?php if (file_exists('/storage/download/' . $data->category->id . "/" . $data->subcategory->id . "/" . $data->id . ".png")): ?>
+                                    <img class="kt-widget7__img"
+                                         src="/storage/download/<?= $data->category->id; ?>/<?= $data->subcategory->id; ?>/<?= $data->id; ?>.png"
+                                         alt="<?= $data->designation; ?>">
                                 <?php else: ?>
-                                    <img class="kt-widget7__img" src="/storage/download/download.png" alt="<?= $data->designation; ?>">
+                                    <img class="kt-widget7__img" src="/storage/download/download.png"
+                                         alt="<?= $data->designation; ?>">
                                 <?php endif; ?>
                             </div>
                             <div class="kt-widget5__section">
-                                <a href="<?= route('Front.Download.show', [$data->category->id, $data->subcategory->id, $data->id]) ?>" class="kt-widget5__title">
+                                <a href="<?= route('Front.Download.show', [$data->category->id, $data->subcategory->id, $data->id]) ?>"
+                                   class="kt-widget5__title">
                                     <?= $data->designation; ?>
                                 </a>
                                 <p class="kt-widget5__desc">
@@ -64,14 +68,16 @@ class DownloadController extends BaseController
                                 </p>
                                 <div class="kt-widget5__info">
                                     <?php foreach ($data->compatibilities as $compatibility): ?>
-                                        <span class="kt-badge kt-badge--inline kt-badge--<?= AssetHelper::stateClassCompatibility($compatibility->state); ?>" data-container="body" data-toggle="kt-tooltip" title="<?= $compatibility->trainzbuild->trainz_version_name; ?>"><?= $compatibility->trainzbuild->build; ?></span>
+                                        <span class="kt-badge kt-badge--inline kt-badge--<?= AssetHelper::stateClassCompatibility($compatibility->state); ?>"
+                                              data-container="body" data-toggle="kt-tooltip"
+                                              title="<?= $compatibility->trainzbuild->trainz_version_name; ?>"><?= $compatibility->trainzbuild->build; ?></span>
                                     <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
                         <div class="kt-widget5__content">
                             <div class="kt-widget5__stats">
-                                <?php if($data->pricing == 0): ?>
+                                <?php if ($data->pricing == 0): ?>
                                     <strong>Gratuit</strong>
                                 <?php else: ?>
                                     <strong><?= $data->price; ?></strong>
@@ -82,7 +88,7 @@ class DownloadController extends BaseController
                 </div>
             </div>
         </div>
-        <?php endforeach; ?>
+    <?php endforeach; ?>
         <?php
         $content = ob_get_clean();
 
@@ -98,7 +104,7 @@ class DownloadController extends BaseController
 
     public function loadConfig($asset_id)
     {
-        $file = Storage::disk('sftp')->get('download/'.$asset_id.'/config.txt');
+        $file = Storage::disk('sftp')->get('download/' . $asset_id . '/config.txt');
         ob_start();
         ?>
         <code>
@@ -124,5 +130,19 @@ class DownloadController extends BaseController
         $categories = $this->assetSubCategoryRepository->all();
 
         return $this->sendResponse($categories->toArray(), "Liste des catégories");
+    }
+
+    public function getAsset($asset_id)
+    {
+        $asset = $this->assetRepository->get($asset_id);
+
+        return $this->sendResponse($asset->toArray(), $asset->name);
+    }
+
+    public function getByCategory($category_id)
+    {
+        $assets = $this->assetRepository->getByCategory($category_id);
+
+        return $this->sendResponse($assets->toArray(), "Liste des objets par catégorie");
     }
 }

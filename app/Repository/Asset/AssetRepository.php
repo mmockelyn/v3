@@ -146,5 +146,13 @@ class AssetRepository
             ->delete();
     }
 
+    public function getByCategory($subcategory_id)
+    {
+        return $this->asset->newQuery()
+            ->where('published', 1)
+            ->orderBy('published_at', 'asc')
+            ->where('asset_sub_category_id', $subcategory_id);
+    }
+
 }
 
