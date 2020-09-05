@@ -151,7 +151,8 @@ class AssetRepository
         return $this->asset->newQuery()
             ->where('published', 1)
             ->orderBy('published_at', 'asc')
-            ->where('asset_sub_category_id', $subcategory_id);
+            ->where('asset_sub_category_id', $subcategory_id)
+            ->get();
     }
 
 }
