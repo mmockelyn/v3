@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Repository\Asset\AssetCategoryRepository;
 use App\Repository\Asset\AssetRepository;
 use App\Repository\Asset\AssetSubCategoryRepository;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class DownloadController extends BaseController
@@ -148,7 +149,7 @@ class DownloadController extends BaseController
 
     public function latestMaj() {
         $asset = $this->assetRepository->getLatestAsset();
-
-        return $this->sendResponse($asset->updated_at->toDayDateTimeString(), null);
+        Carbon::setLocale(config('app.locale'));
+        return $this->sendResponse($asset->updated_at->translatedFormat('d F Y à H\hi'), null);
     }
 }
