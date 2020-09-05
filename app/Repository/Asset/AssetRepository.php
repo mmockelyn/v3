@@ -160,7 +160,7 @@ class AssetRepository
         return $this->asset->newQuery()
             ->where('published', 1)
             ->orderBy('updated_at', 'desc')
-            ->latest('updated_at')->get();
+            ->first();
     }
 
 }
