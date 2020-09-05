@@ -6,6 +6,7 @@ use App\HelpersClass\Asset\AssetHelper;
 use App\Http\Controllers\Api\BaseController;
 use App\Repository\Asset\AssetCategoryRepository;
 use App\Repository\Asset\AssetRepository;
+use App\Repository\Asset\AssetSubCategoryRepository;
 use Illuminate\Support\Facades\Storage;
 
 class DownloadController extends BaseController
@@ -18,16 +19,22 @@ class DownloadController extends BaseController
      * @var AssetCategoryRepository
      */
     private $assetCategoryRepository;
+    /**
+     * @var AssetSubCategoryRepository
+     */
+    private $assetSubCategoryRepository;
 
     /**
      * DownloadController constructor.
      * @param AssetRepository $assetRepository
      * @param AssetCategoryRepository $assetCategoryRepository
+     * @param AssetSubCategoryRepository $assetSubCategoryRepository
      */
-    public function __construct(AssetRepository $assetRepository, AssetCategoryRepository $assetCategoryRepository)
+    public function __construct(AssetRepository $assetRepository, AssetCategoryRepository $assetCategoryRepository, AssetSubCategoryRepository $assetSubCategoryRepository)
     {
         $this->assetRepository = $assetRepository;
         $this->assetCategoryRepository = $assetCategoryRepository;
+        $this->assetSubCategoryRepository = $assetSubCategoryRepository;
     }
 
     public function latest()
@@ -114,7 +121,7 @@ class DownloadController extends BaseController
 
     public function allCategory()
     {
-        $categories = $this->assetCategoryRepository->all();
+        $categories = $this->assetSubCategoryRepository->all();
 
         return $this->sendResponse($categories->toArray(), "Liste des catégories");
     }
