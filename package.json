@@ -113,7 +113,7 @@
         "sweetalert2": "^8.0.6",
         "tagify": "^0.1.1",
         "tether": "^1.4.3",
-        "three": "^0.113.2",
+        "three": "^0.125.0",
         "tinymce": "^5.2.0",
         "toastr": "^2.1.4",
         "tooltip.js": "^1.2.0",
